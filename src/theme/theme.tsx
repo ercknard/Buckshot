@@ -1,4 +1,31 @@
 import { PaletteMode, PaletteOptions, createTheme } from "@mui/material";
+import localFont from "next/font/local";
+
+const geistSans = localFont({
+  src: "../fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "../fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+const minetestMono = localFont({
+  src: "../fonts/MinetestFont.ttf",
+  variable: "--font-test-mono",
+  weight: "100 900",
+});
+const vetregMono = localFont({
+  src: "../fonts/Vetregular.ttf",
+  variable: "--font-test-mono",
+  weight: "100 900",
+});
+const ka1Mono = localFont({
+  src: "../fonts/ka1.ttf",
+  variable: "--font-ka1-mono",
+  weight: "100 900",
+});
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
@@ -47,10 +74,45 @@ declare module "@mui/material/styles" {
       brandInverted: string;
     };
   }
+
+  interface PaletteOptions {
+    custom?: {
+      mainColor?: string;
+      primaryBackground?: string;
+      secondaryBackground?: string;
+      primaryComponents?: string;
+      secondaryComponents?: string;
+      tertiaryComponents?: string;
+      primaryBorders?: string;
+      secondaryBorders?: string;
+      tertiaryBorders?: string;
+      primarySolidColors?: string;
+      secondarySolidColors?: string;
+      primaryText?: string;
+      secondaryText?: string;
+      primaryBackgroundGrayed?: string;
+      secondaryBackgroundGrayed?: string;
+      primaryComponentsGrayed?: string;
+      secondaryComponentsGrayed?: string;
+      tertiaryComponentsGrayed?: string;
+      primaryBordersGrayed?: string;
+      secondaryBordersGrayed?: string;
+      tertiaryBordersGrayed?: string;
+      primarySolidColorsGrayed?: string;
+      secondarySolidColorsGrayed?: string;
+      primaryTextGrayed?: string;
+      secondaryTextGrayed?: string;
+    };
+    gradients?: {
+      brand?: string;
+      brandInverted?: string;
+    };
+  }
 }
 
-const FONT = "Sora, sans-serif";
-const SECONDARY_FONT = "Sora, sans-serif";
+// const FONT = vetregMono.style.fontFamily;
+const FONT = ka1Mono.style.fontFamily;
+const SECONDARY_FONT = vetregMono.style.fontFamily;
 
 const breakpoints = {
   values: {
@@ -303,62 +365,79 @@ const typographyOptions = (palette: PaletteOptions) => {
     fontFamily: FONT,
     fontSize: 14,
     htmlFontSize: 16,
-    body1: {
-      fontSize: "0.875rem",
-      fontWeight: 400,
-      color: palette.text?.primary,
+    h1: {
+      fontFamily: FONT,
     },
-    display1: {
-      fontSize: "1rem",
-      fontWeight: 600,
-      color: palette.text?.primary,
+    h2: {
+      fontFamily: FONT,
     },
-    caption: {
-      color: palette.text?.secondary,
+    h3: {
+      fontFamily: FONT,
     },
-    pageTitle: {
-      fontSize: "2.5rem",
-      fontWeight: 500,
-      color: palette.text?.primary,
-    },
-    sectionTitle: {
-      fontSize: "1.5rem",
-      fontWeight: 600,
+    h4: {
       fontFamily: SECONDARY_FONT,
-      color: palette.text?.primary,
     },
-    title: {
-      fontSize: "1rem",
-      fontWeight: 500,
-      color: palette.text?.primary,
+    h5: {
+      fontFamily: SECONDARY_FONT,
     },
     h6: {
-      fontSize: "1.25rem",
-      fontWeight: 600,
       fontFamily: SECONDARY_FONT,
-      color: palette.text?.primary,
     },
-    highlight: {
-      fontSize: "1.85rem",
-      fontWeight: 600,
-      color: palette.text?.primary,
-      lineHeight: 1.2,
-    },
-    highlightMuted: {
-      fontSize: "1.75rem",
-      fontWeight: 500,
-      color: palette.text?.secondary,
-      lineHeight: 1.2,
-    },
-    h1: undefined,
-    h2: undefined,
-    h3: undefined,
-    h4: undefined,
-    h5: undefined,
-    subtitle1: undefined,
-    subtitle2: undefined,
-    body2: undefined,
-    overline: undefined,
+    // body1: {
+    //   fontSize: "2rem",
+    //   fontWeight: 400,
+    //   color: palette.text?.primary,
+    // },
+    // display1: {
+    //   fontSize: "2.5rem",
+    //   fontWeight: 600,
+    //   color: palette.text?.primary,
+    // },
+    // caption: {
+    //   fontSize: "1.5rem",
+    //   color: palette.text?.secondary,
+    // },
+    // pageTitle: {
+    //   fontSize: "5rem",
+    //   fontWeight: 500,
+    //   color: palette.text?.primary,
+    // },
+    // sectionTitle: {
+    //   fontSize: "3.5rem",
+    //   fontWeight: 600,
+    //   color: palette.text?.primary,
+    // },
+    // title: {
+    //   fontSize: "3rem",
+    //   fontWeight: 500,
+    //   color: palette.text?.primary,
+    // },
+    // h6: {
+    //   fontSize: "1.5rem",
+    //   fontWeight: 600,
+    //   color: palette.text?.primary,
+    // },
+    // highlight: {
+    //   fontSize: "1.85rem",
+    //   fontWeight: 600,
+    //   color: palette.text?.primary,
+    //   lineHeight: 1.2,
+    // },
+    // highlightMuted: {
+    //   fontSize: "1.75rem",
+    //   fontWeight: 500,
+    //   color: palette.text?.secondary,
+    //   lineHeight: 1.2,
+    // },
+    // h1: undefined,
+    // h2: undefined,
+    // h3: undefined,
+    // h4: undefined,
+    // h5: undefined,
+    // subtitle1: undefined,
+    // subtitle2: undefined,
+    // body2: undefined,
+    // overline: undefined,
   };
 };
 
@@ -370,16 +449,17 @@ const customComponents = (palette: PaletteOptions) => {
           body: {
             "&::-webkit-scrollbar": {
               width: "5px",
+              height: "5px",
             },
             "&::-webkit-scrollbar-track": {
-              background: "#111828b",
+              background: palette.custom?.secondaryBackground,
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#0094f675",
+              background: palette.custom?.secondarySolidColors,
               borderRadius: "6px",
             },
             "&::-webkit-scrollbar-thumb:hover": {
-              background: "#0094f6",
+              background: palette.custom?.mainColor,
             },
           },
           "*": {
@@ -388,14 +468,14 @@ const customComponents = (palette: PaletteOptions) => {
               height: "5px",
             },
             "&::-webkit-scrollbar-track": {
-              background: "#111828b",
+              background: palette.custom?.secondaryBackground,
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#0094f675",
+              background: palette.custom?.secondarySolidColors,
               borderRadius: "6px",
             },
             "&::-webkit-scrollbar-thumb:hover": {
-              background: "#0094f6",
+              background: palette.custom?.mainColor,
             },
           },
         },

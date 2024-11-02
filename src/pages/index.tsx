@@ -1,4 +1,4 @@
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box, Typography, Stack } from "@mui/material";
 import { DefaultHead } from "@/components/layout/Head";
 import { useThemeContext } from "@/theme/themeProvider";
 
@@ -121,7 +121,7 @@ export default function Home(): JSX.Element {
             alignItems="center"
             justifyContent="center"
           >
-            <Typography>{box.label}</Typography>
+            <Typography variant={"h6"}>{box.label}</Typography>
           </Box>
         ))}
       </Box>
@@ -141,8 +141,9 @@ export default function Home(): JSX.Element {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            padding={"1rem"}
           >
-            <Typography>{box.label}</Typography>
+            <Typography variant={"subtitle2"}>{box.label}</Typography>
           </Box>
         ))}
       </Box>
@@ -162,11 +163,41 @@ export default function Home(): JSX.Element {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            padding={"1rem"}
           >
-            <Typography>{box.label}</Typography>
+            <Typography variant={"subtitle2"}>{box.label}</Typography>
           </Box>
         ))}
       </Box>
+      <Stack height={"200vh"}>
+        <Typography variant={"h1"} color={"custom.primaryText"}>
+          CryptechTest
+        </Typography>
+        <Typography variant={"h2"} color={"custom.primaryText"}>
+          CryptechTest
+        </Typography>
+        <Typography variant={"h3"} color={"custom.primaryText"}>
+          caption
+        </Typography>
+        <Typography variant={"h4"} color={"custom.primaryText"}>
+          Pagetitle
+        </Typography>
+        <Typography variant={"h5"} color={"custom.primaryText"}>
+          sectiontitle
+        </Typography>
+        <Typography variant={"h6"} color={"custom.primaryText"}>
+          title
+        </Typography>
+        <Typography variant={"h6"} color={"custom.primaryText"}>
+          h6
+        </Typography>
+        <Typography variant={"highlight"} color={"custom.primaryText"}>
+          highlight
+        </Typography>
+        <Typography variant={"highlightMuted"} color={"custom.primaryText"}>
+          highlightMuted
+        </Typography>
+      </Stack>
     </Container>
   );
 }
