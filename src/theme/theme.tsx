@@ -14,14 +14,33 @@ declare module "@mui/material/Typography" {
 declare module "@mui/material/styles" {
   interface Palette {
     custom: {
-      a0: string;
-      a1: string;
-      a2: string;
-      a3: string;
-      b0: string;
-      b1: string;
-      b2: string;
-      grey: string;
+      mainColor: string;
+      //colored
+      primaryBackground: string;
+      secondaryBackground: string;
+      primaryComponents: string;
+      secondaryComponents: string;
+      tertiaryComponents: string;
+      primaryBorders: string;
+      secondaryBorders: string;
+      tertiaryBorders: string;
+      primarySolidColors: string;
+      secondarySolidColors: string;
+      primaryText: string;
+      secondaryText: string;
+      //gray
+      primaryBackgroundGrayed: string;
+      secondaryBackgroundGrayed: string;
+      primaryComponentsGrayed: string;
+      secondaryComponentsGrayed: string;
+      tertiaryComponentsGrayed: string;
+      primaryBordersGrayed: string;
+      secondaryBordersGrayed: string;
+      tertiaryBordersGrayed: string;
+      primarySolidColorsGrayed: string;
+      secondarySolidColorsGrayed: string;
+      primaryTextGrayed: string;
+      secondaryTextGrayed: string;
     };
     gradients: {
       brand: string;
@@ -44,62 +63,235 @@ const breakpoints = {
   },
 };
 
-const colorPalette = (mode: PaletteMode) => {
+const colorPalette = (mode: PaletteMode, setId: number) => {
   const getColor = (darkColor: string, lightColor: string) => {
     return mode === "dark" ? darkColor : lightColor;
   };
 
-  // Available colors
+  const colorSets = {
+    set1: {
+      //blue
+      mainColor: getColor("#6169cf", "#6169cf"),
+      //colored
+      primaryBackground: getColor("#fdfdff", "#0f111b"),
+      secondaryBackground: getColor("#f7f9fe", "#141624"),
+      primaryComponents: getColor("#eff2fd", "#202345"),
+      secondaryComponents: getColor("#e4e8fe", "#282c5f"),
+      tertiaryComponents: getColor("#d7ddfe", "#31356f"),
+      primaryBorders: getColor("#c8d0fa", "#3b407c"),
+      secondaryBorders: getColor("#b3bcf1", "#464d8f"),
+      tertiaryBorders: getColor("#97a2e6", "#545caa"),
+      primarySolidColors: getColor("#6169cf", "#6169cf"),
+      secondarySolidColors: getColor("#565dbb", "#5860af"),
+      primaryText: getColor("#535ab7", "#a3afff"),
+      secondaryText: getColor("#282b5b", "#dce1fc"),
+      //gray
+      primaryBackgroundGrayed: getColor("#fcfcfc", "#121212"),
+      secondaryBackgroundGrayed: getColor("#f9f9f9", "#191919"),
+      primaryComponentsGrayed: getColor("#efefef", "#232323"),
+      secondaryComponentsGrayed: getColor("#e8e8e8", "#2a2a2a"),
+      tertiaryComponentsGrayed: getColor("#e0e0e0", "#313131"),
+      primaryBordersGrayed: getColor("#d8d8d8", "#3a3a3a"),
+      secondaryBordersGrayed: getColor("#cecece", "#484848"),
+      tertiaryBordersGrayed: getColor("#bbbbbb", "#606060"),
+      primarySolidColorsGrayed: getColor("#8d8d8d", "#6e6e6e"),
+      secondarySolidColorsGrayed: getColor("#838383", "#7c7c7c"),
+      primaryTextGrayed: getColor("#646464", "#b4b4b4"),
+      secondaryTextGrayed: getColor("#202020", "#eeeeee"),
+    },
+    set2: {
+      //green
+      mainColor: getColor("#456545", "#456545"),
+      //colored
+      primaryBackground: getColor("#fbfdfb", "#0f130f"),
+      secondaryBackground: getColor("#f6fbf6", "#151a15"),
+      primaryComponents: getColor("#e9f5e9", "#1e291e"),
+      secondaryComponents: getColor("#ddeedd", "#263826"),
+      tertiaryComponents: getColor("#d1e7d1", "#2f452f"),
+      primaryBorders: getColor("#c4dec3", "#395439"),
+      secondaryBorders: getColor("#b3d1b2", "#436344"),
+      tertiaryBorders: getColor("#99be98", "#4f754f"),
+      primarySolidColors: getColor("#456545", "#456545"),
+      secondarySolidColors: getColor("#375637", "#3a553a"),
+      primaryText: getColor("#4e6e4e", "#a3cda2"),
+      secondaryText: getColor("#1f2f1f", "#cdf0cd"),
+      //gray
+      primaryBackgroundGrayed: getColor("#fcfcfc", "#121212"),
+      secondaryBackgroundGrayed: getColor("#f9f9f9", "#191919"),
+      primaryComponentsGrayed: getColor("#efefef", "#232323"),
+      secondaryComponentsGrayed: getColor("#e8e8e8", "#2a2a2a"),
+      tertiaryComponentsGrayed: getColor("#e0e0e0", "#313131"),
+      primaryBordersGrayed: getColor("#d8d8d8", "#3a3a3a"),
+      secondaryBordersGrayed: getColor("#cecece", "#484848"),
+      tertiaryBordersGrayed: getColor("#bbbbbb", "#606060"),
+      primarySolidColorsGrayed: getColor("#8d8d8d", "#6e6e6e"),
+      secondarySolidColorsGrayed: getColor("#838383", "#7c7c7c"),
+      primaryTextGrayed: getColor("#646464", "#b4b4b4"),
+      secondaryTextGrayed: getColor("#202020", "#eeeeee"),
+    },
+    set3: {
+      //yellow
+      mainColor: getColor("#868645", "#868645"),
+      //colored
+      primaryBackground: getColor("#f7f9fe", "#141624"),
+      secondaryBackground: getColor("#8d021f", "#8d021f"),
+      primaryComponents: getColor("#0fcad5", "#0fcad5"),
+      secondaryComponents: getColor("#1dffb4", "#1dffb4"),
+      tertiaryComponents: getColor("#2f8af5", "#2f8af5"),
+      primaryBorders: getColor("#0fcad5", "#0fcad5"),
+      secondaryBorders: getColor("#1dffb4", "#1dffb4"),
+      tertiaryBorders: getColor("#2f8af5", "#2f8af5"),
+      primarySolidColors: getColor("#0fcad5", "#0fcad5"),
+      secondarySolidColors: getColor("#1dffb4", "#1dffb4"),
+      primaryText: getColor("#0fcad5", "#0fcad5"),
+      secondaryText: getColor("#1dffb4", "#1dffb4"),
+      //gray
+      primaryBackgroundGrayed: getColor("#fcfcfc", "#121212"),
+      secondaryBackgroundGrayed: getColor("#f9f9f9", "#191919"),
+      primaryComponentsGrayed: getColor("#efefef", "#232323"),
+      secondaryComponentsGrayed: getColor("#e8e8e8", "#2a2a2a"),
+      tertiaryComponentsGrayed: getColor("#e0e0e0", "#313131"),
+      primaryBordersGrayed: getColor("#d8d8d8", "#3a3a3a"),
+      secondaryBordersGrayed: getColor("#cecece", "#484848"),
+      tertiaryBordersGrayed: getColor("#bbbbbb", "#606060"),
+      primarySolidColorsGrayed: getColor("#8d8d8d", "#6e6e6e"),
+      secondarySolidColorsGrayed: getColor("#838383", "#7c7c7c"),
+      primaryTextGrayed: getColor("#646464", "#b4b4b4"),
+      secondaryTextGrayed: getColor("#202020", "#eeeeee"),
+    },
+    set4: {
+      //orange
+      mainColor: getColor("#a16c4f", "#a16c4f"),
+      //colored
+      primaryBackground: getColor("#f7f9fe", "#141624"),
+      secondaryBackground: getColor("#8d021f", "#8d021f"),
+      primaryComponents: getColor("#0fcad5", "#0fcad5"),
+      secondaryComponents: getColor("#1dffb4", "#1dffb4"),
+      tertiaryComponents: getColor("#2f8af5", "#2f8af5"),
+      primaryBorders: getColor("#0fcad5", "#0fcad5"),
+      secondaryBorders: getColor("#1dffb4", "#1dffb4"),
+      tertiaryBorders: getColor("#2f8af5", "#2f8af5"),
+      primarySolidColors: getColor("#0fcad5", "#0fcad5"),
+      secondarySolidColors: getColor("#1dffb4", "#1dffb4"),
+      primaryText: getColor("#0fcad5", "#0fcad5"),
+      secondaryText: getColor("#1dffb4", "#1dffb4"),
+      //gray
+      primaryBackgroundGrayed: getColor("#fcfcfc", "#121212"),
+      secondaryBackgroundGrayed: getColor("#f9f9f9", "#191919"),
+      primaryComponentsGrayed: getColor("#efefef", "#232323"),
+      secondaryComponentsGrayed: getColor("#e8e8e8", "#2a2a2a"),
+      tertiaryComponentsGrayed: getColor("#e0e0e0", "#313131"),
+      primaryBordersGrayed: getColor("#d8d8d8", "#3a3a3a"),
+      secondaryBordersGrayed: getColor("#cecece", "#484848"),
+      tertiaryBordersGrayed: getColor("#bbbbbb", "#606060"),
+      primarySolidColorsGrayed: getColor("#8d8d8d", "#6e6e6e"),
+      secondarySolidColorsGrayed: getColor("#838383", "#7c7c7c"),
+      primaryTextGrayed: getColor("#646464", "#b4b4b4"),
+      secondaryTextGrayed: getColor("#202020", "#eeeeee"),
+    },
+    set5: {
+      //pink
+      mainColor: getColor("#b770ad", "#b770ad"),
+      //colored
+      primaryBackground: getColor("#f7f9fe", "#141624"),
+      secondaryBackground: getColor("#8d021f", "#8d021f"),
+      primaryComponents: getColor("#0fcad5", "#0fcad5"),
+      secondaryComponents: getColor("#1dffb4", "#1dffb4"),
+      tertiaryComponents: getColor("#2f8af5", "#2f8af5"),
+      primaryBorders: getColor("#0fcad5", "#0fcad5"),
+      secondaryBorders: getColor("#1dffb4", "#1dffb4"),
+      tertiaryBorders: getColor("#2f8af5", "#2f8af5"),
+      primarySolidColors: getColor("#0fcad5", "#0fcad5"),
+      secondarySolidColors: getColor("#1dffb4", "#1dffb4"),
+      primaryText: getColor("#0fcad5", "#0fcad5"),
+      secondaryText: getColor("#1dffb4", "#1dffb4"),
+      //gray
+      primaryBackgroundGrayed: getColor("#fcfcfc", "#121212"),
+      secondaryBackgroundGrayed: getColor("#f9f9f9", "#191919"),
+      primaryComponentsGrayed: getColor("#efefef", "#232323"),
+      secondaryComponentsGrayed: getColor("#e8e8e8", "#2a2a2a"),
+      tertiaryComponentsGrayed: getColor("#e0e0e0", "#313131"),
+      primaryBordersGrayed: getColor("#d8d8d8", "#3a3a3a"),
+      secondaryBordersGrayed: getColor("#cecece", "#484848"),
+      tertiaryBordersGrayed: getColor("#bbbbbb", "#606060"),
+      primarySolidColorsGrayed: getColor("#8d8d8d", "#6e6e6e"),
+      secondarySolidColorsGrayed: getColor("#838383", "#7c7c7c"),
+      primaryTextGrayed: getColor("#646464", "#b4b4b4"),
+      secondaryTextGrayed: getColor("#202020", "#eeeeee"),
+    },
+  };
+
+  // Assert the key as one of the valid keys
+  const selectedSet = colorSets[`set${setId}` as keyof typeof colorSets];
+
   return {
     palette: {
       mode,
-      // Typography
       text: {
-        primary: getColor("#DAEDF8", "#1c1e20"), // Title & Highlights
-        secondary: getColor("#a5a8b6", "#4d4d4d"), // Text, Paragraphs, Units, Icons
+        primary: getColor("#DAEDF8", "#1c1e20"),
+        secondary: getColor("#a5a8b6", "#4d4d4d"),
       },
-      // Brand Specific
       primary: {
-        main: getColor("#0094f6", "#0094f6"), // Call to Action, Interactive Element
+        main: selectedSet.mainColor,
       },
       secondary: {
-        main: getColor("#0fcad5", "#0fcad5"), // Highlight, Non-Interactive
+        main: selectedSet.mainColor,
       },
-      gradients: {
-        brand: "linear-gradient(to right, #0FCAD5, #0094F6)",
-        brandInverted: "linear-gradient(to right, #0094F6, #0FCAD5)",
-      },
-      // Status & Alerts
       success: {
-        main: getColor("#1dffb4", "#1dffb4"),
+        main: selectedSet.mainColor,
       },
       info: {
-        main: getColor("#2f8af5", "#2f8af5"),
+        main: selectedSet.mainColor,
       },
       warning: {
-        main: getColor("#ed6c02", "#ed6c02"),
+        main: selectedSet.mainColor,
       },
       error: {
-        main: getColor("#e3402a", "#e3402a"),
+        main: selectedSet.mainColor,
       },
-      // Layout
+      gradients: {
+        brand: `linear-gradient(to right, #0FCAD5, ${selectedSet.mainColor})`,
+        brandInverted: `linear-gradient(to right, ${selectedSet.mainColor}, #0FCAD5)`,
+      },
       background: {
-        default: getColor("#0B1121", "#f2f2f2"), // Body
-        paper: getColor("#111828", "#ffffff"), // Navigation Bar, Footer, Cards
+        default: getColor(
+          `${selectedSet.primaryBackground}`,
+          `${selectedSet.primaryBackground}`
+        ),
+        paper: getColor(
+          `${selectedSet.secondaryBackground}`,
+          `${selectedSet.secondaryBackground}`
+        ),
       },
-
-      // Palette
       custom: {
-        a0: getColor("#0B1121", "#f5f5f5"),
-        a1: getColor("#111828", "#e0e0e0"),
-        a2: getColor("#192233", "#d1d1d1"),
-        a3: getColor("#2E384B", "#c1c1c1"),
-        b0: getColor("#1DFFB4", "#80e27e"),
-        b1: getColor("#0FCAD5", "#7edbd0"),
-        b2: getColor("#0094F6", "#3a98e3"),
-        grey: getColor("#909090", "#b0b0b0"),
+        mainColor: selectedSet.mainColor,
+        //colored
+        primaryBackground: selectedSet.primaryBackground,
+        secondaryBackground: selectedSet.secondaryBackground,
+        primaryComponents: selectedSet.primaryComponents,
+        secondaryComponents: selectedSet.secondaryComponents,
+        tertiaryComponents: selectedSet.tertiaryComponents,
+        primaryBorders: selectedSet.primaryBorders,
+        secondaryBorders: selectedSet.secondaryBorders,
+        tertiaryBorders: selectedSet.tertiaryBorders,
+        primarySolidColors: selectedSet.primarySolidColors,
+        secondarySolidColors: selectedSet.secondarySolidColors,
+        primaryText: selectedSet.primaryText,
+        secondaryText: selectedSet.secondaryText,
+        //gray
+        primaryBackgroundGrayed: selectedSet.primaryBackgroundGrayed,
+        secondaryBackgroundGrayed: selectedSet.secondaryBackgroundGrayed,
+        primaryComponentsGrayed: selectedSet.primaryComponentsGrayed,
+        secondaryComponentsGrayed: selectedSet.secondaryComponentsGrayed,
+        tertiaryComponentsGrayed: selectedSet.tertiaryComponentsGrayed,
+        primaryBordersGrayed: selectedSet.primaryBordersGrayed,
+        secondaryBordersGrayed: selectedSet.secondaryBordersGrayed,
+        tertiaryBordersGrayed: selectedSet.tertiaryBordersGrayed,
+        primarySolidColorsGrayed: selectedSet.primarySolidColorsGrayed,
+        secondarySolidColorsGrayed: selectedSet.secondarySolidColorsGrayed,
+        primaryTextGrayed: selectedSet.primaryTextGrayed,
+        secondaryTextGrayed: selectedSet.secondaryTextGrayed,
       },
-
       divider: getColor("#ebebef14", "#cccccc"),
     },
   };
@@ -111,7 +303,6 @@ const typographyOptions = (palette: PaletteOptions) => {
     fontFamily: FONT,
     fontSize: 14,
     htmlFontSize: 16,
-    // Default Text
     body1: {
       fontSize: "0.875rem",
       fontWeight: 400,
@@ -147,9 +338,6 @@ const typographyOptions = (palette: PaletteOptions) => {
       fontFamily: SECONDARY_FONT,
       color: palette.text?.primary,
     },
-
-    // Helper Text
-    // Page Highlights (rarely used, mainly to highlight important numbers (TVL, total balance, etc))
     highlight: {
       fontSize: "1.85rem",
       fontWeight: 600,
@@ -162,7 +350,6 @@ const typographyOptions = (palette: PaletteOptions) => {
       color: palette.text?.secondary,
       lineHeight: 1.2,
     },
-    // Disable unused MUI defaults
     h1: undefined,
     h2: undefined,
     h3: undefined,
@@ -181,7 +368,6 @@ const customComponents = (palette: PaletteOptions) => {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            // Global scrollbar styles
             "&::-webkit-scrollbar": {
               width: "5px",
             },
@@ -196,11 +382,10 @@ const customComponents = (palette: PaletteOptions) => {
               background: "#0094f6",
             },
           },
-          // Apply to all scrollable elements
           "*": {
             "&::-webkit-scrollbar": {
               width: "5px",
-              height: "5px", // For Chrome, Safari, and Opera
+              height: "5px",
             },
             "&::-webkit-scrollbar-track": {
               background: "#111828b",
@@ -236,8 +421,8 @@ const customComponents = (palette: PaletteOptions) => {
   };
 };
 
-export const scTheme = (mode: PaletteMode) => {
-  const customPalette = colorPalette(mode);
+export const scTheme = (mode: PaletteMode, setId: number) => {
+  const customPalette = colorPalette(mode, setId);
 
   const theme = createTheme({
     direction: "ltr",
