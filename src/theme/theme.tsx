@@ -255,12 +255,12 @@ const colorPalette = (mode: PaletteMode, setId: number) => {
       },
       background: {
         default: getColor(
-          `${selectedSet.primaryBackground}`,
-          `${selectedSet.primaryBackground}`
-        ),
-        paper: getColor(
           `${selectedSet.secondaryBackground}`,
           `${selectedSet.secondaryBackground}`
+        ),
+        paper: getColor(
+          `${selectedSet.primaryBackground}`,
+          `${selectedSet.primaryBackground}`
         ),
       },
       custom: {

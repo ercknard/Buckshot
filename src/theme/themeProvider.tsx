@@ -29,6 +29,12 @@ const ThemeToggleButton: React.FC<{
   toggleTheme: () => void;
 }> = ({ currentTheme, toggleTheme }) => {
   const isDarkMode = currentTheme === "dark";
+  const colors = useThemeContext(); // Get the custom palette from context
+
+  // Determine the icon color based on the current theme and color set
+  const iconColor = isDarkMode
+    ? colors.palette.custom.primaryText
+    : colors.palette.custom.secondaryText; // Use your palette
 
   return (
     <IconButton
@@ -36,11 +42,15 @@ const ThemeToggleButton: React.FC<{
         position: "absolute",
         right: "0",
         top: ".25rem",
-        color: isDarkMode ? "#000000" : "#ffffff",
+        color: iconColor, // Apply dynamic color based on the theme
       }}
       onClick={toggleTheme}
     >
-      {isDarkMode ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+      {isDarkMode ? (
+        <LightModeOutlinedIcon sx={{ color: iconColor }} />
+      ) : (
+        <DarkModeOutlinedIcon sx={{ color: iconColor }} />
+      )}
     </IconButton>
   );
 };
@@ -49,15 +59,25 @@ const ColorSetButton: React.FC<{
   setId: number;
   currentSet: number;
   onClick: (setId: number) => void;
-}> = ({ setId, currentSet, onClick }) => (
-  <Button
-    variant={currentSet === setId ? "contained" : "outlined"}
-    onClick={() => onClick(setId)}
-    sx={{ margin: 1 }}
-  >
-    Color Set {setId}
-  </Button>
-);
+}> = ({ setId, currentSet, onClick }) => {
+  const colors = ["#6169cf", "#456545", "#868645", "#a16c4f", "#b770ad"];
+
+  return (
+    <Button
+      variant={currentSet === setId ? "contained" : "outlined"}
+      onClick={() => onClick(setId)}
+      sx={{
+        margin: 1,
+        backgroundColor:
+          currentSet === setId ? colors[setId - 1] : colors[setId - 1] + "50",
+        color: currentSet === setId ? "#ffffff" : colors[setId - 1],
+        borderColor: colors[setId - 1],
+      }}
+    >
+      {setId}
+    </Button>
+  );
+};
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [activeTheme, setActiveTheme] = useState<PaletteMode>("dark");
