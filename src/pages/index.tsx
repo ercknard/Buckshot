@@ -5,8 +5,11 @@ import { useThemeContext } from "@/theme/themeProvider";
 export default function Home(): JSX.Element {
   const theme = useThemeContext();
 
-  const boxes = [
+  const boxesmain = [
     { color: theme.palette.custom.mainColor, label: "Main Color" },
+  ];
+
+  const boxes = [
     //colored
     {
       color: theme.palette.custom.primaryBackground,
@@ -44,54 +47,57 @@ export default function Home(): JSX.Element {
     },
     { color: theme.palette.custom.primaryText, label: "Primary Text" },
     { color: theme.palette.custom.secondaryText, label: "Secondary Text" },
+  ];
+
+  const boxesgrayed = [
     // Grayed colors
     {
       color: theme.palette.custom.primaryBackgroundGrayed,
-      label: "Primary Background Grayed",
+      label: "Primary Background ",
     },
     {
       color: theme.palette.custom.secondaryBackgroundGrayed,
-      label: "Secondary Background Grayed",
+      label: "Secondary Background ",
     },
     {
       color: theme.palette.custom.primaryComponentsGrayed,
-      label: "Primary Components Grayed",
+      label: "Primary Components ",
     },
     {
       color: theme.palette.custom.secondaryComponentsGrayed,
-      label: "Secondary Components Grayed",
+      label: "Secondary Components ",
     },
     {
       color: theme.palette.custom.tertiaryComponentsGrayed,
-      label: "Tertiary Components Grayed",
+      label: "Tertiary Components ",
     },
     {
       color: theme.palette.custom.primaryBordersGrayed,
-      label: "Primary Borders Grayed",
+      label: "Primary Borders ",
     },
     {
       color: theme.palette.custom.secondaryBordersGrayed,
-      label: "Secondary Borders Grayed",
+      label: "Secondary Borders ",
     },
     {
       color: theme.palette.custom.tertiaryBordersGrayed,
-      label: "Tertiary Borders Grayed",
+      label: "Tertiary Borders ",
     },
     {
       color: theme.palette.custom.primarySolidColorsGrayed,
-      label: "Primary Solid Colors Grayed",
+      label: "Primary Solid Colors ",
     },
     {
       color: theme.palette.custom.secondarySolidColorsGrayed,
-      label: "Secondary Solid Colors Grayed",
+      label: "Secondary Solid Colors",
     },
     {
       color: theme.palette.custom.primaryTextGrayed,
-      label: "Primary Text Grayed",
+      label: "Primary Text",
     },
     {
       color: theme.palette.custom.secondaryTextGrayed,
-      label: "Secondary Text Grayed",
+      label: "Secondary Text",
     },
   ];
 
@@ -105,12 +111,54 @@ export default function Home(): JSX.Element {
         marginTop={"10rem"}
         justifyContent={"center"}
       >
+        {boxesmain.map((box, index) => (
+          <Box
+            key={index}
+            bgcolor={box.color}
+            width={"100%"}
+            height={"7.5rem"}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Typography>{box.label}</Typography>
+          </Box>
+        ))}
+      </Box>
+      <Box
+        display={"flex"}
+        gap={"1rem"}
+        flexWrap={"wrap"}
+        marginTop={"5rem"}
+        justifyContent={"center"}
+      >
         {boxes.map((box, index) => (
           <Box
             key={index}
             bgcolor={box.color}
-            width={"10rem"}
-            height={"10rem"}
+            width={"11.45rem"}
+            height={"7.5rem"}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Typography>{box.label}</Typography>
+          </Box>
+        ))}
+      </Box>
+      <Box
+        display={"flex"}
+        gap={"1rem"}
+        flexWrap={"wrap"}
+        marginTop={"10rem"}
+        justifyContent={"center"}
+      >
+        {boxesgrayed.map((box, index) => (
+          <Box
+            key={index}
+            bgcolor={box.color}
+            width={"11.45rem"}
+            height={"7.5rem"}
             display="flex"
             alignItems="center"
             justifyContent="center"
