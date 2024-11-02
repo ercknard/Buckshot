@@ -32,7 +32,12 @@ const ThemeToggleButton: React.FC<{
 
   return (
     <IconButton
-      sx={{ position: "absolute", right: "0", top: "0" }}
+      sx={{
+        position: "absolute",
+        right: "0",
+        top: ".25rem",
+        color: isDarkMode ? "#000000" : "#ffffff",
+      }}
       onClick={toggleTheme}
     >
       {isDarkMode ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
