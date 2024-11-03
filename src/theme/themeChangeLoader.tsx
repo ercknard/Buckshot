@@ -40,7 +40,7 @@ const toOpacityAnimation = keyframes`
    opacity: 1;
   }
   100% {
-    opacity: .50;
+    opacity: .25;
   }
 `;
 
@@ -111,7 +111,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
       }}
     >
       <Box
-        bgcolor={"custom.primaryBackgroundGrayed"}
+        bgcolor={"#121212"}
         sx={{
           position: "absolute",
           top: 0,
@@ -172,16 +172,15 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
       />
 
       <Box
-        bgcolor={"custom.primaryBackgroundGrayed"}
+        bgcolor={"#121212"}
         sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "50%",
           height: "100%",
-          opacity: 0.25,
           pointerEvents: "none",
-          animation: `${closeLeftGateAnimation} 3.25s ease-in-out 1`,
+          animation: `${closeLeftGateAnimation} 3.25s ease-in-out 1, ${toOpacityAnimation} 3.25s ease-in-out 1`,
         }}
       />
 
@@ -202,16 +201,15 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
       />
 
       <Box
-        bgcolor={"custom.primaryBackgroundGrayed"}
+        bgcolor={"#121212"}
         sx={{
           position: "absolute",
           top: 0,
           right: 0,
           width: "50%",
           height: "100%",
-          opacity: 0.25,
           pointerEvents: "none",
-          animation: `${closeRightGateAnimation} 3.25s ease-in-out 1`,
+          animation: `${closeRightGateAnimation} 3.25s ease-in-out 1, ${toOpacityAnimation} 3.25s ease-in-out 1`,
         }}
       />
     </Backdrop>
