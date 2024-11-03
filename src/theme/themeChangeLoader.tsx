@@ -44,6 +44,15 @@ const toOpacityAnimation = keyframes`
   }
 `;
 
+const zoomAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+`;
+
 const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
   loading,
   colorSetId,
@@ -104,10 +113,12 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
       sx={{
         color: "#fff",
         zIndex: (theme) => theme.zIndex.drawer + 1,
+        // backgroundColor: (theme) => `${theme.palette.custom.mainColor}50`,
         backgroundImage: `url(${imageBgSrc})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        animation: `${zoomAnimation} 3.25s infinite ease-in-out`,
       }}
     >
       <Box
@@ -142,11 +153,10 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           alt="Loader Image"
           sx={{
             zIndex: (theme) => theme.zIndex.drawer + 2,
-            boxShadow: "6px 6px 8px rgba(0, 0, 0, 1)",
           }}
         />
         <Typography
-          variant="h3"
+          variant="h2"
           color={"custom.primaryText"}
           sx={{
             marginTop: 2,
@@ -168,7 +178,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           height: "100%",
           opacity: 1,
           pointerEvents: "none",
-          animation: `${closeLeftGateAnimation} 3.25s ease-in-out 1`,
+          animation: `${closeLeftGateAnimation} 3s ease-in-out 1`,
           border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
         }}
       />
@@ -182,7 +192,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           width: "50%",
           height: "100%",
           pointerEvents: "none",
-          animation: `${closeLeftGateAnimation} 3.25s ease-in-out 1, ${toOpacityAnimation} 3.25s ease-in-out 1`,
+          animation: `${closeLeftGateAnimation} 3s ease-in-out 1, ${toOpacityAnimation} 3s ease-in-out 1`,
         }}
       />
 
@@ -197,7 +207,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           height: "100%",
           opacity: 1,
           pointerEvents: "none",
-          animation: `${closeRightGateAnimation} 3.25s ease-in-out 1`,
+          animation: `${closeRightGateAnimation} 3s ease-in-out 1`,
           border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
         }}
       />
@@ -211,7 +221,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           width: "50%",
           height: "100%",
           pointerEvents: "none",
-          animation: `${closeRightGateAnimation} 3.25s ease-in-out 1, ${toOpacityAnimation} 3.25s ease-in-out 1`,
+          animation: `${closeRightGateAnimation} 3s ease-in-out 1, ${toOpacityAnimation} 3s ease-in-out 1`,
         }}
       />
     </Backdrop>

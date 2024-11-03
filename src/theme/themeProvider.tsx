@@ -169,7 +169,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
               alignItems="center"
             >
               <Typography variant="h5" color="custom.primaryText">
-                Settings
+                Preference
               </Typography>
               <IconButton
                 onClick={() => setDrawerOpen(false)}
