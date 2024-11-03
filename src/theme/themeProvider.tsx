@@ -12,11 +12,15 @@ import {
   IconButton,
   Button,
   Box,
+  Drawer,
+  Typography,
+  Stack,
 } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { scTheme } from "@/theme/theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const ThemeContext = createContext<Theme | null>(null);
 
@@ -29,27 +33,33 @@ const ThemeToggleButton: React.FC<{
   toggleTheme: () => void;
 }> = ({ currentTheme, toggleTheme }) => {
   const isDarkMode = currentTheme === "dark";
-  const colors = useThemeContext(); // Get the custom palette from context
+  const colors = useThemeContext();
 
-  // Determine the icon color based on the current theme and color set
   const iconColor = isDarkMode
     ? colors.palette.custom.primaryText
-    : colors.palette.custom.secondaryText; // Use your palette
+    : colors.palette.custom.secondaryText;
 
   return (
     <IconButton
       sx={{
-        position: "absolute",
-        right: "0",
-        top: ".25rem",
-        color: iconColor, // Apply dynamic color based on the theme
+        color: iconColor,
       }}
       onClick={toggleTheme}
     >
       {isDarkMode ? (
-        <LightModeOutlinedIcon sx={{ color: iconColor }} />
+        <Stack direction={"row"} spacing={"3"} alignItems={"center"}>
+          <LightModeOutlinedIcon sx={{ color: iconColor }} />
+          <Typography variant={"h6"} marginLeft={"1rem"}>
+            Light mode
+          </Typography>
+        </Stack>
       ) : (
-        <DarkModeOutlinedIcon sx={{ color: iconColor }} />
+        <Stack direction={"row"} spacing={"3"} alignItems={"center"}>
+          <DarkModeOutlinedIcon sx={{ color: iconColor }} />
+          <Typography variant={"h6"} marginLeft={"1rem"}>
+            Dark mode
+          </Typography>
+        </Stack>
       )}
     </IconButton>
   );
@@ -82,6 +92,7 @@ const ColorSetButton: React.FC<{
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [activeTheme, setActiveTheme] = useState<PaletteMode>("dark");
   const [activeSet, setActiveSet] = useState<number>(1);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     const currentTheme = localStorage.getItem("theme") as PaletteMode;
@@ -115,25 +126,48 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   };
 
   const customPalette = scTheme(activeTheme, activeSet);
+  const iconColor = customPalette.palette.custom.primaryText;
 
   return (
     <ThemeContext.Provider value={customPalette}>
       <MuiThemeProvider theme={customPalette}>
         <CssBaseline />
-        <ThemeToggleButton
-          currentTheme={activeTheme}
-          toggleTheme={toggleTheme}
-        />
-        <Box sx={{ position: "absolute", top: "0", right: "2rem" }}>
-          {[1, 2, 3, 4, 5].map((setId) => (
-            <ColorSetButton
-              key={setId}
-              setId={setId}
-              currentSet={activeSet}
-              onClick={changeColorSet}
-            />
-          ))}
-        </Box>
+        <IconButton
+          onClick={() => setDrawerOpen(true)}
+          sx={{
+            position: "absolute",
+            top: "1rem",
+            right: "1rem",
+            color: iconColor,
+          }}
+        >
+          <SettingsIcon />
+        </IconButton>
+        <Drawer
+          anchor="right"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+        >
+          <Box sx={{ width: "100%", padding: 2 }}>
+            <Typography>Settings</Typography>
+            <Box sx={{ marginTop: 2 }}>
+              <ThemeToggleButton
+                currentTheme={activeTheme}
+                toggleTheme={toggleTheme}
+              />
+            </Box>
+            <Box sx={{ marginTop: 2 }}>
+              {[1, 2, 3, 4, 5].map((setId) => (
+                <ColorSetButton
+                  key={setId}
+                  setId={setId}
+                  currentSet={activeSet}
+                  onClick={changeColorSet}
+                />
+              ))}
+            </Box>
+          </Box>
+        </Drawer>
         {children}
       </MuiThemeProvider>
     </ThemeContext.Provider>
