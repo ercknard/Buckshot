@@ -52,7 +52,12 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        sx={{ animation: `${jumpAnimation} 1s ease-in-out infinite` }}
+      >
         <Box
           minWidth={250}
           maxWidth={250}
@@ -61,14 +66,12 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
           alt="Loader Image"
           sx={{
             zIndex: (theme) => theme.zIndex.drawer + 2,
-            animation: `${jumpAnimation} 1s ease-in-out infinite`,
           }}
         />
         <Typography
           variant="h3"
           sx={{
             marginTop: 2,
-            animation: `${jumpAnimation} 1s ease-in-out infinite`,
           }}
         >
           CryptechTest
