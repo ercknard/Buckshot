@@ -136,6 +136,20 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
       />
 
       <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          background:
+            "radial-gradient(circle, rgba(0, 0, 0, .5), rgba(0, 0, 0, 1))",
+          pointerEvents: "none",
+        }}
+      />
+
+      <Box
         key={colorSetId}
         display="flex"
         flexDirection="column"
@@ -167,7 +181,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
         </Typography>
       </Box>
 
-      <Box
+      {/* <Box
         component={"img"}
         src={imageBgLeftSrc}
         sx={{
@@ -223,7 +237,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           pointerEvents: "none",
           animation: `${closeRightGateAnimation} 3s ease-in-out 1, ${toOpacityAnimation} 3s ease-in-out 1`,
         }}
-      />
+      /> */}
     </Backdrop>
   );
 };
