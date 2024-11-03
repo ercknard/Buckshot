@@ -15,12 +15,14 @@ import {
   Drawer,
   Typography,
   Stack,
+  Divider,
 } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { scTheme } from "@/theme/theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
+import CloseIcon from "@mui/icons-material/Close"; // Import CloseIcon
 
 const ThemeContext = createContext<Theme | null>(null);
 
@@ -30,38 +32,57 @@ interface ThemeProviderProps {
 
 const ThemeToggleButton: React.FC<{
   currentTheme: PaletteMode;
-  toggleTheme: () => void;
+  toggleTheme: (theme: PaletteMode) => void;
 }> = ({ currentTheme, toggleTheme }) => {
-  const isDarkMode = currentTheme === "dark";
   const colors = useThemeContext();
 
-  const iconColor = isDarkMode
-    ? colors.palette.custom.primaryText
-    : colors.palette.custom.secondaryText;
+  const iconColor =
+    currentTheme === "dark"
+      ? colors.palette.custom.secondaryText
+      : colors.palette.custom.secondaryText;
 
   return (
-    <IconButton
-      sx={{
-        color: iconColor,
-      }}
-      onClick={toggleTheme}
+    <Stack
+      direction={"row"}
+      bgcolor={"custom.mainColor"}
+      padding={0.5}
+      spacing={1}
+      width={"18rem"}
+      borderRadius={"4px"}
     >
-      {isDarkMode ? (
-        <Stack direction={"row"} spacing={"3"} alignItems={"center"}>
-          <LightModeOutlinedIcon sx={{ color: iconColor }} />
-          <Typography variant={"h6"} marginLeft={"1rem"}>
-            Light mode
-          </Typography>
-        </Stack>
-      ) : (
-        <Stack direction={"row"} spacing={"3"} alignItems={"center"}>
-          <DarkModeOutlinedIcon sx={{ color: iconColor }} />
-          <Typography variant={"h6"} marginLeft={"1rem"}>
-            Dark mode
-          </Typography>
-        </Stack>
-      )}
-    </IconButton>
+      <Button
+        variant={currentTheme === "light" ? "outlined" : "contained"}
+        sx={{
+          color: currentTheme === "light" ? iconColor : "#ffffff",
+          backgroundColor:
+            currentTheme === "light"
+              ? "custom.primaryBackground"
+              : "custom.mainColor",
+        }}
+        onClick={() => toggleTheme("light")}
+      >
+        <LightModeOutlinedIcon />
+        <Typography variant={"h6"} marginLeft={".25rem"}>
+          Light mode
+        </Typography>
+      </Button>
+      <Button
+        variant={currentTheme === "dark" ? "outlined" : "contained"}
+        sx={{
+          color: currentTheme === "dark" ? iconColor : "#ffffff",
+          backgroundColor:
+            currentTheme === "dark"
+              ? "custom.primaryBackground"
+              : "custom.mainColor",
+        }}
+        onClick={() => toggleTheme("dark")}
+      >
+        <DarkModeOutlinedIcon sx={{ color: iconColor }} />
+        <Typography variant={"h6"} marginLeft={".25rem"}>
+          Dark mode
+        </Typography>
+      </Button>
+    </Stack>
   );
 };
 
@@ -77,7 +98,6 @@ const ColorSetButton: React.FC<{
       variant={currentSet === setId ? "contained" : "outlined"}
       onClick={() => onClick(setId)}
       sx={{
-        margin: 1,
         backgroundColor:
           currentSet === setId ? colors[setId - 1] : colors[setId - 1] + "50",
         color: currentSet === setId ? "#ffffff" : colors[setId - 1],
@@ -148,15 +168,36 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
         >
-          <Box sx={{ width: "100%", padding: 2 }}>
-            <Typography>Settings</Typography>
-            <Box sx={{ marginTop: 2 }}>
+          <Box sx={{ minWidth: "400px", padding: 2 }}>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography variant={"h5"}>Settings</Typography>
+              <IconButton
+                onClick={() => setDrawerOpen(false)}
+                sx={{
+                  color: iconColor,
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Stack>
+            <Box marginTop={1}>
+              <Divider />
+            </Box>
+            <Box sx={{ marginTop: 2.5 }}>
               <ThemeToggleButton
                 currentTheme={activeTheme}
                 toggleTheme={toggleTheme}
               />
             </Box>
-            <Box sx={{ marginTop: 2 }}>
+            <Box
+              display={"flex"}
+              justifyContent={"space-between"}
+              sx={{ marginTop: 2.5 }}
+            >
               {[1, 2, 3, 4, 5].map((setId) => (
                 <ColorSetButton
                   key={setId}
