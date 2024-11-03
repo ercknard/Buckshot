@@ -70,6 +70,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
         />
         <Typography
           variant="h3"
+          color={"custom.primaryText"}
           sx={{
             marginTop: 2,
           }}
