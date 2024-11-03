@@ -169,7 +169,7 @@ export default function Home(): JSX.Element {
           </Box>
         ))}
       </Box>
-      <Stack height={"200vh"}>
+      {/* <Stack height={"200vh"}>
         <Typography variant={"h1"} color={"custom.primaryText"}>
           CryptechTest
         </Typography>
@@ -197,7 +197,7 @@ export default function Home(): JSX.Element {
         <Typography variant={"highlightMuted"} color={"custom.primaryText"}>
           highlightMuted
         </Typography>
-      </Stack>
+      </Stack> */}
     </Container>
   );
 }

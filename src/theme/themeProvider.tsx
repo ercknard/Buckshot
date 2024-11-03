@@ -22,7 +22,8 @@ import { scTheme } from "@/theme/theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
-import CloseIcon from "@mui/icons-material/Close"; // Import CloseIcon
+import CloseIcon from "@mui/icons-material/Close";
+import ChangeLoader from "./themeChangeLoader";
 
 const ThemeContext = createContext<Theme | null>(null);
 
@@ -35,53 +36,40 @@ const ThemeToggleButton: React.FC<{
   toggleTheme: (theme: PaletteMode) => void;
 }> = ({ currentTheme, toggleTheme }) => {
   const colors = useThemeContext();
-
-  const iconColor =
-    currentTheme === "dark"
-      ? colors.palette.custom.secondaryText
-      : colors.palette.custom.secondaryText;
+  const iconColor = colors.palette.custom.secondaryText;
 
   return (
     <Stack
-      direction={"row"}
-      bgcolor={"custom.mainColor"}
+      direction="row"
+      bgcolor="custom.mainColor"
       padding={0.5}
       spacing={1}
-      width={"18rem"}
-      borderRadius={"4px"}
+      width="18rem"
+      borderRadius="4px"
     >
-      <Button
-        variant={currentTheme === "light" ? "outlined" : "contained"}
-        sx={{
-          color: currentTheme === "light" ? iconColor : "#ffffff",
-          backgroundColor:
-            currentTheme === "light"
-              ? "custom.primaryBackground"
-              : "custom.mainColor",
-        }}
-        onClick={() => toggleTheme("light")}
-      >
-        <LightModeOutlinedIcon />
-        <Typography variant={"h6"} marginLeft={".25rem"}>
-          Light mode
-        </Typography>
-      </Button>
-      <Button
-        variant={currentTheme === "dark" ? "outlined" : "contained"}
-        sx={{
-          color: currentTheme === "dark" ? iconColor : "#ffffff",
-          backgroundColor:
-            currentTheme === "dark"
-              ? "custom.primaryBackground"
-              : "custom.mainColor",
-        }}
-        onClick={() => toggleTheme("dark")}
-      >
-        <DarkModeOutlinedIcon sx={{ color: iconColor }} />
-        <Typography variant={"h6"} marginLeft={".25rem"}>
-          Dark mode
-        </Typography>
-      </Button>
+      {["light", "dark"].map((theme) => (
+        <Button
+          key={theme}
+          variant={currentTheme === theme ? "outlined" : "contained"}
+          sx={{
+            color: currentTheme === theme ? iconColor : "#ffffff",
+            backgroundColor:
+              currentTheme === theme
+                ? "custom.primaryBackground"
+                : "custom.mainColor",
+          }}
+          onClick={() => toggleTheme(theme as PaletteMode)}
+        >
+          {theme === "light" ? (
+            <LightModeOutlinedIcon />
+          ) : (
+            <DarkModeOutlinedIcon />
+          )}
+          <Typography variant="h6" marginLeft=".25rem">
+            {`${theme.charAt(0).toUpperCase() + theme.slice(1)} mode`}
+          </Typography>
+        </Button>
+      ))}
     </Stack>
   );
 };
@@ -92,14 +80,13 @@ const ColorSetButton: React.FC<{
   onClick: (setId: number) => void;
 }> = ({ setId, currentSet, onClick }) => {
   const colors = ["#6169cf", "#456545", "#868645", "#a16c4f", "#b770ad"];
-
   return (
     <Button
       variant={currentSet === setId ? "contained" : "outlined"}
       onClick={() => onClick(setId)}
       sx={{
         backgroundColor:
-          currentSet === setId ? colors[setId - 1] : colors[setId - 1] + "50",
+          currentSet === setId ? colors[setId - 1] : `${colors[setId - 1]}15`,
         color: currentSet === setId ? "#ffffff" : colors[setId - 1],
         borderColor: colors[setId - 1],
       }}
@@ -113,36 +100,32 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [activeTheme, setActiveTheme] = useState<PaletteMode>("dark");
   const [activeSet, setActiveSet] = useState<number>(1);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme") as PaletteMode;
-    const currentSet = localStorage.getItem("colorSet");
-
-    if (currentTheme === "dark" || currentTheme === "light") {
-      setActiveTheme(currentTheme);
-    } else {
-      const defaultTheme: PaletteMode = "dark";
-      localStorage.setItem("theme", defaultTheme);
-      setActiveTheme(defaultTheme);
-    }
-
-    if (currentSet) {
-      setActiveSet(Number(currentSet));
-    } else {
-      localStorage.setItem("colorSet", "1");
-      setActiveSet(1);
-    }
+    const storedTheme = localStorage.getItem("theme") as PaletteMode;
+    const storedSet = localStorage.getItem("colorSet");
+    setActiveTheme(
+      storedTheme === "dark" || storedTheme === "light" ? storedTheme : "dark"
+    );
+    setActiveSet(storedSet ? Number(storedSet) : 1);
+    localStorage.setItem("theme", storedTheme || "dark");
+    localStorage.setItem("colorSet", storedSet || "1");
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = activeTheme === "dark" ? "light" : "dark";
-    setActiveTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+  const toggleTheme = (theme: PaletteMode) => {
+    setActiveTheme(theme);
+    localStorage.setItem("theme", theme);
   };
 
   const changeColorSet = (setId: number) => {
+    setLoading(true);
     setActiveSet(setId);
     localStorage.setItem("colorSet", setId.toString());
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
 
   const customPalette = scTheme(activeTheme, activeSet);
@@ -152,6 +135,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     <ThemeContext.Provider value={customPalette}>
       <MuiThemeProvider theme={customPalette}>
         <CssBaseline />
+        <ChangeLoader loading={loading} />
         <IconButton
           onClick={() => setDrawerOpen(true)}
           sx={{
@@ -174,30 +158,28 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Typography variant={"h5"}>Settings</Typography>
+              <Typography variant="h5" color="custom.primaryText">
+                Settings
+              </Typography>
               <IconButton
                 onClick={() => setDrawerOpen(false)}
-                sx={{
-                  color: iconColor,
-                }}
+                sx={{ color: iconColor }}
               >
                 <CloseIcon />
               </IconButton>
             </Stack>
-            <Box marginTop={1}>
-              <Divider />
-            </Box>
-            <Box sx={{ marginTop: 2.5 }}>
-              <ThemeToggleButton
-                currentTheme={activeTheme}
-                toggleTheme={toggleTheme}
-              />
-            </Box>
-            <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              sx={{ marginTop: 2.5 }}
-            >
+            <Divider
+              sx={{
+                bgcolor: "custom.tertiaryBorders",
+                marginTop: 1.5,
+                marginBottom: 2.5,
+              }}
+            />
+            <ThemeToggleButton
+              currentTheme={activeTheme}
+              toggleTheme={toggleTheme}
+            />
+            <Box display="flex" justifyContent="space-between" marginTop={2.5}>
               {[1, 2, 3, 4, 5].map((setId) => (
                 <ColorSetButton
                   key={setId}
@@ -217,9 +199,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
 export const useThemeContext = () => {
   const context = useContext(ThemeContext);
-  if (!context) {
+  if (!context)
     throw new Error("useThemeContext must be used within a ThemeProvider");
-  }
   return context;
 };
 
