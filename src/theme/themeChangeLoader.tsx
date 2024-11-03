@@ -160,7 +160,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           color={"custom.primaryText"}
           sx={{
             marginTop: 2,
-            textShadow: "6px 6px 8px rgba(0, 0, 0, 1)",
+            textShadow: "6px 6px 8px rgba(0, 0, 0, .5)",
           }}
         >
           CryptechTest
