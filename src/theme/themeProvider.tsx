@@ -130,9 +130,15 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setActiveSet(setId);
     localStorage.setItem("colorSet", setId.toString());
     setLoaderKey((prevKey) => prevKey + 1); // Force re-render
-    setTimeout(() => setLoading(false), 3000); // Simulating loading duration
-  };
 
+    setTimeout(() => {
+      setLoading(false); // Hide loader after 3 seconds
+    }, 3000); // Simulate loading duration
+
+    setTimeout(() => {
+      setDrawerOpen(false); // Close drawer after an additional 1 second
+    }, 1000); // 1 second delay before closing
+  };
   const customPalette: CustomTheme = {
     ...scTheme(activeTheme, activeSet),
     activeSet, // Add the activeSet to the theme
