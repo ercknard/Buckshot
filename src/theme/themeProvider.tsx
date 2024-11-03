@@ -50,13 +50,13 @@ const ThemeToggleButton: React.FC<{
       {["light", "dark"].map((theme) => (
         <Button
           key={theme}
-          variant={currentTheme === theme ? "outlined" : "contained"}
+          variant={currentTheme === theme ? "contained" : "outlined"}
           sx={{
-            color: currentTheme === theme ? iconColor : "#ffffff",
+            color: currentTheme === theme ? "#ffffff" : iconColor,
             backgroundColor:
               currentTheme === theme
-                ? "custom.primaryBackground"
-                : "custom.mainColor",
+                ? "custom.mainColor"
+                : "custom.primaryBackground",
           }}
           onClick={() => toggleTheme(theme as PaletteMode)}
         >
@@ -108,6 +108,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setActiveTheme(
       storedTheme === "dark" || storedTheme === "light" ? storedTheme : "dark"
     );
+
     setActiveSet(storedSet ? Number(storedSet) : 1);
     localStorage.setItem("theme", storedTheme || "dark");
     localStorage.setItem("colorSet", storedSet || "1");

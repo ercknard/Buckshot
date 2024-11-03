@@ -127,7 +127,7 @@ const breakpoints = {
 
 const colorPalette = (mode: PaletteMode, setId: number) => {
   const getColor = (darkColor: string, lightColor: string) => {
-    return mode === "dark" ? darkColor : lightColor;
+    return mode === "light" ? darkColor : lightColor;
   };
 
   const colorSets = {
