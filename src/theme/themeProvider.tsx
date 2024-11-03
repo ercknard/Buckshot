@@ -101,6 +101,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [activeSet, setActiveSet] = useState<number>(1);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loaderKey, setLoaderKey] = useState(0);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as PaletteMode;
@@ -124,9 +125,13 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setActiveSet(setId);
     localStorage.setItem("colorSet", setId.toString());
 
+    // Change the loader key to force re-render
+    setLoaderKey((prevKey) => prevKey + 1);
+
+    // Simulating loading duration
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 3000);
   };
 
   const customPalette = scTheme(activeTheme, activeSet);
@@ -136,7 +141,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     <ThemeContext.Provider value={customPalette}>
       <MuiThemeProvider theme={customPalette}>
         <CssBaseline />
-        <ChangeLoader loading={loading} />
+        <ChangeLoader
+          loading={loading}
+          key={loaderKey}
+          colorSetId={activeSet}
+        />
         <IconButton
           onClick={() => setDrawerOpen(true)}
           sx={{

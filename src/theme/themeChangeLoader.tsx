@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Backdrop, Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { keyframes } from "@emotion/react"; // Import keyframes from emotion
+import { keyframes } from "@emotion/react";
 
 interface FullscreenLoaderProps {
   loading: boolean;
+  colorSetId: number; // Add this prop to track color set changes
 }
 
 const jumpAnimation = keyframes`
@@ -16,29 +17,86 @@ const jumpAnimation = keyframes`
   }
 `;
 
-const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
+const closeLeftGateAnimation = keyframes`
+  0% {
+    transform: translateX(0vw);
+  }
+  100% {
+    transform: translateX(-50vw);
+  }
+`;
+
+const closeRightGateAnimation = keyframes`
+  0% {
+    transform: translateX(0vw);
+  }
+  100% {
+    transform: translateX(50vw);
+  }
+`;
+
+const toOpacityAnimation = keyframes`
+  0% {
+   opacity: 1;
+  }
+  100% {
+    opacity: .50;
+  }
+`;
+
+const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
+  loading,
+  colorSetId,
+}) => {
   const theme = useTheme();
 
-  const colorSetId = theme.palette.custom.mainColor;
+  const colorKey = colorSetId.toString();
 
   const colorSetImageMap: { [key: string]: string } = {
-    "#6169cf": "/static/images/blue-head.webp",
-    "#456545": "/static/images/green-head.webp",
-    "#868645": "/static/images/yellow-head.webp",
-    "#a16c4f": "/static/images/orange-head.webp",
-    "#b770ad": "/static/images/pink-head.webp",
+    1: "/static/images/blue-head.webp",
+    2: "/static/images/green-head.webp",
+    3: "/static/images/yellow-head.webp",
+    4: "/static/images/orange-head.webp",
+    5: "/static/images/pink-head.webp",
   };
 
   const colorSetBgMap: { [key: string]: string } = {
-    "#6169cf": "/static/images/blue-gate.webp",
-    "#456545": "/static/images/green-gate.webp",
-    "#868645": "/static/images/yellow-gate.webp",
-    "#a16c4f": "/static/images/orange-gate.webp",
-    "#b770ad": "/static/images/pink-gate.webp",
+    1: "/static/images/blue-gate.webp",
+    2: "/static/images/green-gate.webp",
+    3: "/static/images/yellow-gate.webp",
+    4: "/static/images/orange-gate.webp",
+    5: "/static/images/pink-gate.webp",
   };
 
-  const imageBgSrc = colorSetBgMap[colorSetId] || colorSetImageMap["#6169cf"];
-  const imageSrc = colorSetImageMap[colorSetId] || colorSetImageMap["#6169cf"];
+  const colorSetBgMapLeft: { [key: string]: string } = {
+    1: "/static/images/blue-gate-l.webp",
+    2: "/static/images/green-gate-l.webp",
+    3: "/static/images/yellow-gate-l.webp",
+    4: "/static/images/orange-gate-l.webp",
+    5: "/static/images/pink-gate-l.webp",
+  };
+
+  const colorSetBgMapRight: { [key: string]: string } = {
+    1: "/static/images/blue-gate-r.webp",
+    2: "/static/images/green-gate-r.webp",
+    3: "/static/images/yellow-gate-r.webp",
+    4: "/static/images/orange-gate-r.webp",
+    5: "/static/images/pink-gate-r.webp",
+  };
+
+  const imageBgSrc = colorSetBgMap[colorKey] || colorSetBgMap[1];
+  const imageBgLeftSrc = colorSetBgMapLeft[colorKey] || colorSetBgMapLeft[1];
+  const imageBgRightSrc = colorSetBgMapRight[colorKey] || colorSetBgMapRight[1];
+  const imageSrc = colorSetImageMap[colorKey] || colorSetImageMap[1];
+
+  console.log(
+    "Current colorSetId:",
+    colorKey,
+    "Image BG:",
+    imageBgSrc,
+    "Image:",
+    imageSrc
+  );
 
   return (
     <Backdrop
@@ -46,17 +104,35 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
       sx={{
         color: "#fff",
         zIndex: (theme) => theme.zIndex.drawer + 1,
-        backgroundColor: "rgba(0, 0, 0, .8)",
+        backgroundImage: `url(${imageBgSrc})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
       <Box
+        bgcolor={"custom.primaryBackgroundGrayed"}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          animation: `${toOpacityAnimation} 3.25s ease-in-out 1`,
+          pointerEvents: "none",
+        }}
+      />
+
+      <Box
+        key={colorSetId}
         display="flex"
         flexDirection="column"
         alignItems="center"
-        sx={{ animation: `${jumpAnimation} 10s ease-in-out infinite` }}
+        sx={{
+          animation: `${jumpAnimation} 1s ease-in-out infinite`,
+          pointerEvents: "none",
+        }}
       >
         <Box
           minWidth={250}
@@ -80,16 +156,62 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
       </Box>
 
       <Box
-        bgcolor={"custom.mainColor"}
+        component={"img"}
+        src={imageBgLeftSrc}
         sx={{
           position: "absolute",
           top: 0,
           left: 0,
-          width: "100%",
+          width: "50%",
           height: "100%",
-          objectFit: "cover",
+          opacity: 1,
+          pointerEvents: "none",
+          animation: `${closeLeftGateAnimation} 3.25s ease-in-out 1`,
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+        }}
+      />
+
+      <Box
+        bgcolor={"custom.primaryBackgroundGrayed"}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "50%",
+          height: "100%",
           opacity: 0.25,
           pointerEvents: "none",
+          animation: `${closeLeftGateAnimation} 3.25s ease-in-out 1`,
+        }}
+      />
+
+      <Box
+        component={"img"}
+        src={imageBgRightSrc}
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+          animation: `${closeRightGateAnimation} 3.25s ease-in-out 1`,
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+        }}
+      />
+
+      <Box
+        bgcolor={"custom.primaryBackgroundGrayed"}
+        sx={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 0.25,
+          pointerEvents: "none",
+          animation: `${closeRightGateAnimation} 3.25s ease-in-out 1`,
         }}
       />
     </Backdrop>
