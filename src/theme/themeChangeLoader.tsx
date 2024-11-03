@@ -142,6 +142,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           alt="Loader Image"
           sx={{
             zIndex: (theme) => theme.zIndex.drawer + 2,
+            boxShadow: "6px 6px 8px rgba(0, 0, 0, 1)",
           }}
         />
         <Typography
@@ -149,6 +150,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
           color={"custom.primaryText"}
           sx={{
             marginTop: 2,
+            textShadow: "6px 6px 8px rgba(0, 0, 0, 1)",
           }}
         >
           CryptechTest
