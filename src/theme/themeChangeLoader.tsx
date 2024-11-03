@@ -56,7 +56,7 @@ const ChangeLoader: React.FC<FullscreenLoaderProps> = ({ loading }) => {
         display="flex"
         flexDirection="column"
         alignItems="center"
-        sx={{ animation: `${jumpAnimation} 1s ease-in-out infinite` }}
+        sx={{ animation: `${jumpAnimation} 10s ease-in-out infinite` }}
       >
         <Box
           minWidth={250}
