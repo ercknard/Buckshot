@@ -1,6 +1,7 @@
 import { Container, Box, Typography, Stack } from "@mui/material";
 import { DefaultHead } from "@/components/layout/Head";
 import { useThemeContext } from "@/theme/themeProvider";
+import HeroSection from "@/components/layout/home/HeroSection";
 
 export default function Home(): JSX.Element {
   const theme = useThemeContext();
@@ -104,6 +105,7 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <DefaultHead />
+      <HeroSection />
       <Box
         display={"flex"}
         gap={"1rem"}

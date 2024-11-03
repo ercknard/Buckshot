@@ -17,7 +17,7 @@ import {
   Stack,
   Divider,
 } from "@mui/material";
-import { Theme } from "@mui/material/styles";
+import { Theme as MuiTheme } from "@mui/material/styles";
 import { scTheme } from "@/theme/theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -25,7 +25,13 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import CloseIcon from "@mui/icons-material/Close";
 import ChangeLoader from "./themeChangeLoader";
 
-const ThemeContext = createContext<Theme | null>(null);
+// Define the context type
+interface CustomTheme extends MuiTheme {
+  activeSet: number;
+}
+
+// Create context with a default value of null
+const ThemeContext = createContext<CustomTheme | null>(null);
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -109,7 +115,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setActiveTheme(
       storedTheme === "dark" || storedTheme === "light" ? storedTheme : "dark"
     );
-
     setActiveSet(storedSet ? Number(storedSet) : 1);
     localStorage.setItem("theme", storedTheme || "dark");
     localStorage.setItem("colorSet", storedSet || "1");
@@ -124,17 +129,15 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setLoading(true);
     setActiveSet(setId);
     localStorage.setItem("colorSet", setId.toString());
-
-    // Change the loader key to force re-render
-    setLoaderKey((prevKey) => prevKey + 1);
-
-    // Simulating loading duration
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    setLoaderKey((prevKey) => prevKey + 1); // Force re-render
+    setTimeout(() => setLoading(false), 3000); // Simulating loading duration
   };
 
-  const customPalette = scTheme(activeTheme, activeSet);
+  const customPalette: CustomTheme = {
+    ...scTheme(activeTheme, activeSet),
+    activeSet, // Add the activeSet to the theme
+  };
+
   const iconColor = customPalette.palette.custom.primaryText;
 
   return (

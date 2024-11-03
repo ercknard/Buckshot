@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#tsparticles {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 98vw !important;
+  height: 100%;
+  opacity: 100%;
+  pointer-events: none !important;
+}

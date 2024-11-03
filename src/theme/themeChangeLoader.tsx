@@ -3,7 +3,7 @@ import { Backdrop, Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { keyframes } from "@emotion/react";
 
-interface FullscreenLoaderProps {
+interface ChangeLoaderProps {
   loading: boolean;
   colorSetId: number; // Add this prop to track color set changes
 }
@@ -48,15 +48,15 @@ const zoomAnimation = keyframes`
   0% {
     transform: scale(1);
   }
-  100% {
+  75% {
     transform: scale(1.1);
   }
+    100%{
+    transform: scale(0);
+    }
 `;
 
-const ChangeLoader: React.FC<FullscreenLoaderProps> = ({
-  loading,
-  colorSetId,
-}) => {
+const ChangeLoader: React.FC<ChangeLoaderProps> = ({ loading, colorSetId }) => {
   const theme = useTheme();
 
   const colorKey = colorSetId.toString();
