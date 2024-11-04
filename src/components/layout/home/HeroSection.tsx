@@ -29,12 +29,21 @@ const zoomAnimation = keyframes`
   0% {
     transform: scale(1);
   }
-  75% {
-    transform: scale(1.07);
+  90% {
+    transform: scale(3);
   }
     100%{
     transform: scale(1);
     }
+`;
+
+const toOpacityAnimation = keyframes`
+  0%, 100% {
+   opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
 `;
 
 const Cursor = styled("span")(({ theme }) => ({
@@ -219,6 +228,22 @@ export default function HeroSection(): JSX.Element {
       />
 
       <Box
+        sx={(theme) => ({
+          bgcolor: "transparent",
+          backgroundImage: `radial-gradient(circle, ${theme.palette.custom.primaryBackgroundGrayed}90, ${theme.palette.custom.secondaryBackground})`,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100vh",
+          objectFit: "cover",
+          pointerEvents: "none",
+          zIndex: "-1",
+          animation: `${toOpacityAnimation} 20s ease-in-out infinite`,
+        })}
+      />
+
+      <Box
         sx={{
           backgroundImage: `url(${imageBgSrc})`,
           backgroundSize: "cover",
@@ -231,7 +256,7 @@ export default function HeroSection(): JSX.Element {
           height: "100vh",
           pointerEvents: "none",
           zIndex: "-2",
-          animation: `${zoomAnimation} 6s ease-in-out infinite`,
+          animation: `${zoomAnimation} 20s ease-in-out infinite`,
           overflow: "hidden", // Prevents horizontal overflow
           transformOrigin: "center center", // Scales from the center
         }}
