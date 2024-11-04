@@ -410,6 +410,24 @@ export default function HeroSection(): JSX.Element {
       {/* Left */}
 
       <Box
+        sx={{
+          backgroundImage: `url(/static/images/chain.png)`,
+          position: "absolute",
+          top: "51.25%",
+          left: "0",
+          width: "45%",
+          height: "2rem",
+          pointerEvents: "none",
+          zIndex: "3",
+          animation: animationPaused
+            ? "none"
+            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
+          overflow: "hidden",
+          transformOrigin: "center center",
+        }}
+      />
+
+      <Box
         component={"img"}
         src={imageBgLeftSrc}
         sx={(theme) => ({
@@ -483,6 +501,24 @@ export default function HeroSection(): JSX.Element {
       />
 
       {/* Right */}
+
+      <Box
+        sx={{
+          backgroundImage: `url(/static/images/chain.png)`,
+          position: "absolute",
+          top: "51.25%",
+          right: "0",
+          width: "45%",
+          height: "2rem",
+          pointerEvents: "none",
+          zIndex: "3",
+          animation: animationPaused
+            ? "none"
+            : `${clockwiseAnimation} 20s ease-in-out infinite`,
+          overflow: "hidden",
+          transformOrigin: "center center",
+        }}
+      />
 
       <Box
         component={"img"}
