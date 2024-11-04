@@ -64,6 +64,30 @@ const closeRightGateAnimation = keyframes`
   }
 `;
 
+const clockwiseAnimation = keyframes`
+            0%, 100% {
+                transform: translateX(0vw);
+            }
+            75% {
+                transform: translateX(50vw);
+            }
+                           95% {
+                transform: translateX(55vw);
+            }
+        `;
+
+const counterclockwiseAnimation = keyframes`
+            0%, 100% {
+                transform: translateX(0vw);
+            }
+            75% {
+                transform: translateX(-50vw);
+            }
+                           95% {
+                transform: translateX(-55vw);
+            }
+        `;
+
 const Cursor = styled("span")(({ theme }) => ({
   display: "inline-block",
   width: "1rem",
@@ -423,6 +447,25 @@ export default function HeroSection(): JSX.Element {
       />
 
       <Box
+        component={"img"}
+        src="/static/images/wheel.png"
+        sx={(theme) => ({
+          position: "absolute",
+          top: "50%",
+          left: "42.5%",
+          width: "5rem",
+          height: "5rem",
+          opacity: 1,
+          transformOrigin: "center",
+          pointerEvents: "none",
+          animation: animationPaused
+            ? "none"
+            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
+          zIndex: "3",
+        })}
+      />
+
+      <Box
         bgcolor={"#121212"}
         sx={(theme) => ({
           position: "absolute",
@@ -474,6 +517,25 @@ export default function HeroSection(): JSX.Element {
             ? "none"
             : `${closeRightGateAnimation} 20s ease-in-out infinite`,
           border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+          zIndex: "3",
+        })}
+      />
+
+      <Box
+        component={"img"}
+        src="/static/images/wheel.png"
+        sx={(theme) => ({
+          position: "absolute",
+          top: "50%",
+          right: "42.5%",
+          width: "5rem",
+          height: "5rem",
+          opacity: 1,
+          transformOrigin: "center",
+          pointerEvents: "none",
+          animation: animationPaused
+            ? "none"
+            : `${clockwiseAnimation} 20s ease-in-out infinite`,
           zIndex: "3",
         })}
       />
