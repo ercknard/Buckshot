@@ -36,7 +36,7 @@ const Particlesview: React.FC = () => {
         init={particlesInit}
         loaded={particlesLoaded}
         options={{
-          fpsLimit: 30,
+          fpsLimit: 60,
           delay: 1,
           autoPlay: true,
           backgroundMask: {
@@ -49,7 +49,7 @@ const Particlesview: React.FC = () => {
             },
             enable: false,
           },
-          clear: false,
+          clear: true,
           defaultThemes: {},
           fullScreen: {
             enable: false,
@@ -315,7 +315,7 @@ const Particlesview: React.FC = () => {
                 width: 1920,
                 height: 1080,
               },
-              value: 30,
+              value: 50,
             },
             opacity: {
               value: {
@@ -324,7 +324,7 @@ const Particlesview: React.FC = () => {
               },
               animation: {
                 count: 0,
-                enable: false,
+                enable: true,
                 speed: 4,
                 decay: 0,
                 delay: 0,
