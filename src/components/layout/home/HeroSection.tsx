@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button"; // Import Button
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
 import { styled } from "@mui/material/styles";
 import { useThemeContext } from "@/theme/themeProvider";
 import Particlesview from "../Particles";
 import { keyframes } from "@emotion/react";
+import DefaultDialog from "../DefaultDialog";
 
 const typingText = "CryptechTest";
 
@@ -44,6 +46,8 @@ export default function HeroSection(): JSX.Element {
   const [isDeleting, setIsDeleting] = useState(false);
   const [index, setIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false); // State for dialog
+  const [dialogOpenTrailer, setDialogOpenTrailer] = useState(false); // State for dialog
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,6 +101,22 @@ export default function HeroSection(): JSX.Element {
   // Calculate the scale based on scroll position
   const scale = 1 + scrollY * 0.001; // Adjust 0.001 to control zoom intensity
 
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogOpenTrailer = () => {
+    setDialogOpenTrailer(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
+
+  const handleDialogCloseTrailer = () => {
+    setDialogOpenTrailer(false);
+  };
+
   return (
     <Box
       display={"flex"}
@@ -104,7 +124,7 @@ export default function HeroSection(): JSX.Element {
       alignItems={"center"}
       justifyContent={"left"}
     >
-      <Stack marginTop={-15}>
+      <Stack marginTop={-20}>
         <Stack spacing={1} direction={"row"}>
           <Typography variant={"body1"} color={"custom.primaryText"}>
             Play,
@@ -151,11 +171,21 @@ export default function HeroSection(): JSX.Element {
 
         {/* Buttons */}
         <Stack spacing={2} direction={"row"} sx={{ marginTop: "1rem" }}>
-          <Button variant="contained" color="primary" size="large">
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={handleDialogOpen}
+          >
             Get Started
           </Button>
-          <Button variant="outlined" color="primary" size="large">
-            Learn More
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            onClick={handleDialogOpenTrailer}
+          >
+            Watch Trailer
           </Button>
         </Stack>
       </Stack>
@@ -163,7 +193,7 @@ export default function HeroSection(): JSX.Element {
       <Box
         sx={(theme) => ({
           bgcolor: "transparent",
-          backgroundImage: `linear-gradient(to bottom, ${theme.palette.custom.primaryBackgroundGrayed}95, ${theme.palette.custom.secondaryBackground})`,
+          backgroundImage: `linear-gradient(to bottom, ${theme.palette.custom.primaryBackgroundGrayed}25, ${theme.palette.custom.secondaryBackground})`,
           position: "absolute",
           top: 0,
           left: 0,
@@ -209,6 +239,92 @@ export default function HeroSection(): JSX.Element {
       />
 
       <Particlesview />
+
+      {/* Dialog Component */}
+      <DefaultDialog
+        maxWidth="sm"
+        open={dialogOpen}
+        handleOnClose={handleDialogClose}
+        title="Join CryptechTest Now!"
+      >
+        <Stack spacing={3} padding={2}>
+          <Typography
+            variant={"h5"}
+            fontSize={"1.5rem"}
+            color={"custom.primaryTextGrayed"}
+          >
+            ¹ Its simple, to join our server first download the client which is
+            free on their page: MINETEST .
+          </Typography>
+
+          <Typography
+            variant={"h5"}
+            fontSize={"1.5rem"}
+            color={"custom.primaryTextGrayed"}
+          >
+            ² Open Minetest client, choose the join game tab. Put CryptectTest
+            Credentials:
+          </Typography>
+
+          <Box padding={1} bgcolor={"custom.primaryComponents"}>
+            <Typography variant={"h5"} fontSize={"1.5rem"} align={"center"}>
+              IP: cryptechcraft.xyz / us.cryptechcraft.xyz / cryptechtest.xyz
+            </Typography>
+          </Box>
+
+          <Box padding={1} bgcolor={"custom.primaryComponents"}>
+            <Typography variant={"h5"} fontSize={"1.5rem"} align={"center"}>
+              Port: 30000
+            </Typography>
+          </Box>
+
+          <Typography
+            variant={"h5"}
+            fontSize={"1.5rem"}
+            color={"custom.primaryTextGrayed"}
+          >
+            ³ Press the Register option. Once you have done that, the client
+            will proceed to download the necessary files and thats it.
+          </Typography>
+
+          <Typography
+            variant={"h5"}
+            fontSize={"1.5rem"}
+            align={"center"}
+            color={"custom.primaryText"}
+          >
+            &quot;Welcome to our server and good luck landing.&quot; -Karen
+          </Typography>
+        </Stack>
+
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </DefaultDialog>
+
+      <DefaultDialog
+        maxWidth="lg"
+        open={dialogOpenTrailer}
+        handleOnClose={handleDialogCloseTrailer}
+        title="CryptechTest Trailer"
+      >
+        <Stack>
+          <video width="100%" controls autoPlay>
+            <source
+              src="https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </Stack>
+        <DialogActions>
+          <Button onClick={handleDialogCloseTrailer} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </DefaultDialog>
     </Box>
   );
 }

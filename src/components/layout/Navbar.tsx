@@ -136,7 +136,7 @@ export default function Navbar() {
           px: 3,
           mb: 8,
           boxShadow: 1,
-          bgcolor: "custom.a1",
+          bgcolor: "custom.secondaryBackground",
           backgroundImage: "none",
         }}
       >
@@ -162,10 +162,6 @@ export default function Navbar() {
                   variant="body1"
                   fontSize={"1.75rem"}
                   color={"custom.primaryText"}
-                  sx={{
-                    marginTop: 2,
-                    textShadow: "6px 6px 8px rgba(0, 0, 0, .5)",
-                  }}
                 >
                   CryptechTest
                 </Typography>
