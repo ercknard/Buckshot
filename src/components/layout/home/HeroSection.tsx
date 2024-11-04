@@ -117,7 +117,18 @@ export default function HeroSection(): JSX.Element {
     5: "/static/images/pink-gate.webp",
   };
 
+  const colorSetFrameMap: { [key: string]: string } = {
+    1: "/static/images/blue-frame.png",
+    2: "/static/images/green-frame.png",
+    3: "/static/images/yellow-frame.png",
+    4: "/static/images/orange-frame.png",
+    5: "/static/images/pink-frame.png",
+  };
+
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
+
+  const imageFrameSrc =
+    colorSetFrameMap[activeSet.toString()] || colorSetFrameMap[1];
 
   // Calculate the scale based on scroll position
   const scale = 1 + scrollY * 0.001; // Adjust 0.001 to control zoom intensity
@@ -253,7 +264,7 @@ export default function HeroSection(): JSX.Element {
           top: 0,
           left: 0,
           width: "100%",
-          height: "100vh",
+          height: "100%",
           pointerEvents: "none",
           zIndex: "-2",
           animation: `${zoomAnimation} 20s ease-in-out infinite`,
@@ -272,10 +283,26 @@ export default function HeroSection(): JSX.Element {
           top: "45%",
           left: 0,
           width: "100%",
-          height: "100vh",
+          height: "100%",
           pointerEvents: "none",
           zIndex: "1",
           animation: `${jumpAnimation} 3s ease-in-out infinite`,
+        })}
+      />
+
+      <Box
+        sx={(theme) => ({
+          backgroundImage: `url(${imageFrameSrc})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "absolute",
+          top: "4rem",
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: "-1",
+          pointerEvents: "none",
         })}
       />
 
