@@ -84,7 +84,6 @@ export default function HeroSection(): JSX.Element {
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [index, setIndex] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false); // State for dialog
   const [dialogOpenTrailer, setDialogOpenTrailer] = useState(false); // State for dialog
 
@@ -249,6 +248,8 @@ export default function HeroSection(): JSX.Element {
         </Stack>
       </Stack>
 
+      {/* Fogs */}
+
       <Box
         sx={(theme) => ({
           bgcolor: "transparent",
@@ -282,6 +283,8 @@ export default function HeroSection(): JSX.Element {
         })}
       />
 
+      {/* Background */}
+
       <Box
         sx={{
           backgroundImage: `url(${imageBgSrc})`,
@@ -296,10 +299,12 @@ export default function HeroSection(): JSX.Element {
           pointerEvents: "none",
           zIndex: "-4",
           animation: `${zoomAnimation} 20s ease-in-out infinite`,
-          overflow: "hidden", // Prevents horizontal overflow
-          transformOrigin: "center center", // Scales from the center
+          overflow: "hidden",
+          transformOrigin: "center center",
         }}
       />
+
+      {/* Station */}
 
       <Box
         sx={(theme) => ({
@@ -318,6 +323,8 @@ export default function HeroSection(): JSX.Element {
         })}
       />
 
+      {/* Frame */}
+
       <Box
         component="img"
         width={{ xs: 180, sm: 180, md: 35 }}
@@ -333,6 +340,8 @@ export default function HeroSection(): JSX.Element {
           zIndex: "4",
         })}
       />
+
+      {/* Left */}
 
       <Box
         component={"img"}
@@ -381,6 +390,8 @@ export default function HeroSection(): JSX.Element {
           border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
         })}
       />
+
+      {/* Right */}
 
       <Box
         component={"img"}
