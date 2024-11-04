@@ -9,13 +9,14 @@ import {
   ThemeProvider as MuiThemeProvider,
   CssBaseline,
   PaletteMode,
-  IconButton,
-  Button,
-  Box,
+  Fab,
   Drawer,
+  Box,
   Typography,
   Stack,
   Divider,
+  IconButton,
+  Button,
 } from "@mui/material";
 import { Theme as MuiTheme } from "@mui/material/styles";
 import { scTheme } from "@/theme/theme";
@@ -135,10 +136,13 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       setLoading(false); // Hide loader after 3 seconds
     }, 3000); // Simulate loading duration
 
+    document.body.style.overflowY = "auto";
+
     setTimeout(() => {
       setDrawerOpen(false); // Close drawer after an additional 1 second
     }, 1000); // 1 second delay before closing
   };
+
   const customPalette: CustomTheme = {
     ...scTheme(activeTheme, activeSet),
     activeSet, // Add the activeSet to the theme
@@ -155,17 +159,24 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           key={loaderKey}
           colorSetId={activeSet}
         />
-        <IconButton
+        <Fab
           onClick={() => setDrawerOpen(true)}
           sx={{
-            position: "absolute",
-            top: "1rem",
-            right: "1rem",
+            position: "fixed",
+            bottom: "2rem",
+            right: "2rem",
             color: iconColor,
+            backgroundColor: customPalette.palette.custom.mainColor,
+            "&:hover": {
+              backgroundColor:
+                customPalette.palette.custom.secondarySolidColors, // Optional
+            },
           }}
         >
-          <SettingsIcon />
-        </IconButton>
+          <Typography color={customPalette.palette.custom.secondaryText}>
+            <SettingsIcon />
+          </Typography>
+        </Fab>
         <Drawer
           anchor="right"
           open={drawerOpen}

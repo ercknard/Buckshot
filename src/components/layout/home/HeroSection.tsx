@@ -6,12 +6,22 @@ import Button from "@mui/material/Button"; // Import Button
 import { styled } from "@mui/material/styles";
 import { useThemeContext } from "@/theme/themeProvider";
 import Particlesview from "../Particles";
+import { keyframes } from "@emotion/react";
 
 const typingText = "CryptechTest";
 
 type CustomTheme = {
   activeSet: number; // Adjust this based on your actual structure
 };
+
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
 
 const Cursor = styled("span")(({ theme }) => ({
   display: "inline-block",
@@ -94,7 +104,7 @@ export default function HeroSection(): JSX.Element {
       alignItems={"center"}
       justifyContent={"left"}
     >
-      <Stack>
+      <Stack marginTop={-15}>
         <Stack spacing={1} direction={"row"}>
           <Typography variant={"body1"} color={"custom.primaryText"}>
             Play,
@@ -106,9 +116,22 @@ export default function HeroSection(): JSX.Element {
             Earn!,
           </Typography>
         </Stack>
-        <Typography variant={"h3"} color={"custom.primaryText"}>
-          Welcome to
-        </Typography>
+        <Stack
+          display={"flex"}
+          direction={"row"}
+          alignItems={"center"}
+          marginTop={1}
+        >
+          <Box
+            component="img"
+            width={{ xs: 180, sm: 180, md: 55 }}
+            alt="Logo"
+            src="/static/images/mug.png"
+          />
+          <Typography variant={"h3"} color={"custom.primaryText"}>
+            Welcome to
+          </Typography>
+        </Stack>
         <Typography variant={"h1"} color={"custom.secondaryText"}>
           <Stack display={"flex"} direction={"row"} alignItems={"center"}>
             {displayedText} <Cursor />
@@ -181,6 +204,7 @@ export default function HeroSection(): JSX.Element {
           height: "100vh",
           pointerEvents: "none",
           zIndex: "1",
+          animation: `${jumpAnimation} 3s ease-in-out infinite`,
         })}
       />
 

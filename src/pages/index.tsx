@@ -2,6 +2,7 @@ import { Container, Box, Typography, Stack } from "@mui/material";
 import { DefaultHead } from "@/components/layout/Head";
 import { useThemeContext } from "@/theme/themeProvider";
 import HeroSection from "@/components/layout/home/HeroSection";
+import Navbar from "@/components/layout/Navbar";
 
 export default function Home(): JSX.Element {
   const theme = useThemeContext();
@@ -105,6 +106,9 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <DefaultHead />
+      <Box position={"absolute"} width={1} left={0}>
+        <Navbar />
+      </Box>
       <HeroSection />
       <Box
         display={"flex"}
