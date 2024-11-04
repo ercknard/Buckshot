@@ -18,10 +18,10 @@ type CustomTheme = {
 
 const jumpAnimation = keyframes`
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(5px);
   }
   50% {
-    transform: translateY(-px);
+    transform: translateY(-5px);
   }
 `;
 
