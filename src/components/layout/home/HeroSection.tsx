@@ -46,6 +46,24 @@ const toOpacityAnimation = keyframes`
   }
 `;
 
+const closeLeftGateAnimation = keyframes`
+  0%, 100% {
+    transform: translateX(0vw);
+  }
+  90% {
+    transform: translateX(-50vw);
+  }
+`;
+
+const closeRightGateAnimation = keyframes`
+  0%, 100% {
+    transform: translateX(0vw);
+  }
+  90% {
+    transform: translateX(50vw);
+  }
+`;
+
 const Cursor = styled("span")(({ theme }) => ({
   display: "inline-block",
   width: "1rem",
@@ -69,16 +87,6 @@ export default function HeroSection(): JSX.Element {
   const [scrollY, setScrollY] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false); // State for dialog
   const [dialogOpenTrailer, setDialogOpenTrailer] = useState(false); // State for dialog
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const typingSpeed = 100;
@@ -125,13 +133,31 @@ export default function HeroSection(): JSX.Element {
     5: "/static/images/pink-frame.png",
   };
 
+  const colorSetBgMapLeft: { [key: string]: string } = {
+    1: "/static/images/blue-gate-l.webp",
+    2: "/static/images/green-gate-l.webp",
+    3: "/static/images/yellow-gate-l.webp",
+    4: "/static/images/orange-gate-l.webp",
+    5: "/static/images/pink-gate-l.webp",
+  };
+
+  const colorSetBgMapRight: { [key: string]: string } = {
+    1: "/static/images/blue-gate-r.webp",
+    2: "/static/images/green-gate-r.webp",
+    3: "/static/images/yellow-gate-r.webp",
+    4: "/static/images/orange-gate-r.webp",
+    5: "/static/images/pink-gate-r.webp",
+  };
+
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
 
   const imageFrameSrc =
     colorSetFrameMap[activeSet.toString()] || colorSetFrameMap[1];
 
-  // Calculate the scale based on scroll position
-  const scale = 1 + scrollY * 0.001; // Adjust 0.001 to control zoom intensity
+  const imageBgLeftSrc =
+    colorSetBgMapLeft[activeSet.toString()] || colorSetBgMapLeft[1];
+  const imageBgRightSrc =
+    colorSetBgMapRight[activeSet.toString()] || colorSetBgMapRight[1];
 
   const handleDialogOpen = () => {
     setDialogOpen(true);
@@ -157,7 +183,7 @@ export default function HeroSection(): JSX.Element {
       justifyContent={"left"}
       overflow={"hidden"}
     >
-      <Stack marginTop={-20}>
+      <Stack marginTop={-20} zIndex={"1"}>
         <Stack spacing={1} direction={"row"}>
           <Typography variant={"body1"} color={"custom.primaryText"}>
             Play,
@@ -234,9 +260,11 @@ export default function HeroSection(): JSX.Element {
           height: "100vh",
           objectFit: "cover",
           pointerEvents: "none",
-          zIndex: "-1",
+          zIndex: "-3",
         })}
-      />
+      >
+        <Particlesview />
+      </Box>
 
       <Box
         sx={(theme) => ({
@@ -249,7 +277,7 @@ export default function HeroSection(): JSX.Element {
           height: "100vh",
           objectFit: "cover",
           pointerEvents: "none",
-          zIndex: "-1",
+          zIndex: "-3",
           animation: `${toOpacityAnimation} 20s ease-in-out infinite`,
         })}
       />
@@ -266,7 +294,7 @@ export default function HeroSection(): JSX.Element {
           width: "100%",
           height: "100%",
           pointerEvents: "none",
-          zIndex: "-2",
+          zIndex: "-4",
           animation: `${zoomAnimation} 20s ease-in-out infinite`,
           overflow: "hidden", // Prevents horizontal overflow
           transformOrigin: "center center", // Scales from the center
@@ -285,7 +313,7 @@ export default function HeroSection(): JSX.Element {
           width: "100%",
           height: "100%",
           pointerEvents: "none",
-          zIndex: "1",
+          zIndex: "5",
           animation: `${jumpAnimation} 3s ease-in-out infinite`,
         })}
       />
@@ -301,12 +329,106 @@ export default function HeroSection(): JSX.Element {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: "-1",
           pointerEvents: "none",
+          zIndex: "4",
         })}
       />
 
-      <Particlesview />
+      <Box
+        component={"img"}
+        src={imageBgLeftSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 1,
+          animation: `${closeLeftGateAnimation} 20s ease-in-out infinite`,
+          zIndex: "1",
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+        })}
+      />
+
+      <Box
+        component={"img"}
+        src={imageFrameSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+          animation: `${closeLeftGateAnimation} 20s ease-in-out infinite`,
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+          zIndex: "3",
+        })}
+      />
+
+      <Box
+        bgcolor={"#121212"}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "50%",
+          height: "100%",
+          pointerEvents: "none",
+          animation: `${closeLeftGateAnimation} 20s ease-in-out infinite, ${toOpacityAnimation} 20s ease-in-out infinite`,
+          zIndex: "2",
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+        })}
+      />
+
+      <Box
+        component={"img"}
+        src={imageBgRightSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 1,
+          animation: `${closeRightGateAnimation} 20s ease-in-out infinite`,
+          zIndex: "1",
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+        })}
+      />
+
+      <Box
+        component={"img"}
+        src={imageFrameSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+          animation: `${closeRightGateAnimation} 20s ease-in-out infinite`,
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+          zIndex: "3",
+        })}
+      />
+
+      <Box
+        bgcolor={"#121212"}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          right: 0,
+          width: "50%",
+          height: "100%",
+          pointerEvents: "none",
+          animation: `${closeRightGateAnimation} 20s ease-in-out infinite, ${toOpacityAnimation} 20s ease-in-out infinite`,
+          zIndex: "2",
+          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+        })}
+      />
 
       {/* Dialog Component */}
       <DefaultDialog
