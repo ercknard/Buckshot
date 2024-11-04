@@ -18,10 +18,10 @@ type CustomTheme = {
 
 const jumpAnimation = keyframes`
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-px);
   }
 `;
 
@@ -30,7 +30,7 @@ const zoomAnimation = keyframes`
     transform: scale(1);
   }
   90% {
-    transform: scale(3);
+    transform: scale(2);
   }
     100%{
     transform: scale(1);
@@ -230,7 +230,7 @@ export default function HeroSection(): JSX.Element {
       <Box
         sx={(theme) => ({
           bgcolor: "transparent",
-          backgroundImage: `radial-gradient(circle, ${theme.palette.custom.primaryBackgroundGrayed}90, ${theme.palette.custom.secondaryBackground})`,
+          backgroundImage: `radial-gradient(circle, ${theme.palette.custom.primaryBackgroundGrayed}90, ${theme.palette.custom.primaryBackground})`,
           position: "absolute",
           top: 0,
           left: 0,
