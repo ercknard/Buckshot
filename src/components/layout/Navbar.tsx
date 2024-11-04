@@ -138,14 +138,25 @@ export default function Navbar() {
           boxShadow: 1,
           bgcolor: "custom.secondaryBackground",
           backgroundImage: "none",
+          justifyContent: "center",
+          width: "100%",
         }}
       >
-        <Toolbar disableGutters>
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
           <Stack
             width={1}
             direction={"row"}
             display={"flex"}
             justifyContent={"space-between"}
+            sx={{
+              maxWidth: "1600px !important",
+            }}
           >
             <Box display={"flex"}>
               <Stack direction={"row"} spacing={1} alignItems={"center"}>

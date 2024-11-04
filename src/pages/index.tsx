@@ -3,6 +3,7 @@ import { DefaultHead } from "@/components/layout/Head";
 import { useThemeContext } from "@/theme/themeProvider";
 import HeroSection from "@/components/layout/home/HeroSection";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 export default function Home(): JSX.Element {
   const theme = useThemeContext();
@@ -110,6 +111,7 @@ export default function Home(): JSX.Element {
         <Navbar />
       </Box>
       <HeroSection />
+      <Box minHeight={"200vh"}></Box>
       <Box
         display={"flex"}
         gap={"1rem"}
@@ -204,6 +206,7 @@ export default function Home(): JSX.Element {
           highlightMuted
         </Typography>
       </Stack> */}
+      <Footer />
     </Container>
   );
 }

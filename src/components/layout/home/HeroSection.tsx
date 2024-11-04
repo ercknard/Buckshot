@@ -25,6 +25,18 @@ const jumpAnimation = keyframes`
   }
 `;
 
+const zoomAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.07);
+  }
+    100%{
+    transform: scale(1);
+    }
+`;
+
 const Cursor = styled("span")(({ theme }) => ({
   display: "inline-block",
   width: "1rem",
@@ -123,6 +135,7 @@ export default function HeroSection(): JSX.Element {
       height={"100vh"}
       alignItems={"center"}
       justifyContent={"left"}
+      overflow={"hidden"}
     >
       <Stack marginTop={-20}>
         <Stack spacing={1} direction={"row"}>
@@ -218,6 +231,9 @@ export default function HeroSection(): JSX.Element {
           height: "100vh",
           pointerEvents: "none",
           zIndex: "-2",
+          animation: `${zoomAnimation} 6s ease-in-out infinite`,
+          overflow: "hidden", // Prevents horizontal overflow
+          transformOrigin: "center center", // Scales from the center
         }}
       />
 

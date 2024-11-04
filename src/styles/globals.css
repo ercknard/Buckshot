@@ -11,3 +11,8 @@
   opacity: 100%;
   pointer-events: none !important;
 }
+
+html,
+body {
+  overflow-x: hidden !important; /* Prevent horizontal overflow */
+}
