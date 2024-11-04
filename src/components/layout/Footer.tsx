@@ -96,7 +96,7 @@ export default function Footer() {
     <Box mt={10}>
       <Box
         bgcolor={"custom.primaryComponents"}
-        pt={5}
+        pt={{ xs: 1, md: 5 }}
         pb={0}
         width={"100vw"}
         position={"absolute"}
@@ -107,6 +107,7 @@ export default function Footer() {
           item
           xs={12}
           rowSpacing={2}
+          padding={{ xs: 2, md: 0 }}
           sx={{
             maxWidth: "1600px !important",
             justifyContent: { sm: "center", xs: "left" },
@@ -114,7 +115,7 @@ export default function Footer() {
           }}
         >
           <Grid item lg={7} xs={12}>
-            <Stack spacing={1} pb={5}>
+            <Stack spacing={1} pb={{ xs: 1, md: 5 }}>
               <Stack
                 display={"flex"}
                 direction={"row"}
@@ -123,7 +124,7 @@ export default function Footer() {
               >
                 <Box
                   component="img"
-                  width={{ xs: 180, sm: 180, md: 35 }}
+                  width={{ md: 35 }}
                   alt="Logo"
                   src="/static/images/mug.png"
                 />
