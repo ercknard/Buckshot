@@ -291,13 +291,13 @@ export default function HeroSection(): JSX.Element {
       />
 
       <Box
+        component="img"
+        width={{ xs: 180, sm: 180, md: 35 }}
+        alt="Logo"
+        src={imageFrameSrc}
         sx={(theme) => ({
-          backgroundImage: `url(${imageFrameSrc})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
           position: "absolute",
-          top: "4rem",
+          top: "1rem",
           left: 0,
           width: "100%",
           height: "100%",
