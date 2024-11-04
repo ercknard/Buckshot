@@ -39,7 +39,7 @@ const zoomAnimation = keyframes`
 
 const toOpacityAnimation = keyframes`
   0%, 100% {
-   opacity: 1;
+   opacity: .9;
   }
   90% {
     opacity: 0;
