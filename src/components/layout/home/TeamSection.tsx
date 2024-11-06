@@ -238,7 +238,7 @@ const TeamSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      {/* <Box
+      <Box
         component={"img"}
         src="/static/images/BG-B.webp"
         sx={(theme) => ({
@@ -247,11 +247,11 @@ const TeamSection: React.FC = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.55,
+          opacity: 0.25,
         })}
-      /> */}
+      />
 
-      <Box
+      {/* <Box
         component={"img"}
         src={imageBgBannerSrc}
         sx={(theme) => ({
@@ -262,7 +262,7 @@ const TeamSection: React.FC = () => {
           height: "100%",
           opacity: 0.9,
         })}
-      />
+      /> */}
 
       <Box
         component={"img"}
@@ -347,7 +347,7 @@ const TeamSection: React.FC = () => {
                   }}
                 />
 
-                <Typography
+                {/* <Typography
                   fontSize={"1.25rem"}
                   color="textSecondary"
                   sx={(theme) => ({
@@ -377,7 +377,7 @@ const TeamSection: React.FC = () => {
                   })}
                 >
                   {expandedMember.dcdetails}
-                </Typography>
+                </Typography> */}
               </Box>
 
               <Tabs
