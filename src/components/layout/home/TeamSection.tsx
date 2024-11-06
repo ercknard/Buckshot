@@ -169,8 +169,6 @@ const TeamSection: React.FC = () => {
     getDefaultMember(activeSetNumber)
   );
 
-  const [showModerators, setShowModerators] = useState(false);
-
   // Whenever activeSet changes, update expandedMember to the corresponding team member
   useEffect(() => {
     setExpandedMember(getDefaultMember(activeSetNumber));
