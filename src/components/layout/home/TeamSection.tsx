@@ -347,7 +347,7 @@ const TeamSection: React.FC = () => {
                   }}
                 />
 
-                <Typography
+                {/* <Typography
                   fontSize={"1.25rem"}
                   color="textSecondary"
                   sx={(theme) => ({
@@ -381,7 +381,7 @@ const TeamSection: React.FC = () => {
                   })}
                 >
                   {expandedMember.dcdetails}
-                </Typography>
+                </Typography> */}
               </Box>
 
               <Tabs
@@ -415,6 +415,7 @@ const TeamSection: React.FC = () => {
               container
               spacing={3}
               justifyContent="center"
+              sx={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
             >
               {teamMembers.map((member) => (
                 <Grid
@@ -434,21 +435,21 @@ const TeamSection: React.FC = () => {
                       cursor: expandedMember === member ? "pointer" : "pointer", // Disable pointer cursor for active card
                       backgroundColor:
                         expandedMember === member
-                          ? "custom.secondarySolidColors"
-                          : "custom.secondaryBackgroundGrayed", // Change color when active
+                          ? "custom.secondaryComponents"
+                          : "custom.secondaryBackground",
                       borderWidth: "2.5px",
                       borderStyle: "solid",
                       borderColor:
                         expandedMember === member
-                          ? "custom.primaryText"
-                          : "custom.mainColor",
+                          ? "custom.mainColor"
+                          : "custom.primaryBorders",
                       "&:hover": {
                         transform:
                           expandedMember === member ? "none" : "scale(1.05)", // Disable hover effect for active card
                         backgroundColor:
                           expandedMember === member
-                            ? "custom.secondarySolidColors"
-                            : "custom.primaryComponents", // Optional hover effect
+                            ? "custom.secondaryComponents"
+                            : "custom.secondaryBackground",
                       },
                     }}
                     onClick={() => handleCardClick(member)}
@@ -503,6 +504,7 @@ const TeamSection: React.FC = () => {
                     slidesPerView: 1, // For small screens (mobile devices)
                   },
                 }}
+                style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
               >
                 {teamModerators.map((member) => (
                   <SwiperSlide
@@ -516,22 +518,22 @@ const TeamSection: React.FC = () => {
                         textAlign: "center",
                         backgroundColor:
                           expandedMember === member
-                            ? "custom.secondarySolidColors"
-                            : "custom.secondaryBackgroundGrayed",
+                            ? "custom.secondaryComponents"
+                            : "custom.secondaryBackground",
                         transition: "transform 0.2s, background-color 0.3s",
                         cursor: "pointer",
                         borderWidth: "2.5px",
                         borderStyle: "solid",
                         borderColor:
                           expandedMember === member
-                            ? "custom.primaryText"
-                            : "custom.mainColor",
+                            ? "custom.mainColor"
+                            : "custom.primaryBorders",
                         "&:hover": {
                           transform: "scale(1.05)",
                           backgroundColor:
                             expandedMember === member
-                              ? "custom.secondarySolidColors"
-                              : "custom.primaryComponents",
+                              ? "custom.secondaryComponents"
+                              : "custom.secondaryBackground",
                         },
                       }}
                       onClick={() => handleCardClick(member)}

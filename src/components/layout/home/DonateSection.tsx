@@ -295,20 +295,20 @@ const DonateSection: React.FC = () => {
                     cursor: expandedcoin === coin ? "pointer" : "pointer", // Disable pointer cursor for active card
                     backgroundColor:
                       expandedcoin === coin
-                        ? "custom.secondarySolidColors"
-                        : "custom.secondaryBackgroundGrayed", // Change color when active
+                        ? "custom.secondaryComponents"
+                        : "custom.secondaryBackground",
                     borderWidth: "2.5px",
                     borderStyle: "solid",
                     borderColor:
                       expandedcoin === coin
-                        ? "custom.primaryText"
-                        : "custom.mainColor",
+                        ? "custom.mainColor"
+                        : "custom.primaryBorders",
                     "&:hover": {
                       transform: expandedcoin === coin ? "none" : "scale(1.05)", // Disable hover effect for active card
                       backgroundColor:
                         expandedcoin === coin
-                          ? "custom.secondarySolidColors"
-                          : "custom.primaryComponents", // Optional hover effect
+                          ? "custom.secondaryComponents"
+                          : "custom.secondaryBackground",
                     },
                   }}
                   onClick={() => handleCardClick(coin)}
