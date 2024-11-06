@@ -346,10 +346,14 @@ const TeamSection: React.FC = () => {
                       borderRadius: "50%",
                     }}
                   />
-                  <Typography variant="h6" sx={{ marginTop: 2 }}>
+                  <Typography
+                    variant="body1"
+                    fontSize={"1.25rem"}
+                    sx={{ marginTop: 2 }}
+                  >
                     {member.name}
                   </Typography>
-                  <Typography variant="body2">{member.role}</Typography>
+                  <Typography variant="h5">{member.role}</Typography>
                 </Paper>
               </Grid>
             ))}
