@@ -111,25 +111,72 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [loaderKey, setLoaderKey] = useState(0);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") as PaletteMode;
-    const storedSet = localStorage.getItem("colorSet");
-    setActiveTheme(
-      storedTheme === "dark" || storedTheme === "light" ? storedTheme : "dark"
-    );
-    setActiveSet(storedSet ? Number(storedSet) : 1);
-    localStorage.setItem("theme", storedTheme || "dark");
-    localStorage.setItem("colorSet", storedSet || "1");
+    // Get URL parameters for theme and color
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTheme = urlParams.get("theme");
+    const urlColor = urlParams.get("color");
+
+    // If URL parameters are available, use them to set theme and color set
+    const storedTheme =
+      urlTheme && (urlTheme === "light" || urlTheme === "dark")
+        ? urlTheme
+        : "dark";
+    const storedSet =
+      urlColor &&
+      !isNaN(Number(urlColor)) &&
+      Number(urlColor) >= 1 &&
+      Number(urlColor) <= 5
+        ? Number(urlColor)
+        : 1;
+
+    setActiveTheme(storedTheme);
+    setActiveSet(storedSet);
+
+    // Store in localStorage for fallback
+    localStorage.setItem("theme", storedTheme);
+    localStorage.setItem("colorSet", storedSet.toString());
   }, []);
 
   const toggleTheme = (theme: PaletteMode) => {
     setActiveTheme(theme);
     localStorage.setItem("theme", theme);
+    // Update URL parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set("theme", theme);
+    window.history.pushState({}, "", url.toString());
   };
 
   const changeColorSet = (setId: number) => {
     setLoading(true);
     setActiveSet(setId);
     localStorage.setItem("colorSet", setId.toString());
+    // Update URL parameter
+    const url = new URL(window.location.href);
+
+    let color;
+    switch (setId) {
+      case 1:
+        color = "blue";
+        break;
+      case 2:
+        color = "green";
+        break;
+      case 3:
+        color = "yellow";
+        break;
+      case 4:
+        color = "orange";
+        break;
+      case 5:
+        color = "pink";
+        break;
+      default:
+        color = setId.toString(); // If setId is anything else, just use it as a string
+    }
+
+    url.searchParams.set("color", color);
+    window.history.pushState({}, "", url.toString());
+
     setLoaderKey((prevKey) => prevKey + 1); // Force re-render
 
     setTimeout(() => {
