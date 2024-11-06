@@ -111,30 +111,47 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [loaderKey, setLoaderKey] = useState(0);
 
   useEffect(() => {
-    // Get URL parameters for theme and color
+    // First, check if there's a stored theme and color set in localStorage
+    const storedTheme =
+      (localStorage.getItem("theme") as PaletteMode) || "dark"; // Explicitly cast to PaletteMode
+    const storedSet = Number(localStorage.getItem("colorSet")) || 1; // Default to set 1 if no value found
+
+    // Apply the theme and color set from localStorage
+    setActiveTheme(storedTheme); // No need to cast, already a PaletteMode
+    setActiveSet(storedSet);
+
+    // Now, check the URL for parameters (if present, override localStorage values)
     const urlParams = new URLSearchParams(window.location.search);
     const urlTheme = urlParams.get("theme");
     const urlColor = urlParams.get("color");
 
-    // If URL parameters are available, use them to set theme and color set
-    const storedTheme =
+    // If there are URL parameters for theme or color, override localStorage values
+    const finalTheme =
       urlTheme && (urlTheme === "light" || urlTheme === "dark")
-        ? urlTheme
-        : "dark";
-    const storedSet =
+        ? (urlTheme as PaletteMode)
+        : storedTheme;
+    const finalSet =
       urlColor &&
-      !isNaN(Number(urlColor)) &&
-      Number(urlColor) >= 1 &&
-      Number(urlColor) <= 5
-        ? Number(urlColor)
-        : 1;
+      ["blue", "green", "yellow", "orange", "pink"].includes(urlColor)
+        ? ["blue", "green", "yellow", "orange", "pink"].indexOf(urlColor) + 1
+        : storedSet;
 
-    setActiveTheme(storedTheme);
-    setActiveSet(storedSet);
+    // Update the state with the final values (from either URL or localStorage)
+    setActiveTheme(finalTheme); // No need to cast, already a PaletteMode
+    setActiveSet(finalSet);
 
-    // Store in localStorage for fallback
-    localStorage.setItem("theme", storedTheme);
-    localStorage.setItem("colorSet", storedSet.toString());
+    // Store the final values in localStorage
+    localStorage.setItem("theme", finalTheme);
+    localStorage.setItem("colorSet", finalSet.toString());
+
+    // Optionally update the URL with the correct theme and color set (for sharing/bookmarking)
+    const url = new URL(window.location.href);
+    url.searchParams.set("theme", finalTheme);
+    url.searchParams.set(
+      "color",
+      ["blue", "green", "yellow", "orange", "pink"][finalSet - 1]
+    );
+    window.history.pushState({}, "", url.toString());
   }, []);
 
   const toggleTheme = (theme: PaletteMode) => {
