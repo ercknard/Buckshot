@@ -251,7 +251,7 @@ const TeamSection: React.FC = () => {
         })}
       /> */}
 
-      {/* <Box
+      <Box
         component={"img"}
         src={imageBgBannerSrc}
         sx={(theme) => ({
@@ -262,7 +262,7 @@ const TeamSection: React.FC = () => {
           height: "100%",
           opacity: 0.9,
         })}
-      /> */}
+      />
 
       <Box
         component={"img"}
@@ -475,7 +475,7 @@ const TeamSection: React.FC = () => {
           )}
 
           {activeTab === 1 && (
-            <Box>
+            <Box position={"relative"} zIndex={2}>
               <Swiper
                 spaceBetween={23} // Space between slides
                 slidesPerView={5} // Show 5 slides at a time
