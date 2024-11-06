@@ -266,11 +266,11 @@ export default function HeroSection(): JSX.Element {
             alt="Logo"
             src="/static/images/mug.png"
           />
-          <Typography variant={"h3"} color={"custom.primaryText"}>
+          <Typography variant={"h4"} color={"custom.primaryText"}>
             Welcome to
           </Typography>
         </Stack>
-        <Typography variant={"h1"} color={"custom.secondaryText"}>
+        <Typography variant={"h2"} color={"custom.secondaryText"}>
           <Stack display={"flex"} direction={"row"} alignItems={"center"}>
             {displayedText} <Cursor />
           </Stack>
@@ -368,27 +368,6 @@ export default function HeroSection(): JSX.Element {
         }}
       />
 
-      {/* Station */}
-
-      <Box
-        sx={(theme) => ({
-          backgroundImage: `url(/static/images/station-5.webp)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          position: "absolute",
-          top: "45%",
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          zIndex: "5",
-          animation: animationPaused
-            ? "none"
-            : `${jumpAnimation} 3s ease-in-out infinite`,
-        })}
-      />
-
       {/* Frame */}
 
       <Box
@@ -410,6 +389,64 @@ export default function HeroSection(): JSX.Element {
       {/* Left */}
 
       <Box
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "50%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+          animation: animationPaused
+            ? "none"
+            : `${closeLeftGateAnimation} 20s ease-in-out infinite`,
+          zIndex: "2",
+          overflow: "hidden",
+        })}
+      >
+        <Box
+          component={"img"}
+          src={imageFrameSrc}
+          sx={(theme) => ({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            zIndex: "3",
+          })}
+        />
+
+        <Box
+          component={"img"}
+          src={imageBgLeftSrc}
+          sx={(theme) => ({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            animation: animationPaused
+              ? "none"
+              : `${zoomAnimation} 20s ease-in-out infinite`,
+            zIndex: "1",
+          })}
+        />
+
+        <Box
+          bgcolor={"#121212"}
+          sx={(theme) => ({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            animation: animationPaused
+              ? "none"
+              : `${toOpacityAnimation} 20s ease-in-out infinite`,
+            zIndex: "2",
+            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+          })}
+        />
+      </Box>
+
+      <Box
         sx={{
           backgroundImage: `url(/static/images/chain.png)`,
           position: "absolute",
@@ -425,43 +462,6 @@ export default function HeroSection(): JSX.Element {
           overflow: "hidden",
           transformOrigin: "center center",
         }}
-      />
-
-      <Box
-        component={"img"}
-        src={imageBgLeftSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          animation: animationPaused
-            ? "none"
-            : `${closeLeftGateAnimation} 20s ease-in-out infinite`,
-          zIndex: "1",
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-        })}
-      />
-
-      <Box
-        component={"img"}
-        src={imageFrameSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${closeLeftGateAnimation} 20s ease-in-out infinite`,
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-          zIndex: "3",
-        })}
       />
 
       <Box
@@ -483,24 +483,65 @@ export default function HeroSection(): JSX.Element {
         })}
       />
 
+      {/* Right */}
+
       <Box
-        bgcolor={"#121212"}
         sx={(theme) => ({
           position: "absolute",
           top: 0,
-          left: 0,
+          right: 0,
           width: "50%",
           height: "100%",
+          opacity: 1,
           pointerEvents: "none",
           animation: animationPaused
             ? "none"
-            : `${closeLeftGateAnimation} 20s ease-in-out infinite, ${toOpacityAnimation} 20s ease-in-out infinite`,
+            : `${closeRightGateAnimation} 20s ease-in-out infinite`,
           zIndex: "2",
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+          overflow: "hidden",
         })}
-      />
+      >
+        <Box
+          component={"img"}
+          src={imageFrameSrc}
+          sx={(theme) => ({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            zIndex: "3",
+          })}
+        />
 
-      {/* Right */}
+        <Box
+          component={"img"}
+          src={imageBgRightSrc}
+          sx={(theme) => ({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            animation: animationPaused
+              ? "none"
+              : `${zoomAnimation} 20s ease-in-out infinite`,
+            zIndex: "1",
+          })}
+        />
+
+        <Box
+          bgcolor={"#121212"}
+          sx={(theme) => ({
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            animation: animationPaused
+              ? "none"
+              : `${toOpacityAnimation} 20s ease-in-out infinite`,
+            zIndex: "2",
+            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+          })}
+        />
+      </Box>
 
       <Box
         sx={{
@@ -522,43 +563,6 @@ export default function HeroSection(): JSX.Element {
 
       <Box
         component={"img"}
-        src={imageBgRightSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          animation: animationPaused
-            ? "none"
-            : `${closeRightGateAnimation} 20s ease-in-out infinite`,
-          zIndex: "1",
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-        })}
-      />
-
-      <Box
-        component={"img"}
-        src={imageFrameSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${closeRightGateAnimation} 20s ease-in-out infinite`,
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-          zIndex: "3",
-        })}
-      />
-
-      <Box
-        component={"img"}
         src="/static/images/wheel.png"
         sx={(theme) => ({
           position: "absolute",
@@ -573,23 +577,6 @@ export default function HeroSection(): JSX.Element {
             ? "none"
             : `${clockwiseAnimation} 20s ease-in-out infinite`,
           zIndex: "3",
-        })}
-      />
-
-      <Box
-        bgcolor={"#121212"}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "50%",
-          height: "100%",
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${closeRightGateAnimation} 20s ease-in-out infinite, ${toOpacityAnimation} 20s ease-in-out infinite`,
-          zIndex: "2",
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
         })}
       />
 

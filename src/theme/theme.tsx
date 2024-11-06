@@ -375,7 +375,7 @@ const typographyOptions = (palette: PaletteOptions) => {
       fontFamily: FONT,
     },
     h4: {
-      fontFamily: SECONDARY_FONT,
+      fontFamily: FONT,
     },
     h5: {
       fontFamily: SECONDARY_FONT,
