@@ -369,6 +369,23 @@ export default function HeroSection(): JSX.Element {
         }}
       />
 
+      <Box
+        sx={(theme) => ({
+          backgroundImage: `url(/static/images/station-5.webp)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "absolute",
+          top: "45%",
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: "5",
+          animation: `${jumpAnimation} 3s ease-in-out infinite`,
+        })}
+      />
+
       {/* Frame */}
 
       <Box
@@ -384,6 +401,7 @@ export default function HeroSection(): JSX.Element {
           height: "100%",
           pointerEvents: "none",
           zIndex: "4",
+          marginTop: "1rem",
         })}
       />
 

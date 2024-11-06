@@ -271,9 +271,11 @@ const ModsSection: React.FC = () => {
           marginX: "auto",
         }}
       >
-        <Typography variant="h4" align="center" gutterBottom>
-          Featured Mods
-        </Typography>
+        <Box position={"relative"} zIndex={2}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Featured Mods
+          </Typography>
+        </Box>
 
         <Box position={"relative"}>
           {/* Expanded Details Section */}

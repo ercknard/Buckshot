@@ -271,9 +271,16 @@ const TeamSection: React.FC = () => {
           marginX: "auto",
         }}
       >
-        <Typography variant="h4" align="center" gutterBottom>
-          Meet Our Team
-        </Typography>
+        <Box position={"relative"} zIndex={2}>
+          <Typography variant="h4" align="center" gutterBottom>
+            CryptechTest Team
+          </Typography>
+          <Typography variant="h5" align="center" gutterBottom>
+            Meet the creative minds and skilled players who brought our game to
+            life, each contributing their unique talents to create an
+            unforgettable experience.
+          </Typography>
+        </Box>
 
         <Box position={"relative"}>
           {/* Expanded Details Section */}
