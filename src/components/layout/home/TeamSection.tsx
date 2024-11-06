@@ -207,11 +207,22 @@ const TeamSection: React.FC = () => {
     5: "/static/images/pink-border.png",
   };
 
+  const colorSetBgBorderDark: { [key: string]: string } = {
+    1: "/static/images/blue-border-dark.png",
+    2: "/static/images/green-border-dark.png",
+    3: "/static/images/yellow-border-dark.png",
+    4: "/static/images/orange-border-dark.png",
+    5: "/static/images/pink-border-dark.png",
+  };
+
   const imageBgBannerSrc =
     colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
 
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
+
+  const imageBgBorderDarkSrc =
+    colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
   SwiperCore.use([Scrollbar]);
 
@@ -252,6 +263,18 @@ const TeamSection: React.FC = () => {
           opacity: 0.9,
         })}
       /> */}
+
+      <Box
+        component={"img"}
+        src={imageBgBorderDarkSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        })}
+      />
 
       <Box
         component={"img"}

@@ -18,7 +18,7 @@ export default function Home(): JSX.Element {
         <Navbar />
       </Box>
       <HeroSection />
-      <ModsSection />
+      {/* <ModsSection /> */}
       <TeamSection />
       <DonateSection />
       <ColorSection />

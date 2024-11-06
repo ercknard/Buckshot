@@ -208,6 +208,38 @@ export default function HeroSection(): JSX.Element {
     5: "/static/images/pink-gate-r.webp",
   };
 
+  const colorSetBorderHorizontalLight: { [key: string]: string } = {
+    1: "/static/images/blue-border.png",
+    2: "/static/images/green-border.png",
+    3: "/static/images/yellow-border.png",
+    4: "/static/images/orange-border.png",
+    5: "/static/images/pink-border.png",
+  };
+
+  const colorSetBorderHorizontalDark: { [key: string]: string } = {
+    1: "/static/images/blue-border-dark.png",
+    2: "/static/images/green-border-dark.png",
+    3: "/static/images/yellow-border-dark.png",
+    4: "/static/images/orange-border-dark.png",
+    5: "/static/images/pink-border-dark.png",
+  };
+
+  const colorSetBorderVerticalLight: { [key: string]: string } = {
+    1: "/static/images/blue-vertical-light.png",
+    2: "/static/images/green-vertical-light.png",
+    3: "/static/images/yellow-vertical-light.png",
+    4: "/static/images/orange-vertical-light.png",
+    5: "/static/images/pink-vertical-light.png",
+  };
+
+  const colorSetBorderVerticalDark: { [key: string]: string } = {
+    1: "/static/images/blue-vertical-dark.png",
+    2: "/static/images/green-vertical-dark.png",
+    3: "/static/images/yellow-vertical-dark.png",
+    4: "/static/images/orange-vertical-dark.png",
+    5: "/static/images/pink-vertical-dark.png",
+  };
+
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
 
   const imageFrameSrc =
@@ -215,8 +247,25 @@ export default function HeroSection(): JSX.Element {
 
   const imageBgLeftSrc =
     colorSetBgMapLeft[activeSet.toString()] || colorSetBgMapLeft[1];
+
   const imageBgRightSrc =
     colorSetBgMapRight[activeSet.toString()] || colorSetBgMapRight[1];
+
+  const colorSetBorderHorizontalLightSrc =
+    colorSetBorderHorizontalLight[activeSet.toString()] ||
+    colorSetBorderHorizontalLight[1];
+
+  const colorSetBorderHorizontalDarkSrc =
+    colorSetBorderHorizontalDark[activeSet.toString()] ||
+    colorSetBorderHorizontalDark[1];
+
+  const colorSetBorderVerticalLightSrc =
+    colorSetBorderVerticalLight[activeSet.toString()] ||
+    colorSetBorderVerticalLight[1];
+
+  const colorSetBorderVerticalDarkSrc =
+    colorSetBorderVerticalDark[activeSet.toString()] ||
+    colorSetBorderVerticalDark[1];
 
   const handleDialogOpen = () => {
     setDialogOpen(true);
@@ -390,9 +439,8 @@ export default function HeroSection(): JSX.Element {
 
       <Box
         component="img"
-        width={{ xs: 180, sm: 180, md: 35 }}
         alt="Logo"
-        src={imageFrameSrc}
+        src={colorSetBorderVerticalDarkSrc}
         sx={(theme) => ({
           position: "absolute",
           top: 0,
@@ -401,7 +449,55 @@ export default function HeroSection(): JSX.Element {
           height: "100%",
           pointerEvents: "none",
           zIndex: "4",
-          marginTop: "1rem",
+          marginTop: "2.5rem",
+        })}
+      />
+
+      <Box
+        component="img"
+        alt="Logo"
+        src={colorSetBorderVerticalLightSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: "4",
+          marginTop: "2.5rem",
+        })}
+      />
+
+      <Box
+        component="img"
+        alt="Logo"
+        src={colorSetBorderHorizontalDarkSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: "4",
+          marginTop: "2.5rem",
+        })}
+      />
+
+      <Box
+        component="img"
+        alt="Logo"
+        src={colorSetBorderHorizontalLightSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          zIndex: "4",
+          marginTop: "2.5rem",
         })}
       />
 
