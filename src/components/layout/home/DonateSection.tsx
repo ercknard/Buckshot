@@ -290,6 +290,7 @@ const DonateSection: React.FC = () => {
                   elevation={3}
                   sx={{
                     padding: 2,
+                    paddingY: 5,
                     textAlign: "center",
                     transition: "transform 0.2s, background-color 0.3s",
                     cursor: expandedcoin === coin ? "pointer" : "pointer", // Disable pointer cursor for active card
@@ -297,12 +298,9 @@ const DonateSection: React.FC = () => {
                       expandedcoin === coin
                         ? "custom.secondaryComponents"
                         : "custom.secondaryBackground",
-                    borderWidth: "2.5px",
+                    borderWidth: "10px", // Adjust the border width as per your preference
                     borderStyle: "solid",
-                    borderColor:
-                      expandedcoin === coin
-                        ? "custom.mainColor"
-                        : "custom.primaryBorders",
+                    borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
                     "&:hover": {
                       transform: expandedcoin === coin ? "none" : "scale(1.05)", // Disable hover effect for active card
                       backgroundColor:

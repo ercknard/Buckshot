@@ -433,12 +433,9 @@ const TeamSection: React.FC = () => {
                         expandedMember === member
                           ? "custom.secondaryComponents"
                           : "custom.secondaryBackground",
-                      borderWidth: "2.5px",
+                      borderWidth: "10px", // Adjust the border width as per your preference
                       borderStyle: "solid",
-                      borderColor:
-                        expandedMember === member
-                          ? "custom.mainColor"
-                          : "custom.primaryBorders",
+                      borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
                       "&:hover": {
                         transform:
                           expandedMember === member ? "none" : "scale(1.05)", // Disable hover effect for active card
@@ -518,12 +515,9 @@ const TeamSection: React.FC = () => {
                             : "custom.secondaryBackground",
                         transition: "transform 0.2s, background-color 0.3s",
                         cursor: "pointer",
-                        borderWidth: "2.5px",
+                        borderWidth: "10px", // Adjust the border width as per your preference
                         borderStyle: "solid",
-                        borderColor:
-                          expandedMember === member
-                            ? "custom.mainColor"
-                            : "custom.primaryBorders",
+                        borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
                         "&:hover": {
                           transform: "scale(1.05)",
                           backgroundColor:
