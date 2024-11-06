@@ -136,7 +136,7 @@ const teamModerators: TeamMember[] = [
   },
 ];
 
-const TeamSection: React.FC = () => {
+const ModsSection: React.FC = () => {
   const { activeSet } = useThemeContext() as CustomTheme;
   const [activeTab, setActiveTab] = useState<number>(0); // 0 for Team Members, 1 for Moderators
   const theme = useTheme();
@@ -240,7 +240,7 @@ const TeamSection: React.FC = () => {
         })}
       />
 
-      {/* <Box
+      <Box
         component={"img"}
         src={imageBgBannerSrc}
         sx={(theme) => ({
@@ -249,9 +249,9 @@ const TeamSection: React.FC = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.9,
+          opacity: 0.75,
         })}
-      /> */}
+      />
 
       <Box
         component={"img"}
@@ -272,7 +272,7 @@ const TeamSection: React.FC = () => {
         }}
       >
         <Typography variant="h4" align="center" gutterBottom>
-          Meet Our Team
+          Featured Mods
         </Typography>
 
         <Box position={"relative"}>
@@ -560,4 +560,4 @@ const TeamSection: React.FC = () => {
   );
 };
 
-export default TeamSection;
+export default ModsSection;

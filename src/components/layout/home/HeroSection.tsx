@@ -9,6 +9,7 @@ import { useThemeContext } from "@/theme/themeProvider";
 import Particlesview from "../Particles";
 import { keyframes } from "@emotion/react";
 import DefaultDialog from "../DefaultDialog";
+import { Container } from "@mui/material";
 
 const typingText = "CryptechTest";
 
@@ -242,8 +243,8 @@ export default function HeroSection(): JSX.Element {
       overflow={"hidden"}
       ref={heroRef}
     >
-      <Stack marginTop={-20} zIndex={"1"}>
-        <Stack spacing={1} direction={"row"}>
+      <Container>
+        <Stack spacing={1} direction={"row"} marginTop={-20} zIndex={"1"}>
           <Typography variant={"body1"} color={"custom.primaryText"}>
             Play,
           </Typography>
@@ -306,7 +307,7 @@ export default function HeroSection(): JSX.Element {
             Watch Trailer
           </Button>
         </Stack>
-      </Stack>
+      </Container>
 
       {/* Fogs */}
 
@@ -377,7 +378,7 @@ export default function HeroSection(): JSX.Element {
         src={imageFrameSrc}
         sx={(theme) => ({
           position: "absolute",
-          top: "1rem",
+          top: 0,
           left: 0,
           width: "100%",
           height: "100%",
