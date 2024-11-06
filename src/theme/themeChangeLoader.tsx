@@ -17,24 +17,6 @@ const jumpAnimation = keyframes`
   }
 `;
 
-const closeLeftGateAnimation = keyframes`
-  0% {
-    transform: translateX(0vw);
-  }
-  100% {
-    transform: translateX(-50vw);
-  }
-`;
-
-const closeRightGateAnimation = keyframes`
-  0% {
-    transform: translateX(0vw);
-  }
-  100% {
-    transform: translateX(50vw);
-  }
-`;
-
 const toOpacityAnimation = keyframes`
   0% {
    opacity: 1;
@@ -77,25 +59,7 @@ const ChangeLoader: React.FC<ChangeLoaderProps> = ({ loading, colorSetId }) => {
     5: "/static/images/pink-gate.webp",
   };
 
-  const colorSetBgMapLeft: { [key: string]: string } = {
-    1: "/static/images/blue-gate-l.webp",
-    2: "/static/images/green-gate-l.webp",
-    3: "/static/images/yellow-gate-l.webp",
-    4: "/static/images/orange-gate-l.webp",
-    5: "/static/images/pink-gate-l.webp",
-  };
-
-  const colorSetBgMapRight: { [key: string]: string } = {
-    1: "/static/images/blue-gate-r.webp",
-    2: "/static/images/green-gate-r.webp",
-    3: "/static/images/yellow-gate-r.webp",
-    4: "/static/images/orange-gate-r.webp",
-    5: "/static/images/pink-gate-r.webp",
-  };
-
   const imageBgSrc = colorSetBgMap[colorKey] || colorSetBgMap[1];
-  const imageBgLeftSrc = colorSetBgMapLeft[colorKey] || colorSetBgMapLeft[1];
-  const imageBgRightSrc = colorSetBgMapRight[colorKey] || colorSetBgMapRight[1];
   const imageSrc = colorSetImageMap[colorKey] || colorSetImageMap[1];
 
   console.log(
@@ -180,64 +144,6 @@ const ChangeLoader: React.FC<ChangeLoaderProps> = ({ loading, colorSetId }) => {
           CryptechTest
         </Typography>
       </Box>
-
-      {/* <Box
-        component={"img"}
-        src={imageBgLeftSrc}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-          animation: `${closeLeftGateAnimation} 3s ease-in-out 1`,
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-        }}
-      />
-
-      <Box
-        bgcolor={"#121212"}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "50%",
-          height: "100%",
-          pointerEvents: "none",
-          animation: `${closeLeftGateAnimation} 3s ease-in-out 1, ${toOpacityAnimation} 3s ease-in-out 1`,
-        }}
-      />
-
-      <Box
-        component={"img"}
-        src={imageBgRightSrc}
-        sx={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-          animation: `${closeRightGateAnimation} 3s ease-in-out 1`,
-          border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-        }}
-      />
-
-      <Box
-        bgcolor={"#121212"}
-        sx={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          width: "50%",
-          height: "100%",
-          pointerEvents: "none",
-          animation: `${closeRightGateAnimation} 3s ease-in-out 1, ${toOpacityAnimation} 3s ease-in-out 1`,
-        }}
-      /> */}
     </Backdrop>
   );
 };
