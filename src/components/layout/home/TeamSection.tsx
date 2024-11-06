@@ -41,7 +41,7 @@ const teamMembers: TeamMember[] = [
     image: "/static/images/yellow-head.webp",
     land: "/static/images/yellow-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : squidicuz",
+    dcdetails: "squidicuz",
   },
   {
     name: "SeqSee",
@@ -49,7 +49,7 @@ const teamMembers: TeamMember[] = [
     image: "/static/images/pink-head.webp",
     land: "/static/images/pink-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : SeqSee",
+    dcdetails: "SeqSee",
   },
   {
     name: "Vanikoro",
@@ -57,7 +57,7 @@ const teamMembers: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : vanikoro",
+    dcdetails: "vanikoro",
   },
   {
     name: "Kyuhi",
@@ -65,7 +65,7 @@ const teamMembers: TeamMember[] = [
     image: "/static/images/blue-head.webp",
     land: "/static/images/blue-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : Kyuhi",
+    dcdetails: "Kyuhi",
   },
   {
     name: "Shikoku",
@@ -73,7 +73,7 @@ const teamMembers: TeamMember[] = [
     image: "/static/images/orange-head.webp",
     land: "/static/images/orange-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : shikoku",
+    dcdetails: "shikoku",
   },
 ];
 
@@ -84,7 +84,7 @@ const teamModerators: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : anormalstick",
+    dcdetails: "anormalstick",
   },
   {
     name: "Ferbog05",
@@ -92,7 +92,7 @@ const teamModerators: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : ferbog05",
+    dcdetails: "ferbog05",
   },
   {
     name: "Matador",
@@ -100,7 +100,7 @@ const teamModerators: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : matador",
+    dcdetails: "matador",
   },
   {
     name: "Demil",
@@ -116,7 +116,7 @@ const teamModerators: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : deathsmack",
+    dcdetails: "deathsmack",
   },
   {
     name: "Tonic",
@@ -124,7 +124,7 @@ const teamModerators: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : anormaltonic",
+    dcdetails: "anormaltonic",
   },
   {
     name: "Ercknard",
@@ -132,7 +132,7 @@ const teamModerators: TeamMember[] = [
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
     details: "Welcome to CryptechTest",
-    dcdetails: "Discord : ercknard",
+    dcdetails: "ercknard",
   },
 ];
 
@@ -347,14 +347,13 @@ const TeamSection: React.FC = () => {
                   }}
                 />
 
-                {/* <Typography
+                <Typography
                   fontSize={"1.25rem"}
                   color="textSecondary"
                   sx={(theme) => ({
-                    position: "absolute",
-                    left: "50%",
-                    bottom: "15%",
-                    transform: "translate(-50%, -50%)", // Centers the image
+                    position: "relative",
+                    marginTop: "20rem",
+                    marginBottom: ".25rem",
                     zIndex: "3",
                     color: theme.palette.custom.secondaryText,
                     background: `linear-gradient(to right, transparent, ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents} , ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents}, transparent)`, // Linear gradient
@@ -369,10 +368,7 @@ const TeamSection: React.FC = () => {
                   fontSize={"1rem"}
                   color="textSecondary"
                   sx={(theme) => ({
-                    position: "absolute",
-                    left: "50%",
-                    bottom: "10%",
-                    transform: "translate(-50%, -50%)", // Centers the image
+                    position: "relative",
                     zIndex: "3",
                     color: theme.palette.custom.primaryTextGrayed,
                     background: `linear-gradient(to right, transparent, ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents} , ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents}, transparent)`, // Linear gradient
@@ -381,7 +377,7 @@ const TeamSection: React.FC = () => {
                   })}
                 >
                   {expandedMember.dcdetails}
-                </Typography> */}
+                </Typography>
               </Box>
 
               <Tabs
