@@ -151,6 +151,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setActiveSet(setId);
     localStorage.setItem("colorSet", setId.toString());
     // Update URL parameter
+
     const url = new URL(window.location.href);
 
     let color;
@@ -171,7 +172,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         color = "pink";
         break;
       default:
-        color = setId.toString(); // If setId is anything else, just use it as a string
+        color = "blue"; // If setId is anything else, just use it as a string
     }
 
     url.searchParams.set("color", color);
