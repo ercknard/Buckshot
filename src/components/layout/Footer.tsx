@@ -93,7 +93,7 @@ export default function Footer() {
   };
 
   return (
-    <Box mt={10}>
+    <Box>
       <Box
         bgcolor={"custom.primaryComponents"}
         pt={{ xs: 1, md: 5 }}
