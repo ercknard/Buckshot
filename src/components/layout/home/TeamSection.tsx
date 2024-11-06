@@ -249,10 +249,21 @@ const TeamSection: React.FC = () => {
           value={activeTab}
           onChange={(_, newValue) => setActiveTab(newValue)}
           centered
-          sx={{ marginTop: 2 }}
+          sx={{
+            marginTop: 2,
+            "& .MuiTabs-flexContainer": {
+              color: "custom.primaryText", // Set the color of the active Tab
+            },
+            "& .Mui-selected": {
+              color: "custom.primaryText", // Customize the selected tab font color
+            },
+            "& .MuiTabs-indicator": {
+              backgroundColor: "custom.primaryText", // Change the underline color for the active tab
+            },
+          }}
         >
-          <Tab label="Leads" />
-          <Tab label="Moderators" />
+          <Tab label="Leads" sx={{ color: "custom.secondaryBorders" }} />
+          <Tab label="Moderators" sx={{ color: "custom.secondaryBorders" }} />
         </Tabs>
 
         <Box position={"relative"}>
@@ -312,6 +323,7 @@ const TeamSection: React.FC = () => {
               >
                 {expandedMember.details}
               </Typography>
+
               <Typography
                 fontSize={"1rem"}
                 color="textSecondary"
@@ -339,7 +351,14 @@ const TeamSection: React.FC = () => {
               justifyContent="center"
             >
               {teamMembers.map((member) => (
-                <Grid item xs={12} sm={6} md={2.4} key={member.name}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={2.4}
+                  key={member.name}
+                  sx={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
+                >
                   <Paper
                     elevation={3}
                     sx={{
@@ -351,6 +370,12 @@ const TeamSection: React.FC = () => {
                         expandedMember === member
                           ? "custom.secondarySolidColors"
                           : "custom.secondaryBackgroundGrayed", // Change color when active
+                      borderWidth: "2.5px",
+                      borderStyle: "solid",
+                      borderColor:
+                        expandedMember === member
+                          ? "custom.primaryText"
+                          : "custom.mainColor",
                       "&:hover": {
                         transform:
                           expandedMember === member ? "none" : "scale(1.05)", // Disable hover effect for active card
@@ -412,9 +437,13 @@ const TeamSection: React.FC = () => {
                     slidesPerView: 1, // For small screens (mobile devices)
                   },
                 }}
+                style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
               >
                 {teamModerators.map((member) => (
-                  <SwiperSlide key={member.name}>
+                  <SwiperSlide
+                    key={member.name}
+                    style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
+                  >
                     <Paper
                       elevation={3}
                       sx={{
@@ -426,6 +455,12 @@ const TeamSection: React.FC = () => {
                             : "custom.secondaryBackgroundGrayed",
                         transition: "transform 0.2s, background-color 0.3s",
                         cursor: "pointer",
+                        borderWidth: "2.5px",
+                        borderStyle: "solid",
+                        borderColor:
+                          expandedMember === member
+                            ? "custom.primaryText"
+                            : "custom.mainColor",
                         "&:hover": {
                           transform: "scale(1.05)",
                           backgroundColor:
