@@ -149,7 +149,7 @@ const DonateSection: React.FC = () => {
     >
       <Box
         component={"img"}
-        src="/static/images/BG-B.webp"
+        src="/static/images/earth.webp"
         sx={(theme) => ({
           position: "absolute",
           top: 0,
@@ -159,6 +159,19 @@ const DonateSection: React.FC = () => {
           opacity: 0.55,
         })}
       />
+
+      {/* <Box
+        component={"img"}
+        src={imageBgBannerSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.9,
+        })}
+      /> */}
 
       <Box
         component={"img"}
