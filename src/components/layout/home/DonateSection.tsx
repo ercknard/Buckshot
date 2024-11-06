@@ -218,7 +218,8 @@ const DonateSection: React.FC = () => {
                 </Typography>
 
                 <Typography
-                  fontSize={"1rem"}
+                  variant="h5"
+                  fontSize={"1.75rem"}
                   color="textSecondary"
                   sx={(theme) => ({
                     zIndex: "3",
