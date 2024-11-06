@@ -12,6 +12,7 @@ interface TeamMember {
   image: string;
   land: string;
   details: string; // Additional details for the member
+  dcdetails: string; // Additional details for the
 }
 
 const teamMembers: TeamMember[] = [
@@ -20,40 +21,40 @@ const teamMembers: TeamMember[] = [
     role: "Leads",
     image: "/static/images/yellow-head.webp",
     land: "/static/images/yellow-land.webp",
-    details:
-      "John has over 10 years of experience in the industry and leads our team with vision and strategy.",
+    details: "Welcome to CryptechTest",
+    dcdetails: "Discord : squidicuz",
   },
   {
     name: "SeqSee",
     role: "Leads",
     image: "/static/images/pink-head.webp",
     land: "/static/images/pink-land.webp",
-    details:
-      "Jane is the brain behind our technology and oversees all tech developments.",
+    details: "Welcome to CryptechTest",
+    dcdetails: "Discord : SeqSee",
   },
   {
     name: "Vanikoro",
     role: "Leads",
     image: "/static/images/green-head.webp",
     land: "/static/images/green-land.webp",
-    details:
-      "Alice brings creativity and innovation to our projects, ensuring a great user experience.",
+    details: "Welcome to CryptechTest",
+    dcdetails: "Discord : vanikoro",
   },
   {
     name: "Kyuhi",
     role: "Leads",
     image: "/static/images/blue-head.webp",
     land: "/static/images/blue-land.webp",
-    details:
-      "Bob is a full-stack developer who loves turning ideas into reality through code.",
+    details: "Welcome to CryptechTest",
+    dcdetails: "Discord : Kyuhi",
   },
   {
     name: "Shikoku",
     role: "Leads",
     image: "/static/images/orange-head.webp",
     land: "/static/images/orange-land.webp",
-    details:
-      "Bob is a full-stack developer who loves turning ideas into reality through code.",
+    details: "Welcome to CryptechTest",
+    dcdetails: "Discord : shikoku",
   },
 ];
 
@@ -65,6 +66,7 @@ const teamModerators: TeamMember[] = [
     land: "/static/images/green-land.webp",
     details:
       "John has over 10 years of experience in the industry and leads our team with vision and strategy.",
+    dcdetails: "Discord : squidicuz",
   },
   {
     name: "SeqSee",
@@ -73,6 +75,7 @@ const teamModerators: TeamMember[] = [
     land: "/static/images/green-land.webp",
     details:
       "Jane is the brain behind our technology and oversees all tech developments.",
+    dcdetails: "Discord : squidicuz",
   },
   {
     name: "Vanikoro",
@@ -81,6 +84,7 @@ const teamModerators: TeamMember[] = [
     land: "/static/images/green-land.webp",
     details:
       "Alice brings creativity and innovation to our projects, ensuring a great user experience.",
+    dcdetails: "Discord : squidicuz",
   },
   {
     name: "Kyuhi",
@@ -89,6 +93,7 @@ const teamModerators: TeamMember[] = [
     land: "/static/images/green-land.webp",
     details:
       "Bob is a full-stack developer who loves turning ideas into reality through code.",
+    dcdetails: "Discord : squidicuz",
   },
   {
     name: "Shikoku",
@@ -97,6 +102,7 @@ const teamModerators: TeamMember[] = [
     land: "/static/images/green-land.webp",
     details:
       "Bob is a full-stack developer who loves turning ideas into reality through code.",
+    dcdetails: "Discord : squidicuz",
   },
   {
     name: "Shikoku",
@@ -105,6 +111,7 @@ const teamModerators: TeamMember[] = [
     land: "/static/images/green-land.webp",
     details:
       "Bob is a full-stack developer who loves turning ideas into reality through code.",
+    dcdetails: "Discord : squidicuz",
   },
 ];
 
@@ -261,8 +268,26 @@ const TeamSection: React.FC = () => {
                   zIndex: "2",
                 }}
               />
+
               <Typography
-                variant="body1"
+                fontSize={"1.25rem"}
+                color="textSecondary"
+                sx={(theme) => ({
+                  position: "absolute",
+                  left: "50%",
+                  bottom: "15%",
+                  transform: "translate(-50%, -50%)", // Centers the image
+                  zIndex: "3",
+                  color: theme.palette.custom.secondaryText,
+                  background: `linear-gradient(to right, transparent, ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents} , ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents}, transparent)`, // Linear gradient
+                  paddingY: 1,
+                  paddingX: 3,
+                })}
+              >
+                {expandedMember.details}
+              </Typography>
+              <Typography
+                fontSize={"1rem"}
                 color="textSecondary"
                 sx={(theme) => ({
                   position: "absolute",
@@ -271,9 +296,11 @@ const TeamSection: React.FC = () => {
                   transform: "translate(-50%, -50%)", // Centers the image
                   zIndex: "3",
                   color: theme.palette.custom.secondaryText,
+                  paddingY: 1,
+                  paddingX: 3,
                 })}
               >
-                {expandedMember.details}
+                {expandedMember.dcdetails}
               </Typography>
             </Box>
           )}
