@@ -210,7 +210,6 @@ const GitFeedsSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="h5"
-                    color="custom.primaryTextGrayed"
                   >
                     {event.repo.name}
                   </Link>
