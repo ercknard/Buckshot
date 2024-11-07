@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   CircularProgress,
   Alert,
@@ -15,10 +15,19 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Stack,
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import DefaultDialog from "../DefaultDialog";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 type CustomTheme = {
   activeSet: number;
@@ -28,6 +37,22 @@ type Mod = {
   name: string;
   html_url: string;
 };
+
+const slides = [
+  {
+    id: 1,
+    title: "TestCoin",
+    content:
+      "Test Coin is a fake hybrid PoW/PoS cryptocurrency used as in-game currency in CryptechTest game.",
+    image: "/static/images/testcoin.webp",
+  },
+  {
+    id: 2,
+    title: "Starships",
+    content: "Voxel Starships",
+    image: "/static/images/scout.webp",
+  },
+];
 
 const ModsList: React.FC = () => {
   const [mods, setMods] = useState<Mod[]>([]);
@@ -145,14 +170,15 @@ const ModsList: React.FC = () => {
         maxWidth="md"
         open={openDialog}
         handleOnClose={handleDialogClose}
-        title="All mods"
+        title="Cryptech Mods List"
       >
         <Grid
           position={"relative"}
           zIndex={2}
           container
-          spacing={3}
+          spacing={5}
           justifyContent="center"
+          paddingTop={5}
         >
           {remainingMods.map((mod) => (
             <Grid item xs={12} sm={6} md={4} key={mod.name}>
@@ -160,10 +186,11 @@ const ModsList: React.FC = () => {
                 <Paper
                   elevation={3}
                   sx={{
-                    padding: 2,
+                    padding: 2.5,
                     textAlign: "center",
                     transition: "transform 0.2s, background-color 0.3s",
                     backgroundColor: "custom.secondaryBackground",
+                    backgroundImage: "unset",
                     borderWidth: "10px",
                     borderStyle: "solid",
                     borderImage: `url('${imageBgBorderSrc}') 30 round`,
@@ -193,6 +220,29 @@ const ModsList: React.FC = () => {
 
 const ModsSection: React.FC = () => {
   const theme = useTheme();
+  const { activeSet } = useThemeContext();
+
+  const colorSetBgBorderRight: { [key: string]: string } = {
+    1: "/static/images/blue-border.png",
+    2: "/static/images/green-border.png",
+    3: "/static/images/yellow-border.png",
+    4: "/static/images/orange-border.png",
+    5: "/static/images/pink-border.png",
+  };
+
+  const colorSetBgBorderDark: { [key: string]: string } = {
+    1: "/static/images/blue-border-dark.png",
+    2: "/static/images/green-border-dark.png",
+    3: "/static/images/yellow-border-dark.png",
+    4: "/static/images/orange-border-dark.png",
+    5: "/static/images/pink-border-dark.png",
+  };
+
+  const imageBgBorderSrc =
+    colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
+
+  const imageBgBorderDarkSrc =
+    colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
   return (
     <Box
@@ -206,6 +256,30 @@ const ModsSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
+      <Box
+        component={"img"}
+        src={imageBgBorderDarkSrc}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      />
+
+      <Box
+        component={"img"}
+        src={imageBgBorderSrc}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      />
+
       {/* Container for Mods List */}
       <Container
         sx={{
@@ -213,11 +287,61 @@ const ModsSection: React.FC = () => {
           marginX: "auto",
         }}
       >
-        <Typography variant="h4" align="center" gutterBottom>
-          Featured Mods
-        </Typography>
+        <Box position={"relative"} zIndex={2}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Featured Mods
+          </Typography>
+          <Typography variant="h5" align="center" gutterBottom>
+            Check out our latest feature mods, designed to enhance functionality
+            and improve your experience.
+          </Typography>
+        </Box>
 
-        {/* Display Mods List */}
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {slides.map((slide) => (
+            <SwiperSlide key={slide.id}>
+              <Box
+                sx={{
+                  padding: 2,
+                  textAlign: "center",
+                  marginBottom: 5,
+                  marginTop: 5,
+                }}
+              >
+                <Box
+                  component="img"
+                  width="20%"
+                  alt="Logo"
+                  src={slide.image}
+                  marginX={"auto"}
+                />
+                <Stack direction={"column"} spacing={1}>
+                  <Typography
+                    variant="body1"
+                    fontSize={"1.5rem"}
+                    color="custom.primaryText"
+                  >
+                    {slide.title}
+                  </Typography>
+                  <Typography variant="h5" color="custom.secondaryText">
+                    {slide.content}
+                  </Typography>
+                </Stack>
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
         <ModsList />
       </Container>
     </Box>

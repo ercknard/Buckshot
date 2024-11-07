@@ -19,6 +19,7 @@ export default function Home(): JSX.Element {
         <Navbar />
       </Box>
       <HeroSection />
+      <Box minHeight={"50vh"}></Box>
       <ModsSection />
       <TeamSection />
       <MediaSection />
