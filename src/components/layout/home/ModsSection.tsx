@@ -1,203 +1,40 @@
 import React, { useState, useEffect } from "react";
 import {
+  CircularProgress,
+  Alert,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
   Box,
   Grid,
   Paper,
-  Typography,
-  Button,
-  Tab,
-  Tabs,
   Container,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Default Swiper CSS
-import "swiper/css/navigation"; // If you're using navigation
-import "swiper/css/pagination"; // If you're using pagination
-import "swiper/css/scrollbar";
-import SwiperCore from "swiper"; // Import Scrollbar from SwiperCore
-import { Scrollbar } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
-
-// Install the module in SwiperCore
+import DefaultDialog from "../DefaultDialog";
 
 type CustomTheme = {
-  activeSet: number; // Adjust this based on your actual structure
+  activeSet: number;
 };
 
-interface TeamMember {
+type Mod = {
   name: string;
-  role: string;
-  image: string;
-  land: string;
-  details: string; // Additional details for the member
-  dcdetails: string; // Additional details for the
-}
+  html_url: string;
+};
 
-const teamMembers: TeamMember[] = [
-  {
-    name: "Squidicuz",
-    role: "Leads",
-    image: "/static/images/yellow-head.webp",
-    land: "/static/images/yellow-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : squidicuz",
-  },
-  {
-    name: "SeqSee",
-    role: "Leads",
-    image: "/static/images/pink-head.webp",
-    land: "/static/images/pink-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : SeqSee",
-  },
-  {
-    name: "Vanikoro",
-    role: "Leads",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : vanikoro",
-  },
-  {
-    name: "Kyuhi",
-    role: "Leads",
-    image: "/static/images/blue-head.webp",
-    land: "/static/images/blue-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : Kyuhi",
-  },
-  {
-    name: "Shikoku",
-    role: "Leads",
-    image: "/static/images/orange-head.webp",
-    land: "/static/images/orange-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : shikoku",
-  },
-];
-
-const teamModerators: TeamMember[] = [
-  {
-    name: "Stick",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : anormalstick",
-  },
-  {
-    name: "Ferbog05",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : ferbog05",
-  },
-  {
-    name: "Matador",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : matador",
-  },
-  {
-    name: "Demil",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : demil",
-  },
-  {
-    name: "DeathSmack",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : deathsmack",
-  },
-  {
-    name: "Tonic",
-    role: "Contributor",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : anormaltonic",
-  },
-  {
-    name: "Ercknard",
-    role: "Contributor",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : ercknard",
-  },
-];
-
-const ModsSection: React.FC = () => {
+const ModsList: React.FC = () => {
+  const [mods, setMods] = useState<Mod[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
   const { activeSet } = useThemeContext() as CustomTheme;
-  const [activeTab, setActiveTab] = useState<number>(0); // 0 for Team Members, 1 for Moderators
-  const theme = useTheme();
-
-  // Ensure activeSet is a number for comparison purposes
-  const activeSetNumber =
-    typeof activeSet === "number"
-      ? activeSet
-      : parseInt(activeSet as string, 10);
-
-  // Log the activeSet value and type for debugging
-  console.log(
-    "Active Set:",
-    activeSet,
-    "Active Set (parsed):",
-    activeSetNumber
-  );
-
-  // Function to determine default member based on active theme
-  const getDefaultMember = (activeSet: number) => {
-    console.log("Evaluating activeSet:", activeSet);
-    switch (activeSet) {
-      case 1:
-        return teamMembers[3]; // Kyuhi for blue
-      case 2:
-        return teamMembers[2]; // Vanikoro for green
-      case 3:
-        return teamMembers[0]; // Squidicuz for yellow
-      case 4:
-        return teamMembers[4]; // Shikoku for orange
-      case 5:
-        return teamMembers[1]; // SeqSee for pink
-      default:
-        return teamMembers[2]; // Default to Vanikoro if no valid set is found
-    }
-  };
-
-  const [expandedMember, setExpandedMember] = useState<TeamMember | null>(
-    getDefaultMember(activeSetNumber)
-  );
-
-  // Whenever activeSet changes, update expandedMember to the corresponding team member
-  useEffect(() => {
-    setExpandedMember(getDefaultMember(activeSetNumber));
-  }, [activeSetNumber]);
-
-  const handleCardClick = (member: TeamMember) => {
-    // Only toggle the expanded member if it is not the currently expanded member
-    if (expandedMember === member) {
-      return; // Disable click action if the card is already active
-    }
-    setExpandedMember(expandedMember === member ? null : member); // Toggle the expanded member
-  };
-
-  const colorSetBgBannerRight: { [key: string]: string } = {
-    1: "/static/images/blue-banner.png",
-    2: "/static/images/green-banner.png",
-    3: "/static/images/yellow-banner.png",
-    4: "/static/images/orange-banner.png",
-    5: "/static/images/pink-banner.png",
-  };
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
@@ -207,24 +44,155 @@ const ModsSection: React.FC = () => {
     5: "/static/images/pink-border.png",
   };
 
-  const colorSetBgBorderDark: { [key: string]: string } = {
-    1: "/static/images/blue-border-dark.png",
-    2: "/static/images/green-border-dark.png",
-    3: "/static/images/yellow-border-dark.png",
-    4: "/static/images/orange-border-dark.png",
-    5: "/static/images/pink-border-dark.png",
-  };
-
-  const imageBgBannerSrc =
-    colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
-
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
 
-  const imageBgBorderDarkSrc =
-    colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
+  useEffect(() => {
+    const fetchMods = async () => {
+      try {
+        const response = await fetch("/api/MinetestModsApi");
+        if (!response.ok) {
+          throw new Error("Failed to fetch mod list");
+        }
+        const data = await response.json();
+        setMods(data);
+      } catch (err) {
+        setError("Error loading mods");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  SwiperCore.use([Scrollbar]);
+    fetchMods();
+  }, []);
+
+  const handleDialogOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
+
+  // Separate the first 5 mods and the rest
+  const displayedMods = mods.slice(0, 10);
+  const remainingMods = mods.slice(10);
+
+  return (
+    <Box padding={3}>
+      <Grid
+        position={"relative"}
+        zIndex={2}
+        container
+        spacing={3}
+        justifyContent="center"
+      >
+        {displayedMods.map((mod) => (
+          <Grid item xs={12} sm={6} md={2.4} key={mod.name}>
+            <a href={mod.html_url} target="_blank" rel="noopener noreferrer">
+              <Paper
+                elevation={3}
+                sx={{
+                  padding: 2,
+                  textAlign: "center",
+                  transition: "transform 0.2s, background-color 0.3s",
+                  backgroundColor: "custom.secondaryBackground",
+                  borderWidth: "10px",
+                  borderStyle: "solid",
+                  borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                    backgroundColor: "custom.secondaryComponents",
+                  },
+                }}
+              >
+                <Typography variant="h6" fontSize={"1.5rem"}>
+                  {mod.name}
+                </Typography>
+              </Paper>
+            </a>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Button to open dialog for remaining mods */}
+      {remainingMods.length > 0 && (
+        <Box display="flex" justifyContent="right" marginTop={3}>
+          <Button variant="outlined" onClick={handleDialogOpen}>
+            View More Mods
+          </Button>
+        </Box>
+      )}
+
+      {/* Dialog to show the remaining mods */}
+      <DefaultDialog
+        maxWidth="md"
+        open={openDialog}
+        handleOnClose={handleDialogClose}
+        title="All mods"
+      >
+        <Grid
+          position={"relative"}
+          zIndex={2}
+          container
+          spacing={3}
+          justifyContent="center"
+        >
+          {remainingMods.map((mod) => (
+            <Grid item xs={12} sm={6} md={4} key={mod.name}>
+              <a href={mod.html_url} target="_blank" rel="noopener noreferrer">
+                <Paper
+                  elevation={3}
+                  sx={{
+                    padding: 2,
+                    textAlign: "center",
+                    transition: "transform 0.2s, background-color 0.3s",
+                    backgroundColor: "custom.secondaryBackground",
+                    borderWidth: "10px",
+                    borderStyle: "solid",
+                    borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                    "&:hover": {
+                      transform: "scale(1.05)",
+                      backgroundColor: "custom.secondaryComponents",
+                    },
+                  }}
+                >
+                  <Typography variant="h6" fontSize={"1.5rem"}>
+                    {mod.name}
+                  </Typography>
+                </Paper>
+              </a>
+            </Grid>
+          ))}
+        </Grid>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </DefaultDialog>
+    </Box>
+  );
+};
+
+const ModsSection: React.FC = () => {
+  const theme = useTheme();
 
   return (
     <Box
@@ -236,72 +204,21 @@ const ModsSection: React.FC = () => {
         backgroundColor: "custom.secondaryBackground",
         paddingTop: "10rem",
         paddingBottom: "10rem",
-        minHeight: "100vh",
       }}
     >
-      {/* <Box
-        component={"img"}
-        src="/static/images/BG-B.webp"
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.35,
-        })}
-      /> */}
-
-      {/* <Box
-        component={"img"}
-        src={imageBgBannerSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.75,
-        })}
-      /> */}
-
-      <Box
-        component={"img"}
-        src={imageBgBorderDarkSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        })}
-      />
-
-      <Box
-        component={"img"}
-        src={imageBgBorderSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        })}
-      />
-
+      {/* Container for Mods List */}
       <Container
         sx={{
           justifyContent: { sm: "center", xs: "left" },
           marginX: "auto",
         }}
       >
-        <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Featured Mods
-          </Typography>
-        </Box>
+        <Typography variant="h4" align="center" gutterBottom>
+          Featured Mods
+        </Typography>
 
-        <Box position={"relative"}></Box>
+        {/* Display Mods List */}
+        <ModsList />
       </Container>
     </Box>
   );
