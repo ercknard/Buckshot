@@ -10,6 +10,7 @@ import ModsSection from "@/components/layout/home/ModsSection";
 import ColorSection from "@/components/layout/home/ColorSection";
 import DonateSection from "@/components/layout/home/DonateSection";
 import MediaSection from "@/components/layout/home/MediaSection";
+import PartnersSection from "@/components/layout/home/Partners";
 
 export default function Home(): JSX.Element {
   return (
@@ -34,6 +35,7 @@ export default function Home(): JSX.Element {
       <TeamSection />
       <MediaSection />
       <DonateSection />
+      <PartnersSection />
       <ColorSection />
       <Footer />
     </Box>
