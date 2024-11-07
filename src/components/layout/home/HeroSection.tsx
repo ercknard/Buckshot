@@ -47,6 +47,15 @@ const toOpacityAnimation = keyframes`
   }
 `;
 
+const toOpacityAnimation2 = keyframes`
+  0%, 100% {
+   opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+`;
+
 const closeLeftGateAnimation = keyframes`
   0%, 100% {
     transform: translateX(0vw);
@@ -389,7 +398,7 @@ export default function HeroSection(): JSX.Element {
           zIndex: "-3",
           animation: animationPaused
             ? "none"
-            : `${toOpacityAnimation} 20s ease-in-out infinite`,
+            : `${toOpacityAnimation2} 20s ease-in-out infinite`,
         })}
       />
 
