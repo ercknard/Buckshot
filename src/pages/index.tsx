@@ -19,7 +19,17 @@ export default function Home(): JSX.Element {
         <Navbar />
       </Box>
       <HeroSection />
-      <Box minHeight={"50vh"}></Box>
+      {/* <Box
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: 4,
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: "10rem",
+          paddingBottom: "10rem",
+        }}
+      ></Box> */}
       <ModsSection />
       <TeamSection />
       <MediaSection />
