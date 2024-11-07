@@ -21,3 +21,46 @@ body {
 .swiper-button-prev {
   display: none;
 }
+
+.swiper {
+  width: 100% !important;
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.swiper-slide {
+  background-position: center !important;
+  background-size: cover !important;
+  width: 35% !important;
+}
+
+.swiper-slide video {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Style for Swiper Next and Prev buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  border-radius: 50%; /* Make the arrows circular */
+  padding: 12px; /* Space inside the button */
+  z-index: 10; /* Ensure the arrows appear above other elements */
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 24px; /* Increase icon size */
+}
+
+/* Custom positioning for next/prev buttons */
+.swiper-button-next {
+  right: 30% !important; /* Move the "next" button closer to the center */
+  left: auto;
+}
+
+.swiper-button-prev {
+  left: 30% !important; /* Move the "prev" button closer to the center */
+  right: auto;
+}
