@@ -1,16 +1,15 @@
-import { Container, Box, Typography, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import { DefaultHead } from "@/components/layout/Head";
-import { useThemeContext } from "@/theme/themeProvider";
 import HeroSection from "@/components/layout/home/HeroSection";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import TeamSection from "@/components/layout/home/TeamSection";
-import { keyframes } from "@emotion/react";
 import ModsSection from "@/components/layout/home/ModsSection";
 import ColorSection from "@/components/layout/home/ColorSection";
 import DonateSection from "@/components/layout/home/DonateSection";
 import MediaSection from "@/components/layout/home/MediaSection";
 import PartnersSection from "@/components/layout/home/Partners";
+import GitFeedsSection from "@/components/layout/home/GitFeedsSection";
 
 export default function Home(): JSX.Element {
   return (
@@ -36,6 +35,7 @@ export default function Home(): JSX.Element {
       <MediaSection />
       <DonateSection />
       <PartnersSection />
+      <GitFeedsSection />
       <ColorSection />
       <Footer />
     </Box>
