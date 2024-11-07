@@ -108,7 +108,7 @@ const MediaSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      <Box
+      {/* <Box
         component={"img"}
         src="/static/images/BG-B.webp"
         sx={(theme) => ({
@@ -132,7 +132,7 @@ const MediaSection: React.FC = () => {
           height: "100%",
           opacity: 0.75,
         })}
-      />
+      /> */}
 
       <Box
         component={"img"}
