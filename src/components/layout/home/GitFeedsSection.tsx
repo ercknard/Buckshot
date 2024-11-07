@@ -236,7 +236,7 @@ const GitFeedsSection: React.FC = () => {
                   </Stack>
                 ) : (
                   <Typography variant="body2" color="textSecondary">
-                    No commits available for this event.
+                    No commits message available for this event.
                   </Typography>
                 )}
 
@@ -370,7 +370,7 @@ const GitFeedsSection: React.FC = () => {
                     </Stack>
                   ) : (
                     <Typography variant="body2" color="textSecondary">
-                      No commits available for this event.
+                      No commits message available for this event.
                     </Typography>
                   )}
 
