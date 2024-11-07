@@ -44,13 +44,22 @@ const slides = [
     title: "TestCoin",
     content:
       "Test Coin is a fake hybrid PoW/PoS cryptocurrency used as in-game currency in CryptechTest game.",
-    image: "/static/images/testcoin.webp",
+    image: "/static/images/testcoin-grouped.png",
+    image_size: "40%",
   },
   {
     id: 2,
     title: "Starships",
     content: "CryptechTest Voxel Starships",
     image: "/static/images/scout.webp",
+    image_size: "40%",
+  },
+  {
+    id: 3,
+    title: "Orbital Station",
+    content: "CryptechTest Spawn point",
+    image: "/static/images/ship-2.png",
+    image_size: "40%",
   },
 ];
 
@@ -320,7 +329,7 @@ const ModsSection: React.FC = () => {
               >
                 <Box
                   component="img"
-                  width="20%"
+                  width={slide.image_size}
                   alt="Logo"
                   src={slide.image}
                   marginX={"auto"}
@@ -328,7 +337,7 @@ const ModsSection: React.FC = () => {
                 <Stack direction={"column"} spacing={1}>
                   <Typography
                     variant="body1"
-                    fontSize={"1.5rem"}
+                    fontSize={"1.75rem"}
                     color="custom.primaryText"
                   >
                     {slide.title}
