@@ -49,7 +49,7 @@ const slides = [
   {
     id: 2,
     title: "Starships",
-    content: "Voxel Starships",
+    content: "CryptechTest Voxel Starships",
     image: "/static/images/scout.webp",
   },
 ];
