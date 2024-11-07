@@ -22,14 +22,14 @@ body {
   display: none;
 }
 
-.swiper {
+/* .swiper {
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
-}
+} */
 
-.swiper-slide {
+/* .swiper-slide {
   width: 35% !important;
-}
+} */
 
 /* Style for Swiper Next and Prev buttons */
 .swiper-button-next,

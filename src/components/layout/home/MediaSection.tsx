@@ -190,9 +190,10 @@ const MediaSection: React.FC = () => {
           modules={[EffectCoverflow, Pagination, Navigation]}
           className="mySwiper"
           ref={swiperRef} // Pass the ref to the Swiper component
+          style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
         >
           {videoUrls.map((url, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} style={{ width: "35%" }}>
               <Box
                 sx={{
                   position: "relative",
