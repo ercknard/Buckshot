@@ -324,7 +324,6 @@ const ModsSection: React.FC = () => {
                   padding: 2,
                   textAlign: "center",
                   marginBottom: 5,
-                  marginTop: 5,
                 }}
               >
                 <Box
