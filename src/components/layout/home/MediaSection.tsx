@@ -123,6 +123,19 @@ const MediaSection: React.FC = () => {
 
       <Box
         component={"img"}
+        src={imageBgBannerSrc}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.75,
+        })}
+      />
+
+      <Box
+        component={"img"}
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
@@ -165,7 +178,7 @@ const MediaSection: React.FC = () => {
           coverflowEffect={{
             rotate: 50,
             stretch: 0,
-            depth: 300,
+            depth: 250,
             modifier: 1,
             slideShadows: true,
           }}

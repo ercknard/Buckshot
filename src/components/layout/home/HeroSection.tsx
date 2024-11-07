@@ -598,6 +598,43 @@ export default function HeroSection(): JSX.Element {
         })}
       />
 
+      <Box
+        sx={{
+          backgroundImage: `url(/static/images/chain.png)`,
+          position: "absolute",
+          top: "36.15%",
+          left: "0",
+          width: "32.5%",
+          height: "2rem",
+          pointerEvents: "none",
+          zIndex: "3",
+          animation: animationPaused
+            ? "none"
+            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
+          overflow: "hidden",
+          transformOrigin: "center center",
+        }}
+      />
+
+      <Box
+        component={"img"}
+        src="/static/images/wheel.png"
+        sx={(theme) => ({
+          position: "absolute",
+          top: "35%",
+          left: "30%",
+          width: "5rem",
+          height: "5rem",
+          opacity: 1,
+          transformOrigin: "center",
+          pointerEvents: "none",
+          animation: animationPaused
+            ? "none"
+            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
+          zIndex: "3",
+        })}
+      />
+
       {/* Right */}
 
       <Box
@@ -683,6 +720,43 @@ export default function HeroSection(): JSX.Element {
           position: "absolute",
           top: "50%",
           right: "42.5%",
+          width: "5rem",
+          height: "5rem",
+          opacity: 1,
+          transformOrigin: "center",
+          pointerEvents: "none",
+          animation: animationPaused
+            ? "none"
+            : `${clockwiseAnimation} 20s ease-in-out infinite`,
+          zIndex: "3",
+        })}
+      />
+
+      <Box
+        sx={{
+          backgroundImage: `url(/static/images/chain.png)`,
+          position: "absolute",
+          top: "66.15%",
+          right: "0",
+          width: "32.5%",
+          height: "2rem",
+          pointerEvents: "none",
+          zIndex: "3",
+          animation: animationPaused
+            ? "none"
+            : `${clockwiseAnimation} 20s ease-in-out infinite`,
+          overflow: "hidden",
+          transformOrigin: "center center",
+        }}
+      />
+
+      <Box
+        component={"img"}
+        src="/static/images/wheel.png"
+        sx={(theme) => ({
+          position: "absolute",
+          top: "65%",
+          right: "30%",
           width: "5rem",
           height: "5rem",
           opacity: 1,

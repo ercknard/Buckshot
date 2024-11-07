@@ -239,7 +239,7 @@ const ModsSection: React.FC = () => {
         minHeight: "100vh",
       }}
     >
-      <Box
+      {/* <Box
         component={"img"}
         src="/static/images/BG-B.webp"
         sx={(theme) => ({
@@ -250,7 +250,7 @@ const ModsSection: React.FC = () => {
           height: "100%",
           opacity: 0.35,
         })}
-      />
+      /> */}
 
       {/* <Box
         component={"img"}
