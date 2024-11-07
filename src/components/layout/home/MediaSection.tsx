@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState, useRef } from "react";
+import { Box, Typography, IconButton } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import "swiper/css/navigation"; // Import navigation styles
-
+import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { ArrowBack, ArrowForward } from "@mui/icons-material"; // MUI icons for prev and next
+import ReactPlayer from "react-player"; // Import react-player
 
 type CustomTheme = {
   activeSet: number;
@@ -24,10 +23,31 @@ const videoUrls = [
   "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
 ];
 
+const videoTitles = [
+  "Epic Adventure Begins",
+  "Thrilling Gameplay Moments",
+  "Unforgettable Action Sequences",
+  "Master the Game",
+  "Victory Awaits",
+];
+
 const MediaSection: React.FC = () => {
   const { activeSet } = useThemeContext() as CustomTheme;
   const theme = useTheme();
+  const swiperRef = useRef(null);
 
+  // State to handle client-side rendering
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Set to true once the component has mounted on the client
+  }, []);
+
+  if (!isClient) {
+    return null; // Prevent rendering until client-side hydration is complete
+  }
+
+  // Mapping for background images based on activeSet
   const colorSetBgMap: { [key: string]: string } = {
     1: "/static/images/blue-gate.webp",
     2: "/static/images/green-gate.webp",
@@ -61,13 +81,10 @@ const MediaSection: React.FC = () => {
   };
 
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
-
   const imageBgBannerSrc =
     colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
-
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
-
   const imageBgBorderDarkSrc =
     colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
@@ -93,39 +110,39 @@ const MediaSection: React.FC = () => {
     >
       {/* <Box
         component={"img"}
-        src="/static/images/earth.webp"
+        src="/static/images/BG-B.webp"
         sx={(theme) => ({
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.35,
+          opacity: 0.55,
         })}
       /> */}
 
       <Box
         component={"img"}
         src={imageBgBorderDarkSrc}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-        })}
+        }}
       />
 
       <Box
         component={"img"}
         src={imageBgBorderSrc}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-        })}
+        }}
       />
 
       <Box position={"relative"} zIndex={2}>
@@ -134,50 +151,107 @@ const MediaSection: React.FC = () => {
         </Typography>
 
         <Typography variant="h5" align="center" gutterBottom>
-          If you enjoy our server, or the plugin we make, and want to help
-          contribute financially, we happily accept cryptocurrency donations!
+          Get ready for epic gameplay, awesome moments, and plenty of
+          fun—let&apos;s dive in!
         </Typography>
 
         <Swiper
-          loop={true} // Enable looping
+          loop={true}
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={"auto"}
-          spaceBetween={225} // Adds space between slides (left and right)
+          spaceBetween={250}
           coverflowEffect={{
             rotate: 50,
             stretch: 0,
-            depth: 500,
+            depth: 300,
             modifier: 1,
             slideShadows: true,
-            scale: 1.2, // Scale up the active slide
           }}
-          pagination={true}
-          navigation={true} // Enable next/prev navigation arrows
-          modules={[EffectCoverflow, Pagination, Navigation]} // Import Navigation module
+          pagination={false}
+          navigation={{
+            prevEl: ".swiper-button-prev", // Custom prev button
+            nextEl: ".swiper-button-next", // Custom next button
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation]}
           className="mySwiper"
+          ref={swiperRef} // Pass the ref to the Swiper component
         >
           {videoUrls.map((url, index) => (
-            <SwiperSlide
-              key={index}
-              style={{
-                borderWidth: "10px",
-                borderStyle: "solid",
-                borderImage: `url('${imageBgBorderSrc}') 30 round`,
-              }}
-            >
-              <video
-                width="75%"
-                controls
-                poster={videoThumbnails[index]} // Set the thumbnail (poster)
+            <SwiperSlide key={index}>
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  paddingTop: "56.25%", // 16:9 Aspect Ratio (56.25%)
+                  overflow: "hidden", // Ensure child doesn't overflow the container
+                  borderRadius: 2, // Optional: rounded corners for aesthetics
+                }}
               >
-                <source src={url} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                <ReactPlayer
+                  url={url}
+                  width="100%"
+                  height="100%"
+                  controls
+                  light={videoThumbnails[index]} // Show thumbnail before play
+                  playing={false} // Do not autoplay by default
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                  }}
+                />
+              </Box>
+              <Typography
+                variant="h5"
+                align="center"
+                sx={{
+                  marginTop: 1,
+                  padding: 0.5,
+                  bgcolor: "custom.primaryComponents",
+                }}
+              >
+                {videoTitles[index]}
+              </Typography>
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Custom Navigation Buttons */}
+        <Box
+          className="swiper-button-prev"
+          sx={{
+            position: "absolute",
+            top: "58.25%",
+            left: "10px",
+            transform: "translateY(-50%)",
+            zIndex: 3,
+            borderRadius: "50%",
+            boxShadow: 3,
+          }}
+        >
+          <IconButton color="primary">
+            <ArrowBack />
+          </IconButton>
+        </Box>
+
+        <Box
+          className="swiper-button-next"
+          sx={{
+            position: "absolute",
+            top: "58.25%",
+            right: "10px",
+            transform: "translateY(-50%)",
+            zIndex: 3,
+            borderRadius: "50%",
+            boxShadow: 3,
+          }}
+        >
+          <IconButton color="primary">
+            <ArrowForward fontSize={"small"} />
+          </IconButton>
+        </Box>
       </Box>
     </Box>
   );

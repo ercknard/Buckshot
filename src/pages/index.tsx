@@ -19,9 +19,9 @@ export default function Home(): JSX.Element {
         <Navbar />
       </Box>
       <HeroSection />
-      {/* <ModsSection /> */}
-      <MediaSection />
+      <ModsSection />
       <TeamSection />
+      <MediaSection />
       <DonateSection />
       <ColorSection />
       <Footer />

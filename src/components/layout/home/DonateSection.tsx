@@ -23,7 +23,7 @@ interface Coin {
 
 const teamcoins: Coin[] = [
   {
-    name: "Bitcoin",
+    name: "BTC",
     image: "/static/images/bitcoin.webp",
     address: "36UHvrS9jX226kads9tdjgta3sq3RFGjZz",
   },
@@ -38,22 +38,22 @@ const teamcoins: Coin[] = [
     address: "DBFKW511txib9237kBeFt5GcSYPKWcnoGc",
   },
   {
-    name: "Etc",
+    name: "ETC",
     image: "/static/images/etc.webp",
     address: "0x122e3F3877fEDEC646A7891cB779c9F8583cE237",
   },
   {
-    name: "Ethereum",
+    name: "ETH",
     image: "/static/images/ethereum.webp",
     address: "0x1914062c4e5aFe8B4Aaa2b9e46ef4F99F61606C0",
   },
   {
-    name: "Litecoin",
+    name: "LTC",
     image: "/static/images/litecoin.webp",
     address: "MUxtfEzoHeqVf7EwjdzEVoCbnWPRwk9NSd",
   },
   {
-    name: "Metrix Coin",
+    name: "MRX",
     image: "/static/images/metrix-coin.webp",
     address: "MRAZUn5azvVBTVCSFi6y7xyWAhMCcNN3AB",
   },
@@ -63,7 +63,7 @@ const teamcoins: Coin[] = [
     address: "NB5rTVYfApfe7GfdaMmUra8PpusJqkoyuu",
   },
   {
-    name: "Ohm Coin",
+    name: "OHM",
     image: "/static/images/ohm.webp",
     address: "ZK3WpPRBsoboHoemJeiGbnJEuCwQYUqB4q",
   },
@@ -73,7 +73,7 @@ const teamcoins: Coin[] = [
     address: "t1RCU5Sbaj15EiA2sVVZQZLAsffGW1m1WAt",
   },
   {
-    name: "StakeCube",
+    name: "SCC",
     image: "/static/images/scc.webp",
     address: "sMZ8CXDDkPqFrm8W7A1rXhsW1zRrfekJMY",
   },
