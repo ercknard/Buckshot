@@ -24,11 +24,11 @@ const videoUrls = [
 ];
 
 const videoTitles = [
-  "Epic Adventure Begins",
-  "Thrilling Gameplay Moments",
-  "Unforgettable Action Sequences",
-  "Master the Game",
-  "Victory Awaits",
+  "Part I: Epic Adventure Begins",
+  "Part II: Thrilling Gameplay Moments",
+  "Part III: Unforgettable Action Sequences",
+  "Part IV: Master the Game",
+  "Part V: Victory Awaits",
 ];
 
 const MediaSection: React.FC = () => {
@@ -240,12 +240,12 @@ const MediaSection: React.FC = () => {
             left: "10px",
             transform: "translateY(-50%)",
             zIndex: 3,
-            borderRadius: "50%",
-            boxShadow: 3,
           }}
         >
-          <IconButton color="primary">
-            <ArrowBack />
+          <IconButton>
+            <Typography color="custom.secondaryText">
+              <ArrowBack />
+            </Typography>
           </IconButton>
         </Box>
 
@@ -257,12 +257,12 @@ const MediaSection: React.FC = () => {
             right: "10px",
             transform: "translateY(-50%)",
             zIndex: 3,
-            borderRadius: "50%",
-            boxShadow: 3,
           }}
         >
-          <IconButton color="primary">
-            <ArrowForward fontSize={"small"} />
+          <IconButton>
+            <Typography color="custom.secondaryText">
+              <ArrowForward />
+            </Typography>
           </IconButton>
         </Box>
       </Box>

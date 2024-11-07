@@ -40,7 +40,7 @@ const zoomAnimation = keyframes`
 
 const toOpacityAnimation = keyframes`
   0%, 100% {
-   opacity: .9;
+   opacity: .5;
   }
   90% {
     opacity: 0;
@@ -561,7 +561,7 @@ export default function HeroSection(): JSX.Element {
         />
       </Box>
 
-      <Box
+      {/* <Box
         sx={{
           backgroundImage: `url(/static/images/chain.png)`,
           position: "absolute",
@@ -633,7 +633,7 @@ export default function HeroSection(): JSX.Element {
             : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
           zIndex: "3",
         })}
-      />
+      /> */}
 
       {/* Right */}
 
@@ -695,7 +695,7 @@ export default function HeroSection(): JSX.Element {
         />
       </Box>
 
-      <Box
+      {/* <Box
         sx={{
           backgroundImage: `url(/static/images/chain.png)`,
           position: "absolute",
@@ -767,7 +767,7 @@ export default function HeroSection(): JSX.Element {
             : `${clockwiseAnimation} 20s ease-in-out infinite`,
           zIndex: "3",
         })}
-      />
+      /> */}
 
       {/* Dialog Component */}
       <DefaultDialog
