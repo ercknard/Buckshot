@@ -38,7 +38,7 @@ export default function Home(): JSX.Element {
       <DonateSection />
       <PartnersSection />
       <GitFeedsSection />
-      <ColorSection />
+      {/* <ColorSection /> */}
       <Footer />
     </Box>
   );

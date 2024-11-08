@@ -103,7 +103,7 @@ const MediaSection: React.FC = () => {
       left={0}
       sx={{
         padding: 4,
-        backgroundColor: "custom.secondaryBackground",
+        backgroundColor: "custom.primaryComponents",
         paddingTop: "10rem",
         paddingBottom: "10rem",
       }}
@@ -136,7 +136,7 @@ const MediaSection: React.FC = () => {
         })}
       /> */}
 
-      <Box
+      {/* <Box
         component={"img"}
         alt="Logo"
         src={imageBgBorderDarkSrc}
@@ -160,7 +160,7 @@ const MediaSection: React.FC = () => {
           width: "100%",
           height: "100%",
         }}
-      />
+      /> */}
 
       <Box position={"relative"} zIndex={2}>
         <Typography variant="h4" align="center" gutterBottom>

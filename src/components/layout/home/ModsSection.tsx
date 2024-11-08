@@ -260,12 +260,12 @@ const ModsSection: React.FC = () => {
       left={0}
       sx={{
         padding: 4,
-        backgroundColor: "custom.secondaryBackground",
+        backgroundColor: "custom.primaryComponents",
         paddingTop: "10rem",
         paddingBottom: "10rem",
       }}
     >
-      <Box
+      {/* <Box
         component={"img"}
         alt="Logo"
         src={imageBgBorderDarkSrc}
@@ -289,7 +289,7 @@ const ModsSection: React.FC = () => {
           width: "100%",
           height: "100%",
         }}
-      />
+      /> */}
 
       {/* Container for Mods List */}
       <Container
