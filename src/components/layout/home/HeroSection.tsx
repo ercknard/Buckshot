@@ -552,6 +552,7 @@ export default function HeroSection(): JSX.Element {
               ? "none"
               : `${zoomAnimation} 20s ease-in-out infinite`,
             zIndex: "1",
+            objectFit: "cover",
           })}
         />
 
@@ -686,6 +687,7 @@ export default function HeroSection(): JSX.Element {
               ? "none"
               : `${zoomAnimation} 20s ease-in-out infinite`,
             zIndex: "1",
+            objectFit: "cover",
           })}
         />
 

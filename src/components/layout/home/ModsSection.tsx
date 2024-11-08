@@ -321,9 +321,7 @@ const ModsSection: React.FC = () => {
             <SwiperSlide key={slide.id}>
               <Box
                 sx={{
-                  padding: 2,
                   textAlign: "center",
-                  marginBottom: 5,
                 }}
               >
                 <Box

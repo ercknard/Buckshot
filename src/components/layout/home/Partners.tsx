@@ -81,6 +81,20 @@ const PartnersSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
+      {/* <Box
+        component={"img"}
+        src="/static/images/bg-2.webp"
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.1,
+          objectFit: "cover",
+        })}
+      /> */}
+
       <Box
         component={"img"}
         src={imageBgBorderDarkSrc}

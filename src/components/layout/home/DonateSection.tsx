@@ -158,7 +158,7 @@ const DonateSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      <Box
+      {/* <Box
         component={"img"}
         src="/static/images/earth.webp"
         sx={(theme) => ({
@@ -169,7 +169,7 @@ const DonateSection: React.FC = () => {
           height: "100%",
           opacity: 0.35,
         })}
-      />
+      /> */}
 
       {/* <Box
         component={"img"}
@@ -290,7 +290,7 @@ const DonateSection: React.FC = () => {
                   elevation={3}
                   sx={{
                     padding: 2,
-                    paddingY: 5,
+                    paddingY: 3.5,
                     textAlign: "center",
                     transition: "transform 0.2s, background-color 0.3s",
                     cursor: expandedcoin === coin ? "pointer" : "pointer", // Disable pointer cursor for active card

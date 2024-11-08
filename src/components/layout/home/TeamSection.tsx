@@ -238,7 +238,7 @@ const TeamSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      <Box
+      {/* <Box
         component={"img"}
         src="/static/images/BG-B.webp"
         sx={(theme) => ({
@@ -249,7 +249,7 @@ const TeamSection: React.FC = () => {
           height: "100%",
           opacity: 0.35,
         })}
-      />
+      /> */}
 
       {/* <Box
         component={"img"}
@@ -313,7 +313,7 @@ const TeamSection: React.FC = () => {
                 sx={{
                   position: "relative",
                   textAlign: "center",
-                  minHeight: "40vh",
+                  minHeight: "35vh",
                   display: "flex", // Enable flexbox
                   flexDirection: "column", // Stack children vertically
                   justifyContent: "center", // Vertically center the content
