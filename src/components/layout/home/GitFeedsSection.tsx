@@ -263,7 +263,7 @@ const GitFeedsSection: React.FC = () => {
                       fontWeight="bold"
                       color="textSecondary"
                     >
-                      No commits message available for this event.
+                      No commit message
                     </Typography>
                     <Typography variant="h5" color="custom.primaryTextGrayed">
                       .
@@ -411,7 +411,7 @@ const GitFeedsSection: React.FC = () => {
                         fontWeight="bold"
                         color="textSecondary"
                       >
-                        No commits message available for this event.
+                        No commit message
                       </Typography>
                       <Typography variant="h5" color="custom.primaryTextGrayed">
                         .
