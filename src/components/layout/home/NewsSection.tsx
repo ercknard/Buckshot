@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Typography, Grid, Container } from "@mui/material";
+import { Box, Button, Typography, Grid, Container, Paper } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { useThemeContext } from "@/theme/themeProvider";
 import { styled } from "@mui/system";
@@ -197,6 +197,8 @@ const NewsSection = () => {
       {/* Container for Mods List */}
       <Container
         sx={{
+          position: "relative",
+          zIndex: "2",
           justifyContent: { sm: "center", xs: "left" },
           marginX: "auto",
         }}
@@ -221,15 +223,14 @@ const NewsSection = () => {
             </Typography>
           ) : (
             <>
-              <Box
-                marginTop={"2.5rem"}
-                bgcolor={"custom.primaryComponents"}
-                padding={3}
-                paddingBottom={0}
+              <Paper
                 sx={{
+                  marginTop: "2.5rem",
+                  padding: "2rem",
+                  paddingBottom: "0",
                   borderWidth: "10px", // Adjust the border width as per your preference
                   borderStyle: "solid",
-                  borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                  borderImage: `url('${imageBgBorderSrc}') 20 round`, // Use an image as the border
                 }}
               >
                 {/* Render current file */}
@@ -249,7 +250,7 @@ const NewsSection = () => {
                 )}
 
                 {/* Pagination controls */}
-              </Box>
+              </Paper>
               <Grid
                 container
                 justifyContent="space-between"
