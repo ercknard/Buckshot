@@ -261,8 +261,8 @@ const ModsSection: React.FC = () => {
       sx={{
         padding: 4,
         backgroundColor: "custom.primaryComponents",
-        paddingTop: "10rem",
-        paddingBottom: "10rem",
+        paddingTop: "5rem",
+        paddingBottom: "5rem",
       }}
     >
       {/* <Box
