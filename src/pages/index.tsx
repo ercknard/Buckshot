@@ -10,6 +10,7 @@ import DonateSection from "@/components/layout/home/DonateSection";
 import MediaSection from "@/components/layout/home/MediaSection";
 import PartnersSection from "@/components/layout/home/Partners";
 import GitFeedsSection from "@/components/layout/home/GitFeedsSection";
+import NewsSection from "@/components/layout/home/NewsSection";
 
 export default function Home(): JSX.Element {
   return (
@@ -30,6 +31,7 @@ export default function Home(): JSX.Element {
           paddingBottom: "10rem",
         }}
       ></Box> */}
+      <NewsSection />
       <ModsSection />
       <TeamSection />
       <MediaSection />

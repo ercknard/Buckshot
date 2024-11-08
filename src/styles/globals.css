@@ -12,6 +12,16 @@
   pointer-events: none !important;
 }
 
+:root {
+  --font-test-mono: "Vetregular", sans-serif;
+}
+
+@font-face {
+  font-family: "Vetregular";
+  src: url("../fonts/Vetregular.ttf") format("truetype");
+  font-weight: 100 900;
+}
+
 html,
 body {
   overflow-x: hidden !important; /* Prevent horizontal overflow */
