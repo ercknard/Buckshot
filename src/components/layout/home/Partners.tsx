@@ -83,6 +83,7 @@ const PartnersSection: React.FC = () => {
     >
       {/* <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/bg-2.webp"
         sx={(theme) => ({
           position: "absolute",
@@ -97,6 +98,7 @@ const PartnersSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
@@ -109,6 +111,7 @@ const PartnersSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderSrc}
         sx={{
           position: "absolute",

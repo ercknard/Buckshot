@@ -160,6 +160,7 @@ const DonateSection: React.FC = () => {
     >
       {/* <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/earth.webp"
         sx={(theme) => ({
           position: "absolute",
@@ -173,6 +174,7 @@ const DonateSection: React.FC = () => {
 
       {/* <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBannerSrc}
         sx={(theme) => ({
           position: "absolute",
@@ -186,6 +188,7 @@ const DonateSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderDarkSrc}
         sx={(theme) => ({
           position: "absolute",
@@ -198,6 +201,7 @@ const DonateSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderSrc}
         sx={(theme) => ({
           position: "absolute",

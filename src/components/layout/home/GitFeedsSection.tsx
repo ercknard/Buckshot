@@ -103,6 +103,7 @@ const GitFeedsSection: React.FC = () => {
     >
       {/* <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/bg-1.webp"
         sx={(theme) => ({
           position: "absolute",
@@ -117,6 +118,7 @@ const GitFeedsSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
@@ -129,6 +131,7 @@ const GitFeedsSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderSrc}
         sx={{
           position: "absolute",

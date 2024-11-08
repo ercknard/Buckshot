@@ -110,6 +110,7 @@ const MediaSection: React.FC = () => {
     >
       {/* <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/BG-B.webp"
         sx={(theme) => ({
           position: "absolute",
@@ -123,6 +124,7 @@ const MediaSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBannerSrc}
         sx={(theme) => ({
           position: "absolute",
@@ -136,6 +138,7 @@ const MediaSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
@@ -148,6 +151,7 @@ const MediaSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderSrc}
         sx={{
           position: "absolute",

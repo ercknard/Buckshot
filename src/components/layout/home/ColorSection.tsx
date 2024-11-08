@@ -131,6 +131,7 @@ export default function ColorSection(): JSX.Element {
     <Box position={"relative"} padding={"10rem"}>
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderDarkSrc}
         sx={(theme) => ({
           position: "absolute",
@@ -143,6 +144,7 @@ export default function ColorSection(): JSX.Element {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderSrc}
         sx={(theme) => ({
           position: "absolute",

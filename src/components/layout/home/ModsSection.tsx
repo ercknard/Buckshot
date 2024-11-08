@@ -267,6 +267,7 @@ const ModsSection: React.FC = () => {
     >
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
@@ -279,6 +280,7 @@ const ModsSection: React.FC = () => {
 
       <Box
         component={"img"}
+        alt="Logo"
         src={imageBgBorderSrc}
         sx={{
           position: "absolute",

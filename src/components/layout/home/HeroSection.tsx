@@ -529,7 +529,8 @@ export default function HeroSection(): JSX.Element {
         })}
       >
         <Box
-          component={"img"}
+          component="img"
+          alt="Logo"
           src={imageFrameSrc}
           sx={(theme) => ({
             position: "absolute",
@@ -541,7 +542,8 @@ export default function HeroSection(): JSX.Element {
         />
 
         <Box
-          component={"img"}
+          component="img"
+          alt="Logo"
           src={imageBgLeftSrc}
           sx={(theme) => ({
             position: "absolute",
@@ -591,6 +593,7 @@ export default function HeroSection(): JSX.Element {
 
       <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/wheel.png"
         sx={(theme) => ({
           position: "absolute",
@@ -628,6 +631,7 @@ export default function HeroSection(): JSX.Element {
 
       <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/wheel.png"
         sx={(theme) => ({
           position: "absolute",
@@ -664,7 +668,8 @@ export default function HeroSection(): JSX.Element {
         })}
       >
         <Box
-          component={"img"}
+          component="img"
+          alt="Logo"
           src={imageFrameSrc}
           sx={(theme) => ({
             position: "absolute",
@@ -676,7 +681,8 @@ export default function HeroSection(): JSX.Element {
         />
 
         <Box
-          component={"img"}
+          component="img"
+          alt="Logo"
           src={imageBgRightSrc}
           sx={(theme) => ({
             position: "absolute",
@@ -726,6 +732,7 @@ export default function HeroSection(): JSX.Element {
 
       <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/wheel.png"
         sx={(theme) => ({
           position: "absolute",
@@ -763,6 +770,7 @@ export default function HeroSection(): JSX.Element {
 
       <Box
         component={"img"}
+        alt="Logo"
         src="/static/images/wheel.png"
         sx={(theme) => ({
           position: "absolute",
