@@ -37,8 +37,7 @@ const slides = [
   {
     id: 1,
     title: "StakeCube",
-    content:
-      "StakeCube is the predominant crypto ecosystem originally launched in June 2018 as PoS Pool and has since grown to service over 75,000 Users and supporting 60+ different crypto assets with unique features across 10+ apps, like an integrated Exchange, masternode hosting, on-board crypto mining and a powerful compounding interest system.",
+    content: "Join the Future of Finance & Trade Crypto with Confidence.",
     image: "/static/images/stakecube-logo.jpeg",
   },
 ];
