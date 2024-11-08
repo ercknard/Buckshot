@@ -1,11 +1,26 @@
-import { Box, Typography, Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Typography, Grid, Container } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { useThemeContext } from "@/theme/themeProvider";
 import { styled } from "@mui/system";
 
+// Define the type for the GitHub repository content file
+interface GitHubFile {
+  name: string;
+  download_url: string;
+  created_at: string;
+  path: string;
+}
+
+interface GitHubFileWithContent extends GitHubFile {
+  content: string;
+}
+
 const NewsSection = () => {
-  const [content, setContent] = useState<string | null>(null);
+  const [files, setFiles] = useState<GitHubFileWithContent[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filesPerPage] = useState<number>(1); // Only 1 file per page
   const { activeSet } = useThemeContext();
 
   const colorSetBgBorderRight: { [key: string]: string } = {
@@ -30,16 +45,107 @@ const NewsSection = () => {
   const imageBgBorderDarkSrc =
     colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
+  // Helper function to parse the date string
+  const parseDate = (dateString: string): string => {
+    if (dateString === "Unknown Date" || !dateString) {
+      return "Unknown Date"; // Fallback if created_at is missing
+    }
+
+    const parsedDate = new Date(dateString);
+
+    // Check if the date is valid
+    if (isNaN(parsedDate.getTime())) {
+      return "Invalid Date"; // If the date is invalid, return this
+    }
+
+    // Return the formatted date
+    return parsedDate.toLocaleDateString();
+  };
+
   useEffect(() => {
-    const fetchReadme = async () => {
+    const fetchFileData = async (filePath: string) => {
+      const token =
+        "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"; // Replace this with your token
+
       const response = await fetch(
-        "https://raw.githubusercontent.com/CryptechTest/announcement/main/README.md"
+        `https://api.github.com/repos/CryptechTest/announcement/commits?path=${filePath}`,
+        {
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        }
       );
-      const text = await response.text();
-      setContent(text);
+
+      const commitData = await response.json();
+
+      return commitData;
     };
+
+    const fetchReadme = async () => {
+      try {
+        const token =
+          "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"; // Replace with your token
+        const response = await fetch(
+          "https://api.github.com/repos/CryptechTest/announcement/contents/",
+          {
+            headers: {
+              Authorization: `token ${token}`,
+            },
+          }
+        );
+        const data: GitHubFile[] = await response.json();
+
+        const markdownFiles = data.filter((file) => file.name.endsWith(".md"));
+        const sortedFiles = markdownFiles.sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
+
+        const allMarkdownContent = await Promise.all(
+          sortedFiles.map(async (file) => {
+            const fileResponse = await fetch(file.download_url);
+            const fileContent = await fileResponse.text();
+
+            // Fetch commit history to get the creation date
+            const commitData = await fetchFileData(file.path);
+
+            const createdAt =
+              commitData.length > 0
+                ? commitData[0].commit.author.date
+                : "Unknown Date";
+
+            return {
+              ...file,
+              content: fileContent,
+              created_at: createdAt,
+            };
+          })
+        );
+
+        setFiles(allMarkdownContent);
+      } catch (err) {
+        setError("Error fetching data from GitHub.");
+        console.error(err);
+      }
+    };
+
     fetchReadme();
   }, []);
+
+  // Get the file for the current page
+  const indexOfLastFile = currentPage * filesPerPage;
+  const indexOfFirstFile = indexOfLastFile - filesPerPage;
+  const currentFile = files.slice(indexOfFirstFile, indexOfLastFile)[0]; // Only one file per page
+
+  // Remove .md from the filename
+  const displayFileName = currentFile
+    ? currentFile.name.replace(/\.md$/, "")
+    : "";
+
+  // Pagination control logic
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(files.length / filesPerPage);
 
   // Custom Markdown styling using MUI's styled API
   const StyledMarkdown = styled(ReactMarkdown)(({ theme }) => ({
@@ -99,6 +205,20 @@ const NewsSection = () => {
         paddingBottom: "10rem",
       }}
     >
+      {/* <Box
+        component={"img"}
+        src="/static/images/bg-2.webp"
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.1,
+          objectFit: "cover",
+        })}
+      /> */}
+
       <Box
         component={"img"}
         src={imageBgBorderDarkSrc}
@@ -110,6 +230,7 @@ const NewsSection = () => {
           height: "100%",
         }}
       />
+
       <Box
         component={"img"}
         src={imageBgBorderSrc}
@@ -121,6 +242,8 @@ const NewsSection = () => {
           height: "100%",
         }}
       />
+
+      {/* Container for Mods List */}
       <Container
         sx={{
           justifyContent: { sm: "center", xs: "left" },
@@ -135,20 +258,87 @@ const NewsSection = () => {
             Get in touch with us!
           </Typography>
         </Box>
-        <Box
-          marginTop={"2.5rem"}
-          bgcolor={"custom.primaryComponents"}
-          padding={3}
-          sx={{
-            borderWidth: "10px", // Adjust the border width as per your preference
-            borderStyle: "solid",
-            borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
-          }}
-        >
-          {content ? (
-            <StyledMarkdown>{content}</StyledMarkdown>
+        <Box sx={{ paddingTop: 4, paddingBottom: 4 }}>
+          {error && (
+            <Typography variant="body1" color="error" align="center">
+              {error}
+            </Typography>
+          )}
+          {files.length === 0 ? (
+            <Typography variant="body1" align="center">
+              Loading...
+            </Typography>
           ) : (
-            <p>Loading...</p>
+            <>
+              <Box
+                marginTop={"2.5rem"}
+                bgcolor={"custom.primaryComponents"}
+                padding={3}
+                paddingBottom={0}
+                sx={{
+                  borderWidth: "10px", // Adjust the border width as per your preference
+                  borderStyle: "solid",
+                  borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                }}
+              >
+                {/* Render current file */}
+                {currentFile && (
+                  <Box sx={{ marginBottom: 3 }}>
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.5rem"}
+                      color="custom.primaryText"
+                      gutterBottom
+                      align="left"
+                    >
+                      {displayFileName}
+                    </Typography>
+                    <StyledMarkdown>{currentFile.content}</StyledMarkdown>
+                    <Typography
+                      variant="body1"
+                      color="custom.primaryTextGrayed"
+                      align="right"
+                      sx={{ marginTop: 1 }}
+                    >
+                      Created on:
+                      {parseDate(currentFile.created_at)}
+                    </Typography>
+                  </Box>
+                )}
+
+                {/* Pagination controls */}
+              </Box>
+              <Grid
+                container
+                justifyContent="space-between"
+                alignContent="center"
+                marginTop="1rem"
+              >
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    onClick={() => paginate(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  >
+                    <Typography color="custom.primaryText">Previous</Typography>
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h5" component="span">
+                    Page {currentPage} of {totalPages}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    onClick={() => paginate(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                  >
+                    <Typography color="custom.primaryText">Next</Typography>
+                  </Button>
+                </Grid>
+              </Grid>
+            </>
           )}
         </Box>
       </Container>
