@@ -47,12 +47,12 @@ const support = [
 
 const legal = [
   {
-    text: "Terms of Service",
+    text: "Cryptech Services",
     url: "/public/legal/terms",
     isExternal: false,
   },
   {
-    text: "Privacy Policy",
+    text: "StakeCube",
     url: "/public/legal/privacy",
     isExternal: false,
   },
@@ -62,11 +62,6 @@ const community = [
   {
     text: "Discord",
     url: "https://discord.gg/stakecube",
-    isExternal: true,
-  },
-  {
-    text: "Twitter",
-    url: "https://twitter.com/stakecube",
     isExternal: true,
   },
 ];
@@ -226,7 +221,7 @@ export default function Footer() {
           >
             <Stack spacing={1}>
               <Typography fontWeight={600} color={"custom.primaryText"}>
-                Legal
+                Links
               </Typography>
               <Box>
                 {legal.map((val, index) => (
