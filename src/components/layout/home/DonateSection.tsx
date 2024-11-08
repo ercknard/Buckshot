@@ -62,11 +62,11 @@ const teamcoins: Coin[] = [
     image: "/static/images/namecoin.webp",
     address: "NB5rTVYfApfe7GfdaMmUra8PpusJqkoyuu",
   },
-  // {
-  //   name: "OHM",
-  //   image: "/static/images/ohm.webp",
-  //   address: "ZK3WpPRBsoboHoemJeiGbnJEuCwQYUqB4q",
-  // },
+  {
+    name: "OHM",
+    image: "/static/images/ohm.webp",
+    address: "ZK3WpPRBsoboHoemJeiGbnJEuCwQYUqB4q",
+  },
   {
     name: "Zcash",
     image: "/static/images/zcash.webp",
