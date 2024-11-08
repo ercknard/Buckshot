@@ -157,7 +157,7 @@ const NewsSection = () => {
       <Box
         component={"img"}
         alt="Logo"
-        src="/static/images/bg-1.webp"
+        src="/static/images/landscape.webp"
         sx={(theme) => ({
           position: "absolute",
           top: 0,
