@@ -152,10 +152,10 @@ const DonateSection: React.FC = () => {
       width={1}
       left={0}
       sx={{
-        padding: 4,
+        padding: { md: "4", xs: "1" },
         backgroundColor: "custom.secondaryBackground",
-        paddingTop: "10rem",
-        paddingBottom: "10rem",
+        paddingTop: { md: "10rem", xs: "2.5rem" },
+        paddingBottom: { md: "10rem", xs: "2.5rem" },
       }}
     >
       <Box
@@ -286,8 +286,7 @@ const DonateSection: React.FC = () => {
             {teamcoins.map((coin) => (
               <Grid
                 item
-                xs={12}
-                sm={6}
+                xs={6}
                 md={2.4}
                 key={coin.name}
                 sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}

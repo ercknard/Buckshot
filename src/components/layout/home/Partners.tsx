@@ -75,7 +75,7 @@ const PartnersSection: React.FC = () => {
       width={1}
       left={0}
       sx={{
-        padding: 4,
+        padding: { md: "4", xs: "1" },
         backgroundColor: (theme) =>
           `rgba(${parseInt(
             theme.palette.custom.primaryComponents.slice(1, 3),
@@ -87,8 +87,8 @@ const PartnersSection: React.FC = () => {
             theme.palette.custom.primaryComponents.slice(5, 7),
             16
           )}, .5)`,
-        paddingTop: "5rem",
-        paddingBottom: "5rem",
+        paddingTop: { md: "5rem", xs: "2.5rem" },
+        paddingBottom: { md: "5rem", xs: "2.5rem" },
       }}
     >
       {/* <Box

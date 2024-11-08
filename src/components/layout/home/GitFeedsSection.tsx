@@ -95,10 +95,10 @@ const GitFeedsSection: React.FC = () => {
       width={1}
       left={0}
       sx={{
-        padding: 4,
+        padding: { md: "4", xs: "1" },
         backgroundColor: "custom.secondaryBackground",
-        paddingTop: "10rem",
-        paddingBottom: "10rem",
+        paddingTop: { md: "10rem", xs: "2.5rem" },
+        paddingBottom: { md: "10rem", xs: "2.5rem" },
       }}
     >
       <Box
@@ -161,7 +161,7 @@ const GitFeedsSection: React.FC = () => {
 
         <Grid container spacing={3} marginTop={"2.5rem"}>
           {limitedEvents.map((event) => (
-            <Grid position={"relative"} item xs={6} key={event.id}>
+            <Grid position={"relative"} item xs={12} md={6} key={event.id}>
               <Paper
                 elevation={3}
                 sx={{
@@ -176,7 +176,7 @@ const GitFeedsSection: React.FC = () => {
                 }}
               >
                 <Stack
-                  direction={"row"}
+                  direction={{ md: "row", xs: "column" }}
                   spacing={1}
                   alignItems={"center"}
                   marginBottom={2}
@@ -193,7 +193,7 @@ const GitFeedsSection: React.FC = () => {
                 </Stack>
 
                 <Stack
-                  direction={"row"}
+                  direction={{ md: "row", xs: "column" }}
                   spacing={1}
                   alignItems={"center"}
                   justifyContent={"space-between"}
@@ -211,7 +211,7 @@ const GitFeedsSection: React.FC = () => {
                 </Stack>
 
                 <Stack
-                  direction={"row"}
+                  direction={{ md: "row", xs: "column" }}
                   spacing={1}
                   alignItems={"center"}
                   justifyContent={"space-between"}
@@ -235,7 +235,7 @@ const GitFeedsSection: React.FC = () => {
 
                 {event.payload.commits && event.payload.commits.length > 0 ? (
                   <Stack
-                    direction={"row"}
+                    direction={{ md: "row", xs: "column" }}
                     spacing={1}
                     alignItems={"center"}
                     justifyContent={"space-between"}
@@ -253,7 +253,7 @@ const GitFeedsSection: React.FC = () => {
                   </Stack>
                 ) : (
                   <Stack
-                    direction={"row"}
+                    direction={{ md: "row", xs: "column" }}
                     spacing={1}
                     alignItems={"center"}
                     justifyContent={"space-between"}
@@ -272,7 +272,7 @@ const GitFeedsSection: React.FC = () => {
                 )}
 
                 <Stack
-                  direction={"row"}
+                  direction={{ md: "row", xs: "column" }}
                   spacing={1}
                   alignItems={"center"}
                   justifyContent={"space-between"}
@@ -324,7 +324,7 @@ const GitFeedsSection: React.FC = () => {
                   }}
                 >
                   <Stack
-                    direction={"row"}
+                    direction={{ md: "row", xs: "column" }}
                     spacing={1}
                     alignItems={"center"}
                     marginBottom={2}
@@ -341,7 +341,7 @@ const GitFeedsSection: React.FC = () => {
                   </Stack>
 
                   <Stack
-                    direction={"row"}
+                    direction={{ md: "row", xs: "column" }}
                     spacing={1}
                     alignItems={"center"}
                     justifyContent={"space-between"}
@@ -359,7 +359,7 @@ const GitFeedsSection: React.FC = () => {
                   </Stack>
 
                   <Stack
-                    direction={"row"}
+                    direction={{ md: "row", xs: "column" }}
                     spacing={1}
                     alignItems={"center"}
                     justifyContent={"space-between"}
@@ -383,7 +383,7 @@ const GitFeedsSection: React.FC = () => {
 
                   {event.payload.commits && event.payload.commits.length > 0 ? (
                     <Stack
-                      direction={"row"}
+                      direction={{ md: "row", xs: "column" }}
                       spacing={1}
                       alignItems={"center"}
                       justifyContent={"space-between"}
@@ -401,7 +401,7 @@ const GitFeedsSection: React.FC = () => {
                     </Stack>
                   ) : (
                     <Stack
-                      direction={"row"}
+                      direction={{ md: "row", xs: "column" }}
                       spacing={1}
                       alignItems={"center"}
                       justifyContent={"space-between"}
@@ -420,7 +420,7 @@ const GitFeedsSection: React.FC = () => {
                   )}
 
                   <Stack
-                    direction={"row"}
+                    direction={{ md: "row", xs: "column" }}
                     spacing={1}
                     alignItems={"center"}
                     justifyContent={"space-between"}
