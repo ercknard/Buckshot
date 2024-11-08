@@ -154,8 +154,8 @@ const GitFeedsSection: React.FC = () => {
             Git Events
           </Typography>
           <Typography variant="h5" align="center" gutterBottom>
-            A special thanks to our partners for their invaluable support in
-            making this game possible.
+            Stay updated with the latest Git events, including commits, merges,
+            and branch updates of CryptechTest
           </Typography>
         </Box>
 
