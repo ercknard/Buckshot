@@ -252,9 +252,23 @@ const GitFeedsSection: React.FC = () => {
                     </Typography>
                   </Stack>
                 ) : (
-                  <Typography variant="body2" color="textSecondary">
-                    No commits message available for this event.
-                  </Typography>
+                  <Stack
+                    direction={"row"}
+                    spacing={1}
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="textSecondary"
+                    >
+                      No commits message available for this event.
+                    </Typography>
+                    <Typography variant="h5" color="custom.primaryTextGrayed">
+                      .
+                    </Typography>
+                  </Stack>
                 )}
 
                 <Stack
@@ -386,9 +400,23 @@ const GitFeedsSection: React.FC = () => {
                       </Typography>
                     </Stack>
                   ) : (
-                    <Typography variant="body2" color="textSecondary">
-                      No commits message available for this event.
-                    </Typography>
+                    <Stack
+                      direction={"row"}
+                      spacing={1}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
+                    >
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        color="textSecondary"
+                      >
+                        No commits message available for this event.
+                      </Typography>
+                      <Typography variant="h5" color="custom.primaryTextGrayed">
+                        .
+                      </Typography>
+                    </Stack>
                   )}
 
                   <Stack
