@@ -151,6 +151,7 @@ const NewsSection = () => {
         backgroundColor: "custom.secondaryBackground",
         paddingTop: "10rem",
         paddingBottom: "10rem",
+        minHeight: "40vh",
       }}
     >
       <Box
