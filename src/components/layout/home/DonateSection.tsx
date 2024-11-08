@@ -158,7 +158,7 @@ const DonateSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      {/* <Box
+      <Box
         component={"img"}
         alt="Logo"
         src="/static/images/earth.webp"
@@ -169,8 +169,9 @@ const DonateSection: React.FC = () => {
           width: "100%",
           height: "100%",
           opacity: 0.35,
+          objectFit: "cover",
         })}
-      /> */}
+      />
 
       {/* <Box
         component={"img"}

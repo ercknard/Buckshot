@@ -153,10 +153,10 @@ const NewsSection = () => {
         paddingBottom: "10rem",
       }}
     >
-      {/* <Box
+      <Box
         component={"img"}
         alt="Logo"
-        src="/static/images/bg-2.webp"
+        src="/static/images/bg-1.webp"
         sx={(theme) => ({
           position: "absolute",
           top: 0,
@@ -166,7 +166,7 @@ const NewsSection = () => {
           opacity: 0.1,
           objectFit: "cover",
         })}
-      /> */}
+      />
 
       <Box
         component={"img"}

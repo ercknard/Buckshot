@@ -101,10 +101,10 @@ const GitFeedsSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      {/* <Box
+      <Box
         component={"img"}
         alt="Logo"
-        src="/static/images/bg-1.webp"
+        src="/static/images/seq-house.webp"
         sx={(theme) => ({
           position: "absolute",
           top: 0,
@@ -114,7 +114,7 @@ const GitFeedsSection: React.FC = () => {
           opacity: 0.1,
           objectFit: "cover",
         })}
-      /> */}
+      />
 
       <Box
         component={"img"}

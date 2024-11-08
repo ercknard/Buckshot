@@ -238,7 +238,7 @@ const TeamSection: React.FC = () => {
         paddingBottom: "10rem",
       }}
     >
-      {/* <Box
+      <Box
         component={"img"}
         alt="Logo"
         src="/static/images/BG-B.webp"
@@ -249,8 +249,9 @@ const TeamSection: React.FC = () => {
           width: "100%",
           height: "100%",
           opacity: 0.35,
+          objectFit: "cover",
         })}
-      /> */}
+      />
 
       {/* <Box
         component={"img"}
