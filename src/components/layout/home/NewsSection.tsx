@@ -206,7 +206,7 @@ const NewsSection = () => {
             Get in touch with us!
           </Typography>
         </Box>
-        <Box sx={{ paddingTop: 4, paddingBottom: 4 }}>
+        <Box sx={{ paddingBottom: 4 }}>
           {error && (
             <Typography variant="body1" color="error" align="center">
               {error}
