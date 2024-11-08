@@ -90,12 +90,24 @@ export default function Footer() {
   return (
     <Box>
       <Box
-        bgcolor={"custom.primaryComponents"}
         pt={{ xs: 1, md: 5 }}
         pb={0}
         width={"100vw"}
         position={"absolute"}
         left={"0"}
+        sx={{
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+        }}
       >
         <Grid
           container
