@@ -111,16 +111,16 @@ const NewsSection = () => {
     "& h1, & h2, & h3": {
       color: theme.palette.custom.primaryText,
       fontFamily: "Vetregular, serif", // Apply to headings
-      fontSize: "2rem",
+      fontSize: "1.75rem",
     },
     "& h4, & h5, & h6": {
       color: theme.palette.custom.primaryText,
       marginBottom: "1rem",
       fontFamily: "Vetregular, serif", // Apply to headings
-      fontSize: "1.5rem",
+      fontSize: "1.25rem",
     },
     "& p": {
-      fontSize: "1.25rem",
+      fontSize: "1rem",
       lineHeight: "1.8",
       color: theme.palette.custom.secondaryTextGrayed,
       fontFamily: "Vetregular, serif", // Apply to paragraphs

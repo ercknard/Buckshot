@@ -363,7 +363,7 @@ const colorPalette = (mode: PaletteMode, setId: number) => {
 const typographyOptions = (palette: PaletteOptions) => {
   return {
     fontFamily: FONT,
-    fontSize: 14,
+    fontSize: 12,
     htmlFontSize: 16,
     h1: {
       fontFamily: FONT,
