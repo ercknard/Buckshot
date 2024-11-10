@@ -79,6 +79,7 @@ const GameModeSection: React.FC = () => {
           )}, .5)`,
         paddingTop: { md: "5rem", xs: "2.5rem" },
         paddingBottom: { md: "5rem", xs: "2.5rem" },
+        minHeight: "75vh",
       }}
     >
       {/* <Box

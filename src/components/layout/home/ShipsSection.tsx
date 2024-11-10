@@ -66,6 +66,7 @@ const ShipsSection: React.FC = () => {
         backgroundColor: "custom.secondaryBackground",
         paddingTop: { md: "10rem", xs: "2.5rem" },
         paddingBottom: { md: "10rem", xs: "2.5rem" },
+        minHeight: "75vh",
       }}
     >
       <Box
