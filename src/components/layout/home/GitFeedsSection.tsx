@@ -168,7 +168,6 @@ const GitFeedsSection: React.FC = () => {
                   padding: 2,
                   textAlign: "center",
                   transition: "transform 0.2s, background-color 0.3s",
-                  cursor: "pointer",
                   backgroundColor: "custom.secondaryBackground",
                   borderWidth: "10px",
                   borderStyle: "solid",

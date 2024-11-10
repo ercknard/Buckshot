@@ -367,6 +367,8 @@ const typographyOptions = (palette: PaletteOptions) => {
     htmlFontSize: 16,
     h1: {
       fontFamily: FONT,
+      [breakpoints.values.sm]: { fontSize: "2.5rem" }, // smaller font for smaller screens
+      [breakpoints.values.xs]: { fontSize: "2rem" },
     },
     h2: {
       fontFamily: FONT,
