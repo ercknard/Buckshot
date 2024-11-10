@@ -80,6 +80,14 @@ const MediaSection: React.FC = () => {
     5: "/static/images/pink-border-dark.png",
   };
 
+  const colorSetCapsule: { [key: string]: string } = {
+    1: "/static/images/blue-capsule.png",
+    2: "/static/images/green-capsule.png",
+    3: "/static/images/yellow-capsule.png",
+    4: "/static/images/orange-capsule.png",
+    5: "/static/images/pink-capsule.png",
+  };
+
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
   const imageBgBannerSrc =
     colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
@@ -87,6 +95,9 @@ const MediaSection: React.FC = () => {
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
   const imageBgBorderDarkSrc =
     colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
+
+  const imageBgCapsule =
+    colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
 
   const videoThumbnails = [
     `${imageBgSrc}`,
@@ -118,6 +129,20 @@ const MediaSection: React.FC = () => {
         paddingBottom: { md: "5rem", xs: "2.5rem" },
       }}
     >
+      <Box
+        component={"img"}
+        alt="Logo"
+        src={imageBgCapsule}
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.75,
+          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
+        })}
+      />
       {/* <Box
         component={"img"}
         alt="Logo"
