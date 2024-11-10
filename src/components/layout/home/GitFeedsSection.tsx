@@ -26,6 +26,7 @@ import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";
 import DefaultDialog from "../DefaultDialog";
+import Particlesview from "../Particles";
 
 type CustomTheme = {
   activeSet: number;
@@ -65,6 +66,14 @@ const GitFeedsSection: React.FC = () => {
   const limitedEvents = events.slice(0, 4);
   const remainingEvents = events.slice(4);
 
+  const colorSetBgMap: { [key: string]: string } = {
+    1: "/static/images/blue-gate.webp",
+    2: "/static/images/green-gate.webp",
+    3: "/static/images/yellow-gate.webp",
+    4: "/static/images/orange-gate.webp",
+    5: "/static/images/pink-gate.webp",
+  };
+
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
     2: "/static/images/green-border.png",
@@ -81,8 +90,11 @@ const GitFeedsSection: React.FC = () => {
     5: "/static/images/pink-border-dark.png",
   };
 
+  const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
+
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
+
   const imageBgBorderDarkSrc =
     colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
@@ -102,9 +114,23 @@ const GitFeedsSection: React.FC = () => {
       }}
     >
       <Box
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+        })}
+      >
+        <Particlesview containerId="github-particles" />
+      </Box>
+
+      <Box
         component={"img"}
         alt="Logo"
-        src="/static/images/seq-house.webp"
+        src={imageBgSrc}
         sx={(theme) => ({
           position: "absolute",
           top: 0,

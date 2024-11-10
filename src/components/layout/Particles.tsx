@@ -1,12 +1,13 @@
-import { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import type { Container, Engine } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { useThemeContext } from "@/theme/themeProvider";
 import { Box } from "@mui/material"; // Import Box from Material-UI
 
-const Particlesview: React.FC = () => {
+const Particlesview: React.FC<{ containerId: string }> = ({ containerId }) => {
   const { palette } = useThemeContext(); // Access the theme context
+  const [isInView, setIsInView] = useState(true); // Track whether the section is in view
 
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
@@ -20,6 +21,30 @@ const Particlesview: React.FC = () => {
     []
   );
 
+  // Intersection Observer callback
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    const entry = entries[0]; // We only need the first entry since we're observing a single element
+    setIsInView(entry.isIntersecting); // Update the state when the element is in view or out of view
+  };
+
+  useEffect(() => {
+    const containerElement = document.getElementById(containerId);
+
+    if (!containerElement) return;
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: null, // Observe relative to the viewport
+      rootMargin: "0px", // No margin around the root
+      threshold: 0.1, // Trigger when at least 10% of the element is visible
+    });
+
+    observer.observe(containerElement); // Observe the element by containerId
+
+    return () => {
+      observer.unobserve(containerElement); // Clean up observer when component unmounts
+    };
+  }, [containerId]); // Re-run if containerId changes
+
   return (
     <Box
       sx={{
@@ -27,18 +52,18 @@ const Particlesview: React.FC = () => {
         top: "0",
         left: "0",
         width: "100%",
-        height: "100vh",
+        height: "100%",
         pointerEvents: "none",
       }}
     >
       <Particles
-        id="tsparticles"
+        id={containerId}
         init={particlesInit}
         loaded={particlesLoaded}
         options={{
-          fpsLimit: 60,
-          delay: 1,
-          autoPlay: true,
+          autoPlay: isInView, // Start or stop particles based on visibility
+          fpsLimit: 30,
+          delay: 0,
           backgroundMask: {
             composite: "destination-out",
             cover: {

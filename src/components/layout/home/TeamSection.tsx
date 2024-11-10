@@ -18,6 +18,7 @@ import "swiper/css/scrollbar";
 import SwiperCore from "swiper"; // Import Scrollbar from SwiperCore
 import { Scrollbar } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
+import Particlesview from "../Particles";
 
 // Install the module in SwiperCore
 
@@ -191,6 +192,14 @@ const TeamSection: React.FC = () => {
     setExpandedMember(expandedMember === member ? null : member); // Toggle the expanded member
   };
 
+  const colorSetBgMap: { [key: string]: string } = {
+    1: "/static/images/blue-gate.webp",
+    2: "/static/images/green-gate.webp",
+    3: "/static/images/yellow-gate.webp",
+    4: "/static/images/orange-gate.webp",
+    5: "/static/images/pink-gate.webp",
+  };
+
   const colorSetBgBannerRight: { [key: string]: string } = {
     1: "/static/images/blue-banner.png",
     2: "/static/images/green-banner.png",
@@ -214,6 +223,8 @@ const TeamSection: React.FC = () => {
     4: "/static/images/orange-border-dark.png",
     5: "/static/images/pink-border-dark.png",
   };
+
+  const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
 
   const imageBgBannerSrc =
     colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
@@ -239,9 +250,23 @@ const TeamSection: React.FC = () => {
       }}
     >
       <Box
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+        })}
+      >
+        <Particlesview containerId="teams-particles" />
+      </Box>
+
+      <Box
         component={"img"}
         alt="Logo"
-        src="/static/images/BG-B.webp"
+        src={imageBgSrc}
         sx={(theme) => ({
           position: "absolute",
           top: 0,

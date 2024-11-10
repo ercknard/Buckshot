@@ -402,7 +402,7 @@ export default function HeroSection(): JSX.Element {
         })}
       />
 
-      <Particlesview />
+      <Particlesview containerId="hero-particles" />
 
       {/* Background */}
 

@@ -3,6 +3,7 @@ import { Box, Button, Typography, Grid, Container, Paper } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { useThemeContext } from "@/theme/themeProvider";
 import { styled } from "@mui/system";
+import Particlesview from "../Particles";
 
 // Define the type for the GitHub repository content file
 interface GitHubFile {
@@ -16,6 +17,14 @@ const NewsSection = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filesPerPage] = useState<number>(1); // Only 1 file per page
   const { activeSet } = useThemeContext();
+
+  const colorSetBgMap: { [key: string]: string } = {
+    1: "/static/images/blue-gate.webp",
+    2: "/static/images/green-gate.webp",
+    3: "/static/images/yellow-gate.webp",
+    4: "/static/images/orange-gate.webp",
+    5: "/static/images/pink-gate.webp",
+  };
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
@@ -32,6 +41,8 @@ const NewsSection = () => {
     4: "/static/images/orange-border-dark.png",
     5: "/static/images/pink-border-dark.png",
   };
+
+  const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
 
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
@@ -155,9 +166,23 @@ const NewsSection = () => {
       }}
     >
       <Box
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+        })}
+      >
+        <Particlesview containerId="news-particles" />
+      </Box>
+
+      <Box
         component={"img"}
         alt="Logo"
-        src="/static/images/landscape.webp"
+        src={imageBgSrc}
         sx={(theme) => ({
           position: "absolute",
           top: 0,
