@@ -122,14 +122,6 @@ const DonateSection: React.FC = () => {
     5: "/static/images/pink-gate.webp",
   };
 
-  const colorSetBgBannerRight: { [key: string]: string } = {
-    1: "/static/images/blue-banner.png",
-    2: "/static/images/green-banner.png",
-    3: "/static/images/yellow-banner.png",
-    4: "/static/images/orange-banner.png",
-    5: "/static/images/pink-banner.png",
-  };
-
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
     2: "/static/images/green-border.png",
@@ -147,9 +139,6 @@ const DonateSection: React.FC = () => {
   };
 
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
-
-  const imageBgBannerSrc =
-    colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
 
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
@@ -197,20 +186,6 @@ const DonateSection: React.FC = () => {
           objectFit: "cover",
         })}
       />
-
-      {/* <Box
-        component={"img"}
-        alt="Logo"
-        src={imageBgBannerSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.9,
-        })}
-      /> */}
 
       <Box
         component={"img"}
@@ -355,7 +330,7 @@ const DonateSection: React.FC = () => {
                   />
                   <Typography
                     variant="body1"
-                    fontSize={"1.25rem"}
+                    fontSize={"1.10rem"}
                     sx={{ marginTop: 2 }}
                   >
                     {coin.name}

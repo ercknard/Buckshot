@@ -431,7 +431,7 @@ const TeamSection: React.FC = () => {
                     />
                     <Typography
                       variant="body1"
-                      fontSize={"1.25rem"}
+                      fontSize={"1.10rem"}
                       sx={{ marginTop: 2 }}
                     >
                       {member.name}
@@ -512,7 +512,7 @@ const TeamSection: React.FC = () => {
                       />
                       <Typography
                         variant="body1"
-                        fontSize={"1.25rem"}
+                        fontSize={"1.10rem"}
                         sx={{ marginTop: 2 }}
                       >
                         {member.name}
