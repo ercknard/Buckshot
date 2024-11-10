@@ -202,7 +202,7 @@ export default function Navbar() {
                     fontWeight={"600"}
                     color={"custom.secondaryTextGrayed"}
                   >
-                    Ships
+                    Mods
                   </Typography>
                 </Button>
                 <Button color="inherit">
@@ -212,6 +212,15 @@ export default function Navbar() {
                     color={"custom.secondaryTextGrayed"}
                   >
                     Team
+                  </Typography>
+                </Button>
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    Gameplay
                   </Typography>
                 </Button>
                 <Button color="inherit">

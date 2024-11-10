@@ -11,6 +11,8 @@ import MediaSection from "@/components/layout/home/MediaSection";
 import PartnersSection from "@/components/layout/home/Partners";
 import GitFeedsSection from "@/components/layout/home/GitFeedsSection";
 import NewsSection from "@/components/layout/home/NewsSection";
+import GameModeSection from "@/components/layout/home/GameModeSection";
+import ShipsSection from "@/components/layout/home/ShipsSection";
 
 export default function Home(): JSX.Element {
   return (
@@ -32,6 +34,8 @@ export default function Home(): JSX.Element {
         }}
       ></Box> */}
       <NewsSection />
+      <GameModeSection />
+      <ShipsSection />
       <ModsSection />
       <TeamSection />
       <MediaSection />
