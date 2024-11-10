@@ -56,30 +56,6 @@ const MediaSection: React.FC = () => {
     5: "/static/images/pink-gate.webp",
   };
 
-  const colorSetBgBannerRight: { [key: string]: string } = {
-    1: "/static/images/blue-banner.png",
-    2: "/static/images/green-banner.png",
-    3: "/static/images/yellow-banner.png",
-    4: "/static/images/orange-banner.png",
-    5: "/static/images/pink-banner.png",
-  };
-
-  const colorSetBgBorderRight: { [key: string]: string } = {
-    1: "/static/images/blue-border.png",
-    2: "/static/images/green-border.png",
-    3: "/static/images/yellow-border.png",
-    4: "/static/images/orange-border.png",
-    5: "/static/images/pink-border.png",
-  };
-
-  const colorSetBgBorderDark: { [key: string]: string } = {
-    1: "/static/images/blue-border-dark.png",
-    2: "/static/images/green-border-dark.png",
-    3: "/static/images/yellow-border-dark.png",
-    4: "/static/images/orange-border-dark.png",
-    5: "/static/images/pink-border-dark.png",
-  };
-
   const colorSetCapsule: { [key: string]: string } = {
     1: "/static/images/blue-capsule.png",
     2: "/static/images/green-capsule.png",
@@ -89,12 +65,6 @@ const MediaSection: React.FC = () => {
   };
 
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
-  const imageBgBannerSrc =
-    colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
-  const imageBgBorderSrc =
-    colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
-  const imageBgBorderDarkSrc =
-    colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
   const imageBgCapsule =
     colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
@@ -143,59 +113,6 @@ const MediaSection: React.FC = () => {
           filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
         })}
       />
-      {/* <Box
-        component={"img"}
-        alt="Logo"
-        src="/static/images/BG-B.webp"
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.55,
-        })}
-      />
-
-      <Box
-        component={"img"}
-        alt="Logo"
-        src={imageBgBannerSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.75,
-        })}
-      /> */}
-
-      {/* <Box
-        component={"img"}
-        alt="Logo"
-        src={imageBgBorderDarkSrc}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      />
-
-      <Box
-        component={"img"}
-        alt="Logo"
-        src={imageBgBorderSrc}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      /> */}
 
       <Box position={"relative"} zIndex={2}>
         <Typography variant="h4" align="center" gutterBottom>

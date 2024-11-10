@@ -74,30 +74,6 @@ const closeRightGateAnimation = keyframes`
   }
 `;
 
-const clockwiseAnimation = keyframes`
-            0%, 100% {
-                transform: translateX(0vw);
-            }
-            75% {
-                transform: translateX(50vw);
-            }
-                           95% {
-                transform: translateX(55vw);
-            }
-        `;
-
-const counterclockwiseAnimation = keyframes`
-            0%, 100% {
-                transform: translateX(0vw);
-            }
-            75% {
-                transform: translateX(-50vw);
-            }
-                           95% {
-                transform: translateX(-55vw);
-            }
-        `;
-
 const Cursor = styled("span")(({ theme }) => ({
   display: "inline-block",
   width: "1rem",
@@ -573,82 +549,6 @@ export default function HeroSection(): JSX.Element {
         />
       </Box>
 
-      {/* <Box
-        sx={{
-          backgroundImage: `url(/static/images/chain.png)`,
-          position: "absolute",
-          top: "51.15%",
-          left: "0",
-          width: "45%",
-          height: "2rem",
-          pointerEvents: "none",
-          zIndex: "3",
-          animation: animationPaused
-            ? "none"
-            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
-          overflow: "hidden",
-          transformOrigin: "center center",
-        }}
-      />
-
-      <Box
-        component={"img"}
-        alt="Logo"
-        src="/static/images/wheel.png"
-        sx={(theme) => ({
-          position: "absolute",
-          top: "50%",
-          left: "42.5%",
-          width: "5rem",
-          height: "5rem",
-          opacity: 1,
-          transformOrigin: "center",
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
-          zIndex: "3",
-        })}
-      />
-
-      <Box
-        sx={{
-          backgroundImage: `url(/static/images/chain.png)`,
-          position: "absolute",
-          top: "36.15%",
-          left: "0",
-          width: "32.5%",
-          height: "2rem",
-          pointerEvents: "none",
-          zIndex: "3",
-          animation: animationPaused
-            ? "none"
-            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
-          overflow: "hidden",
-          transformOrigin: "center center",
-        }}
-      />
-
-      <Box
-        component={"img"}
-        alt="Logo"
-        src="/static/images/wheel.png"
-        sx={(theme) => ({
-          position: "absolute",
-          top: "35%",
-          left: "30%",
-          width: "5rem",
-          height: "5rem",
-          opacity: 1,
-          transformOrigin: "center",
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${counterclockwiseAnimation} 20s ease-in-out infinite`,
-          zIndex: "3",
-        })}
-      /> */}
-
       {/* Right */}
 
       <Box
@@ -711,82 +611,6 @@ export default function HeroSection(): JSX.Element {
           })}
         />
       </Box>
-
-      {/* <Box
-        sx={{
-          backgroundImage: `url(/static/images/chain.png)`,
-          position: "absolute",
-          top: "51.15%",
-          right: "0",
-          width: "45%",
-          height: "2rem",
-          pointerEvents: "none",
-          zIndex: "3",
-          animation: animationPaused
-            ? "none"
-            : `${clockwiseAnimation} 20s ease-in-out infinite`,
-          overflow: "hidden",
-          transformOrigin: "center center",
-        }}
-      />
-
-      <Box
-        component={"img"}
-        alt="Logo"
-        src="/static/images/wheel.png"
-        sx={(theme) => ({
-          position: "absolute",
-          top: "50%",
-          right: "42.5%",
-          width: "5rem",
-          height: "5rem",
-          opacity: 1,
-          transformOrigin: "center",
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${clockwiseAnimation} 20s ease-in-out infinite`,
-          zIndex: "3",
-        })}
-      />
-
-      <Box
-        sx={{
-          backgroundImage: `url(/static/images/chain.png)`,
-          position: "absolute",
-          top: "66.15%",
-          right: "0",
-          width: "32.5%",
-          height: "2rem",
-          pointerEvents: "none",
-          zIndex: "3",
-          animation: animationPaused
-            ? "none"
-            : `${clockwiseAnimation} 20s ease-in-out infinite`,
-          overflow: "hidden",
-          transformOrigin: "center center",
-        }}
-      />
-
-      <Box
-        component={"img"}
-        alt="Logo"
-        src="/static/images/wheel.png"
-        sx={(theme) => ({
-          position: "absolute",
-          top: "65%",
-          right: "30%",
-          width: "5rem",
-          height: "5rem",
-          opacity: 1,
-          transformOrigin: "center",
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${clockwiseAnimation} 20s ease-in-out infinite`,
-          zIndex: "3",
-        })}
-      /> */}
 
       {/* Dialog Component */}
       <DefaultDialog

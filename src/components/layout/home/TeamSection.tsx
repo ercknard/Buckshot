@@ -4,7 +4,6 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
   Tab,
   Tabs,
   Container,
@@ -200,14 +199,6 @@ const TeamSection: React.FC = () => {
     5: "/static/images/pink-gate.webp",
   };
 
-  const colorSetBgBannerRight: { [key: string]: string } = {
-    1: "/static/images/blue-banner.png",
-    2: "/static/images/green-banner.png",
-    3: "/static/images/yellow-banner.png",
-    4: "/static/images/orange-banner.png",
-    5: "/static/images/pink-banner.png",
-  };
-
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
     2: "/static/images/green-border.png",
@@ -225,9 +216,6 @@ const TeamSection: React.FC = () => {
   };
 
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
-
-  const imageBgBannerSrc =
-    colorSetBgBannerRight[activeSet.toString()] || colorSetBgBannerRight[1];
 
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
@@ -277,20 +265,6 @@ const TeamSection: React.FC = () => {
           objectFit: "cover",
         })}
       />
-
-      {/* <Box
-        component={"img"}
-        alt="Logo"
-        src={imageBgBannerSrc}
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 0.9,
-        })}
-      /> */}
 
       <Box
         component={"img"}
@@ -377,38 +351,6 @@ const TeamSection: React.FC = () => {
                     top: "5%",
                   }}
                 />
-
-                {/* <Typography
-                  fontSize={"1.25rem"}
-                  color="textSecondary"
-                  sx={(theme) => ({
-                    position: "relative",
-                    marginTop: "20rem",
-                    marginBottom: ".25rem",
-                    zIndex: "3",
-                    color: theme.palette.custom.secondaryText,
-                    background: `linear-gradient(to right, transparent, ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents} , ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents}, transparent)`, // Linear gradient
-                    paddingY: 1,
-                    paddingX: 3,
-                  })}
-                >
-                  {expandedMember.details}
-                </Typography>
-
-                <Typography
-                  fontSize={"1rem"}
-                  color="textSecondary"
-                  sx={(theme) => ({
-                    position: "relative",
-                    zIndex: "3",
-                    color: theme.palette.custom.primaryTextGrayed,
-                    background: `linear-gradient(to right, transparent, ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents} , ${theme.palette.custom.secondaryComponents}, ${theme.palette.custom.secondaryComponents}, transparent)`, // Linear gradient
-                    paddingY: 1,
-                    paddingX: 3,
-                  })}
-                >
-                  {expandedMember.dcdetails}
-                </Typography> */}
               </Box>
 
               <Tabs

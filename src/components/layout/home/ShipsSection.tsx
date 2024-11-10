@@ -1,31 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-  CircularProgress,
-  Typography,
-  Box,
-  Paper,
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Card,
-  CardContent,
-  Grid,
-  Link,
-  Stack,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import React from "react";
+import { Typography, Box, Container } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
-import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";
-import DefaultDialog from "../DefaultDialog";
 import Particlesview from "../Particles";
 
 type CustomTheme = {
