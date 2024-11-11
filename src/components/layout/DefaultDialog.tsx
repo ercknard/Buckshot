@@ -46,7 +46,7 @@ export default function DefaultDialog({
       <DialogTitle>
         <Typography
           variant={"body1"}
-          fontSize={"1.5rem"}
+          fontSize={"1.25rem"}
           color={"custom.primaryText"}
         >
           {title}
