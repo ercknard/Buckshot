@@ -227,7 +227,7 @@ export default function Footer() {
             item
             lg={1.5}
             sm={3}
-            xs={4}
+            xs={6}
             display={"flex"}
             sx={{ justifyContent: { lg: "center", xs: "left" } }}
           >
@@ -253,7 +253,7 @@ export default function Footer() {
             item
             lg={1.5}
             sm={3}
-            xs={4}
+            xs={6}
             display={"flex"}
             sx={{ justifyContent: { lg: "center", xs: "left" } }}
           >
