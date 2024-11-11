@@ -63,7 +63,7 @@ body {
 
 /* Custom positioning for next/prev buttons */
 .swiper-button-next {
-  right: 30% !important; /* Move the "next" button closer to the center */
+  right: 32% !important; /* Move the "next" button closer to the center */
   left: auto;
 }
 
