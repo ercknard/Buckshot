@@ -25,7 +25,7 @@ const modes: Modes[] = [
   {
     name: "Main",
     ip: "cryptechtest.xyz",
-    image: "/static/images/mug.png",
+    image: "/static/images/main-icon.png",
     port: "30000",
     intro:
       "Embark on a journey of creativity, collaboration, and adventure in our immersive world.",
