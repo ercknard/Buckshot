@@ -317,7 +317,7 @@ export default function Navbar() {
                         color={
                           activeSection === section
                             ? "custom.primaryText"
-                            : "custom.secondaryTextGrayed"
+                            : "custom.primaryTextGrayed"
                         }
                       >
                         {section.charAt(0).toUpperCase() + section.slice(1)}
