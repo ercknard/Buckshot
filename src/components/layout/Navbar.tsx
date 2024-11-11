@@ -21,7 +21,7 @@ export default function Navbar() {
     const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
-        top: element.offsetTop - 64, // 2rem offset (32px)
+        top: element.offsetTop - 70, // 2rem offset (32px)
         behavior: "smooth",
       });
     }
