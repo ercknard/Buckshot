@@ -180,21 +180,6 @@ const GameModeSection: React.FC = () => {
               }}
             >
               <Box
-                sx={(theme) => ({
-                  bgcolor: "transparent",
-                  backgroundImage: `linear-gradient(to bottom, ${theme.palette.custom.primaryBackgroundGrayed}75, ${theme.palette.custom.secondaryBackground})`,
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  pointerEvents: "none",
-                  zIndex: "1",
-                })}
-              />
-
-              <Box
                 component="img"
                 alt="Logo"
                 src={expandedMember.bgs}
@@ -203,7 +188,7 @@ const GameModeSection: React.FC = () => {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  opacity: 0.5,
+                  opacity: 0.25,
                 })}
               />
 
