@@ -155,6 +155,7 @@ const NewsSection = () => {
 
   return (
     <Box
+      id="news"
       position={"relative"}
       width={1}
       left={0}

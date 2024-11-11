@@ -30,6 +30,7 @@
 html,
 body {
   overflow-x: hidden !important; /* Prevent horizontal overflow */
+  scroll-behavior: smooth;
 }
 
 .swiper-button-next,

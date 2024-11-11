@@ -227,6 +227,7 @@ const TeamSection: React.FC = () => {
 
   return (
     <Box
+      id="team"
       position={"relative"}
       width={1}
       left={0}

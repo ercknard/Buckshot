@@ -85,6 +85,7 @@ const MediaSection: React.FC = () => {
 
   return (
     <Box
+      id="gameplay"
       position={"relative"}
       width={1}
       left={0}

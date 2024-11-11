@@ -29,6 +29,7 @@ const GameModeSection: React.FC = () => {
 
   return (
     <Box
+      id="servers"
       position={"relative"}
       width={1}
       left={0}

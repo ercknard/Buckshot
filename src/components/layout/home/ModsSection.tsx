@@ -238,6 +238,7 @@ const ModsSection: React.FC = () => {
 
   return (
     <Box
+      id="mods"
       position={"relative"}
       width={1}
       left={0}

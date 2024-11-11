@@ -121,11 +121,11 @@ export default function Navbar() {
             <Box>
               <Stack
                 direction={"column"}
-                spacing={{ xs: 0, sm: 0, md: 5 }}
+                spacing={{ xs: 1, sm: 0, md: 5 }}
                 display={"flex"}
                 alignItems={"center"}
               >
-                <Button color="inherit">
+                <Button component="a" href="#news" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -134,7 +134,7 @@ export default function Navbar() {
                     News
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#mods" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -143,7 +143,7 @@ export default function Navbar() {
                     Mods
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#team" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -152,7 +152,7 @@ export default function Navbar() {
                     Team
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#gameplay" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -161,7 +161,7 @@ export default function Navbar() {
                     Gameplay
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#donate" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -170,16 +170,13 @@ export default function Navbar() {
                     Donate
                   </Typography>
                 </Button>
-                <Button color="inherit">
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    Feeds
-                  </Typography>
-                </Button>
-                <Button variant="contained" color="primary" size="large">
+                <Button
+                  component="a"
+                  href="#servers"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
                   Play
                 </Button>
               </Stack>
@@ -244,14 +241,14 @@ export default function Navbar() {
             </Box>
 
             {/* RIGHT MENU */}
-            <Box>
+            <Box marginTop={1}>
               <Stack
                 direction={"row"}
                 spacing={{ xs: 0, sm: 0, md: 5 }}
                 display={"flex"}
                 alignItems={"center"}
               >
-                <Button color="inherit">
+                <Button component="a" href="#news" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -260,7 +257,7 @@ export default function Navbar() {
                     News
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#mods" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -269,7 +266,7 @@ export default function Navbar() {
                     Mods
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#team" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -278,7 +275,7 @@ export default function Navbar() {
                     Team
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#gameplay" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -287,7 +284,7 @@ export default function Navbar() {
                     Gameplay
                   </Typography>
                 </Button>
-                <Button color="inherit">
+                <Button component="a" href="#donate" color="inherit">
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -296,16 +293,13 @@ export default function Navbar() {
                     Donate
                   </Typography>
                 </Button>
-                <Button color="inherit">
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    Feeds
-                  </Typography>
-                </Button>
-                <Button variant="contained" color="primary" size="large">
+                <Button
+                  component="a"
+                  href="#servers"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
                   Play
                 </Button>
               </Stack>

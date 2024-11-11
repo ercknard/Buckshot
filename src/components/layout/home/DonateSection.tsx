@@ -148,6 +148,7 @@ const DonateSection: React.FC = () => {
 
   return (
     <Box
+      id="donate"
       position={"relative"}
       width={1}
       left={0}
