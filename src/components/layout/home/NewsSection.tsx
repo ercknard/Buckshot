@@ -115,12 +115,12 @@ const NewsSection = () => {
     },
     "& h4, & h5, & h6": {
       color: theme.palette.custom.primaryText,
-      marginBottom: "1rem",
+      marginBottom: "1.5rem",
       fontFamily: "Vetregular, serif", // Apply to headings
       fontSize: "1.25rem",
     },
     "& p": {
-      fontSize: "1rem",
+      fontSize: "1.25rem",
       lineHeight: "1.8",
       color: theme.palette.custom.secondaryTextGrayed,
       fontFamily: "Vetregular, serif", // Apply to paragraphs
@@ -132,6 +132,7 @@ const NewsSection = () => {
     },
     "& li": {
       marginBottom: "0.5rem",
+      fontSize: "1.1rem",
       color: theme.palette.custom.secondaryTextGrayed,
       fontFamily: "Vetregular, serif", // Apply to list items
     },
