@@ -386,7 +386,7 @@ const TeamSection: React.FC = () => {
               position={"relative"}
               zIndex={2}
               container
-              spacing={3}
+              spacing={4}
               justifyContent="center"
               sx={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
             >
@@ -450,7 +450,7 @@ const TeamSection: React.FC = () => {
           {activeTab === 1 && (
             <Box position={"relative"} zIndex={2}>
               <Swiper
-                spaceBetween={23} // Space between slides
+                spaceBetween={32} // Space between slides
                 slidesPerView={5} // Show 5 slides at a time
                 loop={false} // Enable looping of the slides
                 autoplay={{
