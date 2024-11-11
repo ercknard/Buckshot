@@ -17,6 +17,16 @@ export default function Navbar() {
   const theme = useTheme();
   const isMobileView = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const handleScrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 64, // 2rem offset (32px)
+        behavior: "smooth",
+      });
+    }
+  };
+
   //Toggle Drawer (Mobile)
   const [selectedDrawer, setSelectedDrawer] = useState<number | null>(null);
 
@@ -24,7 +34,7 @@ export default function Navbar() {
     return (
       <>
         <AppBar
-          position="sticky"
+          position="fixed"
           sx={{
             height: 60,
             zIndex: 10,
@@ -248,7 +258,11 @@ export default function Navbar() {
                 display={"flex"}
                 alignItems={"center"}
               >
-                <Button component="a" href="#news" color="inherit">
+                <Button
+                  component="a"
+                  onClick={() => handleScrollTo("news")}
+                  color="inherit"
+                >
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -257,7 +271,11 @@ export default function Navbar() {
                     News
                   </Typography>
                 </Button>
-                <Button component="a" href="#mods" color="inherit">
+                <Button
+                  component="a"
+                  onClick={() => handleScrollTo("mods")}
+                  color="inherit"
+                >
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -266,7 +284,11 @@ export default function Navbar() {
                     Mods
                   </Typography>
                 </Button>
-                <Button component="a" href="#team" color="inherit">
+                <Button
+                  component="a"
+                  onClick={() => handleScrollTo("team")}
+                  color="inherit"
+                >
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -275,7 +297,11 @@ export default function Navbar() {
                     Team
                   </Typography>
                 </Button>
-                <Button component="a" href="#gameplay" color="inherit">
+                <Button
+                  component="a"
+                  onClick={() => handleScrollTo("gameplay")}
+                  color="inherit"
+                >
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -284,7 +310,11 @@ export default function Navbar() {
                     Gameplay
                   </Typography>
                 </Button>
-                <Button component="a" href="#donate" color="inherit">
+                <Button
+                  component="a"
+                  onClick={() => handleScrollTo("donate")}
+                  color="inherit"
+                >
                   <Typography
                     variant={"h5"}
                     fontWeight={"600"}
@@ -292,10 +322,10 @@ export default function Navbar() {
                   >
                     Donate
                   </Typography>
-                </Button>
+                </Button>{" "}
                 <Button
                   component="a"
-                  href="#servers"
+                  onClick={() => handleScrollTo("servers")}
                   variant="contained"
                   color="primary"
                   size="large"

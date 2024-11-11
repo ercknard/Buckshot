@@ -18,21 +18,10 @@ export default function Home(): JSX.Element {
   return (
     <Box>
       <DefaultHead />
-      <Box position={"absolute"} width={1} left={0}>
+      <Box position={"fixed"} width={1} left={0} zIndex={100}>
         <Navbar />
       </Box>
       <HeroSection />
-      {/* <Box
-        position={"relative"}
-        width={1}
-        left={0}
-        sx={{
-          padding: 4,
-          backgroundColor: "custom.secondaryBackground",
-          paddingTop: "10rem",
-          paddingBottom: "10rem",
-        }}
-      ></Box> */}
       <NewsSection />
       <GameModeSection />
       <ShipsSection />
