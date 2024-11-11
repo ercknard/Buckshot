@@ -475,6 +475,7 @@ export default function HeroSection(): JSX.Element {
         src={colorSetBorderVerticalDarkSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -491,6 +492,7 @@ export default function HeroSection(): JSX.Element {
         src={colorSetBorderVerticalLightSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -507,6 +509,7 @@ export default function HeroSection(): JSX.Element {
         src={colorSetBorderHorizontalDarkSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -523,6 +526,7 @@ export default function HeroSection(): JSX.Element {
         src={colorSetBorderHorizontalLightSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
