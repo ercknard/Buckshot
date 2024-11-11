@@ -131,7 +131,7 @@ const GitFeedsSection: React.FC = () => {
           objectFit: "cover",
         })}
       />
-
+      {/* 
       <Box
         component={"img"}
         alt="Logo"
@@ -159,7 +159,7 @@ const GitFeedsSection: React.FC = () => {
           height: "100%",
           opacity: ".5",
         }}
-      />
+      /> */}
 
       <Container
         sx={{
