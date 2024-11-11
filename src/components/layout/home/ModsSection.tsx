@@ -301,6 +301,7 @@ const ModsSection: React.FC = () => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
+          style={{ marginBottom: "2rem" }}
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
