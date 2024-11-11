@@ -267,6 +267,7 @@ const GameModeSection: React.FC = () => {
                 sx={{
                   padding: 2,
                   textAlign: "center",
+                  justifyItems: "center",
                   transition: "transform 0.2s, background-color 0.3s",
                   cursor: expandedMember === member ? "pointer" : "pointer", // Disable pointer cursor for active card
                   backgroundColor:
@@ -292,7 +293,7 @@ const GameModeSection: React.FC = () => {
                   src={member.image}
                   alt={`${member.name} - ${member.name}`}
                   sx={{
-                    width: "100%",
+                    width: "65%",
                     height: "auto",
                   }}
                 />
