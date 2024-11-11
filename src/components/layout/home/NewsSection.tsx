@@ -160,7 +160,7 @@ const NewsSection = () => {
       sx={{
         padding: { md: "4", xs: "1" },
         backgroundColor: "custom.secondaryBackground",
-        paddingTop: { md: "10rem", xs: "2.5rem" },
+        paddingTop: { md: "10rem", xs: "5rem" },
         paddingBottom: { md: "10rem", xs: "2.5rem" },
         minHeight: "40vh",
       }}
@@ -200,6 +200,7 @@ const NewsSection = () => {
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -213,6 +214,7 @@ const NewsSection = () => {
         src={imageBgBorderSrc}
         sx={{
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -253,7 +255,7 @@ const NewsSection = () => {
               <Paper
                 sx={{
                   marginTop: "2.5rem",
-                  padding: "2rem",
+                  padding: { md: "2rem", xs: "1rem" },
                   paddingBottom: "0",
                   borderWidth: "10px", // Adjust the border width as per your preference
                   borderStyle: "solid",

@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Divider, useMediaQuery } from "@mui/material";
+import { Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -90,6 +92,9 @@ const Cursor = styled("span")(({ theme }) => ({
 }));
 
 export default function HeroSection(): JSX.Element {
+  const isSmallScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
   const { activeSet } = useThemeContext() as CustomTheme; // Get the active color set ID from context
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -289,27 +294,66 @@ export default function HeroSection(): JSX.Element {
             Earn!,
           </Typography>
         </Stack>
-        <Stack
-          display={"flex"}
-          direction={"row"}
-          alignItems={"center"}
-          marginTop={1}
-        >
-          <Box
-            component="img"
-            width={{ xs: 180, sm: 180, md: 55 }}
-            alt="Logo"
-            src="/static/images/mug.png"
-          />
-          <Typography variant={"h4"} color={"custom.primaryText"}>
-            Welcome to
-          </Typography>
-        </Stack>
-        <Typography variant={"h2"} color={"custom.secondaryText"}>
-          <Stack display={"flex"} direction={"row"} alignItems={"center"}>
-            {displayedText} <Cursor />
-          </Stack>
-        </Typography>
+        {!isSmallScreen ? (
+          <>
+            <Stack
+              display={"flex"}
+              direction={"row"}
+              alignItems={"center"}
+              marginTop={1}
+            >
+              <Box
+                component="img"
+                width={{ xs: 40, md: 55 }}
+                alt="Logo"
+                src="/static/images/mug.png"
+              />
+              <Typography variant={"h4"} color={"custom.primaryText"}>
+                Welcome to
+              </Typography>
+            </Stack>
+            <Typography variant={"h2"} color={"custom.secondaryText"}>
+              <Stack
+                display={"flex"}
+                direction={"row"}
+                alignItems={"center"}
+                marginTop={1}
+              >
+                {displayedText} <Cursor />
+              </Stack>
+            </Typography>
+          </>
+        ) : (
+          <>
+            <Stack
+              display={"flex"}
+              direction={"row"}
+              alignItems={"center"}
+              marginTop={1}
+            >
+              <Box
+                component="img"
+                width={{ xs: 40, md: 55 }}
+                alt="Logo"
+                src="/static/images/mug.png"
+              />
+              <Typography
+                variant={"h4"}
+                color={"custom.primaryText"}
+                fontSize={"1.25rem"}
+              >
+                Welcome to
+              </Typography>
+            </Stack>
+            <Typography
+              variant={"h4"}
+              color={"custom.secondaryText"}
+              fontSize={"2.25rem"}
+            >
+              CryptechTest
+            </Typography>
+          </>
+        )}
         <Stack sx={{ marginTop: "1rem" }}>
           <Typography
             variant={"h5"}
@@ -395,9 +439,12 @@ export default function HeroSection(): JSX.Element {
           height: "100%",
           pointerEvents: "none",
           zIndex: "-4",
-          animation: animationPaused
-            ? "none"
-            : `${zoomAnimation} 20s ease-in-out infinite`,
+          animation: {
+            md: animationPaused
+              ? "none"
+              : `${zoomAnimation} 20s ease-in-out infinite`,
+            xs: "none",
+          },
           overflow: "hidden",
           transformOrigin: "center center",
         }}
@@ -491,6 +538,7 @@ export default function HeroSection(): JSX.Element {
       <Box
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "50%",
@@ -554,6 +602,7 @@ export default function HeroSection(): JSX.Element {
       <Box
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           right: 0,
           width: "50%",

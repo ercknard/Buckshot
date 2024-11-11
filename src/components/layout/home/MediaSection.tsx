@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Divider, useMediaQuery } from "@mui/material";
+import { Theme } from "@mui/material/styles";
 import { Box, Typography, IconButton } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
@@ -32,6 +34,10 @@ const videoTitles = [
 ];
 
 const MediaSection: React.FC = () => {
+  const isSmallScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
+
   const { activeSet } = useThemeContext() as CustomTheme;
   const theme = useTheme();
   const swiperRef = useRef(null);
@@ -114,7 +120,7 @@ const MediaSection: React.FC = () => {
         })}
       />
 
-      <Box position={"relative"} zIndex={2}>
+      <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
         <Typography variant="h4" align="center" gutterBottom>
           Gameplays
         </Typography>
@@ -124,75 +130,142 @@ const MediaSection: React.FC = () => {
           fun—let&apos;s dive in!
         </Typography>
 
-        <Swiper
-          loop={true}
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={"auto"}
-          spaceBetween={250}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 250,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={false}
-          navigation={{
-            prevEl: ".swiper-button-prev", // Custom prev button
-            nextEl: ".swiper-button-next", // Custom next button
-          }}
-          modules={[EffectCoverflow, Pagination, Navigation]}
-          className="mySwiper"
-          ref={swiperRef} // Pass the ref to the Swiper component
-          style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
-        >
-          {videoUrls.map((url, index) => (
-            <SwiperSlide key={index} style={{ width: "35%" }}>
-              <Box
-                sx={{
-                  position: "relative",
-                  width: "100%",
-                  paddingTop: "56.25%", // 16:9 Aspect Ratio (56.25%)
-                  overflow: "hidden", // Ensure child doesn't overflow the container
-                  borderRadius: 2, // Optional: rounded corners for aesthetics
-                }}
-              >
-                <ReactPlayer
-                  url={url}
-                  width="100%"
-                  height="100%"
-                  controls
-                  light={videoThumbnails[index]} // Show thumbnail before play
-                  playing={false} // Do not autoplay by default
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
+        {!isSmallScreen ? (
+          <Swiper
+            loop={true}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            spaceBetween={250}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 250,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={false}
+            navigation={{
+              prevEl: ".swiper-button-prev", // Custom prev button
+              nextEl: ".swiper-button-next", // Custom next button
+            }}
+            modules={[EffectCoverflow, Pagination, Navigation]}
+            className="mySwiper"
+            ref={swiperRef} // Pass the ref to the Swiper component
+            style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
+          >
+            {videoUrls.map((url, index) => (
+              <SwiperSlide key={index} style={{ width: "35%" }}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    paddingTop: "56.25%", // 16:9 Aspect Ratio (56.25%)
+                    overflow: "hidden", // Ensure child doesn't overflow the container
+                    borderRadius: 2, // Optional: rounded corners for aesthetics
                   }}
-                />
-              </Box>
-              <Typography
-                variant="h5"
-                align="center"
-                sx={{
-                  marginTop: 1,
-                  padding: 0.5,
-                  bgcolor: "custom.primaryComponents",
-                }}
-              >
-                {videoTitles[index]}
-              </Typography>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                >
+                  <ReactPlayer
+                    url={url}
+                    width="100%"
+                    height="100%"
+                    controls
+                    light={videoThumbnails[index]} // Show thumbnail before play
+                    playing={false} // Do not autoplay by default
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                    }}
+                  />
+                </Box>
+                <Typography
+                  variant="h5"
+                  align="center"
+                  sx={{
+                    marginTop: 1,
+                    padding: 0.5,
+                    bgcolor: "custom.primaryComponents",
+                  }}
+                >
+                  {videoTitles[index]}
+                </Typography>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <Swiper
+            loop={true}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            spaceBetween={250}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 250,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={false}
+            navigation={{
+              prevEl: ".swiper-button-prev", // Custom prev button
+              nextEl: ".swiper-button-next", // Custom next button
+            }}
+            modules={[EffectCoverflow, Pagination, Navigation]}
+            className="mySwiper"
+            ref={swiperRef} // Pass the ref to the Swiper component
+            style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
+          >
+            {videoUrls.map((url, index) => (
+              <SwiperSlide key={index} style={{ width: "90%" }}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    paddingTop: "56.25%", // 16:9 Aspect Ratio (56.25%)
+                    overflow: "hidden", // Ensure child doesn't overflow the container
+                    borderRadius: 2, // Optional: rounded corners for aesthetics
+                  }}
+                >
+                  <ReactPlayer
+                    url={url}
+                    width="100%"
+                    height="100%"
+                    controls
+                    light={videoThumbnails[index]} // Show thumbnail before play
+                    playing={false} // Do not autoplay by default
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                    }}
+                  />
+                </Box>
+                <Typography
+                  variant="h5"
+                  align="center"
+                  sx={{
+                    marginTop: 1,
+                    padding: 0.5,
+                    bgcolor: "custom.primaryComponents",
+                  }}
+                >
+                  {videoTitles[index]}
+                </Typography>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
 
         {/* Custom Navigation Buttons */}
         <Box
           className="swiper-button-prev"
           sx={{
             position: "absolute",
+            display: { md: "block", xs: "none" },
             top: "58.25%",
             left: "10px",
             transform: "translateY(-50%)",
@@ -210,6 +283,7 @@ const MediaSection: React.FC = () => {
           className="swiper-button-next"
           sx={{
             position: "absolute",
+            display: { md: "block", xs: "none" },
             top: "58.25%",
             right: "10px",
             transform: "translateY(-50%)",

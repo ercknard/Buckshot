@@ -123,7 +123,7 @@ const ModsList: React.FC = () => {
   const remainingMods = mods.slice(10);
 
   return (
-    <Box padding={3}>
+    <Box padding={3} sx={{ display: { md: "block", xs: "none" } }}>
       <Grid
         position={"relative"}
         zIndex={2}
@@ -310,7 +310,7 @@ const ModsSection: React.FC = () => {
               >
                 <Box
                   component="img"
-                  width={slide.image_size}
+                  width={{ xs: "100%", md: `${slide.image_size}` }}
                   alt="Logo"
                   src={slide.image}
                   marginX={"auto"}

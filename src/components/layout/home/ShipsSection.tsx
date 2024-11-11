@@ -92,6 +92,7 @@ const ShipsSection: React.FC = () => {
         src={imageBgBorderDarkSrc}
         sx={{
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -105,6 +106,7 @@ const ShipsSection: React.FC = () => {
         src={imageBgBorderSrc}
         sx={{
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",

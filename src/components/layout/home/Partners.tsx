@@ -117,7 +117,7 @@ const PartnersSection: React.FC = () => {
               >
                 <Box
                   component="img"
-                  width="15%"
+                  width={{ xs: "50%", md: "15%" }}
                   alt="Logo"
                   src={slide.image}
                   marginX={"auto"}

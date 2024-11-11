@@ -5,12 +5,13 @@ import { useState } from "react";
 import { Button, Typography, useTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import ClearIcon from "@mui/icons-material/Clear";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar() {
   const theme = useTheme();
@@ -43,26 +44,27 @@ export default function Navbar() {
               alignItems={"center"}
             >
               <Box mr={{ xs: 1, sm: 3, md: 5 }} pt={1}>
-                <Box
-                  component="img"
-                  width={{ xs: 180, sm: 180, md: 200 }}
-                  height={1}
-                  alt="Logo"
-                  src="/static/images/mug.png"
-                />
+                <Stack direction={"row"} spacing={1}>
+                  <Box
+                    component="img"
+                    width={{ xs: 30, sm: 55 }}
+                    height={1}
+                    alt="Logo"
+                    src="/static/images/mug.png"
+                  />
+                  <Typography
+                    variant={"h4"}
+                    fontSize={"1.5rem"}
+                    color={"custom.primaryText"}
+                  >
+                    CryptechTest
+                  </Typography>
+                </Stack>
               </Box>
 
-              <Stack direction={"row"} spacing={1.5}>
+              <Stack marginTop={1}>
                 <IconButton onClick={() => setSelectedDrawer(0)}>
-                  {/* <BellIcon sx={{ fontSize: "1.25rem" }} /> */}
-                </IconButton>
-
-                <IconButton onClick={() => setSelectedDrawer(1)}>
-                  {/* <UserIcon sx={{ fontSize: "1.25rem" }} /> */}
-                </IconButton>
-
-                <IconButton onClick={() => setSelectedDrawer(2)}>
-                  {/* <MenuBarIcon sx={{ fontSize: "1.25rem" }} /> */}
+                  <MenuIcon sx={{ fontSize: "2rem" }} />
                 </IconButton>
               </Stack>
             </Stack>
@@ -93,33 +95,95 @@ export default function Navbar() {
               alignItems={"center"}
             >
               <Box mr={{ xs: 1, sm: 3, md: 5 }}>
-                <Box
-                  component="img"
-                  width={{ xs: 180, sm: 180, md: 200 }}
-                  height={1}
-                  alt="Logo"
-                  src="/static/images/mug.png"
-                />
+                <Stack direction={"row"} spacing={1}>
+                  <Box
+                    component="img"
+                    width={{ xs: 30, sm: 55 }}
+                    height={1}
+                    alt="Logo"
+                    src="/static/images/mug.png"
+                  />
+                  <Typography
+                    variant={"h4"}
+                    fontSize={"1.5rem"}
+                    color={"custom.primaryText"}
+                  >
+                    CryptechTest
+                  </Typography>
+                </Stack>
               </Box>
 
               <IconButton onClick={() => setSelectedDrawer(null)}>
-                {/* <TimesIcon sx={{ fontSize: "1rem" }} /> */}
+                <ClearIcon sx={{ fontSize: "1.5rem" }} />
               </IconButton>
             </Stack>
 
-            <Divider />
-
-            {/* {selectedDrawer === 0 && <NotificationMenu />}
-            {selectedDrawer === 1 && <ProfileMenu />}
-            {selectedDrawer === 2 && (
-              <>
-                <MenuContainer title="Assets" content={assetArray} />
-                <MenuContainer title="Earn" content={earnArray} />
-                <MenuContainer title="Trade" content={tradeArray} />
-                <MenuContainer title="Build" content={buildArray} />
-                <MenuContainer title="More" content={moreArray} />
-              </>
-            )} */}
+            <Box>
+              <Stack
+                direction={"column"}
+                spacing={{ xs: 0, sm: 0, md: 5 }}
+                display={"flex"}
+                alignItems={"center"}
+              >
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    News
+                  </Typography>
+                </Button>
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    Mods
+                  </Typography>
+                </Button>
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    Team
+                  </Typography>
+                </Button>
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    Gameplay
+                  </Typography>
+                </Button>
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    Donate
+                  </Typography>
+                </Button>
+                <Button color="inherit">
+                  <Typography
+                    variant={"h5"}
+                    fontWeight={"600"}
+                    color={"custom.secondaryTextGrayed"}
+                  >
+                    Feeds
+                  </Typography>
+                </Button>
+                <Button variant="contained" color="primary" size="large">
+                  Play
+                </Button>
+              </Stack>
+            </Box>
           </Stack>
         </Drawer>
       </>
@@ -163,7 +227,7 @@ export default function Navbar() {
                 <Box mr={{ xs: 1, sm: 3, md: 5 }}>
                   <Box
                     component="img"
-                    width={{ xs: 180, sm: 180, md: 40 }}
+                    width={{ xs: 40, sm: 55 }}
                     alt="Logo"
                     src="/static/images/mug.png"
                   />

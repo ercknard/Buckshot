@@ -193,6 +193,7 @@ const DonateSection: React.FC = () => {
         src={imageBgBorderDarkSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -206,6 +207,7 @@ const DonateSection: React.FC = () => {
         src={imageBgBorderSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",

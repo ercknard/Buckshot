@@ -272,6 +272,7 @@ const TeamSection: React.FC = () => {
         src={imageBgBorderDarkSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -285,6 +286,7 @@ const TeamSection: React.FC = () => {
         src={imageBgBorderSrc}
         sx={(theme) => ({
           position: "absolute",
+          display: { md: "block", xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
@@ -329,6 +331,7 @@ const TeamSection: React.FC = () => {
                   variant="h1"
                   sx={(theme) => ({
                     position: "absolute",
+                    display: { md: "block", xs: "none" },
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)", // Centers the image
