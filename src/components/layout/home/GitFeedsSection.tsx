@@ -92,6 +92,7 @@ const GitFeedsSection: React.FC = () => {
 
   return (
     <Box
+      id="git"
       position={"relative"}
       width={1}
       left={0}

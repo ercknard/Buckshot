@@ -46,6 +46,7 @@ const ShipsSection: React.FC = () => {
 
   return (
     <Box
+      id={"ships"}
       position={"relative"}
       width={1}
       left={0}

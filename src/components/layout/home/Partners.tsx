@@ -42,6 +42,7 @@ const PartnersSection: React.FC = () => {
 
   return (
     <Box
+      id="partners"
       position={"relative"}
       width={1}
       left={0}

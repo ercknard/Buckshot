@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //MUI
 import { Button, Typography, useTheme } from "@mui/material";
@@ -24,11 +24,48 @@ export default function Navbar() {
         top: element.offsetTop - 70, // 2rem offset (32px)
         behavior: "smooth",
       });
+      window.history.pushState(null, "", `#${id}`);
     }
   };
 
   //Toggle Drawer (Mobile)
   const [selectedDrawer, setSelectedDrawer] = useState<number | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null); // Track the active section
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        "news",
+        "servers",
+        "ships",
+        "mods",
+        "team",
+        "gameplay",
+        "donate",
+        "partners",
+        "git",
+      ];
+      let currentSection: string | null = null;
+      for (let i = 0; i < sections.length; i++) {
+        const section = document.getElementById(sections[i]);
+        if (section) {
+          const sectionOffsetTop = section.offsetTop;
+          // Add a 70px offset to check when the section is in view
+          if (window.scrollY + 100 >= sectionOffsetTop) {
+            currentSection = sections[i];
+          }
+        }
+      }
+
+      setActiveSection(currentSection); // Update active section based on scroll position
+    };
+
+    // Add event listener for scroll
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   if (isMobileView) {
     return (
@@ -254,75 +291,40 @@ export default function Navbar() {
             <Box marginTop={1}>
               <Stack
                 direction={"row"}
-                spacing={{ xs: 0, sm: 0, md: 5 }}
+                spacing={{ xs: 0, sm: 0, md: 4 }}
                 display={"flex"}
                 alignItems={"center"}
               >
-                <Button
-                  component="a"
-                  onClick={() => handleScrollTo("news")}
-                  color="inherit"
-                >
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    News
-                  </Typography>
-                </Button>
-                <Button
-                  component="a"
-                  onClick={() => handleScrollTo("mods")}
-                  color="inherit"
-                >
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    Mods
-                  </Typography>
-                </Button>
-                <Button
-                  component="a"
-                  onClick={() => handleScrollTo("team")}
-                  color="inherit"
-                >
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    Team
-                  </Typography>
-                </Button>
-                <Button
-                  component="a"
-                  onClick={() => handleScrollTo("gameplay")}
-                  color="inherit"
-                >
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    Gameplay
-                  </Typography>
-                </Button>
-                <Button
-                  component="a"
-                  onClick={() => handleScrollTo("donate")}
-                  color="inherit"
-                >
-                  <Typography
-                    variant={"h5"}
-                    fontWeight={"600"}
-                    color={"custom.secondaryTextGrayed"}
-                  >
-                    Donate
-                  </Typography>
-                </Button>{" "}
+                {["news", "mods", "team", "gameplay", "donate"].map(
+                  (section) => (
+                    <Button
+                      key={section}
+                      onClick={() => handleScrollTo(section)}
+                      sx={{
+                        textDecoration:
+                          activeSection === section ? "underline" : "none", // Underline active link
+                        textDecorationColor:
+                          activeSection === section
+                            ? "custom.primaryText"
+                            : "transparent", // Set underline
+                        textDecorationThickness:
+                          activeSection === section ? 4 : 0, // Adjust underline thickness (height)
+                        fontWeight: "600",
+                      }}
+                    >
+                      <Typography
+                        variant={"h5"}
+                        color={
+                          activeSection === section
+                            ? "custom.primaryText"
+                            : "custom.secondaryTextGrayed"
+                        }
+                      >
+                        {section.charAt(0).toUpperCase() + section.slice(1)}
+                      </Typography>
+                    </Button>
+                  )
+                )}
                 <Button
                   component="a"
                   onClick={() => handleScrollTo("servers")}
