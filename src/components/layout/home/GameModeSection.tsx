@@ -212,8 +212,7 @@ const GameModeSection: React.FC = () => {
                   position: "absolute",
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
-                  opacity: 0.25,
+                  opacity: 0.1,
                 })}
               />
 
@@ -245,6 +244,7 @@ const GameModeSection: React.FC = () => {
                 <Box
                   sx={{
                     padding: 1,
+                    paddingX: 3,
                     backgroundColor: "custom.secondaryComponents",
                     borderRadius: "4px",
                   }}
@@ -256,6 +256,7 @@ const GameModeSection: React.FC = () => {
                 <Box
                   sx={{
                     padding: 1,
+                    paddingX: 3,
                     backgroundColor: "custom.secondaryComponents",
                     borderRadius: "4px",
                     marginTop: 1,
