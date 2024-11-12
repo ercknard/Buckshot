@@ -83,11 +83,22 @@ const GameModeSection: React.FC = () => {
     5: "/static/images/pink-border.png",
   };
 
+  const colorSetBgBanner: { [key: string]: string } = {
+    1: "/static/images/blue-banner.png",
+    2: "/static/images/green-banner.png",
+    3: "/static/images/yellow-banner.png",
+    4: "/static/images/orange-banner.png",
+    5: "/static/images/pink-banner.png",
+  };
+
   const imageBgCapsule =
     colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
 
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
+
+  const imageBgBannerSrc =
+    colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
 
   return (
     <Box
@@ -190,6 +201,19 @@ const GameModeSection: React.FC = () => {
                   height: "100%",
                   objectFit: "cover",
                   opacity: 0.25,
+                })}
+              />
+
+              <Box
+                component="img"
+                alt="Logo"
+                src={imageBgBannerSrc}
+                sx={(theme) => ({
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  opacity: 0.5,
                 })}
               />
 
