@@ -204,11 +204,10 @@ const GameModeSection: React.FC = () => {
                   }}
                 />
                 <Typography
-                  variant="h5"
-                  fontSize={"2rem"}
+                  fontSize={"1.5rem"}
                   sx={{ marginTop: 2, marginBottom: 2 }}
                 >
-                  Server: {expandedMember.name}
+                  {expandedMember.name}
                 </Typography>
 
                 <Typography
