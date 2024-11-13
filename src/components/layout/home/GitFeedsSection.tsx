@@ -203,7 +203,8 @@ const GitFeedsSection: React.FC = () => {
                       Commit Message:
                     </Typography>
                     <Typography variant="h5" color="custom.primaryTextGrayed">
-                      {event.payload.commits[0].message}
+                      {event.payload.commits[0].message.substring(0, 32)}
+                      {event.payload.commits[0].message.length > 20 && "..."}
                     </Typography>
                   </Stack>
                 ) : (
@@ -351,7 +352,8 @@ const GitFeedsSection: React.FC = () => {
                         Commit Message:
                       </Typography>
                       <Typography variant="h5" color="custom.primaryTextGrayed">
-                        {event.payload.commits[0].message}
+                        {event.payload.commits[0].message.substring(0, 32)}
+                        {event.payload.commits[0].message.length > 20 && "..."}
                       </Typography>
                     </Stack>
                   ) : (

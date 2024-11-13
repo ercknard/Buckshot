@@ -29,6 +29,12 @@ type Ship = {
   image: string;
   image_size: string;
   ship_type: string;
+  specs_1: string;
+  specs_2: string;
+  specs_3: string;
+  specs_4: string;
+  specs_5: string;
+  specs_6: string;
 };
 
 const station: Ship[] = [
@@ -39,6 +45,12 @@ const station: Ship[] = [
     image: "/static/images/ship-2.png",
     image_size: "40%",
     ship_type: "Station",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 ];
 
@@ -50,6 +62,12 @@ const scout: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Scout",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 
   {
@@ -59,6 +77,12 @@ const scout: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Scout",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 ];
 
@@ -70,6 +94,12 @@ const raider: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Raider",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 ];
 
@@ -81,6 +111,12 @@ const battle: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Cruiser",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 
   {
@@ -90,6 +126,12 @@ const battle: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Cruiser",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 
   {
@@ -99,6 +141,12 @@ const battle: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Cruiser",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 ];
 
@@ -110,6 +158,12 @@ const cargo: Ship[] = [
     image: "/static/images/scout.webp",
     image_size: "40%",
     ship_type: "Cruiser",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
   },
 ];
 
@@ -197,34 +251,93 @@ const ShipsSection: React.FC = () => {
                 position: "relative",
                 textAlign: "center",
                 minHeight: "35vh",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
+                display: "flex", // Enable flexbox
+                flexDirection: "column", // Stack children vertically
+                justifyContent: "center", // Vertically center the content
+                alignItems: "center", // Horizontally center the content
               }}
             >
-              {/* <Typography
-                variant="h1"
+              <Box
                 sx={{
                   position: "absolute",
-                  display: { md: "block", xs: "none" },
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  zIndex: "1",
-                  color: theme.palette.custom.primaryText,
+                  display: "flex", // Enable flexbox
+                  flexDirection: "column", // Stack children vertically
+                  marginTop: 5,
+                  marginBottom: 5,
+                  padding: 5,
+                  transition: "transform 0.2s, background-color 0.3s",
+                  backgroundColor: "custom.primaryComponents",
+                  borderWidth: "10px", // Adjust the border width as per your preference
+                  borderStyle: "solid",
+                  borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                  left: 0,
+                  zIndex: 3,
                 }}
               >
-                {expandedMember.title}
-              </Typography> */}
+                <Typography
+                  variant="body1"
+                  fontSize={"1.10rem"}
+                  color="custom.primaryText"
+                >
+                  {expandedMember.title} Features :
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="left"
+                  sx={{ marginTop: 3 }}
+                  color="custom.secondaryText"
+                >
+                  {expandedMember.specs_1}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="left"
+                  sx={{ marginTop: 2 }}
+                  color="custom.secondaryText"
+                >
+                  {expandedMember.specs_2}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="left"
+                  sx={{ marginTop: 2 }}
+                  color="custom.secondaryText"
+                >
+                  {expandedMember.specs_3}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="left"
+                  sx={{ marginTop: 2 }}
+                  color="custom.secondaryText"
+                >
+                  {expandedMember.specs_4}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="left"
+                  sx={{ marginTop: 2 }}
+                  color="custom.secondaryText"
+                >
+                  {expandedMember.specs_5}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="left"
+                  sx={{ marginTop: 2 }}
+                  color="custom.secondaryText"
+                >
+                  {expandedMember.specs_6}
+                </Typography>
+              </Box>
               <Box
                 component="img"
-                alt="Ship"
+                alt="Logo"
                 src={expandedMember.image}
                 sx={{
                   position: "absolute",
-                  maxWidth: "100%",
-                  maxHeight: "100%",
+                  maxWidth: "100%", // Ensure the image does not exceed the container width
+                  maxHeight: "100%", // Optional: limit the height of the image if needed
                   zIndex: "2",
                   top: "5%",
                 }}
