@@ -181,6 +181,7 @@ const MediaSection: React.FC = () => {
                     }}
                   />
                 </Box>
+
                 <Typography
                   variant="h5"
                   align="center"
@@ -268,16 +269,18 @@ const MediaSection: React.FC = () => {
             position: "absolute",
             display: { md: "block", xs: "none" },
             top: "58.25%",
-            left: "10px",
+            left: "30%",
             transform: "translateY(-50%)",
             zIndex: 3,
+            cursor: "pointer",
+            color: "custom.primaryText",
           }}
         >
-          <IconButton>
+          {/* <IconButton>
             <Typography color="custom.secondaryText">
-              <ArrowBack />
+              <ArrowBack fontSize="large" />
             </Typography>
-          </IconButton>
+          </IconButton> */}
         </Box>
 
         <Box
@@ -286,16 +289,18 @@ const MediaSection: React.FC = () => {
             position: "absolute",
             display: { md: "block", xs: "none" },
             top: "58.25%",
-            right: "10px",
+            right: "30%",
             transform: "translateY(-50%)",
             zIndex: 3,
+            cursor: "pointer",
+            color: "custom.primaryText",
           }}
         >
-          <IconButton>
+          {/* <IconButton>
             <Typography color="custom.secondaryText">
-              <ArrowForward />
+              <ArrowForward fontSize="large" />
             </Typography>
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
     </Box>

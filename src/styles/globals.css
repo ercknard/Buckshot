@@ -48,29 +48,24 @@ body {
 } */
 
 /* Style for Swiper Next and Prev buttons */
-.swiper-button-next,
-.swiper-button-prev {
-  border-radius: 50%; /* Make the arrows circular */
-  padding: 12px; /* Space inside the button */
-  z-index: 10; /* Ensure the arrows appear above other elements */
-}
 
-.swiper-button-next:after,
+/* .swiper-button-next:after,
 .swiper-button-prev:after {
   font-size: 24px !important;
   display: none !important;
-}
+} */
 
 /* Custom positioning for next/prev buttons */
-.swiper-button-next {
-  right: 32% !important; /* Move the "next" button closer to the center */
+/* .swiper-button-next {
+  position: absolute;
+  right: 0 !important;
   left: auto;
 }
 
 .swiper-button-prev {
-  left: 30% !important; /* Move the "prev" button closer to the center */
+  left: 0 !important;
   right: auto;
-}
+} */
 
 .swiper-button-next svg {
   width: 2.5rem !important;

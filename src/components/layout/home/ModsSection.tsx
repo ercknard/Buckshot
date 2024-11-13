@@ -10,6 +10,7 @@ import {
   Button,
   DialogActions,
   Stack,
+  IconButton,
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
@@ -22,6 +23,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 type CustomTheme = {
   activeSet: number;
@@ -298,7 +300,10 @@ const ModsSection: React.FC = () => {
             delay: 5000,
             disableOnInteraction: false,
           }}
-          navigation={true}
+          navigation={{
+            prevEl: ".swiper-button-prev", // Custom prev button
+            nextEl: ".swiper-button-next", // Custom next button
+          }}
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
           style={{ marginBottom: "2rem" }}
@@ -332,6 +337,46 @@ const ModsSection: React.FC = () => {
               </Box>
             </SwiperSlide>
           ))}
+          {/* Custom Navigation Buttons */}
+          <Box
+            className="swiper-button-prev"
+            sx={{
+              position: "absolute",
+              display: { md: "block", xs: "none" },
+              top: "58.25%",
+              left: "10px",
+              transform: "translateY(-50%)",
+              zIndex: 3,
+              cursor: "pointer",
+              color: "custom.primaryText",
+            }}
+          >
+            {/* <IconButton>
+                    <Typography color="custom.secondaryText">
+                      <ArrowBack fontSize="large" />
+                    </Typography>
+                  </IconButton> */}
+          </Box>
+
+          <Box
+            className="swiper-button-next"
+            sx={{
+              position: "absolute",
+              display: { md: "block", xs: "none" },
+              top: "58.25%",
+              right: "10px",
+              transform: "translateY(-50%)",
+              zIndex: 3,
+              cursor: "pointer",
+              color: "custom.primaryText",
+            }}
+          >
+            {/* <IconButton>
+                    <Typography color="custom.secondaryText">
+                      <ArrowForward fontSize="large" />
+                    </Typography>
+                  </IconButton> */}
+          </Box>
         </Swiper>
 
         <ModsList />
