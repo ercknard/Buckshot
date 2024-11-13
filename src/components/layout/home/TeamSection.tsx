@@ -319,6 +319,7 @@ const TeamSection: React.FC = () => {
               </Tabs>
             </>
           )}
+
           {activeTab === 0 && (
             <Grid
               position={"relative"}
