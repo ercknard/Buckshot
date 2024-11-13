@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Typography, Grid, Container, Paper } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import { useThemeContext } from "@/theme/themeProvider";
+import rehypeRaw from "rehype-raw"; // Import rehype-raw for raw HTML parsing
 import { styled } from "@mui/system";
 import Particlesview from "../Particles";
 import MainBorder from "../MainBorder";
@@ -131,6 +132,13 @@ const NewsSection = () => {
       fontFamily: "'Courier New', monospace", // Optionally use monospace for code
       fontSize: "1rem",
     },
+    "& img": {
+      maxWidth: "100%",
+      height: "auto",
+      borderRadius: "8px",
+      marginTop: "2rem",
+      marginBottom: "1rem",
+    },
   }));
 
   return (
@@ -214,7 +222,9 @@ const NewsSection = () => {
                     >
                       {displayFileName}
                     </Typography>
-                    <StyledMarkdown>{currentFile.content}</StyledMarkdown>
+                    <StyledMarkdown rehypePlugins={[rehypeRaw]}>
+                      {currentFile.content}
+                    </StyledMarkdown>
                   </Box>
                 )}
 
