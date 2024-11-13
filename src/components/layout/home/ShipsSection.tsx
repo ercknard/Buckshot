@@ -170,7 +170,7 @@ const ShipsSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet } = useThemeContext();
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [expandedMember, setExpandedMember] = useState<Ship | null>(station[0]); // Default to first entry of station
+  const [expandedMember, setExpandedMember] = useState<Ship | null>(battle[0]); // Default to first entry of station
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
