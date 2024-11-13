@@ -29,6 +29,7 @@ import ChangeLoader from "./themeChangeLoader";
 // Define the context type
 interface CustomTheme extends MuiTheme {
   activeSet: number;
+  fancyMode: boolean;
 }
 
 // Create context with a default value of null
@@ -51,7 +52,7 @@ const ThemeToggleButton: React.FC<{
       bgcolor="custom.mainColor"
       padding={0.5}
       spacing={1}
-      width="18rem"
+      width="16.4rem"
       borderRadius="4px"
     >
       {["light", "dark"].map((theme) => (
@@ -109,21 +110,25 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loaderKey, setLoaderKey] = useState(0);
+  const [fancyMode, setFancyMode] = useState<boolean>(false);
 
   useEffect(() => {
     // First, check if there's a stored theme and color set in localStorage
     const storedTheme =
       (localStorage.getItem("theme") as PaletteMode) || "dark"; // Explicitly cast to PaletteMode
     const storedSet = Number(localStorage.getItem("colorSet")) || 1; // Default to set 1 if no value found
+    const storedFancyMode = localStorage.getItem("fancyMode") === "true";
 
     // Apply the theme and color set from localStorage
     setActiveTheme(storedTheme); // No need to cast, already a PaletteMode
     setActiveSet(storedSet);
+    setFancyMode(storedFancyMode);
 
     // Now, check the URL for parameters (if present, override localStorage values)
     const urlParams = new URLSearchParams(window.location.search);
     const urlTheme = urlParams.get("theme");
     const urlColor = urlParams.get("color");
+    const urlFancy = urlParams.get("fancy");
 
     // If there are URL parameters for theme or color, override localStorage values
     const finalTheme =
@@ -135,14 +140,17 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ["blue", "green", "yellow", "orange", "pink"].includes(urlColor)
         ? ["blue", "green", "yellow", "orange", "pink"].indexOf(urlColor) + 1
         : storedSet;
+    const finalFancyMode = urlFancy === "on";
 
     // Update the state with the final values (from either URL or localStorage)
     setActiveTheme(finalTheme); // No need to cast, already a PaletteMode
     setActiveSet(finalSet);
+    setFancyMode(finalFancyMode);
 
     // Store the final values in localStorage
     localStorage.setItem("theme", finalTheme);
     localStorage.setItem("colorSet", finalSet.toString());
+    localStorage.setItem("fancyMode", finalFancyMode.toString());
 
     // Optionally update the URL with the correct theme and color set (for sharing/bookmarking)
     const url = new URL(window.location.href);
@@ -151,6 +159,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       "color",
       ["blue", "green", "yellow", "orange", "pink"][finalSet - 1]
     );
+    url.searchParams.set("fancy", finalFancyMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
   }, []);
 
@@ -208,9 +217,21 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }, 1000); // 1 second delay before closing
   };
 
+  const toggleFancyMode = () => {
+    const newFancyMode = !fancyMode;
+    setFancyMode(newFancyMode);
+    localStorage.setItem("fancyMode", newFancyMode.toString());
+
+    // Optionally update the URL to reflect the fancy mode
+    const url = new URL(window.location.href);
+    url.searchParams.set("fancy", newFancyMode ? "on" : "off");
+    window.history.pushState({}, "", url.toString());
+  };
+
   const customPalette: CustomTheme = {
     ...scTheme(activeTheme, activeSet),
     activeSet, // Add the activeSet to the theme
+    fancyMode,
   };
 
   const iconColor = customPalette.palette.custom.primaryText;
@@ -284,6 +305,30 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 />
               ))}
             </Box>
+            <Stack
+              direction={"row"}
+              marginTop={2.5}
+              spacing={2}
+              alignItems={"center"}
+            >
+              <Typography variant="h5" color="custom.primaryText">
+                Fancy Mode:
+              </Typography>
+              <Button
+                variant={fancyMode ? "contained" : "outlined"}
+                onClick={toggleFancyMode}
+                sx={{
+                  backgroundColor: fancyMode
+                    ? customPalette.palette.custom.secondarySolidColors
+                    : customPalette.palette.custom.secondarySolidColors,
+                  color: fancyMode
+                    ? customPalette.palette.custom.secondaryText
+                    : customPalette.palette.custom.secondaryText,
+                }}
+              >
+                {fancyMode ? "ON" : "OFF"}
+              </Button>
+            </Stack>
           </Box>
         </Drawer>
         {children}

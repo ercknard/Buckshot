@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
-import Particlesview from "../Particles";
 import MainBorder from "../MainBorder";
 
 type CustomTheme = {
@@ -139,21 +138,7 @@ const DonateSection: React.FC = () => {
         paddingBottom: { md: "7.5rem", xs: "2.5rem" },
       }}
     >
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-        })}
-      >
-        <Particlesview containerId="donate-particles" />
-      </Box>
-
-      <MainBorder />
+      <MainBorder containerId="donate-particles" />
 
       <Container
         sx={{

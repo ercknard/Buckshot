@@ -2,13 +2,20 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
+import Particlesview from "./Particles";
+
+// Define the type for props
+interface MainBorderProps {
+  containerId: string;
+}
 
 type CustomTheme = {
   activeSet: number;
+  fancyMode: boolean; // Add fancyMode here
 };
 
-const MainBorder: React.FC = () => {
-  const { activeSet } = useThemeContext() as CustomTheme;
+const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
+  const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
   const theme = useTheme();
 
   const colorSetBgMap: { [key: string]: string } = {
@@ -36,15 +43,31 @@ const MainBorder: React.FC = () => {
   };
 
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
-
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
-
   const imageBgBorderDarkSrc =
     colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
 
+  if (!fancyMode) {
+    return null; // Or return an empty Box or null if you don't want to render anything
+  }
+
   return (
     <Box>
+      <Box
+        sx={(theme) => ({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 1,
+          pointerEvents: "none",
+        })}
+      >
+        {/* Pass the containerId prop to Particlesview */}
+        <Particlesview containerId={containerId} />
+      </Box>
       <Box
         component={"img"}
         alt="Logo"

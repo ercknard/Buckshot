@@ -17,6 +17,7 @@ const typingText = "CryptechTest";
 
 type CustomTheme = {
   activeSet: number; // Adjust this based on your actual structure
+  fancyMode: boolean; // Add fancyMode here
 };
 
 const jumpAnimation = keyframes`
@@ -95,7 +96,7 @@ export default function HeroSection(): JSX.Element {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
-  const { activeSet } = useThemeContext() as CustomTheme; // Get the active color set ID from context
+  const { activeSet, fancyMode } = useThemeContext() as CustomTheme; // Get the active color set ID from context
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [index, setIndex] = useState(0);
@@ -312,16 +313,31 @@ export default function HeroSection(): JSX.Element {
                 Welcome to
               </Typography>
             </Stack>
-            <Typography variant={"h2"} color={"custom.secondaryText"}>
-              <Stack
-                display={"flex"}
-                direction={"row"}
-                alignItems={"center"}
-                marginTop={1}
-              >
-                {displayedText} <Cursor />
-              </Stack>
-            </Typography>
+            {fancyMode ? (
+              <Typography variant={"h2"} color={"custom.secondaryText"}>
+                <Stack
+                  display={"flex"}
+                  direction={"row"}
+                  alignItems={"center"}
+                  marginTop={1}
+                >
+                  {displayedText} <Cursor />
+                </Stack>
+              </Typography>
+            ) : (
+              <>
+                <Typography variant={"h2"} color={"custom.secondaryText"}>
+                  <Stack
+                    display={"flex"}
+                    direction={"row"}
+                    alignItems={"center"}
+                    marginTop={1}
+                  >
+                    Cryptechtest
+                  </Stack>
+                </Typography>
+              </>
+            )}
           </>
         ) : (
           <>
@@ -404,68 +420,103 @@ export default function HeroSection(): JSX.Element {
         })}
       />
 
-      <Box
-        sx={(theme) => ({
-          bgcolor: "transparent",
-          backgroundImage: `radial-gradient(circle, ${theme.palette.custom.primaryBackgroundGrayed}90, ${theme.palette.custom.primaryBackground})`,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100vh",
-          objectFit: "cover",
-          pointerEvents: "none",
-          zIndex: "-3",
-          animation: animationPaused
-            ? "none"
-            : `${toOpacityAnimation2} 20s ease-in-out infinite`,
-        })}
-      />
+      {fancyMode ? (
+        <>
+          <Box
+            sx={(theme) => ({
+              bgcolor: "transparent",
+              backgroundImage: `radial-gradient(circle, ${theme.palette.custom.primaryBackgroundGrayed}90, ${theme.palette.custom.primaryBackground})`,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100vh",
+              objectFit: "cover",
+              pointerEvents: "none",
+              zIndex: "-3",
+              animation: animationPaused
+                ? "none"
+                : `${toOpacityAnimation2} 20s ease-in-out infinite`,
+            })}
+          />
 
-      <Particlesview containerId="hero-particles" />
+          <Particlesview containerId="hero-particles" />
 
-      {/* Background */}
+          <Box
+            sx={{
+              backgroundImage: `url(${imageBgSrc})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+              zIndex: "-4",
+              animation: {
+                md: animationPaused
+                  ? "none"
+                  : `${zoomAnimation} 20s ease-in-out infinite`,
+                xs: "none",
+              },
+              overflow: "hidden",
+              transformOrigin: "center center",
+            }}
+          />
 
-      <Box
-        sx={{
-          backgroundImage: `url(${imageBgSrc})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          zIndex: "-4",
-          animation: {
-            md: animationPaused
-              ? "none"
-              : `${zoomAnimation} 20s ease-in-out infinite`,
-            xs: "none",
-          },
-          overflow: "hidden",
-          transformOrigin: "center center",
-        }}
-      />
-
-      <Box
-        sx={(theme) => ({
-          backgroundImage: `url(/static/images/station-5.webp)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          position: "absolute",
-          top: "45%",
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          zIndex: "5",
-          animation: `${jumpAnimation} 3s ease-in-out infinite`,
-        })}
-      />
+          <Box
+            sx={(theme) => ({
+              backgroundImage: `url(/static/images/station-5.webp)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              position: "absolute",
+              top: "45%",
+              left: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+              zIndex: "5",
+              animation: `${jumpAnimation} 3s ease-in-out infinite`,
+            })}
+          />
+        </>
+      ) : (
+        <>
+          <Box
+            sx={{
+              backgroundImage: `url(${imageBgSrc})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+              zIndex: "-4",
+            }}
+          />
+          <Box
+            sx={(theme) => ({
+              backgroundImage: `url(/static/images/station-5.webp)`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              position: "absolute",
+              top: "45%",
+              left: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+              zIndex: "5",
+            })}
+          />
+        </>
+      )}
 
       {/* Frame */}
 
@@ -539,131 +590,139 @@ export default function HeroSection(): JSX.Element {
 
       {/* Left */}
 
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          display: { md: "block", xs: "none" },
-          top: 0,
-          left: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${closeLeftGateAnimation} 20s ease-in-out infinite`,
-          zIndex: "2",
-          overflow: "hidden",
-        })}
-      >
+      {fancyMode ? (
         <Box
-          component="img"
-          alt="Logo"
-          src={imageFrameSrc}
           sx={(theme) => ({
             position: "absolute",
-            width: "100%",
+            display: { md: "block", xs: "none" },
+            top: 0,
+            left: 0,
+            width: "50%",
             height: "100%",
-            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-            zIndex: "3",
-          })}
-        />
-
-        <Box
-          component="img"
-          alt="Logo"
-          src={imageBgLeftSrc}
-          sx={(theme) => ({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            opacity: 1,
+            pointerEvents: "none",
             animation: animationPaused
               ? "none"
-              : `${zoomAnimation} 20s ease-in-out infinite`,
-            zIndex: "1",
-            objectFit: "cover",
-          })}
-        />
-
-        <Box
-          bgcolor={"#121212"}
-          sx={(theme) => ({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            animation: animationPaused
-              ? "none"
-              : `${toOpacityAnimation} 20s ease-in-out infinite`,
+              : `${closeLeftGateAnimation} 20s ease-in-out infinite`,
             zIndex: "2",
-            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            overflow: "hidden",
           })}
-        />
-      </Box>
+        >
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageFrameSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              zIndex: "3",
+            })}
+          />
+
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageBgLeftSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              animation: animationPaused
+                ? "none"
+                : `${zoomAnimation} 20s ease-in-out infinite`,
+              zIndex: "1",
+              objectFit: "cover",
+            })}
+          />
+
+          <Box
+            bgcolor={"#121212"}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              animation: animationPaused
+                ? "none"
+                : `${toOpacityAnimation} 20s ease-in-out infinite`,
+              zIndex: "2",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            })}
+          />
+        </Box>
+      ) : (
+        <></>
+      )}
 
       {/* Right */}
 
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          display: { md: "block", xs: "none" },
-          top: 0,
-          right: 0,
-          width: "50%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-          animation: animationPaused
-            ? "none"
-            : `${closeRightGateAnimation} 20s ease-in-out infinite`,
-          zIndex: "2",
-          overflow: "hidden",
-        })}
-      >
+      {fancyMode ? (
         <Box
-          component="img"
-          alt="Logo"
-          src={imageFrameSrc}
           sx={(theme) => ({
             position: "absolute",
-            width: "100%",
+            display: { md: "block", xs: "none" },
+            top: 0,
+            right: 0,
+            width: "50%",
             height: "100%",
-            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
-            zIndex: "3",
-          })}
-        />
-
-        <Box
-          component="img"
-          alt="Logo"
-          src={imageBgRightSrc}
-          sx={(theme) => ({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            opacity: 1,
+            pointerEvents: "none",
             animation: animationPaused
               ? "none"
-              : `${zoomAnimation} 20s ease-in-out infinite`,
-            zIndex: "1",
-            objectFit: "cover",
-          })}
-        />
-
-        <Box
-          bgcolor={"#121212"}
-          sx={(theme) => ({
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            animation: animationPaused
-              ? "none"
-              : `${toOpacityAnimation} 20s ease-in-out infinite`,
+              : `${closeRightGateAnimation} 20s ease-in-out infinite`,
             zIndex: "2",
-            border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            overflow: "hidden",
           })}
-        />
-      </Box>
+        >
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageFrameSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              zIndex: "3",
+            })}
+          />
+
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageBgRightSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              animation: animationPaused
+                ? "none"
+                : `${zoomAnimation} 20s ease-in-out infinite`,
+              zIndex: "1",
+              objectFit: "cover",
+            })}
+          />
+
+          <Box
+            bgcolor={"#121212"}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              animation: animationPaused
+                ? "none"
+                : `${toOpacityAnimation} 20s ease-in-out infinite`,
+              zIndex: "2",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            })}
+          />
+        </Box>
+      ) : (
+        <></>
+      )}
 
       {/* Dialog Component */}
       <DefaultDialog

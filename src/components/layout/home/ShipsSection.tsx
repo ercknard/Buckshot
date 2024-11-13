@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
-import Particlesview from "../Particles";
 import MainBorder from "../MainBorder";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -212,21 +211,7 @@ const ShipsSection: React.FC = () => {
         minHeight: "75vh",
       }}
     >
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-        })}
-      >
-        <Particlesview containerId="ships-particles" />
-      </Box>
-
-      <MainBorder />
+      <MainBorder containerId="ships-particles" />
 
       <Container
         sx={{

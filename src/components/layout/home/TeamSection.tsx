@@ -17,7 +17,6 @@ import "swiper/css/scrollbar";
 import SwiperCore from "swiper"; // Import Scrollbar from SwiperCore
 import { Scrollbar } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
-import Particlesview from "../Particles";
 import MainBorder from "../MainBorder";
 
 // Install the module in SwiperCore
@@ -218,21 +217,7 @@ const TeamSection: React.FC = () => {
         paddingBottom: { md: "7.5rem", xs: "2.5rem" },
       }}
     >
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-        })}
-      >
-        <Particlesview containerId="teams-particles" />
-      </Box>
-
-      <MainBorder />
+      <MainBorder containerId="teams-particles" />
 
       <Container
         sx={{

@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 import { useThemeContext } from "@/theme/themeProvider";
 import rehypeRaw from "rehype-raw"; // Import rehype-raw for raw HTML parsing
 import { styled } from "@mui/system";
-import Particlesview from "../Particles";
 import MainBorder from "../MainBorder";
 
 // Define the type for the GitHub repository content file
@@ -155,21 +154,7 @@ const NewsSection = () => {
         minHeight: "40vh",
       }}
     >
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-        })}
-      >
-        <Particlesview containerId="news-particles" />
-      </Box>
-
-      <MainBorder />
+      <MainBorder containerId="news-particles" />
 
       {/* Container for Mods List */}
       <Container

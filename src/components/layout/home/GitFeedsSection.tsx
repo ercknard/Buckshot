@@ -15,7 +15,6 @@ import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";
 import DefaultDialog from "../DefaultDialog";
-import Particlesview from "../Particles";
 import MainBorder from "../MainBorder";
 
 type CustomTheme = {
@@ -83,21 +82,7 @@ const GitFeedsSection: React.FC = () => {
         paddingBottom: { md: "7.5rem", xs: "2.5rem" },
       }}
     >
-      <Box
-        sx={(theme) => ({
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          opacity: 1,
-          pointerEvents: "none",
-        })}
-      >
-        <Particlesview containerId="github-particles" />
-      </Box>
-
-      <MainBorder />
+      <MainBorder containerId="github-particles" />
 
       <Container
         sx={{
