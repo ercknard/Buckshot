@@ -36,72 +36,6 @@ type Ship = {
   specs_6: string;
 };
 
-const station: Ship[] = [
-  {
-    id: 1,
-    title: "Orbital Station",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/ship-2.png",
-    image_size: "40%",
-    ship_type: "Station",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
-const scout: Ship[] = [
-  {
-    id: 1,
-    title: "Scout",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Scout",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-
-  {
-    id: 2,
-    title: "Proto Scout",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Scout",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
-const raider: Ship[] = [
-  {
-    id: 1,
-    title: "Raider",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Raider",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
 const battle: Ship[] = [
   {
     id: 1,
@@ -166,6 +100,72 @@ const cargo: Ship[] = [
   },
 ];
 
+const scout: Ship[] = [
+  {
+    id: 1,
+    title: "Scout",
+    content: "CryptechTest Spawn point",
+    image: "/static/images/scout.webp",
+    image_size: "40%",
+    ship_type: "Scout",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
+  },
+
+  {
+    id: 2,
+    title: "Proto Scout",
+    content: "CryptechTest Spawn point",
+    image: "/static/images/scout.webp",
+    image_size: "40%",
+    ship_type: "Scout",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
+  },
+];
+
+const station: Ship[] = [
+  {
+    id: 1,
+    title: "Orbital Station",
+    content: "CryptechTest Spawn point",
+    image: "/static/images/ship-2.png",
+    image_size: "40%",
+    ship_type: "Station",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
+  },
+];
+
+const raider: Ship[] = [
+  {
+    id: 1,
+    title: "Raider",
+    content: "CryptechTest Spawn point",
+    image: "/static/images/scout.webp",
+    image_size: "40%",
+    ship_type: "Raider",
+    specs_1: "sample feature 1",
+    specs_2: "sample feature 2",
+    specs_3: "sample feature 3",
+    specs_4: "sample feature 4",
+    specs_5: "sample feature 5",
+    specs_6: "sample feature 6",
+  },
+];
+
 const ShipsSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet } = useThemeContext();
@@ -184,7 +184,7 @@ const ShipsSection: React.FC = () => {
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
 
   // Ship data mapping for each tab
-  const tabShipData = [station, scout, raider, battle, cargo];
+  const tabShipData = [battle, cargo, scout, station, raider];
 
   // Handle tab change and set the first entry of the selected tab as the expanded member
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -352,11 +352,11 @@ const ShipsSection: React.FC = () => {
             },
           }}
         >
-          <Tab label="Station" />
-          <Tab label="Scout" />
-          <Tab label="Raider" />
           <Tab label="Battle Cruiser" />
           <Tab label="Cargo Cruiser" />
+          <Tab label="Scout" />
+          <Tab label="Orbital Station" />
+          <Tab label="Raider" />
         </Tabs>
 
         <Box position={"relative"} zIndex={2}>
