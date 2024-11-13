@@ -92,13 +92,13 @@ export default function Navbar() {
             >
               <Box mr={{ xs: 1, sm: 3, md: 5 }} pt={1}>
                 <Stack direction={"row"} spacing={1}>
-                  <Box
+                  {/* <Box
                     component="img"
                     width={{ xs: 30, sm: 55 }}
                     height={1}
                     alt="Logo"
                     src="/static/images/mug.png"
-                  />
+                  /> */}
                   <Typography
                     variant={"h4"}
                     fontSize={"1.5rem"}
@@ -143,13 +143,13 @@ export default function Navbar() {
             >
               <Box mr={{ xs: 1, sm: 3, md: 5 }}>
                 <Stack direction={"row"} spacing={1}>
-                  <Box
+                  {/* <Box
                     component="img"
                     width={{ xs: 30, sm: 55 }}
                     height={1}
                     alt="Logo"
                     src="/static/images/mug.png"
-                  />
+                  /> */}
                   <Typography
                     variant={"h4"}
                     fontSize={"1.5rem"}
@@ -268,14 +268,14 @@ export default function Navbar() {
           >
             <Box display={"flex"}>
               <Stack direction={"row"} spacing={1} alignItems={"center"}>
-                <Box mr={{ xs: 1, sm: 3, md: 5 }}>
+                {/* <Box mr={{ xs: 1, sm: 3, md: 5 }}>
                   <Box
                     component="img"
                     width={{ xs: 40, sm: 55 }}
                     alt="Logo"
                     src="/static/images/mug.png"
                   />
-                </Box>
+                </Box> */}
 
                 <Typography
                   variant="body1"
