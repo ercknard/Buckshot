@@ -255,7 +255,7 @@ const ShipsSection: React.FC = () => {
                   borderWidth: "10px", // Adjust the border width as per your preference
                   borderStyle: "solid",
                   borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
-                  left: 0,
+                  left: "10%",
                   zIndex: 3,
                 }}
               >
@@ -325,6 +325,7 @@ const ShipsSection: React.FC = () => {
                   maxHeight: "100%", // Optional: limit the height of the image if needed
                   zIndex: "2",
                   top: "5%",
+                  right: "10%",
                 }}
               />
             </Box>
