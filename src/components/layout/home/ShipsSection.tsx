@@ -54,7 +54,7 @@ const battle: Ship[] = [
 
   {
     id: 2,
-    title: "Meduim Battle",
+    title: "Medium Battle",
     content: "CryptechTest Spawn point",
     image: "/static/images/scout.webp",
     image_size: "40%",
