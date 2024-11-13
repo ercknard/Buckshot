@@ -288,7 +288,7 @@ export default function Navbar() {
             </Box>
 
             {/* RIGHT MENU */}
-            <Box marginTop={1}>
+            <Box>
               <Stack
                 direction={"row"}
                 spacing={{ xs: 0, sm: 0, md: 4 }}
