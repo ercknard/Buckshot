@@ -218,6 +218,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   };
 
   const toggleFancyMode = () => {
+    setLoading(true);
     const newFancyMode = !fancyMode;
     setFancyMode(newFancyMode);
     localStorage.setItem("fancyMode", newFancyMode.toString());
@@ -226,6 +227,13 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const url = new URL(window.location.href);
     url.searchParams.set("fancy", newFancyMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
+    setDrawerOpen(false);
+
+    setLoaderKey((prevKey) => prevKey + 1); // Force re-render
+
+    setTimeout(() => {
+      setLoading(false); // Hide loader after 3 seconds
+    }, 3000); // Simulate loading duration
   };
 
   const customPalette: CustomTheme = {
