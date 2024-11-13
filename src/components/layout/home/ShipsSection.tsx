@@ -28,12 +28,12 @@ type Ship = {
   image: string;
   image_size: string;
   ship_type: string;
-  specs_1: string;
-  specs_2: string;
-  specs_3: string;
-  specs_4: string;
-  specs_5: string;
-  specs_6: string;
+  specs_1?: string;
+  specs_2?: string;
+  specs_3?: string;
+  specs_4?: string;
+  specs_5?: string;
+  specs_6?: string;
 };
 
 const battle: Ship[] = [
