@@ -45,6 +45,15 @@ const station: Ship[] = [
 const scout: Ship[] = [
   {
     id: 1,
+    title: "Scout",
+    content: "CryptechTest Spawn point",
+    image: "/static/images/scout.webp",
+    image_size: "40%",
+    ship_type: "Scout",
+  },
+
+  {
+    id: 2,
     title: "Proto Scout",
     content: "CryptechTest Spawn point",
     image: "/static/images/scout.webp",
