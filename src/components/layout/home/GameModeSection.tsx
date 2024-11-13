@@ -322,7 +322,7 @@ const GameModeSection: React.FC = () => {
                   src={member.image}
                   alt={`${member.name} - ${member.name}`}
                   sx={{
-                    width: "65%",
+                    width: "50%",
                     height: "auto",
                   }}
                 />
