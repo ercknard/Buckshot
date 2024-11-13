@@ -22,8 +22,8 @@ const ShipsSection: React.FC = () => {
       sx={{
         padding: { md: "4", xs: "1" },
         backgroundColor: "custom.secondaryBackground",
-        paddingTop: { md: "10rem", xs: "2.5rem" },
-        paddingBottom: { md: "10rem", xs: "2.5rem" },
+        paddingTop: { md: "7.5rem", xs: "2.5rem" },
+        paddingBottom: { md: "7.5rem", xs: "2.5rem" },
         minHeight: "75vh",
       }}
     >
@@ -51,7 +51,7 @@ const ShipsSection: React.FC = () => {
       >
         <Box position={"relative"} zIndex={2}>
           <Typography variant="h4" align="center" gutterBottom>
-            CryptechTest Ships
+            Starships
           </Typography>
           <Typography variant="h5" align="center" gutterBottom>
             Stay updated with the latest Git events, including commits, merges,

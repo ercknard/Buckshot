@@ -135,8 +135,8 @@ const DonateSection: React.FC = () => {
       sx={{
         padding: { md: "4", xs: "1" },
         backgroundColor: "custom.secondaryBackground",
-        paddingTop: { md: "10rem", xs: "2.5rem" },
-        paddingBottom: { md: "10rem", xs: "2.5rem" },
+        paddingTop: { md: "7.5rem", xs: "2.5rem" },
+        paddingBottom: { md: "7.5rem", xs: "2.5rem" },
       }}
     >
       <Box
