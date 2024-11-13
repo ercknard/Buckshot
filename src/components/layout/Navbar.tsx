@@ -295,7 +295,7 @@ export default function Navbar() {
                 display={"flex"}
                 alignItems={"center"}
               >
-                {["news", "mods", "team", "gameplay", "donate"].map(
+                {["news", "ships", "mods", "team", "gameplay", "donate"].map(
                   (section) => (
                     <Button
                       key={section}
