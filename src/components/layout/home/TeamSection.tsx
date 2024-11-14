@@ -262,7 +262,7 @@ const TeamSection: React.FC = () => {
               {teamMembers.map((member) => (
                 <Grid
                   item
-                  xs={6}
+                  xs={12}
                   md={2.4}
                   key={member.name}
                   sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}

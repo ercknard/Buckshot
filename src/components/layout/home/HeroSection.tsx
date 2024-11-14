@@ -364,7 +364,7 @@ export default function HeroSection(): JSX.Element {
             <Typography
               variant={"h4"}
               color={"custom.secondaryText"}
-              fontSize={"2.25rem"}
+              fontSize={"2rem"}
             >
               CryptechTest
             </Typography>

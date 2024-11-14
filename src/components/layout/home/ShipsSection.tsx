@@ -172,7 +172,7 @@ const ShipsSection: React.FC = () => {
               sx={{
                 position: "relative",
                 textAlign: "center",
-                minHeight: "35vh",
+                minHeight: "40vh",
                 display: "flex", // Enable flexbox
                 flexDirection: "column", // Stack children vertically
                 justifyContent: "center", // Vertically center the content
