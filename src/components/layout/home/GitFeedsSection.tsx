@@ -78,8 +78,8 @@ const GitFeedsSection: React.FC = () => {
       sx={{
         padding: { md: "4", xs: "1" },
         backgroundColor: "custom.secondaryBackground",
-        paddingTop: { md: "7.5rem", xs: "2.5rem" },
-        paddingBottom: { md: "7.5rem", xs: "2.5rem" },
+        paddingTop: { md: "7.5rem", xs: "3rem" },
+        paddingBottom: { md: "7.5rem", xs: "3rem" },
       }}
     >
       <MainBorder containerId="github-particles" />

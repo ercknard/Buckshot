@@ -280,8 +280,8 @@ const ModsSection: React.FC = () => {
             theme.palette.custom.primaryComponents.slice(5, 7),
             16
           )}, .5)`,
-        paddingTop: { md: "5rem", xs: "2.5rem" },
-        paddingBottom: { md: "5rem", xs: "2.5rem" },
+        paddingTop: { md: "5rem", xs: "3rem" },
+        paddingBottom: { md: "5rem", xs: "3rem" },
       }}
     >
       <Box
