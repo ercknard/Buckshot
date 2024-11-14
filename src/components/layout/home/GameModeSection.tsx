@@ -262,7 +262,7 @@ const GameModeSection: React.FC = () => {
           position={"relative"}
           zIndex={2}
           container
-          spacing={4}
+          spacing={{ md: 4, xs: 2 }}
           justifyContent="left"
         >
           {modes.map((member) => (

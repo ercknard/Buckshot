@@ -273,6 +273,7 @@ const ShipsSection: React.FC = () => {
           value={activeTab}
           onChange={handleTabChange} // Use handleTabChange
           sx={{
+            overflowX: "auto",
             marginTop: 2,
             marginBottom: 2,
             "& .MuiTabs-flexContainer": {

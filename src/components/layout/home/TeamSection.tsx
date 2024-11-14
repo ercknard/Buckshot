@@ -255,7 +255,7 @@ const TeamSection: React.FC = () => {
               position={"relative"}
               zIndex={2}
               container
-              spacing={4}
+              spacing={{ md: 4, xs: 2 }}
               justifyContent="center"
               sx={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
             >
