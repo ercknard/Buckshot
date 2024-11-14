@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Grid,
@@ -7,10 +7,13 @@ import {
   Container,
   Snackbar,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
+import supabase from "@/lib/supabase";
+import { error } from "console";
 
 type CustomTheme = {
   activeSet: number;
@@ -22,71 +25,110 @@ interface Coin {
   address: string;
 }
 
-const teamcoins: Coin[] = [
-  {
-    name: "BTC",
-    image: "/static/images/bitcoin.webp",
-    address: "36UHvrS9jX226kads9tdjgta3sq3RFGjZz",
-  },
-  {
-    name: "Dash",
-    image: "/static/images/dash-logo.webp",
-    address: "XkS9v246S4U4mYo7RhVpyxQfv6G6o5kUfr",
-  },
-  {
-    name: "Doge",
-    image: "/static/images/dogecoin.webp",
-    address: "DBFKW511txib9237kBeFt5GcSYPKWcnoGc",
-  },
-  {
-    name: "ETC",
-    image: "/static/images/etc.webp",
-    address: "0x122e3F3877fEDEC646A7891cB779c9F8583cE237",
-  },
-  {
-    name: "ETH",
-    image: "/static/images/ethereum.webp",
-    address: "0x1914062c4e5aFe8B4Aaa2b9e46ef4F99F61606C0",
-  },
-  {
-    name: "LTC",
-    image: "/static/images/litecoin.webp",
-    address: "MUxtfEzoHeqVf7EwjdzEVoCbnWPRwk9NSd",
-  },
-  {
-    name: "MRX",
-    image: "/static/images/metrix-coin.webp",
-    address: "MRAZUn5azvVBTVCSFi6y7xyWAhMCcNN3AB",
-  },
-  {
-    name: "NameCoin",
-    image: "/static/images/namecoin.webp",
-    address: "NB5rTVYfApfe7GfdaMmUra8PpusJqkoyuu",
-  },
-  {
-    name: "OHM",
-    image: "/static/images/ohm.webp",
-    address: "ZK3WpPRBsoboHoemJeiGbnJEuCwQYUqB4q",
-  },
-  {
-    name: "Zcash",
-    image: "/static/images/zcash.webp",
-    address: "t1RCU5Sbaj15EiA2sVVZQZLAsffGW1m1WAt",
-  },
-  {
-    name: "SCC",
-    image: "/static/images/scc.webp",
-    address: "sMZ8CXDDkPqFrm8W7A1rXhsW1zRrfekJMY",
-  },
-];
+// const teamcoins: Coin[] = [
+//   {
+//     name: "BTC",
+//     image: "/static/images/bitcoin.webp",
+//     address: "36UHvrS9jX226kads9tdjgta3sq3RFGjZz",
+//   },
+//   {
+//     name: "Dash",
+//     image: "/static/images/dash-logo.webp",
+//     address: "XkS9v246S4U4mYo7RhVpyxQfv6G6o5kUfr",
+//   },
+//   {
+//     name: "Doge",
+//     image: "/static/images/dogecoin.webp",
+//     address: "DBFKW511txib9237kBeFt5GcSYPKWcnoGc",
+//   },
+//   {
+//     name: "ETC",
+//     image: "/static/images/etc.webp",
+//     address: "0x122e3F3877fEDEC646A7891cB779c9F8583cE237",
+//   },
+//   {
+//     name: "ETH",
+//     image: "/static/images/ethereum.webp",
+//     address: "0x1914062c4e5aFe8B4Aaa2b9e46ef4F99F61606C0",
+//   },
+//   {
+//     name: "LTC",
+//     image: "/static/images/litecoin.webp",
+//     address: "MUxtfEzoHeqVf7EwjdzEVoCbnWPRwk9NSd",
+//   },
+//   {
+//     name: "MRX",
+//     image: "/static/images/metrix-coin.webp",
+//     address: "MRAZUn5azvVBTVCSFi6y7xyWAhMCcNN3AB",
+//   },
+//   {
+//     name: "NameCoin",
+//     image: "/static/images/namecoin.webp",
+//     address: "NB5rTVYfApfe7GfdaMmUra8PpusJqkoyuu",
+//   },
+//   {
+//     name: "OHM",
+//     image: "/static/images/ohm.webp",
+//     address: "ZK3WpPRBsoboHoemJeiGbnJEuCwQYUqB4q",
+//   },
+//   {
+//     name: "Zcash",
+//     image: "/static/images/zcash.webp",
+//     address: "t1RCU5Sbaj15EiA2sVVZQZLAsffGW1m1WAt",
+//   },
+//   {
+//     name: "SCC",
+//     image: "/static/images/scc.webp",
+//     address: "sMZ8CXDDkPqFrm8W7A1rXhsW1zRrfekJMY",
+//   },
+// ];
 
 const DonateSection: React.FC = () => {
   const { activeSet } = useThemeContext() as CustomTheme;
   const theme = useTheme();
 
-  const [expandedcoin, setExpandedcoin] = useState<Coin | null>(teamcoins[0]); // Set the first coin as default
   const [snackbarOpen, setSnackbarOpen] = useState(false); // Snackbar visibility state
   const [snackbarMessage, setSnackbarMessage] = useState(""); // Snackbar message content
+  const [coin, setCoin] = useState<Coin[]>([]);
+  const [expandedcoin, setExpandedcoin] = useState<Coin | null>(null); // Set the first coin as default
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCoin = async () => {
+      try {
+        // Fetch coins from Supabase
+        const { data, error } = await supabase.from("team_coins").select("*");
+
+        if (error) throw error;
+
+        setCoin(data); // Set the fetched coins
+        setExpandedcoin(data[0]); // Set the first coin as default active
+      } catch (err) {
+        setError("Error loading coins");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCoin();
+  }, []);
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   const handleCardClick = (coin: Coin) => {
     // Only toggle the expanded coin if it is not the currently expanded coin
@@ -209,7 +251,7 @@ const DonateSection: React.FC = () => {
             rowSpacing={1}
             justifyContent="center"
           >
-            {teamcoins.map((coin) => (
+            {coin.map((coin) => (
               <Grid
                 item
                 xs={6}
