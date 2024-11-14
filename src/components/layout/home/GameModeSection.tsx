@@ -236,7 +236,10 @@ const GameModeSection: React.FC = () => {
                     borderRadius: "4px",
                   }}
                 >
-                  <Typography variant="h5" fontSize={"1.75rem"}>
+                  <Typography
+                    variant="h5"
+                    fontSize={{ md: "1.75rem", xs: "1.25rem" }}
+                  >
                     IP address: {expandedMember.ip}
                   </Typography>
                 </Box>
@@ -249,7 +252,10 @@ const GameModeSection: React.FC = () => {
                     marginTop: 1,
                   }}
                 >
-                  <Typography variant="h5" fontSize={"1.75rem"}>
+                  <Typography
+                    variant="h5"
+                    fontSize={{ md: "1.75rem", xs: "1.25rem" }}
+                  >
                     {expandedMember.name} port: {expandedMember.port}
                   </Typography>
                 </Box>

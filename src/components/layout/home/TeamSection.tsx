@@ -262,7 +262,7 @@ const TeamSection: React.FC = () => {
               {teamMembers.map((member) => (
                 <Grid
                   item
-                  xs={12}
+                  xs={6}
                   md={2.4}
                   key={member.name}
                   sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
@@ -304,7 +304,7 @@ const TeamSection: React.FC = () => {
                     />
                     <Typography
                       variant="body1"
-                      fontSize={"1.10rem"}
+                      fontSize={{ md: "1.10rem", xs: "1rem" }}
                       sx={{ marginTop: 2 }}
                     >
                       {member.name}
