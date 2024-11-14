@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Divider, useMediaQuery } from "@mui/material";
+import { Alert, CircularProgress, useMediaQuery } from "@mui/material";
 import { Theme } from "@mui/material/styles";
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,40 +10,86 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import { ArrowBack, ArrowForward } from "@mui/icons-material"; // MUI icons for prev and next
 import ReactPlayer from "react-player"; // Import react-player
+import supabase from "@/lib/supabase";
 
 type CustomTheme = {
   activeSet: number;
 };
 
-const videoUrls = [
-  "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-  "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-  "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-  "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-  "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-];
+interface Media {
+  video_url: string;
+  title: string;
+  cover_image: string;
+}
 
-const videoTitles = [
-  "Part I: Epic Adventure Begins",
-  "Part II: Thrilling Gameplay Moments",
-  "Part III: Unforgettable Action Sequences",
-  "Part IV: Master the Game",
-  "Part V: Victory Awaits",
-];
+// const media: Media[] = [
+//   {
+//     video_url:
+//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
+//     title: "Part I: Epic Adventure Begins",
+//     cover_image: "/static/images/bg-2.webp",
+//   },
+//   {
+//     video_url:
+//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
+//     title: "Part II: Thrilling Gameplay Moments",
+//     cover_image: "/static/images/bg-1.webp",
+//   },
+//   {
+//     video_url:
+//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
+//     title: "Part III: Unforgettable Action Sequences",
+//     cover_image: "/static/images/spaceship.webp",
+//   },
+//   {
+//     video_url:
+//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
+//     title: "Part IV: Master the Game",
+//     cover_image: "/static/images/bgse.png",
+//   },
+//   {
+//     video_url:
+//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
+//     title: "Part V: Victory Awaits",
+//     cover_image: "static/images/corridor-b.png",
+//   },
+// ];
 
 const MediaSection: React.FC = () => {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
   );
-
   const { activeSet } = useThemeContext() as CustomTheme;
   const theme = useTheme();
   const swiperRef = useRef(null);
 
   // State to handle client-side rendering
   const [isClient, setIsClient] = useState(false);
+  const [media, setMedia] = useState<Media[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      try {
+        // Fetch slides from Supabase
+        const { data, error } = await supabase
+          .from("media") // Assuming "featuredmods" is your table name
+          .select("*");
+
+        if (error) throw error;
+
+        setMedia(data); // Set the fetched slides data
+      } catch (err) {
+        setError("Error loading slides");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMedia();
+  }, []);
 
   useEffect(() => {
     setIsClient(true); // Set to true once the component has mounted on the client
@@ -71,17 +117,24 @@ const MediaSection: React.FC = () => {
   };
 
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
-
   const imageBgCapsule =
     colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
 
-  const videoThumbnails = [
-    `${imageBgSrc}`,
-    `${imageBgSrc}`,
-    `${imageBgSrc}`,
-    `${imageBgSrc}`,
-    `${imageBgSrc}`,
-  ];
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -110,7 +163,7 @@ const MediaSection: React.FC = () => {
         component={"img"}
         alt="Logo"
         src={imageBgCapsule}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
           top: 0,
           left: 0,
@@ -118,7 +171,7 @@ const MediaSection: React.FC = () => {
           height: "100%",
           opacity: 0.75,
           filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
-        })}
+        }}
       />
 
       <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
@@ -153,10 +206,10 @@ const MediaSection: React.FC = () => {
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="mySwiper"
-            ref={swiperRef} // Pass the ref to the Swiper component
+            ref={swiperRef}
             style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
           >
-            {videoUrls.map((url, index) => (
+            {media.map((item, index) => (
               <SwiperSlide key={index} style={{ width: "35%" }}>
                 <Box
                   sx={{
@@ -168,11 +221,11 @@ const MediaSection: React.FC = () => {
                   }}
                 >
                   <ReactPlayer
-                    url={url}
+                    url={item.video_url}
                     width="100%"
                     height="100%"
                     controls
-                    light={videoThumbnails[index]} // Show thumbnail before play
+                    light={item.cover_image} // Show thumbnail before play
                     playing={false} // Do not autoplay by default
                     style={{
                       position: "absolute",
@@ -191,7 +244,7 @@ const MediaSection: React.FC = () => {
                     bgcolor: "custom.primaryComponents",
                   }}
                 >
-                  {videoTitles[index]}
+                  {item.title}
                 </Typography>
               </SwiperSlide>
             ))}
@@ -218,10 +271,10 @@ const MediaSection: React.FC = () => {
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="mySwiper"
-            ref={swiperRef} // Pass the ref to the Swiper component
+            ref={swiperRef}
             style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
           >
-            {videoUrls.map((url, index) => (
+            {media.map((item, index) => (
               <SwiperSlide key={index} style={{ width: "90%" }}>
                 <Box
                   sx={{
@@ -233,11 +286,11 @@ const MediaSection: React.FC = () => {
                   }}
                 >
                   <ReactPlayer
-                    url={url}
+                    url={item.video_url}
                     width="100%"
                     height="100%"
                     controls
-                    light={videoThumbnails[index]} // Show thumbnail before play
+                    light={item.cover_image} // Show thumbnail before play
                     playing={false} // Do not autoplay by default
                     style={{
                       position: "absolute",
@@ -255,53 +308,52 @@ const MediaSection: React.FC = () => {
                     bgcolor: "custom.primaryComponents",
                   }}
                 >
-                  {videoTitles[index]}
+                  {item.title}
                 </Typography>
               </SwiperSlide>
             ))}
           </Swiper>
         )}
-
-        {/* Custom Navigation Buttons */}
-        <Box
-          className="swiper-button-prev"
-          sx={{
-            position: "absolute",
-            display: { md: "block", xs: "none" },
-            top: "58.25%",
-            left: "30%",
-            transform: "translateY(-50%)",
-            zIndex: 3,
-            cursor: "pointer",
-            color: "custom.primaryText",
-          }}
-        >
-          {/* <IconButton>
+      </Box>
+      {/* Custom Navigation Buttons */}
+      <Box
+        className="swiper-button-prev"
+        sx={{
+          position: "absolute",
+          display: { md: "block", xs: "none" },
+          top: "58.25%",
+          left: "30%",
+          transform: "translateY(-50%)",
+          zIndex: 3,
+          cursor: "pointer",
+          color: "custom.primaryText",
+        }}
+      >
+        {/* <IconButton>
             <Typography color="custom.secondaryText">
               <ArrowBack fontSize="large" />
             </Typography>
           </IconButton> */}
-        </Box>
+      </Box>
 
-        <Box
-          className="swiper-button-next"
-          sx={{
-            position: "absolute",
-            display: { md: "block", xs: "none" },
-            top: "58.25%",
-            right: "30%",
-            transform: "translateY(-50%)",
-            zIndex: 3,
-            cursor: "pointer",
-            color: "custom.primaryText",
-          }}
-        >
-          {/* <IconButton>
+      <Box
+        className="swiper-button-next"
+        sx={{
+          position: "absolute",
+          display: { md: "block", xs: "none" },
+          top: "58.25%",
+          right: "30%",
+          transform: "translateY(-50%)",
+          zIndex: 3,
+          cursor: "pointer",
+          color: "custom.primaryText",
+        }}
+      >
+        {/* <IconButton>
             <Typography color="custom.secondaryText">
               <ArrowForward fontSize="large" />
             </Typography>
           </IconButton> */}
-        </Box>
       </Box>
     </Box>
   );

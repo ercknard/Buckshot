@@ -20,6 +20,9 @@ import "swiper/css/navigation";
 
 import { Scrollbar } from "swiper/modules";
 
+// Import the Supabase client
+import supabase from "@/lib/supabase";
+
 // Define the Ship type
 type Ship = {
   id: number;
@@ -36,141 +39,13 @@ type Ship = {
   specs_6?: string;
 };
 
-const battle: Ship[] = [
-  {
-    id: 1,
-    title: "Small Battle",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Cruiser",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-
-  {
-    id: 2,
-    title: "Medium Battle",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Cruiser",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-
-  {
-    id: 3,
-    title: "Large Battle",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Cruiser",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
-const cargo: Ship[] = [
-  {
-    id: 1,
-    title: "Cargo Cruiser",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Cruiser",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
-const scout: Ship[] = [
-  {
-    id: 1,
-    title: "Scout",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Scout",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-
-  {
-    id: 2,
-    title: "Proto Scout",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Scout",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
-const station: Ship[] = [
-  {
-    id: 1,
-    title: "Orbital Station",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/ship-2.png",
-    image_size: "40%",
-    ship_type: "Station",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
-const raider: Ship[] = [
-  {
-    id: 1,
-    title: "Raider",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-    ship_type: "Raider",
-    specs_1: "sample feature 1",
-    specs_2: "sample feature 2",
-    specs_3: "sample feature 3",
-    specs_4: "sample feature 4",
-    specs_5: "sample feature 5",
-    specs_6: "sample feature 6",
-  },
-];
-
 const ShipsSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet } = useThemeContext();
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [expandedMember, setExpandedMember] = useState<Ship | null>(battle[0]); // Default to first entry of station
+  const [expandedMember, setExpandedMember] = useState<Ship | null>(null); // Initially null
+  const [shipData, setShipData] = useState<Ship[][]>([]); // Array to store ship data for each tab
+  const [loading, setLoading] = useState<boolean>(true); // State to manage loading
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
@@ -183,19 +58,76 @@ const ShipsSection: React.FC = () => {
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
 
-  // Ship data mapping for each tab
-  const tabShipData = [battle, cargo, scout, station, raider];
+  // Fetch ship data from Supabase
+  useEffect(() => {
+    const fetchShipData = async () => {
+      try {
+        setLoading(true);
 
-  // Handle tab change and set the first entry of the selected tab as the expanded member
+        // Fetch ship data for each category from Supabase
+        const { data: battleShips, error: battleError } = await supabase
+          .from("battle_ships") // Adjust table name based on your actual table in Supabase
+          .select("*");
+        if (battleError) throw battleError;
+
+        const { data: cargoShips, error: cargoError } = await supabase
+          .from("cargo_ships")
+          .select("*");
+        if (cargoError) throw cargoError;
+
+        const { data: scoutShips, error: scoutError } = await supabase
+          .from("scout_ships")
+          .select("*");
+        if (scoutError) throw scoutError;
+
+        const { data: stationShips, error: stationError } = await supabase
+          .from("station_ships")
+          .select("*");
+        if (stationError) throw stationError;
+
+        const { data: raiderShips, error: raiderError } = await supabase
+          .from("raider_ships")
+          .select("*");
+        if (raiderError) throw raiderError;
+
+        // Combine all the data into one array
+        setShipData([
+          battleShips,
+          cargoShips,
+          scoutShips,
+          stationShips,
+          raiderShips,
+        ]);
+        setLoading(false);
+
+        // Set the first ship from battle as the default expanded member
+        setExpandedMember(battleShips[0]);
+      } catch (error) {
+        console.error("Error fetching ship data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchShipData();
+  }, []);
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
     // Set the first member of the new tab as expanded member
-    setExpandedMember(tabShipData[newValue][0]);
+    setExpandedMember(shipData[newValue][0]);
   };
 
   const handleCardClick = (member: Ship) => {
     setExpandedMember(member); // Set the clicked member as expanded
   };
+
+  if (loading) {
+    return (
+      <Typography variant="h6" align="center">
+        Loading...
+      </Typography>
+    );
+  }
 
   return (
     <Box
@@ -386,7 +318,7 @@ const ShipsSection: React.FC = () => {
             }}
             style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
           >
-            {tabShipData[activeTab].map((member) => (
+            {shipData[activeTab].map((member) => (
               <SwiperSlide
                 key={member.id}
                 style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
@@ -438,30 +370,6 @@ const ShipsSection: React.FC = () => {
           </Swiper>
         </Box>
       </Container>
-
-      <style jsx global>
-        {`
-          /* Swiper scrollbar customizations */
-          .swiper-scrollbar {
-            background-color: ${theme.palette.custom
-              .secondaryBackground}; /* Track background */
-            border-radius: 10px; /* Rounded track edges */
-            height: 8px; /* Scrollbar height */
-          }
-
-          .swiper-scrollbar-drag {
-            background-color: ${theme.palette.custom
-              .mainColor}; /* Thumb color */
-            border-radius: 10px; /* Rounded thumb */
-            opacity: 0.7; /* Thumb opacity */
-          }
-
-          .swiper-scrollbar-drag:hover {
-            background-color: ${theme.palette.custom
-              .secondarySolidColors}; /* Thumb color on hover */
-          }
-        `}
-      </style>
     </Box>
   );
 };
