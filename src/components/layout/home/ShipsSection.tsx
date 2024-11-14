@@ -12,6 +12,8 @@ import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Divider, useMediaQuery } from "@mui/material";
+import { Theme } from "@mui/material/styles";
 
 // Import Swiper styles
 import "swiper/css";
@@ -40,6 +42,9 @@ type Ship = {
 };
 
 const ShipsSection: React.FC = () => {
+  const isSmallScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
   const theme = useTheme();
   const { activeSet } = useThemeContext();
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -176,7 +181,7 @@ const ShipsSection: React.FC = () => {
             >
               <Box
                 sx={{
-                  position: "absolute",
+                  position: { md: "absolute", xs: "relative" },
                   display: "flex", // Enable flexbox
                   flexDirection: "column", // Stack children vertically
                   marginTop: 5,
@@ -187,7 +192,7 @@ const ShipsSection: React.FC = () => {
                   borderWidth: "10px", // Adjust the border width as per your preference
                   borderStyle: "solid",
                   borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
-                  left: "10%",
+                  left: { md: "10%", xs: "unset" },
                   zIndex: 3,
                 }}
               >
@@ -252,12 +257,12 @@ const ShipsSection: React.FC = () => {
                 alt="Logo"
                 src={expandedMember.image}
                 sx={{
-                  position: "absolute",
+                  position: { md: "absolute", xs: "relative" },
                   maxWidth: "100%", // Ensure the image does not exceed the container width
                   maxHeight: "100%", // Optional: limit the height of the image if needed
                   zIndex: "2",
                   top: "5%",
-                  right: "10%",
+                  right: { md: "10%", xs: "unset" },
                 }}
               />
             </Box>
@@ -294,7 +299,7 @@ const ShipsSection: React.FC = () => {
         <Box position={"relative"} zIndex={2}>
           <Swiper
             spaceBetween={32} // Set space between each slide
-            slidesPerView={5} // Automatically adjust the number of slides based on the container width
+            slidesPerView={"auto"} // Automatically adjust the number of slides based on the container width
             loop={false} // Disable looping
             autoplay={{
               delay: 2500,
@@ -313,7 +318,7 @@ const ShipsSection: React.FC = () => {
                 slidesPerView: 3, // For tablets (portrait mode)
               },
               480: {
-                slidesPerView: 1, // For small screens (mobile devices)
+                slidesPerView: 2, // For small screens (mobile devices)
               },
             }}
             style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}

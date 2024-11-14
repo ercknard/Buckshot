@@ -326,7 +326,7 @@ export default function HeroSection(): JSX.Element {
               </Typography>
             ) : (
               <>
-                <Typography variant={"h2"} color={"custom.secondaryText"}>
+                <Typography variant={"h3"} color={"custom.secondaryText"}>
                   <Stack
                     display={"flex"}
                     direction={"row"}

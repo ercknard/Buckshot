@@ -320,7 +320,7 @@ const TeamSection: React.FC = () => {
             <Box position={"relative"} zIndex={2}>
               <Swiper
                 spaceBetween={32} // Space between slides
-                slidesPerView={5} // Show 5 slides at a time
+                slidesPerView={"auto"} // Show 5 slides at a time
                 loop={false} // Enable looping of the slides
                 autoplay={{
                   delay: 2500, // Autoplay delay (in ms)
