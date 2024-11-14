@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Typography, Box, Container, Grid, Paper } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
+import supabase from "@/lib/supabase";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,58 +15,40 @@ type CustomTheme = {
 };
 
 interface Modes {
+  id: number;
   name: string;
   ip: string;
   image: string;
   port: string;
-  intro: string; // Additional details for the member
+  intro: string;
   bgs: string;
 }
-
-const modes: Modes[] = [
-  {
-    name: "Main",
-    ip: "cryptechtest.xyz",
-    image: "/static/images/main-icon.png",
-    port: "30000",
-    intro:
-      "Embark on a journey of creativity, collaboration, and adventure in our immersive world.",
-    bgs: "/static/images/BG-B.webp",
-  },
-  {
-    name: "Buckshot",
-    ip: "cryptechtest.xyz",
-    image: "/static/images/buckshot-icon.png",
-    port: "n/a",
-    intro: "coming soon!",
-    bgs: "/static/images/earth.webp",
-  },
-  {
-    name: "Minigames",
-    ip: "cryptechtest.xyz",
-    image: "/static/images/minigames-icon.png",
-    port: "n/a",
-    intro: "coming soon!",
-    bgs: "/static/images/seq-house.webp",
-  },
-];
 
 const GameModeSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
-  const [expandedMember, setExpandedMember] = useState<Modes | null>();
+  const [expandedMember, setExpandedMember] = useState<Modes | null>(null);
+  const [modes, setModes] = useState<Modes[]>([]);
 
   useEffect(() => {
-    // Set the first item as the default selected mode
-    setExpandedMember(modes[0]);
+    // Fetch modes from Supabase when the component mounts
+    const fetchModes = async () => {
+      const { data, error } = await supabase.from("modes").select("*");
+      if (error) {
+        console.error("Error fetching modes:", error);
+      } else {
+        setModes(data);
+        setExpandedMember(data[0]); // Set the first item as the default selected mode
+      }
+    };
+    fetchModes();
   }, []);
 
   const handleCardClick = (member: Modes) => {
-    // Only toggle the expanded member if it is not the currently expanded member
     if (expandedMember === member) {
-      return; // Disable click action if the card is already active
+      return; // Prevent toggling if the same card is clicked
     }
-    setExpandedMember(expandedMember === member ? null : member); // Toggle the expanded member
+    setExpandedMember(expandedMember === member ? null : member);
   };
 
   const colorSetCapsule: { [key: string]: string } = {
@@ -94,10 +77,8 @@ const GameModeSection: React.FC = () => {
 
   const imageBgCapsule =
     colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
-
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
-
   const imageBgBannerSrc =
     colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
 
@@ -135,7 +116,7 @@ const GameModeSection: React.FC = () => {
           width: "100%",
           height: "100%",
           opacity: 0.75,
-          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
+          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
           zIndex: 1,
         })}
       />
@@ -172,28 +153,29 @@ const GameModeSection: React.FC = () => {
                   width: "100%",
                   height: "100%",
                   opacity: 0.1,
-                  filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
+                  filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
                 })}
               />
             ) : (
               <></>
             )}
+
             <Box
               sx={{
                 position: "relative",
                 textAlign: "center",
-                display: "flex", // Enable flexbox
-                flexDirection: "column", // Stack children vertically
-                justifyContent: "center", // Vertically center the content
-                alignItems: "center", // Horizontally center the content
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
                 marginTop: 5,
                 marginBottom: 5,
                 padding: 5,
                 transition: "transform 0.2s, background-color 0.3s",
                 backgroundColor: "custom.secondaryBackground",
-                borderWidth: "10px", // Adjust the border width as per your preference
+                borderWidth: "10px",
                 borderStyle: "solid",
-                borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                borderImage: `url('${imageBgBorderSrc}') 30 round`,
               }}
             >
               <Box
@@ -227,8 +209,8 @@ const GameModeSection: React.FC = () => {
                   alt="Logo"
                   src={expandedMember.image}
                   sx={{
-                    maxWidth: "100%", // Ensure the image does not exceed the container width
-                    maxHeight: "100%", // Optional: limit the height of the image if needed
+                    maxWidth: "100%",
+                    maxHeight: "100%",
                   }}
                 />
                 <Typography
@@ -298,17 +280,17 @@ const GameModeSection: React.FC = () => {
                   textAlign: "center",
                   justifyItems: "center",
                   transition: "transform 0.2s, background-color 0.3s",
-                  cursor: expandedMember === member ? "pointer" : "pointer", // Disable pointer cursor for active card
+                  cursor: expandedMember === member ? "pointer" : "pointer",
                   backgroundColor:
                     expandedMember === member
                       ? "custom.secondaryComponents"
                       : "custom.secondaryBackground",
-                  borderWidth: "10px", // Adjust the border width as per your preference
+                  borderWidth: "10px",
                   borderStyle: "solid",
-                  borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                  borderImage: `url('${imageBgBorderSrc}') 30 round`,
                   "&:hover": {
                     transform:
-                      expandedMember === member ? "none" : "scale(1.05)", // Disable hover effect for active card
+                      expandedMember === member ? "none" : "scale(1.05)",
                     backgroundColor:
                       expandedMember === member
                         ? "custom.secondaryComponents"

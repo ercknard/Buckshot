@@ -10,157 +10,96 @@ import {
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Default Swiper CSS
-import "swiper/css/navigation"; // If you're using navigation
-import "swiper/css/pagination"; // If you're using pagination
+import supabase from "@/lib/supabase";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import SwiperCore from "swiper"; // Import Scrollbar from SwiperCore
+import SwiperCore from "swiper";
 import { Scrollbar } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
 
-// Install the module in SwiperCore
-
 type CustomTheme = {
-  activeSet: number; // Adjust this based on your actual structure
+  activeSet: number;
 };
 
 interface TeamMember {
+  id: number;
   name: string;
   role: string;
   image: string;
   land: string;
-  details: string; // Additional details for the member
-  dcdetails: string; // Additional details for the
+  details: string;
+  dcdetails: string;
 }
-
-const teamMembers: TeamMember[] = [
-  {
-    name: "Squidicuz",
-    role: "Leads",
-    image: "/static/images/yellow-head.webp",
-    land: "/static/images/yellow-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "squidicuz",
-  },
-  {
-    name: "SeqSee",
-    role: "Leads",
-    image: "/static/images/pink-head.webp",
-    land: "/static/images/pink-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "SeqSee",
-  },
-  {
-    name: "Vanikoro",
-    role: "Leads",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "vanikoro",
-  },
-  {
-    name: "Kyuhi",
-    role: "Leads",
-    image: "/static/images/blue-head.webp",
-    land: "/static/images/blue-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Kyuhi",
-  },
-  {
-    name: "Shikoku",
-    role: "Leads",
-    image: "/static/images/orange-head.webp",
-    land: "/static/images/orange-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "shikoku",
-  },
-];
-
-const teamModerators: TeamMember[] = [
-  {
-    name: "Stick",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "anormalstick",
-  },
-  {
-    name: "Ferbog05",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "ferbog05",
-  },
-  {
-    name: "Matador",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "matador",
-  },
-  {
-    name: "Demil",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "Discord : demil",
-  },
-  {
-    name: "DeathSmack",
-    role: "Moderator",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "deathsmack",
-  },
-  {
-    name: "Tonic",
-    role: "Contributor",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "anormaltonic",
-  },
-  {
-    name: "Ercknard",
-    role: "Contributor",
-    image: "/static/images/green-head.webp",
-    land: "/static/images/green-land.webp",
-    details: "Welcome to CryptechTest",
-    dcdetails: "ercknard",
-  },
-];
 
 const TeamSection: React.FC = () => {
   const { activeSet } = useThemeContext() as CustomTheme;
-  const [activeTab, setActiveTab] = useState<number>(0); // 0 for Team Members, 1 for Moderators
+  const [activeTab, setActiveTab] = useState<number>(0);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [teamModerators, setTeamModerators] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
 
-  // Ensure activeSet is a number for comparison purposes
   const activeSetNumber =
     typeof activeSet === "number"
       ? activeSet
       : parseInt(activeSet as string, 10);
 
-  // Log the activeSet value and type for debugging
-  console.log(
-    "Active Set:",
-    activeSet,
-    "Active Set (parsed):",
-    activeSetNumber
-  );
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      setLoading(true);
+      setError(null);
 
-  // Function to determine default member based on active theme
+      try {
+        // Fetch data from Supabase for Team Members
+        const { data: members, error: membersError } = await supabase
+          .from("team_members") // Make sure this is the correct table name
+          .select("*")
+          .eq("role", "Leads"); // Filter for team members
+
+        if (membersError) {
+          throw membersError;
+        }
+
+        // Fetch data from Supabase for Team Moderators
+        const { data: moderators, error: moderatorsError } = await supabase
+          .from("team_moderators") // Same table for moderators as well, you could also create a separate table if needed
+          .select("*")
+          .in("role", ["Moderator", "Contributor"]); // Filter for moderators and contributors
+
+        if (moderatorsError) {
+          throw moderatorsError;
+        }
+
+        setTeamMembers(members);
+        setTeamModerators(moderators);
+
+        // Set default expanded member to the first team member
+        if (members && members.length > 0) {
+          setExpandedMember(members[0]); // Set the first member as default
+        }
+
+        // Optionally, you can set the first moderator as default expanded if moderators tab is active
+        if (moderators && moderators.length > 0 && activeTab === 1) {
+          setExpandedMember(moderators[0]); // Set the first moderator as default
+        }
+      } catch (err) {
+        setError("Error fetching team data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamData();
+  }, []);
+
   const getDefaultMember = (activeSet: number) => {
-    console.log("Evaluating activeSet:", activeSet);
     switch (activeSet) {
       case 1:
-        return teamMembers[3]; // Kyuhi for blue
+        return teamMembers[3]; // Example: Kyuhi for blue
       case 2:
         return teamMembers[2]; // Vanikoro for green
       case 3:
@@ -170,7 +109,7 @@ const TeamSection: React.FC = () => {
       case 5:
         return teamMembers[1]; // SeqSee for pink
       default:
-        return teamMembers[2]; // Default to Vanikoro if no valid set is found
+        return teamMembers[2]; // Default to Vanikoro
     }
   };
 
@@ -178,17 +117,15 @@ const TeamSection: React.FC = () => {
     getDefaultMember(activeSetNumber)
   );
 
-  // Whenever activeSet changes, update expandedMember to the corresponding team member
   useEffect(() => {
     setExpandedMember(getDefaultMember(activeSetNumber));
   }, [activeSetNumber]);
 
   const handleCardClick = (member: TeamMember) => {
-    // Only toggle the expanded member if it is not the currently expanded member
     if (expandedMember === member) {
-      return; // Disable click action if the card is already active
+      return;
     }
-    setExpandedMember(expandedMember === member ? null : member); // Toggle the expanded member
+    setExpandedMember(expandedMember === member ? null : member);
   };
 
   const colorSetBgBorderRight: { [key: string]: string } = {
@@ -203,6 +140,14 @@ const TeamSection: React.FC = () => {
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
 
   SwiperCore.use([Scrollbar]);
+
+  if (loading) {
+    return <Typography>Loading...</Typography>;
+  }
+
+  if (error) {
+    return <Typography color="error">{error}</Typography>;
+  }
 
   return (
     <Box

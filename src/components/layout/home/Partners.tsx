@@ -1,5 +1,13 @@
-import React from "react";
-import { Typography, Box, Container, Stack, IconButton } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Typography,
+  Box,
+  Container,
+  Stack,
+  IconButton,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import DefaultDialog from "../DefaultDialog";
@@ -12,23 +20,34 @@ import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import supabase from "@/lib/supabase";
 
 type CustomTheme = {
   activeSet: number;
 };
 
-const slides = [
-  {
-    id: 1,
-    title: "StakeCube",
-    content: "Join the Future of Finance & Trade Crypto with Confidence.",
-    image: "/static/images/stakecube-logo.jpeg",
-  },
-];
+type Partners = {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+};
+
+// const partners = [
+//   {
+//     id: 1,
+//     title: "StakeCube",
+//     content: "Join the Future of Finance & Trade Crypto with Confidence.",
+//     image: "/static/images/stakecube-logo.jpeg",
+//   },
+// ];
 
 const PartnersSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet } = useThemeContext();
+  const [partners, setPartners] = useState<Partners[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   const colorSetCapsule: { [key: string]: string } = {
     1: "/static/images/blue-capsule.png",
@@ -40,6 +59,43 @@ const PartnersSection: React.FC = () => {
 
   const imageBgCapsule =
     colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        // Fetch slides from Supabase
+        const { data, error } = await supabase
+          .from("partners") // Assuming "featuredmods" is your table name
+          .select("*");
+
+        if (error) throw error;
+
+        setPartners(data); // Set the fetched slides data
+      } catch (err) {
+        setError("Error loading slides");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPartners();
+  }, []);
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -110,7 +166,7 @@ const PartnersSection: React.FC = () => {
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
         >
-          {slides.map((slide) => (
+          {partners.map((slide) => (
             <SwiperSlide key={slide.id}>
               <Box
                 sx={{

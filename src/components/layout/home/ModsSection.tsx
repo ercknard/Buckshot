@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CircularProgress,
   Alert,
   Typography,
   Box,
-  Grid,
-  Paper,
   Container,
+  Stack,
   Button,
   DialogActions,
-  Stack,
-  IconButton,
+  Grid,
+  Paper,
 } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
@@ -23,7 +22,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import supabase from "@/lib/supabase";
+import { url } from "inspector";
 
 type CustomTheme = {
   activeSet: number;
@@ -34,30 +34,13 @@ type Mod = {
   html_url: string;
 };
 
-const slides = [
-  {
-    id: 1,
-    title: "TestCoin",
-    content:
-      "Test Coin is a fake hybrid PoW/PoS cryptocurrency used as in-game currency in CryptechTest game.",
-    image: "/static/images/testcoin-grouped.png",
-    image_size: "40%",
-  },
-  {
-    id: 2,
-    title: "Starships",
-    content: "CryptechTest Voxel Starships",
-    image: "/static/images/scout.webp",
-    image_size: "40%",
-  },
-  {
-    id: 3,
-    title: "Orbital Station",
-    content: "CryptechTest Spawn point",
-    image: "/static/images/ship-2.png",
-    image_size: "40%",
-  },
-];
+type Slide = {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  image_size: string;
+};
 
 const ModsList: React.FC = () => {
   const [mods, setMods] = useState<Mod[]>([]);
@@ -145,7 +128,7 @@ const ModsList: React.FC = () => {
                   backgroundColor: "custom.secondaryBackground",
                   borderWidth: "10px",
                   borderStyle: "solid",
-                  borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                  borderImage: `url("${imageBgBorderSrc}") 30 round`,
                   "&:hover": {
                     transform: "scale(1.05)",
                     backgroundColor: "custom.secondaryComponents",
@@ -224,9 +207,12 @@ const ModsList: React.FC = () => {
 };
 
 const ModsSection: React.FC = () => {
-  const theme = useTheme();
-  const { activeSet } = useThemeContext();
+  const [slides, setSlides] = useState<Slide[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const { activeSet } = useThemeContext() as CustomTheme;
 
+  // Background images based on the active set
   const colorSetCapsule: { [key: string]: string } = {
     1: "/static/images/blue-capsule.png",
     2: "/static/images/green-capsule.png",
@@ -237,6 +223,43 @@ const ModsSection: React.FC = () => {
 
   const imageBgCapsule =
     colorSetCapsule[activeSet.toString()] || colorSetCapsule[1];
+
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        // Fetch slides from Supabase
+        const { data, error } = await supabase
+          .from("featured_mods") // Assuming "featuredmods" is your table name
+          .select("*");
+
+        if (error) throw error;
+
+        setSlides(data); // Set the fetched slides data
+      } catch (err) {
+        setError("Error loading slides");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSlides();
+  }, []);
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -272,7 +295,7 @@ const ModsSection: React.FC = () => {
           width: "100%",
           height: "100%",
           opacity: 0.75,
-          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
+          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
         })}
       />
 
@@ -293,6 +316,7 @@ const ModsSection: React.FC = () => {
           </Typography>
         </Box>
 
+        {/* Swiper Component for Featured Mods */}
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -318,7 +342,7 @@ const ModsSection: React.FC = () => {
                 <Box
                   component="img"
                   width={{ xs: "100%", md: `${slide.image_size}` }}
-                  alt="Logo"
+                  alt={slide.title}
                   src={slide.image}
                   marginX={"auto"}
                 />
@@ -337,6 +361,7 @@ const ModsSection: React.FC = () => {
               </Box>
             </SwiperSlide>
           ))}
+
           {/* Custom Navigation Buttons */}
           <Box
             className="swiper-button-prev"
@@ -350,14 +375,7 @@ const ModsSection: React.FC = () => {
               cursor: "pointer",
               color: "custom.primaryText",
             }}
-          >
-            {/* <IconButton>
-                    <Typography color="custom.secondaryText">
-                      <ArrowBack fontSize="large" />
-                    </Typography>
-                  </IconButton> */}
-          </Box>
-
+          />
           <Box
             className="swiper-button-next"
             sx={{
@@ -370,15 +388,8 @@ const ModsSection: React.FC = () => {
               cursor: "pointer",
               color: "custom.primaryText",
             }}
-          >
-            {/* <IconButton>
-                    <Typography color="custom.secondaryText">
-                      <ArrowForward fontSize="large" />
-                    </Typography>
-                  </IconButton> */}
-          </Box>
+          />
         </Swiper>
-
         <ModsList />
       </Container>
     </Box>
