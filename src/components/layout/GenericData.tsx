@@ -5,7 +5,7 @@ import {
   updateRow,
   deleteRow,
   RowData,
-} from "@/lib/supabaseCrud"; // Use the imported RowData
+} from "@/lib/supabaseCrud";
 import {
   Table,
   TableBody,
@@ -24,11 +24,18 @@ import {
   Stack,
   Snackbar,
   Alert,
+  Box,
 } from "@mui/material";
 import DefaultDialog from "./DefaultDialog";
 
 interface GenericTableProps {
   tableName: string;
+}
+
+interface ActionHistory {
+  timestamp: string;
+  action: string;
+  details: string;
 }
 
 const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
@@ -38,9 +45,10 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteConfirmationDialogOpen, setDeleteConfirmationDialogOpen] =
     useState(false);
-  const [rowToDelete, setRowToDelete] = useState<RowData | null>(null); // Track the row to delete
+  const [rowToDelete, setRowToDelete] = useState<RowData | null>(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState(""); // Message to display in the Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [actionHistory, setActionHistory] = useState<ActionHistory[]>([]); // New state for action history
 
   useEffect(() => {
     const loadData = async () => {
@@ -59,6 +67,14 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     loadData();
   }, [tableName]);
 
+  const logAction = (action: string, details: string) => {
+    const timestamp = new Date().toLocaleString();
+    setActionHistory((prevHistory) => [
+      { timestamp, action, details },
+      ...prevHistory,
+    ]);
+  };
+
   const handleCreate = async () => {
     if (!newRow) return;
 
@@ -73,11 +89,13 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
       setOpenDialog(false);
       setSnackbarMessage("Row successfully added!");
       setSnackbarOpen(true);
+      logAction("Create", `Created a new row with ID ${nextId}`);
     } else {
       setOpenDialog(false);
       await loadData();
       setSnackbarMessage("Row successfully added!");
       setSnackbarOpen(true);
+      logAction("Create", "Created a new row.");
     }
   };
 
@@ -90,6 +108,7 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
       setEditRow(null);
       setSnackbarMessage("Row successfully updated!");
       setSnackbarOpen(true);
+      logAction("Edit", `Updated row with ID ${editRow.id}`);
     }
   };
 
@@ -99,16 +118,18 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     const deletedRow = await deleteRow(tableName, rowToDelete.id);
 
     if (deletedRow) {
-      await loadData(); // Re-fetch data to update the state
+      await loadData();
       setSnackbarMessage("Row successfully deleted!");
       setSnackbarOpen(true);
+      logAction("Delete", `Deleted row with ID ${rowToDelete.id}`);
     } else {
       await loadData();
       setSnackbarMessage("Error deleting the row.");
       setSnackbarOpen(true);
+      logAction("Delete", `Failed to delete row with ID ${rowToDelete.id}`);
     }
 
-    setDeleteConfirmationDialogOpen(false); // Close the confirmation dialog after deletion
+    setDeleteConfirmationDialogOpen(false);
   };
 
   const handleNewRowChange = (
@@ -153,15 +174,7 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
 
   const handleCloseDeleteConfirmation = () => {
     setDeleteConfirmationDialogOpen(false);
-    setRowToDelete(null); // Reset the row to delete
-  };
-
-  const handleDialogOpen = () => {
-    setOpenDialog(true);
-  };
-
-  const handleDialogClose = () => {
-    setOpenDialog(false);
+    setRowToDelete(null);
   };
 
   return (
@@ -186,7 +199,7 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
       <DefaultDialog
         maxWidth="sm"
         open={openDialog}
-        handleOnClose={handleDialogClose}
+        handleOnClose={handleCloseDialog}
         title="Add new row"
       >
         <DialogContent>
@@ -222,14 +235,14 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
       <DefaultDialog
         maxWidth="sm"
         open={deleteConfirmationDialogOpen}
-        handleOnClose={handleDialogClose}
+        handleOnClose={handleCloseDeleteConfirmation}
         title="Delete Row"
       >
         <Typography variant="h5">
           Are you sure you want to delete this row?
         </Typography>
         <DialogActions>
-          <Button onClick={handleDialogClose} color="secondary">
+          <Button onClick={handleCloseDeleteConfirmation} color="secondary">
             Cancel
           </Button>
           <Button onClick={handleDelete} color="error">
@@ -327,6 +340,27 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+
+      {/* Action History Section */}
+      <div style={{ marginTop: 20 }}>
+        <Box marginBottom={1}>
+          <Typography variant="h5">Action History</Typography>
+        </Box>
+        {actionHistory.length > 0 ? (
+          <ul>
+            {actionHistory.map((entry, index) => (
+              <li key={index}>
+                <Typography variant="h6">
+                  <strong>{entry.timestamp}</strong> - {entry.action}:{" "}
+                  {entry.details}
+                </Typography>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <Typography variant="h6">No actions performed yet.</Typography>
+        )}
+      </div>
     </div>
   );
 };
