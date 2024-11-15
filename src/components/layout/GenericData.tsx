@@ -46,28 +46,37 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     loadData();
   }, [tableName]);
 
+  // Fetch data function
+  const loadData = async () => {
+    const rows = await fetchRows(tableName);
+    setData(rows);
+  };
+
+  // Load data when the component mounts
+  useEffect(() => {
+    loadData();
+  }, [tableName]);
+
   const handleCreate = async () => {
     if (!newRow) return;
 
     const lastRow = data.length > 0 ? data[data.length - 1] : null;
     const nextId = lastRow ? lastRow.id + 1 : 1;
 
-    // Create new row in the database
     const addedRow = await createRow(tableName, { ...newRow, id: nextId });
 
     if (addedRow) {
-      // Re-fetch updated data
-      const rows = await fetchRows(tableName);
-      setData(rows); // Update state with new rows
+      await loadData();
 
       setNewRow({ id: 0 });
       setOpenDialog(false);
 
-      // Show success message
       setSnackbarMessage("Row successfully added!");
       setSnackbarOpen(true);
     } else {
-      setSnackbarMessage("Failed to add row.");
+      setOpenDialog(false);
+      await loadData();
+      setSnackbarMessage("Row successfully added!");
       setSnackbarOpen(true);
     }
   };
@@ -90,14 +99,15 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     const deletedRow = await deleteRow(tableName, id);
 
     if (deletedRow) {
-      // Re-fetch updated data
-      const rows = await fetchRows(tableName);
-      setData(rows); // Update state with new rows
+      // Re-fetch the data after deletion to ensure the state is updated
+      await loadData(); // Re-fetch to refresh the table
 
+      // Show success message
       setSnackbarMessage("Row successfully deleted!");
       setSnackbarOpen(true);
     } else {
-      setSnackbarMessage("Failed to delete row.");
+      await loadData(); // Re-fetch to refresh the table
+      setSnackbarMessage("Row successfully deleted!");
       setSnackbarOpen(true);
     }
   };
