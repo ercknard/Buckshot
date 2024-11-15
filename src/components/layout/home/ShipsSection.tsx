@@ -71,29 +71,34 @@ const ShipsSection: React.FC = () => {
 
         // Fetch ship data for each category from Supabase
         const { data: battleShips, error: battleError } = await supabase
-          .from("battle_ships") // Adjust table name based on your actual table in Supabase
+          .from("ships_battle") // Adjust table name based on your actual table in Supabase
           .select("*");
         if (battleError) throw battleError;
 
         const { data: cargoShips, error: cargoError } = await supabase
-          .from("cargo_ships")
+          .from("ships_cargo")
           .select("*");
         if (cargoError) throw cargoError;
 
         const { data: scoutShips, error: scoutError } = await supabase
-          .from("scout_ships")
+          .from("ships_scout")
           .select("*");
         if (scoutError) throw scoutError;
 
         const { data: stationShips, error: stationError } = await supabase
-          .from("station_ships")
+          .from("ships_station")
           .select("*");
         if (stationError) throw stationError;
 
         const { data: raiderShips, error: raiderError } = await supabase
-          .from("raider_ships")
+          .from("ships_raider")
           .select("*");
         if (raiderError) throw raiderError;
+
+        const { data: utilityShips, error: utilityError } = await supabase
+          .from("ships_utility")
+          .select("*");
+        if (utilityError) throw utilityError;
 
         // Combine all the data into one array
         setShipData([
@@ -102,6 +107,7 @@ const ShipsSection: React.FC = () => {
           scoutShips,
           stationShips,
           raiderShips,
+          utilityShips,
         ]);
         setLoading(false);
 
@@ -295,6 +301,7 @@ const ShipsSection: React.FC = () => {
           <Tab label="Scout" />
           <Tab label="Orbital Station" />
           <Tab label="Raider" />
+          <Tab label="Utility" />
         </Tabs>
 
         <Box position={"relative"} zIndex={2}>
