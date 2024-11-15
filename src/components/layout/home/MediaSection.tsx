@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Alert, CircularProgress, useMediaQuery } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { Theme } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,7 +13,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
-import ReactPlayer from "react-player"; // Import react-player
+import ReactPlayer from "react-player";
 import supabase from "@/lib/supabase";
 
 type CustomTheme = {
@@ -23,39 +26,6 @@ interface Media {
   cover_image: string;
 }
 
-// const media: Media[] = [
-//   {
-//     video_url:
-//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-//     title: "Part I: Epic Adventure Begins",
-//     cover_image: "/static/images/bg-2.webp",
-//   },
-//   {
-//     video_url:
-//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-//     title: "Part II: Thrilling Gameplay Moments",
-//     cover_image: "/static/images/bg-1.webp",
-//   },
-//   {
-//     video_url:
-//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-//     title: "Part III: Unforgettable Action Sequences",
-//     cover_image: "/static/images/spaceship.webp",
-//   },
-//   {
-//     video_url:
-//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-//     title: "Part IV: Master the Game",
-//     cover_image: "/static/images/bgse.png",
-//   },
-//   {
-//     video_url:
-//       "https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96",
-//     title: "Part V: Victory Awaits",
-//     cover_image: "static/images/corridor-b.png",
-//   },
-// ];
-
 const MediaSection: React.FC = () => {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
@@ -64,7 +34,6 @@ const MediaSection: React.FC = () => {
   const theme = useTheme();
   const swiperRef = useRef(null);
 
-  // State to handle client-side rendering
   const [isClient, setIsClient] = useState(false);
   const [media, setMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -73,16 +42,13 @@ const MediaSection: React.FC = () => {
   useEffect(() => {
     const fetchMedia = async () => {
       try {
-        // Fetch slides from Supabase
-        const { data, error } = await supabase
-          .from("media") // Assuming "featuredmods" is your table name
-          .select("*");
+        const { data, error } = await supabase.from("media").select("*");
 
         if (error) throw error;
 
-        setMedia(data); // Set the fetched slides data
+        setMedia(data);
       } catch (err) {
-        setError("Error loading slides");
+        setError("Error loading media");
       } finally {
         setLoading(false);
       }
@@ -92,14 +58,13 @@ const MediaSection: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setIsClient(true); // Set to true once the component has mounted on the client
+    setIsClient(true);
   }, []);
 
   if (!isClient) {
-    return null; // Prevent rendering until client-side hydration is complete
+    return null;
   }
 
-  // Mapping for background images based on activeSet
   const colorSetBgMap: { [key: string]: string } = {
     1: "/static/images/blue-gate.webp",
     2: "/static/images/green-gate.webp",
@@ -170,7 +135,7 @@ const MediaSection: React.FC = () => {
           width: "100%",
           height: "100%",
           opacity: 0.75,
-          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
+          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
         }}
       />
 
@@ -201,8 +166,8 @@ const MediaSection: React.FC = () => {
             }}
             pagination={false}
             navigation={{
-              prevEl: ".swiper-button-prev", // Custom prev button
-              nextEl: ".swiper-button-next", // Custom next button
+              prevEl: ".swiper-button-prev",
+              nextEl: ".swiper-button-next",
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="mySwiper"
@@ -215,9 +180,9 @@ const MediaSection: React.FC = () => {
                   sx={{
                     position: "relative",
                     width: "100%",
-                    paddingTop: "56.25%", // 16:9 Aspect Ratio (56.25%)
-                    overflow: "hidden", // Ensure child doesn't overflow the container
-                    borderRadius: 2, // Optional: rounded corners for aesthetics
+                    paddingTop: "56.25%",
+                    overflow: "hidden",
+                    borderRadius: 2,
                   }}
                 >
                   <ReactPlayer
@@ -225,8 +190,8 @@ const MediaSection: React.FC = () => {
                     width="100%"
                     height="100%"
                     controls
-                    light={item.cover_image} // Show thumbnail before play
-                    playing={false} // Do not autoplay by default
+                    light={item.cover_image}
+                    playing={false}
                     style={{
                       position: "absolute",
                       top: 0,
@@ -266,8 +231,8 @@ const MediaSection: React.FC = () => {
             }}
             pagination={false}
             navigation={{
-              prevEl: ".swiper-button-prev", // Custom prev button
-              nextEl: ".swiper-button-next", // Custom next button
+              prevEl: ".swiper-button-prev",
+              nextEl: ".swiper-button-next",
             }}
             modules={[EffectCoverflow, Pagination, Navigation]}
             className="mySwiper"
@@ -280,9 +245,9 @@ const MediaSection: React.FC = () => {
                   sx={{
                     position: "relative",
                     width: "100%",
-                    paddingTop: "56.25%", // 16:9 Aspect Ratio (56.25%)
-                    overflow: "hidden", // Ensure child doesn't overflow the container
-                    borderRadius: 2, // Optional: rounded corners for aesthetics
+                    paddingTop: "56.25%",
+                    overflow: "hidden",
+                    borderRadius: 2,
                   }}
                 >
                   <ReactPlayer
@@ -290,8 +255,8 @@ const MediaSection: React.FC = () => {
                     width="100%"
                     height="100%"
                     controls
-                    light={item.cover_image} // Show thumbnail before play
-                    playing={false} // Do not autoplay by default
+                    light={item.cover_image}
+                    playing={false}
                     style={{
                       position: "absolute",
                       top: 0,
@@ -315,7 +280,7 @@ const MediaSection: React.FC = () => {
           </Swiper>
         )}
       </Box>
-      {/* Custom Navigation Buttons */}
+
       <Box
         className="swiper-button-prev"
         sx={{
@@ -328,13 +293,7 @@ const MediaSection: React.FC = () => {
           cursor: "pointer",
           color: "custom.primaryText",
         }}
-      >
-        {/* <IconButton>
-            <Typography color="custom.secondaryText">
-              <ArrowBack fontSize="large" />
-            </Typography>
-          </IconButton> */}
-      </Box>
+      ></Box>
 
       <Box
         className="swiper-button-next"
@@ -348,13 +307,7 @@ const MediaSection: React.FC = () => {
           cursor: "pointer",
           color: "custom.primaryText",
         }}
-      >
-        {/* <IconButton>
-            <Typography color="custom.secondaryText">
-              <ArrowForward fontSize="large" />
-            </Typography>
-          </IconButton> */}
-      </Box>
+      ></Box>
     </Box>
   );
 };

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Box, Container, Grid, Paper } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import supabase from "@/lib/supabase";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -31,14 +33,13 @@ const GameModeSection: React.FC = () => {
   const [modes, setModes] = useState<Modes[]>([]);
 
   useEffect(() => {
-    // Fetch modes from Supabase when the component mounts
     const fetchModes = async () => {
       const { data, error } = await supabase.from("modes").select("*");
       if (error) {
         console.error("Error fetching modes:", error);
       } else {
         setModes(data);
-        setExpandedMember(data[0]); // Set the first item as the default selected mode
+        setExpandedMember(data[0]);
       }
     };
     fetchModes();
@@ -46,7 +47,7 @@ const GameModeSection: React.FC = () => {
 
   const handleCardClick = (member: Modes) => {
     if (expandedMember === member) {
-      return; // Prevent toggling if the same card is clicked
+      return;
     }
     setExpandedMember(expandedMember === member ? null : member);
   };
@@ -121,7 +122,6 @@ const GameModeSection: React.FC = () => {
         })}
       />
 
-      {/* Container for Mods List */}
       <Container
         sx={{
           justifyContent: { sm: "center", xs: "left" },

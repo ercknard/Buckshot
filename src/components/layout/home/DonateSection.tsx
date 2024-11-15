@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Grid,
-  Paper,
-  Typography,
-  Container,
-  Snackbar,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
 import supabase from "@/lib/supabase";
-import { error } from "console";
 
 type CustomTheme = {
   activeSet: number;
@@ -25,85 +22,26 @@ interface Coin {
   address: string;
 }
 
-// const teamcoins: Coin[] = [
-//   {
-//     name: "BTC",
-//     image: "/static/images/bitcoin.webp",
-//     address: "36UHvrS9jX226kads9tdjgta3sq3RFGjZz",
-//   },
-//   {
-//     name: "Dash",
-//     image: "/static/images/dash-logo.webp",
-//     address: "XkS9v246S4U4mYo7RhVpyxQfv6G6o5kUfr",
-//   },
-//   {
-//     name: "Doge",
-//     image: "/static/images/dogecoin.webp",
-//     address: "DBFKW511txib9237kBeFt5GcSYPKWcnoGc",
-//   },
-//   {
-//     name: "ETC",
-//     image: "/static/images/etc.webp",
-//     address: "0x122e3F3877fEDEC646A7891cB779c9F8583cE237",
-//   },
-//   {
-//     name: "ETH",
-//     image: "/static/images/ethereum.webp",
-//     address: "0x1914062c4e5aFe8B4Aaa2b9e46ef4F99F61606C0",
-//   },
-//   {
-//     name: "LTC",
-//     image: "/static/images/litecoin.webp",
-//     address: "MUxtfEzoHeqVf7EwjdzEVoCbnWPRwk9NSd",
-//   },
-//   {
-//     name: "MRX",
-//     image: "/static/images/metrix-coin.webp",
-//     address: "MRAZUn5azvVBTVCSFi6y7xyWAhMCcNN3AB",
-//   },
-//   {
-//     name: "NameCoin",
-//     image: "/static/images/namecoin.webp",
-//     address: "NB5rTVYfApfe7GfdaMmUra8PpusJqkoyuu",
-//   },
-//   {
-//     name: "OHM",
-//     image: "/static/images/ohm.webp",
-//     address: "ZK3WpPRBsoboHoemJeiGbnJEuCwQYUqB4q",
-//   },
-//   {
-//     name: "Zcash",
-//     image: "/static/images/zcash.webp",
-//     address: "t1RCU5Sbaj15EiA2sVVZQZLAsffGW1m1WAt",
-//   },
-//   {
-//     name: "SCC",
-//     image: "/static/images/scc.webp",
-//     address: "sMZ8CXDDkPqFrm8W7A1rXhsW1zRrfekJMY",
-//   },
-// ];
-
 const DonateSection: React.FC = () => {
   const { activeSet } = useThemeContext() as CustomTheme;
   const theme = useTheme();
 
-  const [snackbarOpen, setSnackbarOpen] = useState(false); // Snackbar visibility state
-  const [snackbarMessage, setSnackbarMessage] = useState(""); // Snackbar message content
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [coin, setCoin] = useState<Coin[]>([]);
-  const [expandedcoin, setExpandedcoin] = useState<Coin | null>(null); // Set the first coin as default
+  const [expandedcoin, setExpandedcoin] = useState<Coin | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCoin = async () => {
       try {
-        // Fetch coins from Supabase
         const { data, error } = await supabase.from("team_coins").select("*");
 
         if (error) throw error;
 
-        setCoin(data); // Set the fetched coins
-        setExpandedcoin(data[0]); // Set the first coin as default active
+        setCoin(data);
+        setExpandedcoin(data[0]);
       } catch (err) {
         setError("Error loading coins");
       } finally {
@@ -131,21 +69,19 @@ const DonateSection: React.FC = () => {
   }
 
   const handleCardClick = (coin: Coin) => {
-    // Only toggle the expanded coin if it is not the currently expanded coin
     if (expandedcoin === coin) {
-      return; // Disable click action if the card is already active
+      return;
     }
-    setExpandedcoin(expandedcoin === coin ? null : coin); // Toggle the expanded coin
-    copyToClipboard(coin); // Pass the whole coin object to copy the address and name
+    setExpandedcoin(expandedcoin === coin ? null : coin);
+    copyToClipboard(coin);
   };
 
   const copyToClipboard = (coin: Coin) => {
-    // Use the clipboard API to copy the text
     navigator.clipboard
       .writeText(coin.address)
       .then(() => {
-        setSnackbarMessage(`${coin.name} address copied to clipboard!`); // Include coin name in the Snackbar message
-        setSnackbarOpen(true); // Open Snackbar
+        setSnackbarMessage(`${coin.name} address copied to clipboard!`);
+        setSnackbarOpen(true);
       })
       .catch((err) => {
         console.error("Failed to copy address: ", err);
@@ -153,7 +89,7 @@ const DonateSection: React.FC = () => {
   };
 
   const handleCloseSnackbar = () => {
-    setSnackbarOpen(false); // Close Snackbar when it times out or is manually closed
+    setSnackbarOpen(false);
   };
 
   const colorSetBgBorderRight: { [key: string]: string } = {
@@ -200,48 +136,45 @@ const DonateSection: React.FC = () => {
         </Box>
 
         <Box position={"relative"}>
-          {/* Expanded Details Section */}
           {expandedcoin && (
-            <>
-              <Box
-                sx={{
-                  position: "relative",
-                  textAlign: "center",
-                  minHeight: "10vh",
-                  display: "flex", // Enable flexbox
-                  flexDirection: "column", // Stack children vertically
-                  justifyContent: "center", // Vertically center the content
-                  alignItems: "center", // Horizontally center the content
-                }}
+            <Box
+              sx={{
+                position: "relative",
+                textAlign: "center",
+                minHeight: "10vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                fontSize={"1.25rem"}
+                color="textSecondary"
+                sx={(theme) => ({
+                  zIndex: "3",
+                  color: theme.palette.custom.secondaryText,
+                  paddingY: 1,
+                  paddingX: 3,
+                })}
               >
-                <Typography
-                  fontSize={"1.25rem"}
-                  color="textSecondary"
-                  sx={(theme) => ({
-                    zIndex: "3",
-                    color: theme.palette.custom.secondaryText,
-                    paddingY: 1,
-                    paddingX: 3,
-                  })}
-                >
-                  {expandedcoin.name} Address
-                </Typography>
+                {expandedcoin.name} Address
+              </Typography>
 
-                <Typography
-                  variant="h5"
-                  fontSize={"1.75rem"}
-                  color="textSecondary"
-                  sx={(theme) => ({
-                    zIndex: "3",
-                    color: theme.palette.custom.primaryTextGrayed,
-                    paddingY: 1,
-                    paddingX: 3,
-                  })}
-                >
-                  {expandedcoin.address}
-                </Typography>
-              </Box>
-            </>
+              <Typography
+                variant="h5"
+                fontSize={"1.75rem"}
+                color="textSecondary"
+                sx={(theme) => ({
+                  zIndex: "3",
+                  color: theme.palette.custom.primaryTextGrayed,
+                  paddingY: 1,
+                  paddingX: 3,
+                })}
+              >
+                {expandedcoin.address}
+              </Typography>
+            </Box>
           )}
           <Grid
             position={"relative"}
@@ -266,16 +199,16 @@ const DonateSection: React.FC = () => {
                     paddingY: 3.5,
                     textAlign: "center",
                     transition: "transform 0.2s, background-color 0.3s",
-                    cursor: expandedcoin === coin ? "pointer" : "pointer", // Disable pointer cursor for active card
+                    cursor: expandedcoin === coin ? "pointer" : "pointer",
                     backgroundColor:
                       expandedcoin === coin
                         ? "custom.secondaryComponents"
                         : "custom.secondaryBackground",
-                    borderWidth: "10px", // Adjust the border width as per your preference
+                    borderWidth: "10px",
                     borderStyle: "solid",
-                    borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                    borderImage: `url('${imageBgBorderSrc}') 30 round`,
                     "&:hover": {
-                      transform: expandedcoin === coin ? "none" : "scale(1.05)", // Disable hover effect for active card
+                      transform: expandedcoin === coin ? "none" : "scale(1.05)",
                       backgroundColor:
                         expandedcoin === coin
                           ? "custom.secondaryComponents"
@@ -292,8 +225,8 @@ const DonateSection: React.FC = () => {
                       width: "25%",
                       height: "auto",
                       borderRadius: "50%",
-                      display: "block", // Ensures the element behaves as a block-level element
-                      margin: "0 auto", // Horizontally centers the image
+                      display: "block",
+                      margin: "0 auto",
                     }}
                   />
                   <Typography
@@ -310,14 +243,13 @@ const DonateSection: React.FC = () => {
         </Box>
       </Container>
 
-      {/* Snackbar for copied address message */}
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={3000} // The Snackbar will disappear after 3 seconds
+        autoHideDuration={3000}
         onClose={handleCloseSnackbar}
       >
         <Alert onClose={handleCloseSnackbar} severity="success">
-          {snackbarMessage} {/* The message now includes the coin name */}
+          {snackbarMessage}
         </Alert>
       </Snackbar>
     </Box>

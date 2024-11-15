@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  CircularProgress,
-  Typography,
-  Box,
-  Paper,
-  Container,
-  Grid,
-  Link,
-  Stack,
-  Button,
-  DialogActions,
-} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";

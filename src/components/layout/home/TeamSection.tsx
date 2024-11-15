@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Grid,
-  Paper,
-  Typography,
-  Tab,
-  Tabs,
-  Container,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Container from "@mui/material/Container";
 import { useThemeContext } from "@/theme/themeProvider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import supabase from "@/lib/supabase";
@@ -54,21 +52,19 @@ const TeamSection: React.FC = () => {
       setError(null);
 
       try {
-        // Fetch data from Supabase for Team Members
         const { data: members, error: membersError } = await supabase
-          .from("team_members") // Make sure this is the correct table name
+          .from("team_members")
           .select("*")
-          .eq("role", "Leads"); // Filter for team members
+          .eq("role", "Leads");
 
         if (membersError) {
           throw membersError;
         }
 
-        // Fetch data from Supabase for Team Moderators
         const { data: moderators, error: moderatorsError } = await supabase
-          .from("team_moderators") // Same table for moderators as well, you could also create a separate table if needed
+          .from("team_moderators")
           .select("*")
-          .in("role", ["Moderator", "Contributor"]); // Filter for moderators and contributors
+          .in("role", ["Moderator", "Contributor"]);
 
         if (moderatorsError) {
           throw moderatorsError;
@@ -77,14 +73,12 @@ const TeamSection: React.FC = () => {
         setTeamMembers(members);
         setTeamModerators(moderators);
 
-        // Set default expanded member to the first team member
         if (members && members.length > 0) {
-          setExpandedMember(members[0]); // Set the first member as default
+          setExpandedMember(members[0]);
         }
 
-        // Optionally, you can set the first moderator as default expanded if moderators tab is active
         if (moderators && moderators.length > 0 && activeTab === 1) {
-          setExpandedMember(moderators[0]); // Set the first moderator as default
+          setExpandedMember(moderators[0]);
         }
       } catch (err) {
         setError("Error fetching team data.");
@@ -99,17 +93,17 @@ const TeamSection: React.FC = () => {
   const getDefaultMember = (activeSet: number) => {
     switch (activeSet) {
       case 1:
-        return teamMembers[3]; // Example: Kyuhi for blue
+        return teamMembers[3];
       case 2:
-        return teamMembers[2]; // Vanikoro for green
+        return teamMembers[2];
       case 3:
-        return teamMembers[0]; // Squidicuz for yellow
+        return teamMembers[0];
       case 4:
-        return teamMembers[4]; // Shikoku for orange
+        return teamMembers[4];
       case 5:
-        return teamMembers[1]; // SeqSee for pink
+        return teamMembers[1];
       default:
-        return teamMembers[2]; // Default to Vanikoro
+        return teamMembers[2];
     }
   };
 
@@ -182,7 +176,6 @@ const TeamSection: React.FC = () => {
         </Box>
 
         <Box position={"relative"}>
-          {/* Expanded Details Section */}
           {expandedMember && (
             <>
               <Box
@@ -190,10 +183,10 @@ const TeamSection: React.FC = () => {
                   position: "relative",
                   textAlign: "center",
                   minHeight: "35vh",
-                  display: "flex", // Enable flexbox
-                  flexDirection: "column", // Stack children vertically
-                  justifyContent: "center", // Vertically center the content
-                  alignItems: "center", // Horizontally center the content
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 <Typography
@@ -203,7 +196,7 @@ const TeamSection: React.FC = () => {
                     display: { md: "block", xs: "none" },
                     top: "50%",
                     left: "50%",
-                    transform: "translate(-50%, -50%)", // Centers the image
+                    transform: "translate(-50%, -50%)",
                     zIndex: "1",
                     textWrap: "nowrap",
                     color: theme.palette.custom.primaryText,
@@ -217,8 +210,8 @@ const TeamSection: React.FC = () => {
                   src={expandedMember.land}
                   sx={{
                     position: "absolute",
-                    maxWidth: "100%", // Ensure the image does not exceed the container width
-                    maxHeight: "100%", // Optional: limit the height of the image if needed
+                    maxWidth: "100%",
+                    maxHeight: "100%",
                     zIndex: "2",
                     top: "5%",
                   }}
@@ -231,16 +224,16 @@ const TeamSection: React.FC = () => {
                 sx={{
                   marginBottom: 2,
                   "& .MuiTabs-flexContainer": {
-                    color: "custom.secondaryText", // Set the default color for the tabs
+                    color: "custom.secondaryText",
                   },
                   "& .MuiTab-root": {
-                    color: "custom.primaryTextGrayed", // Set the default color for unselected tabs
+                    color: "custom.primaryTextGrayed",
                   },
                   "& .MuiTab-root.Mui-selected": {
-                    color: "custom.secondaryText", // Set the color for the selected tab
+                    color: "custom.secondaryText",
                   },
                   "& .MuiTabs-indicator": {
-                    backgroundColor: "custom.secondaryText", // Change the underline color for the active tab
+                    backgroundColor: "custom.secondaryText",
                   },
                 }}
               >
@@ -273,17 +266,17 @@ const TeamSection: React.FC = () => {
                       padding: 2,
                       textAlign: "center",
                       transition: "transform 0.2s, background-color 0.3s",
-                      cursor: expandedMember === member ? "pointer" : "pointer", // Disable pointer cursor for active card
+                      cursor: expandedMember === member ? "pointer" : "pointer",
                       backgroundColor:
                         expandedMember === member
                           ? "custom.secondaryComponents"
                           : "custom.secondaryBackground",
-                      borderWidth: "10px", // Adjust the border width as per your preference
+                      borderWidth: "10px",
                       borderStyle: "solid",
-                      borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                      borderImage: `url('${imageBgBorderSrc}') 30 round`,
                       "&:hover": {
                         transform:
-                          expandedMember === member ? "none" : "scale(1.05)", // Disable hover effect for active card
+                          expandedMember === member ? "none" : "scale(1.05)",
                         backgroundColor:
                           expandedMember === member
                             ? "custom.secondaryComponents"
@@ -319,27 +312,27 @@ const TeamSection: React.FC = () => {
           {activeTab === 1 && (
             <Box position={"relative"} zIndex={2}>
               <Swiper
-                spaceBetween={32} // Space between slides
-                slidesPerView={"auto"} // Show 5 slides at a time
-                loop={false} // Enable looping of the slides
+                spaceBetween={32}
+                slidesPerView={"auto"}
+                loop={false}
                 autoplay={{
-                  delay: 2500, // Autoplay delay (in ms)
-                  disableOnInteraction: false, // Keep autoplay on after interaction
+                  delay: 2500,
+                  disableOnInteraction: false,
                 }}
                 scrollbar={{
-                  hide: false, // Keep scrollbar visible
-                  draggable: true, // Make the scrollbar draggable
+                  hide: false,
+                  draggable: true,
                 }}
                 modules={[Scrollbar]}
                 breakpoints={{
                   1024: {
-                    slidesPerView: 5, // For large screens (desktops)
+                    slidesPerView: 5,
                   },
                   768: {
-                    slidesPerView: 3, // For tablets (portrait mode)
+                    slidesPerView: 3,
                   },
                   480: {
-                    slidesPerView: 1, // For small screens (mobile devices)
+                    slidesPerView: 1,
                   },
                 }}
                 style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
@@ -360,9 +353,9 @@ const TeamSection: React.FC = () => {
                             : "custom.secondaryBackground",
                         transition: "transform 0.2s, background-color 0.3s",
                         cursor: "pointer",
-                        borderWidth: "10px", // Adjust the border width as per your preference
+                        borderWidth: "10px",
                         borderStyle: "solid",
-                        borderImage: `url('${imageBgBorderSrc}') 30 round`, // Use an image as the border
+                        borderImage: `url('${imageBgBorderSrc}') 30 round`,
                         "&:hover": {
                           transform: "scale(1.05)",
                           backgroundColor:
@@ -402,24 +395,20 @@ const TeamSection: React.FC = () => {
 
       <style jsx global>
         {`
-          /* Swiper scrollbar customizations */
           .swiper-scrollbar {
-            background-color: ${theme.palette.custom
-              .secondaryBackground}; /* Track background */
-            border-radius: 10px; /* Rounded track edges */
-            height: 8px; /* Scrollbar height */
+            background-color: ${theme.palette.custom.secondaryBackground};
+            border-radius: 10px;
+            height: 8px;
           }
 
           .swiper-scrollbar-drag {
-            background-color: ${theme.palette.custom
-              .mainColor}; /* Thumb color */
-            border-radius: 10px; /* Rounded thumb */
-            opacity: 0.7; /* Thumb opacity */
+            background-color: ${theme.palette.custom.mainColor};
+            border-radius: 10px;
+            opacity: 0.7;
           }
 
           .swiper-scrollbar-drag:hover {
-            background-color: ${theme.palette.custom
-              .secondarySolidColors}; /* Thumb color on hover */
+            background-color: ${theme.palette.custom.secondarySolidColors};
           }
         `}
       </style>

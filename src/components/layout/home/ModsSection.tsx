@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {
-  CircularProgress,
-  Alert,
-  Typography,
-  Box,
-  Container,
-  Stack,
-  Button,
-  DialogActions,
-  Grid,
-  Paper,
-} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import DefaultDialog from "../DefaultDialog";
@@ -23,7 +21,6 @@ import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import supabase from "@/lib/supabase";
-import { url } from "inspector";
 
 type CustomTheme = {
   activeSet: number;
@@ -280,6 +277,7 @@ const ModsSection: React.FC = () => {
             theme.palette.custom.primaryComponents.slice(5, 7),
             16
           )}, .5)`,
+
         paddingTop: { md: "5rem", xs: "3rem" },
         paddingBottom: { md: "5rem", xs: "3rem" },
       }}

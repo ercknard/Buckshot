@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  Box,
-  Container,
-  Stack,
-  IconButton,
-  CircularProgress,
-  Alert,
-} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import IconButton from "@mui/material/IconButton";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import DefaultDialog from "../DefaultDialog";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { Swiper } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { Autoplay } from "swiper/modules";
+import { Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import ArrowForward from "@mui/icons-material/ArrowForward";
 import supabase from "@/lib/supabase";
 
 type CustomTheme = {
@@ -32,15 +31,6 @@ type Partners = {
   content: string;
   image: string;
 };
-
-// const partners = [
-//   {
-//     id: 1,
-//     title: "StakeCube",
-//     content: "Join the Future of Finance & Trade Crypto with Confidence.",
-//     image: "/static/images/stakecube-logo.jpeg",
-//   },
-// ];
 
 const PartnersSection: React.FC = () => {
   const theme = useTheme();
@@ -63,14 +53,11 @@ const PartnersSection: React.FC = () => {
   useEffect(() => {
     const fetchPartners = async () => {
       try {
-        // Fetch slides from Supabase
-        const { data, error } = await supabase
-          .from("partners") // Assuming "featuredmods" is your table name
-          .select("*");
+        const { data, error } = await supabase.from("partners").select("*");
 
         if (error) throw error;
 
-        setPartners(data); // Set the fetched slides data
+        setPartners(data);
       } catch (err) {
         setError("Error loading slides");
       } finally {
@@ -131,11 +118,10 @@ const PartnersSection: React.FC = () => {
           width: "100%",
           height: "100%",
           opacity: 0.75,
-          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))", // Drop shadow applied
+          filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
         })}
       />
 
-      {/* Container for Mods List */}
       <Container
         sx={{
           justifyContent: { sm: "center", xs: "left" },
@@ -160,8 +146,8 @@ const PartnersSection: React.FC = () => {
             disableOnInteraction: false,
           }}
           navigation={{
-            prevEl: ".swiper-button-prev", // Custom prev button
-            nextEl: ".swiper-button-next", // Custom next button
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
           }}
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
@@ -198,7 +184,6 @@ const PartnersSection: React.FC = () => {
               </Box>
             </SwiperSlide>
           ))}
-          {/* Custom Navigation Buttons */}
           <Box
             className="swiper-button-prev"
             sx={{
@@ -211,13 +196,7 @@ const PartnersSection: React.FC = () => {
               cursor: "pointer",
               color: "custom.primaryText",
             }}
-          >
-            {/* <IconButton>
-                    <Typography color="custom.secondaryText">
-                      <ArrowBack fontSize="large" />
-                    </Typography>
-                  </IconButton> */}
-          </Box>
+          ></Box>
 
           <Box
             className="swiper-button-next"
@@ -231,13 +210,7 @@ const PartnersSection: React.FC = () => {
               cursor: "pointer",
               color: "custom.primaryText",
             }}
-          >
-            {/* <IconButton>
-                    <Typography color="custom.secondaryText">
-                      <ArrowForward fontSize="large" />
-                    </Typography>
-                  </IconButton> */}
-          </Box>
+          ></Box>
         </Swiper>
       </Container>
     </Box>

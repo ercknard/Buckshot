@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Typography, Grid, Container, Paper } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
 import ReactMarkdown from "react-markdown";
 import { useThemeContext } from "@/theme/themeProvider";
 import rehypeRaw from "rehype-raw"; // Import rehype-raw for raw HTML parsing
@@ -44,10 +49,6 @@ const NewsSection = () => {
         // Sort the markdown files in descending order based on the name (or any other sorting logic)
         const sortedFiles = markdownFiles.sort((a, b) => {
           return b.name.localeCompare(a.name); // Lexicographically, descending
-          // Alternatively, if you have timestamps or dates in the filenames:
-          // const dateA = new Date(a.name.replace(".md", ""));
-          // const dateB = new Date(b.name.replace(".md", ""));
-          // return dateB.getTime() - dateA.getTime(); // Sort by date in descending order
         });
 
         // Fetch content for each Markdown file
@@ -156,7 +157,6 @@ const NewsSection = () => {
     >
       <MainBorder containerId="news-particles" />
 
-      {/* Container for Mods List */}
       <Container
         sx={{
           position: "relative",
@@ -190,12 +190,11 @@ const NewsSection = () => {
                   marginTop: "2.5rem",
                   padding: { md: "2rem", xs: "1rem" },
                   paddingBottom: "0",
-                  borderWidth: "10px", // Adjust the border width as per your preference
+                  borderWidth: "10px",
                   borderStyle: "solid",
-                  borderImage: `url('${imageBgBorderSrc}') 20 round`, // Use an image as the border
+                  borderImage: `url('${imageBgBorderSrc}') 20 round`,
                 }}
               >
-                {/* Render current file */}
                 {currentFile && (
                   <Box sx={{ marginBottom: 3 }}>
                     <Typography
