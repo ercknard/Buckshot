@@ -491,6 +491,22 @@ const customComponents = (palette: PaletteOptions) => {
           },
         },
       },
+      MuiFormLabel: {
+        styleOverrides: {
+          root: {
+            fontFamily: "Roboto, sans-serif", // Change font for all TextField components
+            color: "#ffffff",
+          },
+        },
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            fontFamily: "Roboto, sans-serif", // Change font for all TextField components
+            color: "#ffffff",
+          },
+        },
+      },
       MuiDrawer: {
         styleOverrides: {
           paper: {
