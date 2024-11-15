@@ -25,6 +25,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import DefaultDialog from "./DefaultDialog";
 
 interface GenericTableProps {
   tableName: string;
@@ -35,7 +36,10 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
   const [newRow, setNewRow] = useState<RowData>({ id: 0 });
   const [editRow, setEditRow] = useState<RowData | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false); // State for Snackbar visibility
+  const [deleteConfirmationDialogOpen, setDeleteConfirmationDialogOpen] =
+    useState(false);
+  const [rowToDelete, setRowToDelete] = useState<RowData | null>(null); // Track the row to delete
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState(""); // Message to display in the Snackbar
 
   useEffect(() => {
@@ -46,13 +50,11 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     loadData();
   }, [tableName]);
 
-  // Fetch data function
   const loadData = async () => {
     const rows = await fetchRows(tableName);
     setData(rows);
   };
 
-  // Load data when the component mounts
   useEffect(() => {
     loadData();
   }, [tableName]);
@@ -67,10 +69,8 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
 
     if (addedRow) {
       await loadData();
-
       setNewRow({ id: 0 });
       setOpenDialog(false);
-
       setSnackbarMessage("Row successfully added!");
       setSnackbarOpen(true);
     } else {
@@ -88,28 +88,27 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     if (updatedRow) {
       setData(data.map((row) => (row.id === updatedRow.id ? updatedRow : row)));
       setEditRow(null);
-
-      // Show success message
       setSnackbarMessage("Row successfully updated!");
       setSnackbarOpen(true);
     }
   };
 
-  const handleDelete = async (id: number) => {
-    const deletedRow = await deleteRow(tableName, id);
+  const handleDelete = async () => {
+    if (!rowToDelete) return;
+
+    const deletedRow = await deleteRow(tableName, rowToDelete.id);
 
     if (deletedRow) {
-      // Re-fetch the data after deletion to ensure the state is updated
-      await loadData(); // Re-fetch to refresh the table
-
-      // Show success message
+      await loadData(); // Re-fetch data to update the state
       setSnackbarMessage("Row successfully deleted!");
       setSnackbarOpen(true);
     } else {
-      await loadData(); // Re-fetch to refresh the table
-      setSnackbarMessage("Row successfully deleted!");
+      await loadData();
+      setSnackbarMessage("Error deleting the row.");
       setSnackbarOpen(true);
     }
+
+    setDeleteConfirmationDialogOpen(false); // Close the confirmation dialog after deletion
   };
 
   const handleNewRowChange = (
@@ -147,6 +146,24 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
     setSnackbarOpen(false);
   };
 
+  const handleOpenDeleteConfirmation = (row: RowData) => {
+    setRowToDelete(row);
+    setDeleteConfirmationDialogOpen(true);
+  };
+
+  const handleCloseDeleteConfirmation = () => {
+    setDeleteConfirmationDialogOpen(false);
+    setRowToDelete(null); // Reset the row to delete
+  };
+
+  const handleDialogOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <div>
       <Stack
@@ -166,11 +183,16 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
       </Stack>
 
       {/* Dialog for creating a new row */}
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Add New Row</DialogTitle>
+      <DefaultDialog
+        maxWidth="sm"
+        open={openDialog}
+        handleOnClose={handleDialogClose}
+        title="Add new row"
+      >
         <DialogContent>
+          <Typography variant="h5">Row for {tableName}</Typography>
           {data[0] && (
-            <Grid container spacing={3} marginTop={0.5}>
+            <Grid container spacing={5} marginTop={0.5}>
               {Object.keys(data[0]).map((key) =>
                 key !== "id" ? (
                   <Grid item xs={12} sm={12} key={key}>
@@ -194,7 +216,27 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
             Add Row
           </Button>
         </DialogActions>
-      </Dialog>
+      </DefaultDialog>
+
+      {/* Confirmation Dialog for Deletion */}
+      <DefaultDialog
+        maxWidth="sm"
+        open={deleteConfirmationDialogOpen}
+        handleOnClose={handleDialogClose}
+        title="Delete Row"
+      >
+        <Typography variant="h5">
+          Are you sure you want to delete this row?
+        </Typography>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="error">
+            Delete
+          </Button>
+        </DialogActions>
+      </DefaultDialog>
 
       {/* Table */}
       <TableContainer>
@@ -256,7 +298,7 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
                         <Typography variant="h6">Edit</Typography>
                       </Button>
                       <Button
-                        onClick={() => handleDelete(row.id)}
+                        onClick={() => handleOpenDeleteConfirmation(row)}
                         variant="outlined"
                         color="error"
                       >
