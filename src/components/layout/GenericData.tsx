@@ -203,9 +203,13 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
             <TableRow>
               {data[0] &&
                 Object.keys(data[0]).map((key) => (
-                  <TableCell key={key}>{key}</TableCell>
+                  <TableCell key={key}>
+                    <Typography color="custom.primaryText">{key}</Typography>
+                  </TableCell>
                 ))}
-              <TableCell>Actions</TableCell>
+              <TableCell>
+                <Typography color="custom.primaryText">Actions</Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -213,7 +217,7 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
               <TableRow key={row.id}>
                 {Object.keys(row).map((key) => (
                   <TableCell key={key}>
-                    <Typography variant="h6">
+                    <Typography variant="h6" color="custom.primaryTextGrayed">
                       {editRow?.id === row.id ? (
                         <TextField
                           value={editRow[key] || ""}

@@ -9,12 +9,14 @@ import {
 } from "@mui/material";
 import GenericTable from "@/components/layout/GenericData";
 import { fetchTables } from "@/lib/fectTableSupabase";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 interface Table {
   name: string;
 }
 
-const HomePage: React.FC = () => {
+const AdminPage: React.FC = () => {
   const [tables, setTables] = useState<Table[]>([]);
   const [user, setUser] = useState<{ email: string } | null>(null); // Custom user object
   const [email, setEmail] = useState("");
@@ -75,80 +77,88 @@ const HomePage: React.FC = () => {
   // If the user is not logged in, show login form
   if (!user) {
     return (
-      <Container>
-        <Box padding={5} textAlign="center">
-          <Typography variant="h4" gutterBottom>
-            Login to Access Tables
-          </Typography>
+      <Box bgcolor={"custom.primaryBackground"}>
+        <Navbar />
+        <Container>
+          <Box padding={5} textAlign="center" minHeight={"74vh"}>
+            <Typography variant="h4" gutterBottom>
+              Login to Access Tables
+            </Typography>
 
-          <TextField
-            label="Email"
-            type="email"
-            fullWidth
-            margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <TextField
+              label="Email"
+              type="email"
+              fullWidth
+              margin="normal"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <TextField
-            label="Password"
-            type="password"
-            fullWidth
-            margin="normal"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <TextField
+              label="Password"
+              type="password"
+              fullWidth
+              margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          {error && <Typography color="error">{error}</Typography>}
+            {error && <Typography color="error">{error}</Typography>}
 
-          <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            onClick={handleLogin}
-            style={{ marginTop: "1rem" }}
-          >
-            Login
-          </Button>
-        </Box>
-      </Container>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={handleLogin}
+              style={{ marginTop: "1rem" }}
+            >
+              Login
+            </Button>
+          </Box>
+        </Container>
+        <Footer />
+      </Box>
     );
   }
 
   // If user is logged in, render the tables page
   return (
-    <Box padding={5}>
-      <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h4" gutterBottom>
-          CryptechTest Tables
-        </Typography>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={handleLogout}
-          style={{ marginBottom: "1rem" }}
-        >
-          Logout
-        </Button>
-      </Stack>
-
-      {/* Render the tables here */}
-      {tables
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((table) => (
-          <Box
-            key={table.name}
-            marginTop={"2.5rem"}
-            marginBottom={"2.5rem"}
-            padding={10}
-            bgcolor={"custom.primaryBackground"}
-            borderRadius={3}
+    <Box bgcolor={"custom.primaryBackground"}>
+      <Navbar />
+      <Box padding={5} paddingTop={0}>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography variant="h4" color="custom.primaryText">
+            CryptechTest Tables
+          </Typography>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleLogout}
+            style={{ marginBottom: "1rem" }}
           >
-            <GenericTable tableName={table.name} />
-          </Box>
-        ))}
+            Logout
+          </Button>
+        </Stack>
+
+        {/* Render the tables here */}
+        {tables
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((table) => (
+            <Box
+              key={table.name}
+              marginTop={"2.5rem"}
+              marginBottom={"2.5rem"}
+              padding={10}
+              bgcolor={"custom.secondaryBackground"}
+              borderRadius={3}
+            >
+              <GenericTable tableName={table.name} />
+            </Box>
+          ))}
+      </Box>
+      <Footer />
     </Box>
   );
 };
 
-export default HomePage;
+export default AdminPage;
