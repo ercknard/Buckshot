@@ -61,7 +61,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 1,
+          opacity: 0.75,
           pointerEvents: "none",
         })}
       >
@@ -78,7 +78,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.1,
+          opacity: 0.05,
           objectFit: "cover",
         })}
       />

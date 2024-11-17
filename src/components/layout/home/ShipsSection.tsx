@@ -21,6 +21,8 @@ import { Scrollbar } from "swiper/modules";
 import supabase from "@/lib/supabase";
 import { keyframes } from "@emotion/react";
 
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
 type Ship = {
   id: number;
   title: string;
@@ -34,6 +36,9 @@ type Ship = {
   specs_4?: string;
   specs_5?: string;
   specs_6?: string;
+  front_view?: string;
+  back_view?: string;
+  side_view?: string;
 };
 
 const jumpAnimation = keyframes`
@@ -204,7 +209,7 @@ const ShipsSection: React.FC = () => {
               >
                 <Tab label="Model" />
                 <Tab label="Ship Features" />
-                <Tab label="Images" />
+                <Tab label="Views" />
               </Tabs>
             </Box>
             <Box
@@ -316,57 +321,103 @@ const ShipsSection: React.FC = () => {
                       position: "relative",
                       display: "flex",
                       flexDirection: "column",
+                      width: "100%",
                     }}
                   >
-                    <Typography
-                      variant="body1"
-                      fontSize={"1.5rem"}
-                      color="custom.primaryText"
+                    <Swiper
+                      spaceBetween={30}
+                      centeredSlides={true}
+                      autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                      }}
+                      navigation={{
+                        prevEl: ".swiper-button-prev", // Custom prev button
+                        nextEl: ".swiper-button-next", // Custom next button
+                      }}
+                      modules={[Autoplay, Pagination, Navigation]}
+                      className="mySwiper"
+                      style={{ marginBottom: "2rem" }}
                     >
-                      {expandedMember.title} Images :
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      textAlign="left"
-                      color="custom.secondaryText"
-                    >
-                      {expandedMember.specs_1}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      textAlign="left"
-                      color="custom.secondaryText"
-                    >
-                      {expandedMember.specs_2}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      textAlign="left"
-                      color="custom.secondaryText"
-                    >
-                      {expandedMember.specs_3}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      textAlign="left"
-                      color="custom.secondaryText"
-                    >
-                      {expandedMember.specs_4}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      textAlign="left"
-                      color="custom.secondaryText"
-                    >
-                      {expandedMember.specs_5}
-                    </Typography>
-                    <Typography
-                      variant="h5"
-                      textAlign="left"
-                      color="custom.secondaryText"
-                    >
-                      {expandedMember.specs_6}
-                    </Typography>
+                      <SwiperSlide>
+                        <Box
+                          component="img"
+                          width={{
+                            xs: "100%",
+                            md: `${expandedMember.front_view}`,
+                          }}
+                          alt={expandedMember.title}
+                          src={expandedMember.image}
+                          marginX={"auto"}
+                          sx={{
+                            animation: `${jumpAnimation} 3s ease-in-out infinite`,
+                          }}
+                        />
+                        <Stack direction={"column"} spacing={1}>
+                          <Typography variant="h5" color="custom.secondaryText">
+                            {expandedMember.title} Front View
+                          </Typography>
+                        </Stack>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        <Box
+                          sx={{
+                            textAlign: "center",
+                          }}
+                        >
+                          <Box
+                            component="img"
+                            width={{
+                              xs: "100%",
+                              md: `${expandedMember.back_view}`,
+                            }}
+                            alt={expandedMember.title}
+                            src={expandedMember.image}
+                            marginX={"auto"}
+                            sx={{
+                              animation: `${jumpAnimation} 3s ease-in-out infinite`,
+                            }}
+                          />
+                          <Stack direction={"column"} spacing={1}>
+                            <Typography
+                              variant="h5"
+                              color="custom.secondaryText"
+                            >
+                              {expandedMember.title} Back View
+                            </Typography>
+                          </Stack>
+                        </Box>
+                      </SwiperSlide>
+                      <SwiperSlide>
+                        <Box
+                          sx={{
+                            textAlign: "center",
+                          }}
+                        >
+                          <Box
+                            component="img"
+                            width={{
+                              xs: "100%",
+                              md: `${expandedMember.side_view}`,
+                            }}
+                            alt={expandedMember.title}
+                            src={expandedMember.image}
+                            marginX={"auto"}
+                            sx={{
+                              animation: `${jumpAnimation} 3s ease-in-out infinite`,
+                            }}
+                          />
+                          <Stack direction={"column"} spacing={1}>
+                            <Typography
+                              variant="h5"
+                              color="custom.secondaryText"
+                            >
+                              {expandedMember.title} Side View
+                            </Typography>
+                          </Stack>
+                        </Box>
+                      </SwiperSlide>
+                    </Swiper>
                   </Stack>
                 </>
               )}
