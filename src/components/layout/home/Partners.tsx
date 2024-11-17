@@ -20,6 +20,7 @@ import { Navigation } from "swiper/modules";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import supabase from "@/lib/supabase";
+import { keyframes } from "@emotion/react";
 
 type CustomTheme = {
   activeSet: number;
@@ -31,6 +32,15 @@ type Partners = {
   content: string;
   image: string;
 };
+
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
 
 const PartnersSection: React.FC = () => {
   const theme = useTheme();
@@ -168,6 +178,7 @@ const PartnersSection: React.FC = () => {
                   alt="Logo"
                   src={slide.image}
                   marginX={"auto"}
+                  sx={{ animation: `${jumpAnimation} 3s ease-in-out infinite` }}
                 />
                 <Stack direction={"column"} spacing={2} marginTop={"2.5rem"}>
                   <Typography

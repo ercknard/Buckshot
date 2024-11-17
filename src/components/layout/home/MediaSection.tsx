@@ -21,6 +21,7 @@ type CustomTheme = {
 };
 
 interface Media {
+  id: number;
   video_url: string;
   title: string;
   cover_image: string;
@@ -174,45 +175,47 @@ const MediaSection: React.FC = () => {
             ref={swiperRef}
             style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
           >
-            {media.map((item, index) => (
-              <SwiperSlide key={index} style={{ width: "35%" }}>
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: "100%",
-                    paddingTop: "56.25%",
-                    overflow: "hidden",
-                    borderRadius: 2,
-                  }}
-                >
-                  <ReactPlayer
-                    url={item.video_url}
-                    width="100%"
-                    height="100%"
-                    controls
-                    light={item.cover_image}
-                    playing={false}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
+            {media
+              .sort((a, b) => a.id - b.id)
+              .map((item, index) => (
+                <SwiperSlide key={index} style={{ width: "35%" }}>
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "100%",
+                      paddingTop: "56.25%",
+                      overflow: "hidden",
+                      borderRadius: 2,
                     }}
-                  />
-                </Box>
+                  >
+                    <ReactPlayer
+                      url={item.video_url}
+                      width="100%"
+                      height="100%"
+                      controls
+                      light={item.cover_image}
+                      playing={false}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                      }}
+                    />
+                  </Box>
 
-                <Typography
-                  variant="h5"
-                  align="center"
-                  sx={{
-                    marginTop: 1,
-                    padding: 0.5,
-                    bgcolor: "custom.primaryComponents",
-                  }}
-                >
-                  {item.title}
-                </Typography>
-              </SwiperSlide>
-            ))}
+                  <Typography
+                    variant="h5"
+                    align="center"
+                    sx={{
+                      marginTop: 1,
+                      padding: 0.5,
+                      bgcolor: "custom.primaryComponents",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                </SwiperSlide>
+              ))}
           </Swiper>
         ) : (
           <Swiper
@@ -239,44 +242,46 @@ const MediaSection: React.FC = () => {
             ref={swiperRef}
             style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
           >
-            {media.map((item, index) => (
-              <SwiperSlide key={index} style={{ width: "90%" }}>
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: "100%",
-                    paddingTop: "56.25%",
-                    overflow: "hidden",
-                    borderRadius: 2,
-                  }}
-                >
-                  <ReactPlayer
-                    url={item.video_url}
-                    width="100%"
-                    height="100%"
-                    controls
-                    light={item.cover_image}
-                    playing={false}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
+            {media
+              .sort((a, b) => a.id - b.id)
+              .map((item, index) => (
+                <SwiperSlide key={index} style={{ width: "90%" }}>
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "100%",
+                      paddingTop: "56.25%",
+                      overflow: "hidden",
+                      borderRadius: 2,
                     }}
-                  />
-                </Box>
-                <Typography
-                  variant="h5"
-                  align="center"
-                  sx={{
-                    marginTop: 1,
-                    padding: 0.5,
-                    bgcolor: "custom.primaryComponents",
-                  }}
-                >
-                  {item.title}
-                </Typography>
-              </SwiperSlide>
-            ))}
+                  >
+                    <ReactPlayer
+                      url={item.video_url}
+                      width="100%"
+                      height="100%"
+                      controls
+                      light={item.cover_image}
+                      playing={false}
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                      }}
+                    />
+                  </Box>
+                  <Typography
+                    variant="h5"
+                    align="center"
+                    sx={{
+                      marginTop: 1,
+                      padding: 0.5,
+                      bgcolor: "custom.primaryComponents",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                </SwiperSlide>
+              ))}
           </Swiper>
         )}
       </Box>

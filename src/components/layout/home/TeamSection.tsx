@@ -17,6 +17,7 @@ import SwiperCore from "swiper";
 import { Scrollbar } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
+import { keyframes } from "@emotion/react";
 
 type CustomTheme = {
   activeSet: number;
@@ -31,6 +32,50 @@ interface TeamMember {
   details: string;
   dcdetails: string;
 }
+
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
+
+const glitchEffect = keyframes`
+  0% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+  10% {
+    opacity: 0.8;
+    clip-path: inset(0 10% 0 0);
+  }
+  20% {
+    opacity: 0.7;
+    clip-path: inset(0 0 5px 0);
+  }
+  30% {
+    opacity: 1;
+    clip-path: inset(10% 0 10% 0);
+  }
+  40% {
+    opacity: 0.9;
+    clip-path: inset(0 0 0 0);
+  }
+  50% {
+    opacity: 0.6;
+    clip-path: inset(0 5px 0 0);
+  }
+  60% {
+    opacity: 0.8;
+    clip-path: inset(0 0 5px 0);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+`;
 
 const TeamSection: React.FC = () => {
   const { activeSet } = useThemeContext() as CustomTheme;
@@ -200,6 +245,7 @@ const TeamSection: React.FC = () => {
                     zIndex: "1",
                     textWrap: "nowrap",
                     color: theme.palette.custom.primaryText,
+                    animation: `${glitchEffect} 3s ease-in-out infinite`,
                   })}
                 >
                   {expandedMember.name}
@@ -214,6 +260,7 @@ const TeamSection: React.FC = () => {
                     maxHeight: "100%",
                     zIndex: "2",
                     top: "5%",
+                    animation: `${jumpAnimation} 3s ease-in-out infinite`,
                   }}
                 />
               </Box>
@@ -252,60 +299,63 @@ const TeamSection: React.FC = () => {
               justifyContent="center"
               sx={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
             >
-              {teamMembers.map((member) => (
-                <Grid
-                  item
-                  xs={6}
-                  md={2.4}
-                  key={member.name}
-                  sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
-                >
-                  <Paper
-                    elevation={3}
-                    sx={{
-                      padding: 2,
-                      textAlign: "center",
-                      transition: "transform 0.2s, background-color 0.3s",
-                      cursor: expandedMember === member ? "pointer" : "pointer",
-                      backgroundColor:
-                        expandedMember === member
-                          ? "custom.secondaryComponents"
-                          : "custom.secondaryBackground",
-                      borderWidth: "10px",
-                      borderStyle: "solid",
-                      borderImage: `url('${imageBgBorderSrc}') 30 round`,
-                      "&:hover": {
-                        transform:
-                          expandedMember === member ? "none" : "scale(1.05)",
+              {teamMembers
+                .sort((a, b) => a.id - b.id)
+                .map((member) => (
+                  <Grid
+                    item
+                    xs={6}
+                    md={2.4}
+                    key={member.name}
+                    sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
+                  >
+                    <Paper
+                      elevation={3}
+                      sx={{
+                        padding: 2,
+                        textAlign: "center",
+                        transition: "transform 0.2s, background-color 0.3s",
+                        cursor:
+                          expandedMember === member ? "pointer" : "pointer",
                         backgroundColor:
                           expandedMember === member
                             ? "custom.secondaryComponents"
                             : "custom.secondaryBackground",
-                      },
-                    }}
-                    onClick={() => handleCardClick(member)}
-                  >
-                    <Box
-                      component={"img"}
-                      src={member.image}
-                      alt={`${member.name} - ${member.role}`}
-                      sx={{
-                        width: "100%",
-                        height: "auto",
-                        borderRadius: "50%",
+                        borderWidth: "10px",
+                        borderStyle: "solid",
+                        borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                        "&:hover": {
+                          transform:
+                            expandedMember === member ? "none" : "scale(1.05)",
+                          backgroundColor:
+                            expandedMember === member
+                              ? "custom.secondaryComponents"
+                              : "custom.secondaryBackground",
+                        },
                       }}
-                    />
-                    <Typography
-                      variant="body1"
-                      fontSize={{ md: "1.10rem", xs: "1rem" }}
-                      sx={{ marginTop: 2 }}
+                      onClick={() => handleCardClick(member)}
                     >
-                      {member.name}
-                    </Typography>
-                    <Typography variant="h5">{member.role}</Typography>
-                  </Paper>
-                </Grid>
-              ))}
+                      <Box
+                        component={"img"}
+                        src={member.image}
+                        alt={`${member.name} - ${member.role}`}
+                        sx={{
+                          width: "100%",
+                          height: "auto",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <Typography
+                        variant="body1"
+                        fontSize={{ md: "1.10rem", xs: "1rem" }}
+                        sx={{ marginTop: 2 }}
+                      >
+                        {member.name}
+                      </Typography>
+                      <Typography variant="h5">{member.role}</Typography>
+                    </Paper>
+                  </Grid>
+                ))}
             </Grid>
           )}
 
@@ -337,56 +387,58 @@ const TeamSection: React.FC = () => {
                 }}
                 style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
               >
-                {teamModerators.map((member) => (
-                  <SwiperSlide
-                    key={member.name}
-                    style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
-                  >
-                    <Paper
-                      elevation={3}
-                      sx={{
-                        padding: 2,
-                        textAlign: "center",
-                        backgroundColor:
-                          expandedMember === member
-                            ? "custom.secondaryComponents"
-                            : "custom.secondaryBackground",
-                        transition: "transform 0.2s, background-color 0.3s",
-                        cursor: "pointer",
-                        borderWidth: "10px",
-                        borderStyle: "solid",
-                        borderImage: `url('${imageBgBorderSrc}') 30 round`,
-                        "&:hover": {
-                          transform: "scale(1.05)",
+                {teamModerators
+                  .sort((a, b) => a.id - b.id)
+                  .map((member) => (
+                    <SwiperSlide
+                      key={member.name}
+                      style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
+                    >
+                      <Paper
+                        elevation={3}
+                        sx={{
+                          padding: 2,
+                          textAlign: "center",
                           backgroundColor:
                             expandedMember === member
                               ? "custom.secondaryComponents"
                               : "custom.secondaryBackground",
-                        },
-                      }}
-                      onClick={() => handleCardClick(member)}
-                    >
-                      <Box
-                        component={"img"}
-                        src={member.image}
-                        alt={`${member.name} - ${member.role}`}
-                        sx={{
-                          width: "100%",
-                          height: "auto",
-                          borderRadius: "50%",
+                          transition: "transform 0.2s, background-color 0.3s",
+                          cursor: "pointer",
+                          borderWidth: "10px",
+                          borderStyle: "solid",
+                          borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                          "&:hover": {
+                            transform: "scale(1.05)",
+                            backgroundColor:
+                              expandedMember === member
+                                ? "custom.secondaryComponents"
+                                : "custom.secondaryBackground",
+                          },
                         }}
-                      />
-                      <Typography
-                        variant="body1"
-                        fontSize={"1.10rem"}
-                        sx={{ marginTop: 2 }}
+                        onClick={() => handleCardClick(member)}
                       >
-                        {member.name}
-                      </Typography>
-                      <Typography variant="h5">{member.role}</Typography>
-                    </Paper>
-                  </SwiperSlide>
-                ))}
+                        <Box
+                          component={"img"}
+                          src={member.image}
+                          alt={`${member.name} - ${member.role}`}
+                          sx={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "50%",
+                          }}
+                        />
+                        <Typography
+                          variant="body1"
+                          fontSize={"1.10rem"}
+                          sx={{ marginTop: 2 }}
+                        >
+                          {member.name}
+                        </Typography>
+                        <Typography variant="h5">{member.role}</Typography>
+                      </Paper>
+                    </SwiperSlide>
+                  ))}
               </Swiper>
             </Box>
           )}

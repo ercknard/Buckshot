@@ -19,6 +19,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Scrollbar } from "swiper/modules";
 import supabase from "@/lib/supabase";
+import { keyframes } from "@emotion/react";
 
 type Ship = {
   id: number;
@@ -35,6 +36,15 @@ type Ship = {
   specs_6?: string;
 };
 
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
+
 const ShipsSection: React.FC = () => {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
@@ -42,6 +52,7 @@ const ShipsSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet } = useThemeContext();
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTabShips, setActiveTabShips] = useState<number>(0);
   const [expandedMember, setExpandedMember] = useState<Ship | null>(null);
   const [shipData, setShipData] = useState<Ship[][]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -117,6 +128,13 @@ const ShipsSection: React.FC = () => {
     setExpandedMember(shipData[newValue][0]);
   };
 
+  const handleTabChangeShips = (
+    event: React.SyntheticEvent,
+    newValue: number
+  ) => {
+    setActiveTabShips(newValue);
+  };
+
   const handleCardClick = (member: Ship) => {
     setExpandedMember(member);
   };
@@ -163,103 +181,195 @@ const ShipsSection: React.FC = () => {
 
         {expandedMember && (
           <>
+            <Box marginTop={3} justifyItems={"center"}>
+              <Tabs
+                value={activeTabShips}
+                onChange={handleTabChangeShips}
+                sx={{
+                  overflowX: "auto",
+                  marginBottom: 2,
+                  "& .MuiTabs-flexContainer": {
+                    color: "custom.secondaryText",
+                  },
+                  "& .MuiTab-root": {
+                    color: "custom.primaryTextGrayed",
+                  },
+                  "& .MuiTab-root.Mui-selected": {
+                    color: "custom.secondaryText",
+                  },
+                  "& .MuiTabs-indicator": {
+                    backgroundColor: "custom.secondaryText",
+                  },
+                }}
+              >
+                <Tab label="Model" />
+                <Tab label="Ship Features" />
+                <Tab label="Images" />
+              </Tabs>
+            </Box>
             <Box
               sx={{
                 position: "relative",
                 textAlign: "center",
-                minHeight: "40vh",
+                minHeight: "35vh",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <Box
-                sx={{
-                  position: { md: "absolute", xs: "relative" },
-                  display: "flex",
-                  flexDirection: "column",
-                  marginTop: 5,
-                  marginBottom: 5,
-                  padding: 5,
-                  transition: "transform 0.2s, background-color 0.3s",
-                  backgroundColor: "custom.primaryComponents",
-                  borderWidth: "10px",
-                  borderStyle: "solid",
-                  borderImage: `url('${imageBgBorderSrc}') 30 round`,
-                  left: { md: "10%", xs: "unset" },
-                  zIndex: 3,
-                }}
-              >
-                <Typography
-                  variant="body1"
-                  fontSize={"1.10rem"}
-                  color="custom.primaryText"
+              {activeTabShips === 0 && (
+                <>
+                  <Box
+                    component="img"
+                    alt="Logo"
+                    src={expandedMember.image}
+                    width={{ xs: "100%", md: `${expandedMember.image_size}` }}
+                    sx={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      animation: `${jumpAnimation} 3s ease-in-out infinite`,
+                    }}
+                  />
+                  {/* <Stack direction={"column"} spacing={1} marginBottom={4}>
+                      <Typography
+                        variant="body1"
+                        fontSize={"1.75rem"}
+                        color="custom.primaryText"
+                      >
+                        {expandedMember.title} {expandedMember.ship_type}
+                      </Typography>
+                      <Typography variant="h5" color="custom.secondaryText">
+                        {expandedMember.content}
+                      </Typography>
+                    </Stack> */}
+                </>
+              )}
+
+              {activeTabShips === 1 && (
+                <Stack
+                  direction={"column"}
+                  spacing={1}
+                  sx={{
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
                 >
-                  {expandedMember.title} Features :
-                </Typography>
-                <Typography
-                  variant="h5"
-                  textAlign="left"
-                  sx={{ marginTop: 3 }}
-                  color="custom.secondaryText"
-                >
-                  {expandedMember.specs_1}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  textAlign="left"
-                  sx={{ marginTop: 2 }}
-                  color="custom.secondaryText"
-                >
-                  {expandedMember.specs_2}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  textAlign="left"
-                  sx={{ marginTop: 2 }}
-                  color="custom.secondaryText"
-                >
-                  {expandedMember.specs_3}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  textAlign="left"
-                  sx={{ marginTop: 2 }}
-                  color="custom.secondaryText"
-                >
-                  {expandedMember.specs_4}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  textAlign="left"
-                  sx={{ marginTop: 2 }}
-                  color="custom.secondaryText"
-                >
-                  {expandedMember.specs_5}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  textAlign="left"
-                  sx={{ marginTop: 2 }}
-                  color="custom.secondaryText"
-                >
-                  {expandedMember.specs_6}
-                </Typography>
-              </Box>
-              <Box
-                component="img"
-                alt="Logo"
-                src={expandedMember.image}
-                sx={{
-                  position: { md: "absolute", xs: "relative" },
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  zIndex: "2",
-                  top: "5%",
-                  right: { md: "10%", xs: "unset" },
-                }}
-              />
+                  <Typography
+                    variant="body1"
+                    fontSize={"1.5rem"}
+                    color="custom.primaryText"
+                  >
+                    {expandedMember.title} Features :
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_1}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_2}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_3}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_4}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_5}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_6}
+                  </Typography>
+                </Stack>
+              )}
+              {activeTabShips === 2 && (
+                <>
+                  <Stack
+                    direction={"column"}
+                    spacing={1}
+                    sx={{
+                      position: "relative",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.5rem"}
+                      color="custom.primaryText"
+                    >
+                      {expandedMember.title} Images :
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      textAlign="left"
+                      color="custom.secondaryText"
+                    >
+                      {expandedMember.specs_1}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      textAlign="left"
+                      color="custom.secondaryText"
+                    >
+                      {expandedMember.specs_2}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      textAlign="left"
+                      color="custom.secondaryText"
+                    >
+                      {expandedMember.specs_3}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      textAlign="left"
+                      color="custom.secondaryText"
+                    >
+                      {expandedMember.specs_4}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      textAlign="left"
+                      color="custom.secondaryText"
+                    >
+                      {expandedMember.specs_5}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      textAlign="left"
+                      color="custom.secondaryText"
+                    >
+                      {expandedMember.specs_6}
+                    </Typography>
+                  </Stack>
+                </>
+              )}
             </Box>
           </>
         )}
@@ -269,7 +379,6 @@ const ShipsSection: React.FC = () => {
           onChange={handleTabChange}
           sx={{
             overflowX: "auto",
-            marginTop: 2,
             marginBottom: 2,
             "& .MuiTabs-flexContainer": {
               color: "custom.secondaryText",
@@ -290,7 +399,7 @@ const ShipsSection: React.FC = () => {
           <Tab label="Scout" />
           <Tab label="Orbital Station" />
           <Tab label="Raider" />
-          <Tab label="Utility" />
+          <Tab label="Utility Ships" />
         </Tabs>
 
         <Box position={"relative"} zIndex={2}>
@@ -320,55 +429,57 @@ const ShipsSection: React.FC = () => {
             }}
             style={{ paddingLeft: ".5rem", paddingRight: ".5rem" }}
           >
-            {shipData[activeTab].map((member) => (
-              <SwiperSlide
-                key={member.id}
-                style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
-              >
-                <Paper
-                  elevation={3}
-                  sx={{
-                    padding: 2,
-                    minHeight: "265px",
-                    textAlign: "center",
-                    backgroundColor:
-                      expandedMember === member
-                        ? "custom.secondaryComponents"
-                        : "custom.secondaryBackground",
-                    transition: "transform 0.2s, background-color 0.3s",
-                    cursor: "pointer",
-                    borderWidth: "10px",
-                    borderStyle: "solid",
-                    borderImage: `url('${imageBgBorderSrc}') 30 round`,
-                    "&:hover": {
-                      transform: "scale(1.05)",
+            {shipData[activeTab]
+              .sort((a, b) => a.id - b.id)
+              .map((member) => (
+                <SwiperSlide
+                  key={member.id}
+                  style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
+                >
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      padding: 2,
+                      minHeight: "265px",
+                      textAlign: "center",
                       backgroundColor:
                         expandedMember === member
                           ? "custom.secondaryComponents"
                           : "custom.secondaryBackground",
-                    },
-                  }}
-                  onClick={() => handleCardClick(member)}
-                >
-                  <Box
-                    component="img"
-                    src={member.image}
-                    alt={`${member.title}`}
-                    sx={{
-                      width: "100%",
-                      height: "auto",
-                      borderRadius: "50%",
+                      transition: "transform 0.2s, background-color 0.3s",
+                      cursor: "pointer",
+                      borderWidth: "10px",
+                      borderStyle: "solid",
+                      borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                      "&:hover": {
+                        transform: "scale(1.05)",
+                        backgroundColor:
+                          expandedMember === member
+                            ? "custom.secondaryComponents"
+                            : "custom.secondaryBackground",
+                      },
                     }}
-                  />
-                  <Typography variant="body1" fontSize={"1.10rem"}>
-                    {member.title}
-                  </Typography>
-                  <Typography variant="h5" sx={{ marginTop: 2 }}>
-                    Type: {member.ship_type}
-                  </Typography>
-                </Paper>
-              </SwiperSlide>
-            ))}
+                    onClick={() => handleCardClick(member)}
+                  >
+                    <Box
+                      component="img"
+                      src={member.image}
+                      alt={`${member.title}`}
+                      sx={{
+                        width: "100%",
+                        height: "auto",
+                        borderRadius: "50%",
+                      }}
+                    />
+                    <Typography variant="body1" fontSize={"1.10rem"}>
+                      {member.title}
+                    </Typography>
+                    <Typography variant="h5" sx={{ marginTop: 2 }}>
+                      Type: {member.ship_type}
+                    </Typography>
+                  </Paper>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </Box>
       </Container>

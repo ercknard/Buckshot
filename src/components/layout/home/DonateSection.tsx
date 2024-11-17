@@ -17,6 +17,7 @@ type CustomTheme = {
 };
 
 interface Coin {
+  id: number;
   name: string;
   image: string;
   address: string;
@@ -184,61 +185,64 @@ const DonateSection: React.FC = () => {
             rowSpacing={1}
             justifyContent="center"
           >
-            {coin.map((coin) => (
-              <Grid
-                item
-                xs={6}
-                md={2.4}
-                key={coin.name}
-                sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
-              >
-                <Paper
-                  elevation={3}
-                  sx={{
-                    padding: 2,
-                    paddingY: 3.5,
-                    textAlign: "center",
-                    transition: "transform 0.2s, background-color 0.3s",
-                    cursor: expandedcoin === coin ? "pointer" : "pointer",
-                    backgroundColor:
-                      expandedcoin === coin
-                        ? "custom.secondaryComponents"
-                        : "custom.secondaryBackground",
-                    borderWidth: "10px",
-                    borderStyle: "solid",
-                    borderImage: `url('${imageBgBorderSrc}') 30 round`,
-                    "&:hover": {
-                      transform: expandedcoin === coin ? "none" : "scale(1.05)",
+            {coin
+              .sort((a, b) => a.id - b.id)
+              .map((coin) => (
+                <Grid
+                  item
+                  xs={6}
+                  md={2.4}
+                  key={coin.name}
+                  sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
+                >
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      padding: 2,
+                      paddingY: 3.5,
+                      textAlign: "center",
+                      transition: "transform 0.2s, background-color 0.3s",
+                      cursor: expandedcoin === coin ? "pointer" : "pointer",
                       backgroundColor:
                         expandedcoin === coin
                           ? "custom.secondaryComponents"
                           : "custom.secondaryBackground",
-                    },
-                  }}
-                  onClick={() => handleCardClick(coin)}
-                >
-                  <Box
-                    component={"img"}
-                    src={coin.image}
-                    alt={`${coin.name} - ${coin.name}`}
-                    sx={{
-                      width: "25%",
-                      height: "auto",
-                      borderRadius: "50%",
-                      display: "block",
-                      margin: "0 auto",
+                      borderWidth: "10px",
+                      borderStyle: "solid",
+                      borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                      "&:hover": {
+                        transform:
+                          expandedcoin === coin ? "none" : "scale(1.05)",
+                        backgroundColor:
+                          expandedcoin === coin
+                            ? "custom.secondaryComponents"
+                            : "custom.secondaryBackground",
+                      },
                     }}
-                  />
-                  <Typography
-                    variant="body1"
-                    fontSize={"1.10rem"}
-                    sx={{ marginTop: 2 }}
+                    onClick={() => handleCardClick(coin)}
                   >
-                    {coin.name}
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))}
+                    <Box
+                      component={"img"}
+                      src={coin.image}
+                      alt={`${coin.name} - ${coin.name}`}
+                      sx={{
+                        width: "25%",
+                        height: "auto",
+                        borderRadius: "50%",
+                        display: "block",
+                        margin: "0 auto",
+                      }}
+                    />
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.10rem"}
+                      sx={{ marginTop: 2 }}
+                    >
+                      {coin.name}
+                    </Typography>
+                  </Paper>
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Container>

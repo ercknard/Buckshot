@@ -13,6 +13,7 @@ import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import DefaultDialog from "../DefaultDialog";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { keyframes } from "@emotion/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -38,6 +39,15 @@ type Slide = {
   image: string;
   image_size: string;
 };
+
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
 
 const ModsList: React.FC = () => {
   const [mods, setMods] = useState<Mod[]>([]);
@@ -330,35 +340,40 @@ const ModsSection: React.FC = () => {
           className="mySwiper"
           style={{ marginBottom: "2rem" }}
         >
-          {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <Box
-                sx={{
-                  textAlign: "center",
-                }}
-              >
+          {slides
+            .sort((a, b) => a.id - b.id)
+            .map((slide) => (
+              <SwiperSlide key={slide.id}>
                 <Box
-                  component="img"
-                  width={{ xs: "100%", md: `${slide.image_size}` }}
-                  alt={slide.title}
-                  src={slide.image}
-                  marginX={"auto"}
-                />
-                <Stack direction={"column"} spacing={1}>
-                  <Typography
-                    variant="body1"
-                    fontSize={"1.75rem"}
-                    color="custom.primaryText"
-                  >
-                    {slide.title}
-                  </Typography>
-                  <Typography variant="h5" color="custom.secondaryText">
-                    {slide.content}
-                  </Typography>
-                </Stack>
-              </Box>
-            </SwiperSlide>
-          ))}
+                  sx={{
+                    textAlign: "center",
+                  }}
+                >
+                  <Box
+                    component="img"
+                    width={{ xs: "100%", md: `${slide.image_size}` }}
+                    alt={slide.title}
+                    src={slide.image}
+                    marginX={"auto"}
+                    sx={{
+                      animation: `${jumpAnimation} 3s ease-in-out infinite`,
+                    }}
+                  />
+                  <Stack direction={"column"} spacing={1}>
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.75rem"}
+                      color="custom.primaryText"
+                    >
+                      {slide.title}
+                    </Typography>
+                    <Typography variant="h5" color="custom.secondaryText">
+                      {slide.content}
+                    </Typography>
+                  </Stack>
+                </Box>
+              </SwiperSlide>
+            ))}
 
           {/* Custom Navigation Buttons */}
           <Box

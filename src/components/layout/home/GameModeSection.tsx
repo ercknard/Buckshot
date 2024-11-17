@@ -271,59 +271,61 @@ const GameModeSection: React.FC = () => {
           spacing={{ md: 4, xs: 2 }}
           justifyContent="left"
         >
-          {modes.map((member) => (
-            <Grid
-              item
-              xs={6}
-              md={2.4}
-              key={member.name}
-              sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
-            >
-              <Paper
-                elevation={3}
-                sx={{
-                  padding: 2,
-                  textAlign: "center",
-                  justifyItems: "center",
-                  transition: "transform 0.2s, background-color 0.3s",
-                  cursor: expandedMember === member ? "pointer" : "pointer",
-                  backgroundColor:
-                    expandedMember === member
-                      ? "custom.secondaryComponents"
-                      : "custom.secondaryBackground",
-                  borderWidth: "10px",
-                  borderStyle: "solid",
-                  borderImage: `url('${imageBgBorderSrc}') 30 round`,
-                  "&:hover": {
-                    transform:
-                      expandedMember === member ? "none" : "scale(1.05)",
+          {modes
+            .sort((a, b) => a.id - b.id)
+            .map((member) => (
+              <Grid
+                item
+                xs={6}
+                md={2.4}
+                key={member.name}
+                sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
+              >
+                <Paper
+                  elevation={3}
+                  sx={{
+                    padding: 2,
+                    textAlign: "center",
+                    justifyItems: "center",
+                    transition: "transform 0.2s, background-color 0.3s",
+                    cursor: expandedMember === member ? "pointer" : "pointer",
                     backgroundColor:
                       expandedMember === member
                         ? "custom.secondaryComponents"
                         : "custom.secondaryBackground",
-                  },
-                }}
-                onClick={() => handleCardClick(member)}
-              >
-                <Box
-                  component={"img"}
-                  src={member.image}
-                  alt={`${member.name} - ${member.name}`}
-                  sx={{
-                    width: "50%",
-                    height: "auto",
+                    borderWidth: "10px",
+                    borderStyle: "solid",
+                    borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                    "&:hover": {
+                      transform:
+                        expandedMember === member ? "none" : "scale(1.05)",
+                      backgroundColor:
+                        expandedMember === member
+                          ? "custom.secondaryComponents"
+                          : "custom.secondaryBackground",
+                    },
                   }}
-                />
-                <Typography
-                  variant="body1"
-                  fontSize={"1.10rem"}
-                  sx={{ marginTop: 2 }}
+                  onClick={() => handleCardClick(member)}
                 >
-                  {member.name}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
+                  <Box
+                    component={"img"}
+                    src={member.image}
+                    alt={`${member.name} - ${member.name}`}
+                    sx={{
+                      width: "50%",
+                      height: "auto",
+                    }}
+                  />
+                  <Typography
+                    variant="body1"
+                    fontSize={"1.10rem"}
+                    sx={{ marginTop: 2 }}
+                  >
+                    {member.name}
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
         </Grid>
       </Container>
     </Box>
