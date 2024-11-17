@@ -36,6 +36,11 @@ type Ship = {
   specs_4?: string;
   specs_5?: string;
   specs_6?: string;
+  specs_7?: string;
+  specs_8?: string;
+  specs_9?: string;
+  specs_10?: string;
+  no_specs?: string;
   front_view?: string;
   back_view?: string;
   side_view?: string;
@@ -309,6 +314,41 @@ const ShipsSection: React.FC = () => {
                     color="custom.secondaryText"
                   >
                     {expandedMember.specs_6}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_7}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_8}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_9}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.specs_10}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    textAlign="left"
+                    color="custom.secondaryText"
+                  >
+                    {expandedMember.no_specs}
                   </Typography>
                 </Stack>
               )}
