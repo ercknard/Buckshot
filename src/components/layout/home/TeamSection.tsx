@@ -45,35 +45,27 @@ const jumpAnimation = keyframes`
 const glitchEffect = keyframes`
   0% {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
   }
   10% {
-    opacity: 0.8;
-    clip-path: inset(0 10% 0 0);
+    opacity: 0.7;
   }
   20% {
-    opacity: 0.7;
-    clip-path: inset(0 0 5px 0);
+    opacity: 0.6;
   }
   30% {
     opacity: 1;
-    clip-path: inset(10% 0 10% 0);
   }
   40% {
-    opacity: 0.9;
-    clip-path: inset(0 0 0 0);
+    opacity: 0.8;
   }
   50% {
-    opacity: 0.6;
-    clip-path: inset(0 5px 0 0);
+    opacity: 0.5;
   }
   60% {
-    opacity: 0.8;
-    clip-path: inset(0 0 5px 0);
+    opacity: 0.7;
   }
   100% {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
   }
 `;
 
