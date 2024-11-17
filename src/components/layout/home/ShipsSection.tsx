@@ -75,8 +75,19 @@ const ShipsSection: React.FC = () => {
     5: "/static/images/pink-border.png",
   };
 
+  const colorSetBgBanner: { [key: string]: string } = {
+    1: "/static/images/blue-banner.png",
+    2: "/static/images/green-banner.png",
+    3: "/static/images/yellow-banner.png",
+    4: "/static/images/orange-banner.png",
+    5: "/static/images/pink-banner.png",
+  };
+
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
+
+  const imageBgBannerSrc =
+    colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
 
   useEffect(() => {
     const fetchShipData = async () => {
