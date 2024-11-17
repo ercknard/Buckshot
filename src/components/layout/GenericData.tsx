@@ -78,9 +78,11 @@ const GenericTable: React.FC<GenericTableProps> = ({ tableName }) => {
   const handleCreate = async () => {
     if (!newRow) return;
 
-    const lastRow = data.length > 0 ? data[data.length - 1] : null;
-    const nextId = lastRow ? lastRow.id + 1 : 1;
+    // Get the highest existing ID from the data (assuming IDs are unique integers)
+    const maxId = data.reduce((max, row) => (row.id > max ? row.id : max), 0);
+    const nextId = maxId + 1; // Increment by 1
 
+    // Create the new row with the calculated next ID
     const addedRow = await createRow(tableName, { ...newRow, id: nextId });
 
     if (addedRow) {
