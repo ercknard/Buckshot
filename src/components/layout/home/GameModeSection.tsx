@@ -39,7 +39,7 @@ const GameModeSection: React.FC = () => {
         console.error("Error fetching modes:", error);
       } else {
         setModes(data);
-        setExpandedMember(data[0]);
+        setExpandedMember(data[1]);
       }
     };
     fetchModes();
