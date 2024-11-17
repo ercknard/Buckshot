@@ -253,6 +253,15 @@ const ShipsSection: React.FC = () => {
                         {expandedMember.content}
                       </Typography>
                     </Stack> */}
+                  <Stack
+                    direction={"column"}
+                    spacing={1}
+                    sx={{ marginBottom: "2rem" }}
+                  >
+                    <Typography variant="h5" color="custom.secondaryText">
+                      {expandedMember.title} Model
+                    </Typography>
+                  </Stack>
                 </>
               )}
 
@@ -264,14 +273,16 @@ const ShipsSection: React.FC = () => {
                     position: "relative",
                     display: "flex",
                     flexDirection: "column",
+                    marginBottom: "3.22rem",
+                    marginTop: "3.22rem",
                   }}
                 >
                   <Typography
                     variant="body1"
-                    fontSize={"1.5rem"}
+                    fontSize={"1.25rem"}
                     color="custom.primaryText"
                   >
-                    {expandedMember.title} Features :
+                    {expandedMember.title} Features
                   </Typography>
 
                   <Divider />
@@ -387,10 +398,10 @@ const ShipsSection: React.FC = () => {
                           component="img"
                           width={{
                             xs: "100%",
-                            md: `${expandedMember.front_view}`,
+                            md: `${expandedMember.image_size}`,
                           }}
                           alt={expandedMember.title}
-                          src={expandedMember.image}
+                          src={expandedMember.front_view}
                           marginX={"auto"}
                           sx={{
                             animation: `${jumpAnimation} 3s ease-in-out infinite`,
@@ -412,10 +423,10 @@ const ShipsSection: React.FC = () => {
                             component="img"
                             width={{
                               xs: "100%",
-                              md: `${expandedMember.back_view}`,
+                              md: `${expandedMember.image_size}`,
                             }}
                             alt={expandedMember.title}
-                            src={expandedMember.image}
+                            src={expandedMember.back_view}
                             marginX={"auto"}
                             sx={{
                               animation: `${jumpAnimation} 3s ease-in-out infinite`,
@@ -441,10 +452,10 @@ const ShipsSection: React.FC = () => {
                             component="img"
                             width={{
                               xs: "100%",
-                              md: `${expandedMember.side_view}`,
+                              md: `${expandedMember.image_size}`,
                             }}
                             alt={expandedMember.title}
-                            src={expandedMember.image}
+                            src={expandedMember.side_view}
                             marginX={"auto"}
                             sx={{
                               animation: `${jumpAnimation} 3s ease-in-out infinite`,
@@ -460,6 +471,33 @@ const ShipsSection: React.FC = () => {
                           </Stack>
                         </Box>
                       </SwiperSlide>
+                      <Box
+                        className="swiper-button-prev"
+                        sx={{
+                          position: "absolute",
+                          display: { md: "block", xs: "none" },
+                          top: "58.25%",
+                          left: "10px",
+                          transform: "translateY(-50%)",
+                          zIndex: 3,
+                          cursor: "pointer",
+                          color: "custom.primaryText",
+                        }}
+                      ></Box>
+
+                      <Box
+                        className="swiper-button-next"
+                        sx={{
+                          position: "absolute",
+                          display: { md: "block", xs: "none" },
+                          top: "58.25%",
+                          right: "10px",
+                          transform: "translateY(-50%)",
+                          zIndex: 3,
+                          cursor: "pointer",
+                          color: "custom.primaryText",
+                        }}
+                      ></Box>
                     </Swiper>
                   </Stack>
                 </>
