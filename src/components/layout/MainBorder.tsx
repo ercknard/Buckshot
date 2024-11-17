@@ -149,7 +149,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
           top: "30%", // Vertically center
           transform: "translateY(-50%)", // Adjust to make sure it’s perfectly centered
           width: "10rem",
-          animation: `${throwIntoSpace} 5s ease-out infinite` /* Apply the animation */,
+          animation: `${throwIntoSpace} 10s ease-out infinite` /* Apply the animation */,
         })}
       />
 
