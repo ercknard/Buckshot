@@ -123,7 +123,7 @@ const ShipsSection: React.FC = () => {
         ]);
         setLoading(false);
 
-        setExpandedMember(battleShips[0]);
+        setExpandedMember(battleShips[2]);
       } catch (error) {
         console.error("Error fetching ship data:", error);
         setLoading(false);
@@ -259,7 +259,7 @@ const ShipsSection: React.FC = () => {
               {activeTabShips === 1 && (
                 <Stack
                   direction={"column"}
-                  spacing={1}
+                  spacing={1.5}
                   sx={{
                     position: "relative",
                     display: "flex",
@@ -273,6 +273,9 @@ const ShipsSection: React.FC = () => {
                   >
                     {expandedMember.title} Features :
                   </Typography>
+
+                  <Divider />
+
                   <Typography
                     variant="h5"
                     textAlign="left"
@@ -345,7 +348,7 @@ const ShipsSection: React.FC = () => {
                   </Typography>
                   <Typography
                     variant="h5"
-                    textAlign="left"
+                    textAlign="center"
                     color="custom.secondaryText"
                   >
                     {expandedMember.no_specs}
