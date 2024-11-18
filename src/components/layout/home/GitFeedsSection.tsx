@@ -27,6 +27,34 @@ const GitFeedsSection: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [isFeedsVisible, setIsFeedsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsFeedsVisible(true); // "Team" section is in view
+        } else {
+          setIsFeedsVisible(false); // "Team" section is out of view
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the section is in view
+      }
+    );
+
+    const gitSection = document.getElementById("git");
+    if (gitSection) {
+      observer.observe(gitSection);
+    }
+
+    return () => {
+      if (gitSection) {
+        observer.unobserve(gitSection);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const loadEvents = async () => {
@@ -57,7 +85,7 @@ const GitFeedsSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="github-particles" />
+        <MainBorder containerId="github-particles" isVisible={isFeedsVisible} />
 
         <Container
           sx={{
@@ -111,7 +139,7 @@ const GitFeedsSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="github-particles" />
+        <MainBorder containerId="github-particles" isVisible={isFeedsVisible} />
 
         <Container
           sx={{
@@ -181,7 +209,7 @@ const GitFeedsSection: React.FC = () => {
         paddingBottom: { md: "7.5rem", xs: "3rem" },
       }}
     >
-      <MainBorder containerId="github-particles" />
+      <MainBorder containerId="github-particles" isVisible={isFeedsVisible} />
 
       <Container
         sx={{

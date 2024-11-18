@@ -23,6 +23,34 @@ const NewsSection = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filesPerPage] = useState<number>(1); // Only 1 file per page
   const { activeSet } = useThemeContext();
+  const [isNewsVisible, setIsNewsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsNewsVisible(true); // "Team" section is in view
+        } else {
+          setIsNewsVisible(false); // "Team" section is out of view
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the section is in view
+      }
+    );
+
+    const newsSection = document.getElementById("news");
+    if (newsSection) {
+      observer.observe(newsSection);
+    }
+
+    return () => {
+      if (newsSection) {
+        observer.unobserve(newsSection);
+      }
+    };
+  }, []);
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
@@ -155,7 +183,7 @@ const NewsSection = () => {
         minHeight: "40vh",
       }}
     >
-      <MainBorder containerId="news-particles" />
+      <MainBorder containerId="news-particles" isVisible={isNewsVisible} />
 
       <Container
         sx={{

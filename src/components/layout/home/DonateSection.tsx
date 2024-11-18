@@ -33,6 +33,34 @@ const DonateSection: React.FC = () => {
   const [expandedcoin, setExpandedcoin] = useState<Coin | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDonateVisible, setIsDonateVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsDonateVisible(true); // "Team" section is in view
+        } else {
+          setIsDonateVisible(false); // "Team" section is out of view
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the section is in view
+      }
+    );
+
+    const donateSection = document.getElementById("donate");
+    if (donateSection) {
+      observer.observe(donateSection);
+    }
+
+    return () => {
+      if (donateSection) {
+        observer.unobserve(donateSection);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const fetchCoin = async () => {
@@ -67,7 +95,10 @@ const DonateSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="donate-particles" />
+        <MainBorder
+          containerId="donate-particles"
+          isVisible={isDonateVisible}
+        />
 
         <Container
           sx={{
@@ -123,7 +154,10 @@ const DonateSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="donate-particles" />
+        <MainBorder
+          containerId="donate-particles"
+          isVisible={isDonateVisible}
+        />
 
         <Container
           sx={{
@@ -213,7 +247,7 @@ const DonateSection: React.FC = () => {
         paddingBottom: { md: "7.5rem", xs: "3rem" },
       }}
     >
-      <MainBorder containerId="donate-particles" />
+      <MainBorder containerId="donate-particles" isVisible={isDonateVisible} />
 
       <Container
         sx={{

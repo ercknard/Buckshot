@@ -79,6 +79,34 @@ const TeamSection: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
+  const [isTeamVisible, setIsTeamVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsTeamVisible(true); // "Team" section is in view
+        } else {
+          setIsTeamVisible(false); // "Team" section is out of view
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the section is in view
+      }
+    );
+
+    const teamSection = document.getElementById("team");
+    if (teamSection) {
+      observer.observe(teamSection);
+    }
+
+    return () => {
+      if (teamSection) {
+        observer.unobserve(teamSection);
+      }
+    };
+  }, []);
 
   const activeSetNumber =
     typeof activeSet === "number"
@@ -188,7 +216,7 @@ const TeamSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="teams-particles" />
+        <MainBorder containerId="teams-particles" isVisible={isTeamVisible} />
 
         <Container
           sx={{
@@ -243,7 +271,7 @@ const TeamSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="teams-particles" />
+        <MainBorder containerId="teams-particles" isVisible={isTeamVisible} />
 
         <Container
           sx={{
@@ -297,7 +325,7 @@ const TeamSection: React.FC = () => {
         paddingBottom: { md: "7.5rem", xs: "3rem" },
       }}
     >
-      <MainBorder containerId="teams-particles" />
+      <MainBorder containerId="teams-particles" isVisible={isTeamVisible} />
 
       <Container
         sx={{

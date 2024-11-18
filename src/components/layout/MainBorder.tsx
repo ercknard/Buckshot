@@ -9,6 +9,7 @@ import supabase from "@/lib/supabase";
 // Define the type for props
 interface MainBorderProps {
   containerId: string;
+  isVisible: boolean;
 }
 
 type CustomTheme = {
@@ -55,7 +56,7 @@ const throwIntoSpace = keyframes`
   }
 `;
 
-const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
+const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
   const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
   const [uiBoolean, setUiBoolean] = useState<UiBoolean | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -84,6 +85,16 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
 
     fetchUiBoolean();
   }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      setLeftVisible(true); // Open left section
+      setRightVisible(true); // Open right section
+    } else {
+      setLeftVisible(false); // Close left section
+      setRightVisible(false); // Close right section
+    }
+  }, [isVisible]);
 
   if (!fancyMode || loading || error || !uiBoolean) {
     return null; // Do not render anything if fancyMode is off or data is not loaded

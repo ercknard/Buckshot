@@ -68,6 +68,34 @@ const ShipsSection: React.FC = () => {
   const [shipData, setShipData] = useState<Ship[][]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isShipsVisible, setIsShipsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setIsShipsVisible(true); // "Team" section is in view
+        } else {
+          setIsShipsVisible(false); // "Team" section is out of view
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of the section is in view
+      }
+    );
+
+    const shipsSection = document.getElementById("ships");
+    if (shipsSection) {
+      observer.observe(shipsSection);
+    }
+
+    return () => {
+      if (shipsSection) {
+        observer.unobserve(shipsSection);
+      }
+    };
+  }, []);
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
@@ -178,7 +206,7 @@ const ShipsSection: React.FC = () => {
           minHeight: "75vh",
         }}
       >
-        <MainBorder containerId="ships-particles" />
+        <MainBorder containerId="ships-particles" isVisible={isShipsVisible} />
 
         <Container
           sx={{
@@ -232,7 +260,7 @@ const ShipsSection: React.FC = () => {
           paddingBottom: { md: "7.5rem", xs: "3rem" },
         }}
       >
-        <MainBorder containerId="ships-particles" />
+        <MainBorder containerId="ships-particles" isVisible={isShipsVisible} />
 
         <Container
           sx={{
@@ -286,7 +314,7 @@ const ShipsSection: React.FC = () => {
         minHeight: "75vh",
       }}
     >
-      <MainBorder containerId="ships-particles" />
+      <MainBorder containerId="ships-particles" isVisible={isShipsVisible} />
 
       <Container
         sx={{
