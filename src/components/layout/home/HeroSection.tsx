@@ -436,7 +436,7 @@ export default function HeroSection(): JSX.Element {
               zIndex: "-3",
               animation: animationPaused
                 ? "none"
-                : `${toOpacityAnimation2} 20s ease-in-out infinite`,
+                : `${toOpacityAnimation2} 10s ease-in-out infinite`,
             })}
           />
 
@@ -458,7 +458,7 @@ export default function HeroSection(): JSX.Element {
               animation: {
                 md: animationPaused
                   ? "none"
-                  : `${zoomAnimation} 20s ease-in-out infinite`,
+                  : `${zoomAnimation} 10s ease-in-out infinite`,
                 xs: "none",
               },
               overflow: "hidden",
@@ -603,7 +603,7 @@ export default function HeroSection(): JSX.Element {
             pointerEvents: "none",
             animation: animationPaused
               ? "none"
-              : `${closeLeftGateAnimation} 20s ease-in-out infinite`,
+              : `${closeLeftGateAnimation} 10s ease-in-out infinite`,
             zIndex: "2",
             overflow: "hidden",
           })}
@@ -632,7 +632,7 @@ export default function HeroSection(): JSX.Element {
               border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
               animation: animationPaused
                 ? "none"
-                : `${zoomAnimation} 20s ease-in-out infinite`,
+                : `${zoomAnimation} 10s ease-in-out infinite`,
               zIndex: "1",
               objectFit: "cover",
             })}
@@ -646,7 +646,7 @@ export default function HeroSection(): JSX.Element {
               height: "100%",
               animation: animationPaused
                 ? "none"
-                : `${toOpacityAnimation} 20s ease-in-out infinite`,
+                : `${toOpacityAnimation} 10s ease-in-out infinite`,
               zIndex: "2",
               border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
             })}
@@ -671,7 +671,7 @@ export default function HeroSection(): JSX.Element {
             pointerEvents: "none",
             animation: animationPaused
               ? "none"
-              : `${closeRightGateAnimation} 20s ease-in-out infinite`,
+              : `${closeRightGateAnimation} 10s ease-in-out infinite`,
             zIndex: "2",
             overflow: "hidden",
           })}
@@ -700,7 +700,7 @@ export default function HeroSection(): JSX.Element {
               border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
               animation: animationPaused
                 ? "none"
-                : `${zoomAnimation} 20s ease-in-out infinite`,
+                : `${zoomAnimation} 10s ease-in-out infinite`,
               zIndex: "1",
               objectFit: "cover",
             })}
@@ -714,7 +714,7 @@ export default function HeroSection(): JSX.Element {
               height: "100%",
               animation: animationPaused
                 ? "none"
-                : `${toOpacityAnimation} 20s ease-in-out infinite`,
+                : `${toOpacityAnimation} 10s ease-in-out infinite`,
               zIndex: "2",
               border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
             })}
