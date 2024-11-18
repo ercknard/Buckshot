@@ -187,10 +187,20 @@ const ShipsSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Starships
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               The Starships lets you build and fly customizable ships, exploring
               space and engaging in battles.
             </Typography>
@@ -231,10 +241,20 @@ const ShipsSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Starships
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               The Starships lets you build and fly customizable ships, exploring
               space and engaging in battles.
             </Typography>
@@ -275,10 +295,20 @@ const ShipsSection: React.FC = () => {
         }}
       >
         <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Starships
           </Typography>
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             The Starships lets you build and fly customizable ships, exploring
             space and engaging in battles.
           </Typography>

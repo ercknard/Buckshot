@@ -126,11 +126,21 @@ const MediaSection: React.FC = () => {
         />
 
         <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Gameplays
           </Typography>
 
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             Get ready for epic gameplay, awesome moments, and plenty of
             fun—let&apos;s dive in!
           </Typography>
@@ -187,11 +197,21 @@ const MediaSection: React.FC = () => {
         />
 
         <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Gameplays
           </Typography>
 
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             Get ready for epic gameplay, awesome moments, and plenty of
             fun—let&apos;s dive in!
           </Typography>
@@ -247,11 +267,21 @@ const MediaSection: React.FC = () => {
       />
 
       <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography
+          variant="h4"
+          align="center"
+          gutterBottom
+          color="custom.secondaryTextGrayed"
+        >
           Gameplays
         </Typography>
 
-        <Typography variant="h5" align="center" gutterBottom>
+        <Typography
+          variant="h5"
+          align="center"
+          gutterBottom
+          color="custom.primaryTextGrayed"
+        >
           Get ready for epic gameplay, awesome moments, and plenty of
           fun—let&apos;s dive in!
         </Typography>

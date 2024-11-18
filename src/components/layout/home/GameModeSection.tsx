@@ -143,10 +143,20 @@ const GameModeSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Game Servers
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               Explore a variety of exciting game modes on our servers, offering
               endless fun and diverse experiences for every type of gamer, from
               competitive challenges to casual adventures.
@@ -212,10 +222,20 @@ const GameModeSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Game Servers
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               Explore a variety of exciting game modes on our servers, offering
               endless fun and diverse experiences for every type of gamer, from
               competitive challenges to casual adventures.
@@ -280,10 +300,20 @@ const GameModeSection: React.FC = () => {
         }}
       >
         <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Game Servers
           </Typography>
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             Explore a variety of exciting game modes on our servers, offering
             endless fun and diverse experiences for every type of gamer, from
             competitive challenges to casual adventures.

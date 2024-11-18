@@ -66,10 +66,20 @@ const GitFeedsSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Git Events
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               Stay updated with the latest Git events, including commits,
               merges, and branch updates of CryptechTest
             </Typography>
@@ -110,10 +120,20 @@ const GitFeedsSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Git Events
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               Stay updated with the latest Git events, including commits,
               merges, and branch updates of CryptechTest
             </Typography>
@@ -170,10 +190,20 @@ const GitFeedsSection: React.FC = () => {
         }}
       >
         <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Git Events
           </Typography>
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             Stay updated with the latest Git events, including commits, merges,
             and branch updates of CryptechTest
           </Typography>

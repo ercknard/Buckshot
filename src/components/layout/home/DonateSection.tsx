@@ -76,11 +76,21 @@ const DonateSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Donate
             </Typography>
 
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               If you enjoy our server, or the plugin we make, and want to help
               contribute financially, we happily accept cryptocurrency
               donations!
@@ -122,11 +132,21 @@ const DonateSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Donate
             </Typography>
 
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               If you enjoy our server, or the plugin we make, and want to help
               contribute financially, we happily accept cryptocurrency
               donations!
@@ -202,11 +222,21 @@ const DonateSection: React.FC = () => {
         }}
       >
         <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Donate
           </Typography>
 
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             If you enjoy our server, or the plugin we make, and want to help
             contribute financially, we happily accept cryptocurrency donations!
           </Typography>

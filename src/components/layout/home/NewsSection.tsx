@@ -166,10 +166,20 @@ const NewsSection = () => {
         }}
       >
         <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             News and Updates
           </Typography>
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             Get in touch with us!
           </Typography>
         </Box>

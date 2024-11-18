@@ -126,10 +126,20 @@ const PartnersSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Our Partners
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               A special thanks to our partners for their invaluable support in
               making this game possible.
             </Typography>
@@ -193,10 +203,20 @@ const PartnersSection: React.FC = () => {
           }}
         >
           <Box position={"relative"} zIndex={2}>
-            <Typography variant="h4" align="center" gutterBottom>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
               Our Partners
             </Typography>
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
               A special thanks to our partners for their invaluable support in
               making this game possible.
             </Typography>
@@ -259,10 +279,20 @@ const PartnersSection: React.FC = () => {
         }}
       >
         <Box position={"relative"} zIndex={2}>
-          <Typography variant="h4" align="center" gutterBottom>
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            color="custom.secondaryTextGrayed"
+          >
             Our Partners
           </Typography>
-          <Typography variant="h5" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            align="center"
+            gutterBottom
+            color="custom.primaryTextGrayed"
+          >
             A special thanks to our partners for their invaluable support in
             making this game possible.
           </Typography>
