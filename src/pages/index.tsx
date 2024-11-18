@@ -13,6 +13,7 @@ import GitFeedsSection from "@/components/layout/home/GitFeedsSection";
 import NewsSection from "@/components/layout/home/NewsSection";
 import GameModeSection from "@/components/layout/home/GameModeSection";
 import ShipsSection from "@/components/layout/home/ShipsSection";
+import AOScall from "@/components/layout/AOS";
 
 export default function Home(): JSX.Element {
   return (
@@ -33,6 +34,7 @@ export default function Home(): JSX.Element {
       <GitFeedsSection />
       {/* <ColorSection /> */}
       <Footer />
+      <AOScall />
     </Box>
   );
 }
