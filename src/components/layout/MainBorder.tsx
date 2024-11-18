@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import Particlesview from "./Particles";
 import { keyframes } from "@emotion/react";
+import supabase from "@/lib/supabase";
 
 // Define the type for props
 interface MainBorderProps {
@@ -13,6 +14,15 @@ interface MainBorderProps {
 type CustomTheme = {
   activeSet: number;
   fancyMode: boolean; // Add fancyMode here
+};
+
+type UiBoolean = {
+  image_background: string;
+  image_doll: string;
+  image_banner: string;
+  image_darkborder: string;
+  image_lightborder: string;
+  particles_view: string;
 };
 
 const throwIntoSpace = keyframes`
@@ -47,7 +57,35 @@ const throwIntoSpace = keyframes`
 
 const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
   const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
+  const [uiBoolean, setUiBoolean] = useState<UiBoolean | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
+
+  useEffect(() => {
+    const fetchUiBoolean = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("ui_boolean")
+          .select("*")
+          .single(); // Assuming you only need a single object
+
+        if (error) throw error;
+
+        setUiBoolean(data);
+      } catch (err) {
+        setError("Error loading UI settings.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUiBoolean();
+  }, []);
+
+  if (!fancyMode || loading || error || !uiBoolean) {
+    return null; // Do not render anything if fancyMode is off or data is not loaded
+  }
 
   const colorSetBgMap: { [key: string]: string } = {
     1: "/static/images/blue-gate.webp",
@@ -81,6 +119,14 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
     5: "/static/images/pink-land.webp",
   };
 
+  const colorSetBgBanner: { [key: string]: string } = {
+    1: "/static/images/blue-banner.png",
+    2: "/static/images/green-banner.png",
+    3: "/static/images/yellow-banner.png",
+    4: "/static/images/orange-banner.png",
+    5: "/static/images/pink-banner.png",
+  };
+
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
@@ -88,84 +134,101 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
     colorSetBgBorderDark[activeSet.toString()] || colorSetBgBorderDark[1];
   const imageBgSrcland =
     colorSetBgMapland[activeSet.toString()] || colorSetBgMapland[1];
-
-  if (!fancyMode) {
-    return null; // Or return an empty Box or null if you don't want to render anything
-  }
+  const imageBgBannerSrc =
+    colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
 
   return (
     <Box>
       <Box
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
+          display: `${uiBoolean.particles_view}`,
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
           opacity: 0.5,
           pointerEvents: "none",
-        })}
+        }}
       >
         {/* Pass the containerId prop to Particlesview */}
         <Particlesview containerId={containerId} />
       </Box>
+
       <Box
-        component={"img"}
-        alt="Logo"
+        component="img"
+        alt="Background"
         src={imageBgSrc}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
+          display: `${uiBoolean.image_background}`,
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
           opacity: 0.05,
           objectFit: "cover",
-        })}
+        }}
       />
 
       <Box
-        component={"img"}
-        alt="Logo"
+        component="img"
+        alt="Dark border"
         src={imageBgBorderDarkSrc}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
-          display: { md: "block", xs: "none" },
+          display: { md: `${uiBoolean.image_darkborder}`, xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-        })}
+        }}
       />
 
       <Box
-        component={"img"}
-        alt="Logo"
+        component="img"
+        alt="Banner"
+        src={imageBgBannerSrc}
+        sx={{
+          position: "absolute",
+          display: { md: `${uiBoolean.image_banner}`, xs: "none" },
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          opacity: 0.05,
+          objectFit: "cover",
+        }}
+      />
+
+      <Box
+        component="img"
+        alt="Land"
         src={imageBgSrcland}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
-          display: { md: "block", xs: "none" },
+          display: { md: `${uiBoolean.image_doll}`, xs: "none" },
           left: 0,
-          top: "30%", // Vertically center
-          transform: "translateY(-50%)", // Adjust to make sure it’s perfectly centered
+          top: "30%",
+          transform: "translateY(-50%)",
           width: "10rem",
-          animation: `${throwIntoSpace} 10s ease-out infinite` /* Apply the animation */,
-        })}
+          animation: `${throwIntoSpace} 10s ease-out infinite`,
+        }}
       />
 
       <Box
-        component={"img"}
-        alt="Logo"
+        component="img"
+        alt="Border"
         src={imageBgBorderSrc}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
-          display: { md: "block", xs: "none" },
+          display: { md: `${uiBoolean.image_lightborder}`, xs: "none" },
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: ".5",
-        })}
+          opacity: 0.5,
+        }}
       />
     </Box>
   );
