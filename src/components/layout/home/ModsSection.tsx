@@ -236,7 +236,7 @@ const ModsSection: React.FC = () => {
       try {
         // Fetch slides from Supabase
         const { data, error } = await supabase
-          .from("featured_mods") // Assuming "featuredmods" is your table name
+          .from("test_mods") // Assuming "featuredmods" is your table name
           .select("*");
 
         if (error) throw error;

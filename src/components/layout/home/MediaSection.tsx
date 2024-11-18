@@ -43,7 +43,7 @@ const MediaSection: React.FC = () => {
   useEffect(() => {
     const fetchMedia = async () => {
       try {
-        const { data, error } = await supabase.from("media").select("*");
+        const { data, error } = await supabase.from("test_media").select("*");
 
         if (error) throw error;
 

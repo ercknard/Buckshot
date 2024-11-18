@@ -34,7 +34,7 @@ const GameModeSection: React.FC = () => {
 
   useEffect(() => {
     const fetchModes = async () => {
-      const { data, error } = await supabase.from("modes").select("*");
+      const { data, error } = await supabase.from("test_gamemodes").select("*");
       if (error) {
         console.error("Error fetching modes:", error);
       } else {

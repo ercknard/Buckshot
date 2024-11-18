@@ -63,7 +63,9 @@ const PartnersSection: React.FC = () => {
   useEffect(() => {
     const fetchPartners = async () => {
       try {
-        const { data, error } = await supabase.from("partners").select("*");
+        const { data, error } = await supabase
+          .from("test_partners")
+          .select("*");
 
         if (error) throw error;
 
