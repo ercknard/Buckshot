@@ -149,7 +149,7 @@ const NewsSection = () => {
       left={0}
       sx={{
         padding: { md: "4", xs: "1" },
-        backgroundColor: "custom.secondaryBackground",
+        backgroundColor: "custom.primaryBackground",
         paddingTop: { md: "10rem", xs: "5rem" },
         paddingBottom: { md: "7.5rem", xs: "3rem" },
         minHeight: "40vh",

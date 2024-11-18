@@ -63,7 +63,7 @@ const ShipsSection: React.FC = () => {
   const theme = useTheme();
   const { activeSet } = useThemeContext();
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [activeTabShips, setActiveTabShips] = useState<number>(0);
+  const [activeTabShips, setActiveTabShips] = useState<number>(1);
   const [expandedMember, setExpandedMember] = useState<Ship | null>(null);
   const [shipData, setShipData] = useState<Ship[][]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -280,7 +280,7 @@ const ShipsSection: React.FC = () => {
       left={0}
       sx={{
         padding: { md: "4", xs: "1" },
-        backgroundColor: "custom.secondaryBackground",
+        backgroundColor: "custom.primaryBackground",
         paddingTop: { md: "7.5rem", xs: "3rem" },
         paddingBottom: { md: "7.5rem", xs: "3rem" },
         minHeight: "75vh",
@@ -735,10 +735,18 @@ const ShipsSection: React.FC = () => {
                         borderRadius: "50%",
                       }}
                     />
-                    <Typography variant="body1" fontSize={"1.10rem"}>
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.10rem"}
+                      color="custom.primaryTextGrayed"
+                    >
                       {member.title}
                     </Typography>
-                    <Typography variant="h5" sx={{ marginTop: 2 }}>
+                    <Typography
+                      variant="h5"
+                      sx={{ marginTop: 2 }}
+                      color="custom.primaryTextGrayed"
+                    >
                       Type: {member.ship_type}
                     </Typography>
                   </Paper>

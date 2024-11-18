@@ -233,6 +233,24 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
               border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
             })}
           />
+
+          {/* <Box
+            component="img"
+            alt="Banner"
+            src={imageBgBannerSrc}
+            sx={{
+              position: "absolute",
+              display: { md: `${uiBoolean.image_banner}`, xs: "none" },
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              opacity: 0.5,
+              objectFit: "cover",
+              zIndex: "2",
+              transform: "scaleX(-1)",
+            }}
+          /> */}
         </Box>
       )}
 
@@ -292,6 +310,23 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
               border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
             })}
           />
+          {/* 
+          <Box
+            component="img"
+            alt="Banner"
+            src={imageBgBannerSrc}
+            sx={{
+              position: "absolute",
+              display: { md: `${uiBoolean.image_banner}`, xs: "none" },
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              opacity: 0.5,
+              objectFit: "cover",
+              zIndex: "2",
+            }}
+          /> */}
         </Box>
       )}
 

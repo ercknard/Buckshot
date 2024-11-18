@@ -208,7 +208,7 @@ const DonateSection: React.FC = () => {
       left={0}
       sx={{
         padding: { md: "4", xs: "1" },
-        backgroundColor: "custom.secondaryBackground",
+        backgroundColor: "custom.primaryBackground",
         paddingTop: { md: "7.5rem", xs: "3rem" },
         paddingBottom: { md: "7.5rem", xs: "3rem" },
       }}
@@ -343,6 +343,7 @@ const DonateSection: React.FC = () => {
                       variant="body1"
                       fontSize={"1.10rem"}
                       sx={{ marginTop: 2 }}
+                      color="custom.primaryTextGrayed"
                     >
                       {coin.name}
                     </Typography>

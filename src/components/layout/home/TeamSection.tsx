@@ -292,7 +292,7 @@ const TeamSection: React.FC = () => {
       left={0}
       sx={{
         padding: { md: "4", xs: "1" },
-        backgroundColor: "custom.secondaryBackground",
+        backgroundColor: "custom.primaryBackground",
         paddingTop: { md: "7.5rem", xs: "3rem" },
         paddingBottom: { md: "7.5rem", xs: "3rem" },
       }}
@@ -455,10 +455,13 @@ const TeamSection: React.FC = () => {
                         variant="body1"
                         fontSize={{ md: "1.10rem", xs: "1rem" }}
                         sx={{ marginTop: 2 }}
+                        color="custom.primaryTextGrayed"
                       >
                         {member.name}
                       </Typography>
-                      <Typography variant="h5">{member.role}</Typography>
+                      <Typography variant="h5" color="custom.primaryTextGrayed">
+                        {member.role}
+                      </Typography>
                     </Paper>
                   </Grid>
                 ))}
@@ -538,10 +541,16 @@ const TeamSection: React.FC = () => {
                           variant="body1"
                           fontSize={"1.10rem"}
                           sx={{ marginTop: 2 }}
+                          color="custom.primaryTextGrayed"
                         >
                           {member.name}
                         </Typography>
-                        <Typography variant="h5">{member.role}</Typography>
+                        <Typography
+                          variant="h5"
+                          color="custom.primaryTextGrayed"
+                        >
+                          {member.role}
+                        </Typography>
                       </Paper>
                     </SwiperSlide>
                   ))}

@@ -142,7 +142,11 @@ const ModsList: React.FC = () => {
                   },
                 }}
               >
-                <Typography variant="h6" fontSize={"1.5rem"}>
+                <Typography
+                  variant="h6"
+                  fontSize={"1.5rem"}
+                  color="custom.primaryTextGrayed"
+                >
                   {mod.name}
                 </Typography>
               </Paper>
@@ -195,7 +199,11 @@ const ModsList: React.FC = () => {
                     },
                   }}
                 >
-                  <Typography variant="h6" fontSize={"1.5rem"}>
+                  <Typography
+                    variant="h6"
+                    fontSize={"1.5rem"}
+                    color="custom.primaryTextGrayed"
+                  >
                     {mod.name}
                   </Typography>
                 </Paper>
@@ -444,7 +452,7 @@ const ModsSection: React.FC = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.75,
+          opacity: 0.5,
           filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
         })}
       />

@@ -287,7 +287,7 @@ const GameModeSection: React.FC = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.75,
+          opacity: 0.5,
           filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
           zIndex: 1,
         })}
@@ -397,6 +397,7 @@ const GameModeSection: React.FC = () => {
                 <Typography
                   fontSize={"1.5rem"}
                   sx={{ marginTop: 2, marginBottom: 2 }}
+                  color="custom.primaryTextGrayed"
                 >
                   {expandedMember.name}
                 </Typography>
@@ -405,6 +406,7 @@ const GameModeSection: React.FC = () => {
                   variant="h5"
                   fontSize={"1.5rem"}
                   sx={{ marginBottom: 2 }}
+                  color="custom.primaryTextGrayed"
                 >
                   {expandedMember.intro}
                 </Typography>
@@ -420,6 +422,7 @@ const GameModeSection: React.FC = () => {
                   <Typography
                     variant="h5"
                     fontSize={{ md: "1.75rem", xs: "1.25rem" }}
+                    color="custom.primaryTextGrayed"
                   >
                     IP address: {expandedMember.ip}
                   </Typography>
@@ -436,6 +439,7 @@ const GameModeSection: React.FC = () => {
                   <Typography
                     variant="h5"
                     fontSize={{ md: "1.75rem", xs: "1.25rem" }}
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.name} port: {expandedMember.port}
                   </Typography>
@@ -501,6 +505,7 @@ const GameModeSection: React.FC = () => {
                     variant="body1"
                     fontSize={"1.10rem"}
                     sx={{ marginTop: 2 }}
+                    color="custom.primaryTextGrayed"
                   >
                     {member.name}
                   </Typography>
