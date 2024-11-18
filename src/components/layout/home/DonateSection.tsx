@@ -14,6 +14,7 @@ import supabase from "@/lib/supabase";
 
 type CustomTheme = {
   activeSet: number;
+  soundsMode: boolean;
 };
 
 interface Coin {
@@ -24,7 +25,7 @@ interface Coin {
 }
 
 const DonateSection: React.FC = () => {
-  const { activeSet } = useThemeContext() as CustomTheme;
+  const { activeSet, soundsMode } = useThemeContext() as CustomTheme;
   const theme = useTheme();
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -34,6 +35,15 @@ const DonateSection: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isDonateVisible, setIsDonateVisible] = useState<boolean>(false);
+  const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Only load the sound when the component is mounted on the client side
+    if (typeof window !== "undefined") {
+      const sound = new Audio("/static/sounds/sounds_scifi_nodes_switch.ogg");
+      setClickSound(sound);
+    }
+  }, []); // This useEffect will only run on the client side
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -205,6 +215,10 @@ const DonateSection: React.FC = () => {
     }
     setExpandedcoin(expandedcoin === coin ? null : coin);
     copyToClipboard(coin);
+    // Play the sound if it's loaded
+    if (clickSound && soundsMode) {
+      clickSound.play();
+    }
   };
 
   const copyToClipboard = (coin: Coin) => {

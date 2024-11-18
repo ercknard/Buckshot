@@ -16,6 +16,7 @@ import { Alert } from "@mui/material";
 type CustomTheme = {
   activeSet: number;
   fancyMode: boolean;
+  soundsMode: boolean;
 };
 
 interface Modes {
@@ -30,11 +31,20 @@ interface Modes {
 
 const GameModeSection: React.FC = () => {
   const theme = useTheme();
-  const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
+  const { activeSet, fancyMode, soundsMode } = useThemeContext() as CustomTheme;
   const [expandedMember, setExpandedMember] = useState<Modes | null>(null);
   const [modes, setModes] = useState<Modes[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Only load the sound when the component is mounted on the client side
+    if (typeof window !== "undefined") {
+      const sound = new Audio("/static/sounds/sounds_scifi_nodes_switch.ogg");
+      setClickSound(sound);
+    }
+  }, []); // This useEffect will only run on the client side
 
   useEffect(() => {
     const fetchModes = async () => {
@@ -63,6 +73,10 @@ const GameModeSection: React.FC = () => {
       return;
     }
     setExpandedMember(expandedMember === member ? null : member);
+    // Play the sound if it's loaded
+    if (clickSound && soundsMode) {
+      clickSound.play();
+    }
   };
 
   const colorSetCapsule: { [key: string]: string } = {

@@ -61,7 +61,7 @@ const ShipsSection: React.FC = () => {
     theme.breakpoints.down("sm")
   );
   const theme = useTheme();
-  const { activeSet } = useThemeContext();
+  const { activeSet, soundsMode } = useThemeContext();
   const [activeTab, setActiveTab] = useState<number>(0);
   const [activeTabShips, setActiveTabShips] = useState<number>(1);
   const [expandedMember, setExpandedMember] = useState<Ship | null>(null);
@@ -69,6 +69,15 @@ const ShipsSection: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isShipsVisible, setIsShipsVisible] = useState<boolean>(false);
+  const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Only load the sound when the component is mounted on the client side
+    if (typeof window !== "undefined") {
+      const sound = new Audio("/static/sounds/sounds_scifi_nodes_switch.ogg");
+      setClickSound(sound);
+    }
+  }, []); // This useEffect will only run on the client side
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -189,6 +198,11 @@ const ShipsSection: React.FC = () => {
 
   const handleCardClick = (member: Ship) => {
     setExpandedMember(member);
+
+    // Play the sound if it's loaded
+    if (clickSound && soundsMode) {
+      clickSound.play();
+    }
   };
 
   if (loading) {

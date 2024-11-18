@@ -23,6 +23,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 type CustomTheme = {
   activeSet: number;
+  soundsMode: boolean;
 };
 
 interface TeamMember {
@@ -72,7 +73,7 @@ const glitchEffect = keyframes`
 `;
 
 const TeamSection: React.FC = () => {
-  const { activeSet } = useThemeContext() as CustomTheme;
+  const { activeSet, soundsMode } = useThemeContext() as CustomTheme;
   const [activeTab, setActiveTab] = useState<number>(0);
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [teamModerators, setTeamModerators] = useState<TeamMember[]>([]);
@@ -80,6 +81,15 @@ const TeamSection: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const theme = useTheme();
   const [isTeamVisible, setIsTeamVisible] = useState<boolean>(false);
+  const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Only load the sound when the component is mounted on the client side
+    if (typeof window !== "undefined") {
+      const sound = new Audio("/static/sounds/sounds_scifi_nodes_switch.ogg");
+      setClickSound(sound);
+    }
+  }, []); // This useEffect will only run on the client side
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -187,6 +197,10 @@ const TeamSection: React.FC = () => {
       return;
     }
     setExpandedMember(expandedMember === member ? null : member);
+    // Play the sound if it's loaded
+    if (clickSound && soundsMode) {
+      clickSound.play();
+    }
   };
 
   const colorSetBgBorderRight: { [key: string]: string } = {
