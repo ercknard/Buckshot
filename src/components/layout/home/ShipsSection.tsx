@@ -70,12 +70,17 @@ const ShipsSection: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isShipsVisible, setIsShipsVisible] = useState<boolean>(false);
   const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
+  const [clickSound2, setClickSound2] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Only load the sound when the component is mounted on the client side
     if (typeof window !== "undefined") {
       const sound = new Audio("/static/sounds/sounds_scifi_nodes_switch.ogg");
       setClickSound(sound);
+      const sound2 = new Audio(
+        "/static/sounds/sounds_scifi_nodes_palm_scanner.ogg"
+      );
+      setClickSound2(sound2);
     }
   }, []); // This useEffect will only run on the client side
 
@@ -187,6 +192,10 @@ const ShipsSection: React.FC = () => {
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
     setExpandedMember(shipData[newValue][0]);
+    // Play the sound if it's loaded
+    if (clickSound2 && soundsMode) {
+      clickSound2.play();
+    }
   };
 
   const handleTabChangeShips = (
@@ -194,6 +203,10 @@ const ShipsSection: React.FC = () => {
     newValue: number
   ) => {
     setActiveTabShips(newValue);
+    // Play the sound if it's loaded
+    if (clickSound2 && soundsMode) {
+      clickSound2.play();
+    }
   };
 
   const handleCardClick = (member: Ship) => {

@@ -82,12 +82,17 @@ const TeamSection: React.FC = () => {
   const theme = useTheme();
   const [isTeamVisible, setIsTeamVisible] = useState<boolean>(false);
   const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
+  const [clickSound2, setClickSound2] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Only load the sound when the component is mounted on the client side
     if (typeof window !== "undefined") {
       const sound = new Audio("/static/sounds/sounds_scifi_nodes_switch.ogg");
       setClickSound(sound);
+      const sound2 = new Audio(
+        "/static/sounds/sounds_scifi_nodes_palm_scanner.ogg"
+      );
+      setClickSound2(sound2);
     }
   }, []); // This useEffect will only run on the client side
 
@@ -200,6 +205,14 @@ const TeamSection: React.FC = () => {
     // Play the sound if it's loaded
     if (clickSound && soundsMode) {
       clickSound.play();
+    }
+  };
+
+  const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
+    setActiveTab(newTab);
+    // Play the sound if it's loaded and sound mode is enabled
+    if (clickSound2 && soundsMode) {
+      clickSound2.play();
     }
   };
 
@@ -415,7 +428,7 @@ const TeamSection: React.FC = () => {
 
               <Tabs
                 value={activeTab}
-                onChange={(_, newValue) => setActiveTab(newValue)}
+                onChange={handleTabChange}
                 sx={{
                   marginBottom: 2,
                   "& .MuiTabs-flexContainer": {

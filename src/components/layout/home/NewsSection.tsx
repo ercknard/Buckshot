@@ -22,8 +22,19 @@ const NewsSection = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [filesPerPage] = useState<number>(1); // Only 1 file per page
-  const { activeSet } = useThemeContext();
+  const { activeSet, soundsMode } = useThemeContext();
   const [isNewsVisible, setIsNewsVisible] = useState<boolean>(false);
+  const [clickSound2, setClickSound2] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Only load the sound when the component is mounted on the client side
+    if (typeof window !== "undefined") {
+      const sound2 = new Audio(
+        "/static/sounds/sounds_scifi_nodes_palm_scanner.ogg"
+      );
+      setClickSound2(sound2);
+    }
+  }, []); // This useEffect will only run on the client side
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -110,7 +121,13 @@ const NewsSection = () => {
     : "";
 
   // Pagination control logic
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Play the sound if it's loaded
+    if (clickSound2 && soundsMode) {
+      clickSound2.play();
+    }
+  };
 
   // Calculate total pages
   const totalPages = Math.ceil(files.length / filesPerPage);
