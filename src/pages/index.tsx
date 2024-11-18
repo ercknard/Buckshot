@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
       <GitFeedsSection />
       {/* <ColorSection /> */}
       <Footer />
-      <AOScall />
+      {/* <AOScall /> */}
     </Box>
   );
 }
