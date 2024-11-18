@@ -111,8 +111,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loaderKey, setLoaderKey] = useState(0);
-  const [fancyMode, setFancyMode] = useState<boolean>(false);
-  const [soundsMode, setSoundsMode] = useState<boolean>(false);
+  const [fancyMode, setFancyMode] = useState<boolean>(true);
+  const [soundsMode, setSoundsMode] = useState<boolean>(true);
 
   useEffect(() => {
     // First, check if there's a stored theme and color set in localStorage
