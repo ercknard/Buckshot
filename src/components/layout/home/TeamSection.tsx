@@ -152,7 +152,7 @@ const TeamSection: React.FC = () => {
 
   useEffect(() => {
     setExpandedMember(getDefaultMember(activeSetNumber));
-  }, [activeSetNumber]);
+  }, [getDefaultMember]);
 
   const handleCardClick = (member: TeamMember) => {
     if (expandedMember === member) {
