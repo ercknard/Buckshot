@@ -30,6 +30,7 @@ import ChangeLoader from "./themeChangeLoader";
 interface CustomTheme extends MuiTheme {
   activeSet: number;
   fancyMode: boolean;
+  soundsMode: boolean;
 }
 
 // Create context with a default value of null
@@ -111,6 +112,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [loaderKey, setLoaderKey] = useState(0);
   const [fancyMode, setFancyMode] = useState<boolean>(false);
+  const [soundsMode, setSoundsMode] = useState<boolean>(false);
 
   useEffect(() => {
     // First, check if there's a stored theme and color set in localStorage
@@ -118,17 +120,20 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       (localStorage.getItem("theme") as PaletteMode) || "dark"; // Explicitly cast to PaletteMode
     const storedSet = Number(localStorage.getItem("colorSet")) || 1; // Default to set 1 if no value found
     const storedFancyMode = localStorage.getItem("fancyMode") === "true";
+    const storedSoundsMode = localStorage.getItem("soundsMode") === "true";
 
     // Apply the theme and color set from localStorage
     setActiveTheme(storedTheme); // No need to cast, already a PaletteMode
     setActiveSet(storedSet);
     setFancyMode(storedFancyMode);
+    setSoundsMode(storedSoundsMode);
 
     // Now, check the URL for parameters (if present, override localStorage values)
     const urlParams = new URLSearchParams(window.location.search);
     const urlTheme = urlParams.get("theme");
     const urlColor = urlParams.get("color");
     const urlFancy = urlParams.get("fancy");
+    const urlSound = urlParams.get("sound");
 
     // If there are URL parameters for theme or color, override localStorage values
     const finalTheme =
@@ -141,16 +146,19 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         ? ["blue", "green", "yellow", "orange", "pink"].indexOf(urlColor) + 1
         : storedSet;
     const finalFancyMode = urlFancy === "on";
+    const finalSoundMode = urlSound === "on";
 
     // Update the state with the final values (from either URL or localStorage)
     setActiveTheme(finalTheme); // No need to cast, already a PaletteMode
     setActiveSet(finalSet);
     setFancyMode(finalFancyMode);
+    setSoundsMode(finalSoundMode);
 
     // Store the final values in localStorage
     localStorage.setItem("theme", finalTheme);
     localStorage.setItem("colorSet", finalSet.toString());
     localStorage.setItem("fancyMode", finalFancyMode.toString());
+    localStorage.setItem("soundMode", finalSoundMode.toString());
 
     // Optionally update the URL with the correct theme and color set (for sharing/bookmarking)
     const url = new URL(window.location.href);
@@ -160,6 +168,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ["blue", "green", "yellow", "orange", "pink"][finalSet - 1]
     );
     url.searchParams.set("fancy", finalFancyMode ? "on" : "off");
+    url.searchParams.set("sound", finalSoundMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
   }, []);
 
@@ -236,10 +245,22 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }, 3000); // Simulate loading duration
   };
 
+  const toggleSoundMode = () => {
+    const newSoundMode = !soundsMode;
+    setSoundsMode(newSoundMode);
+    localStorage.setItem("soundMode", newSoundMode.toString());
+
+    // Optionally update the URL to reflect the fancy mode
+    const url = new URL(window.location.href);
+    url.searchParams.set("sound", newSoundMode ? "on" : "off");
+    window.history.pushState({}, "", url.toString());
+  };
+
   const customPalette: CustomTheme = {
     ...scTheme(activeTheme, activeSet),
     activeSet, // Add the activeSet to the theme
     fancyMode,
+    soundsMode,
   };
 
   const iconColor = customPalette.palette.custom.primaryText;
@@ -335,6 +356,31 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 }}
               >
                 {fancyMode ? "ON" : "OFF"}
+              </Button>
+            </Stack>
+
+            <Stack
+              direction={"row"}
+              marginTop={2.5}
+              spacing={2}
+              alignItems={"center"}
+            >
+              <Typography variant="h5" color="custom.primaryText">
+                Sound Mode:
+              </Typography>
+              <Button
+                variant={soundsMode ? "contained" : "outlined"}
+                onClick={toggleSoundMode}
+                sx={{
+                  backgroundColor: soundsMode
+                    ? customPalette.palette.custom.secondarySolidColors
+                    : customPalette.palette.custom.secondarySolidColors,
+                  color: soundsMode
+                    ? customPalette.palette.custom.secondaryText
+                    : customPalette.palette.custom.secondaryText,
+                }}
+              >
+                {soundsMode ? "ON" : "OFF"}
               </Button>
             </Stack>
           </Box>

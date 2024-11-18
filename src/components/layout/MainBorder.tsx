@@ -15,6 +15,7 @@ interface MainBorderProps {
 type CustomTheme = {
   activeSet: number;
   fancyMode: boolean; // Add fancyMode here
+  soundsMode: boolean; // Add fancyMode here
 };
 
 type UiBoolean = {
@@ -57,7 +58,7 @@ const throwIntoSpace = keyframes`
 `;
 
 const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
-  const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
+  const { activeSet, fancyMode, soundsMode } = useThemeContext() as CustomTheme;
   const [uiBoolean, setUiBoolean] = useState<UiBoolean | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,16 +86,36 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
 
     fetchUiBoolean();
   }, []);
-
   useEffect(() => {
-    if (isVisible) {
-      setLeftVisible(true); // Open left section
-      setRightVisible(true); // Open right section
+    // Ensure sound plays only if both fancyMode and soundsMode are true
+    if (typeof window !== "undefined" && fancyMode && soundsMode) {
+      const openSound = new Audio(
+        "/static/sounds/sounds_scifi_nodes_door_normal.ogg"
+      );
+      const closeSound = new Audio(
+        "/static/sounds/sounds_scifi_nodes_door_normal.ogg"
+      );
+
+      if (isVisible) {
+        setLeftVisible(true);
+        setRightVisible(true);
+        openSound.play(); // Play the sound only if fancyMode and soundsMode are true
+      } else {
+        setLeftVisible(false);
+        setRightVisible(false);
+      }
+
+      // Cleanup function to stop the sound when component unmounts or when sound settings change
+      return () => {
+        openSound.pause();
+        closeSound.pause();
+      };
     } else {
-      setLeftVisible(false); // Close left section
-      setRightVisible(false); // Close right section
+      // If fancyMode or soundsMode is false, no sound should play
+      setLeftVisible(isVisible);
+      setRightVisible(isVisible);
     }
-  }, [isVisible]);
+  }, [isVisible, fancyMode, soundsMode]); // Triggered when `isVisible`, `fancyMode`, or `soundsMode` changes
 
   if (!fancyMode || loading || error || !uiBoolean) {
     return null; // Do not render anything if fancyMode is off or data is not loaded
@@ -202,7 +223,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
             zIndex: "5",
             overflow: "hidden",
             transform: leftVisible ? "translateX(-98%)" : "translateX(0)", // Slide in/out
-            transition: "transform 1s ease", // Apply smooth sliding animation
+            transition: "transform 2s ease", // Apply smooth sliding animation
             cursor: "pointer",
           })}
         >
@@ -279,7 +300,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
             zIndex: "5",
             overflow: "hidden",
             transform: rightVisible ? "translateX(98%)" : "translateX(0)", // Slide in/out
-            transition: "transform 1s ease", // Apply smooth sliding animation
+            transition: "transform 2s ease", // Apply smooth sliding animation
             cursor: "pointer",
           })}
         >
