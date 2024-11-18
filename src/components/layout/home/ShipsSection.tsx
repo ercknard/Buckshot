@@ -392,77 +392,77 @@ const ShipsSection: React.FC = () => {
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_1}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_2}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_3}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_4}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_5}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_6}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_7}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_8}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_9}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="left"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_10}
                   </Typography>
                   <Typography
                     variant="h5"
                     textAlign="center"
-                    color="custom.secondaryText"
+                    color="custom.primaryTextGrayed"
                   >
                     {expandedMember.no_specs}
                   </Typography>
