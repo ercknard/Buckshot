@@ -368,8 +368,15 @@ const ShipsSection: React.FC = () => {
                     position: "relative",
                     display: "flex",
                     flexDirection: "column",
-                    marginBottom: "3.22rem",
-                    marginTop: "3.22rem",
+                    marginTop: 4.5,
+                    marginBottom: 4.5,
+                    padding: 5,
+                    transition: "transform 0.2s, background-color 0.3s",
+                    backgroundColor: "custom.primaryComponents",
+                    borderWidth: "10px",
+                    borderStyle: "solid",
+                    borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                    zIndex: 3,
                   }}
                 >
                   <Typography
