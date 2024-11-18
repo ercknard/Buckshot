@@ -49,7 +49,7 @@ const MediaSection: React.FC = () => {
 
         setMedia(data);
       } catch (err) {
-        setError("Error loading media");
+        setError("Error loading gameplays");
       } finally {
         setLoading(false);
       }
@@ -88,16 +88,122 @@ const MediaSection: React.FC = () => {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <CircularProgress />
+      <Box
+        id="gameplay"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+          paddingTop: { md: "5rem", xs: "3rem" },
+          paddingBottom: { md: "5rem", xs: "3rem" },
+        }}
+      >
+        <Box
+          component={"img"}
+          alt="Logo"
+          src={imageBgCapsule}
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.75,
+            filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
+          }}
+        />
+
+        <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Gameplays
+          </Typography>
+
+          <Typography variant="h5" align="center" gutterBottom>
+            Get ready for epic gameplay, awesome moments, and plenty of
+            fun—let&apos;s dive in!
+          </Typography>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop={7.5}
+          >
+            <CircularProgress />
+          </Box>
+        </Box>
       </Box>
     );
   }
 
   if (error) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Alert severity="error">{error}</Alert>
+      <Box
+        id="gameplay"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+          paddingTop: { md: "5rem", xs: "3rem" },
+          paddingBottom: { md: "5rem", xs: "3rem" },
+        }}
+      >
+        <Box
+          component={"img"}
+          alt="Logo"
+          src={imageBgCapsule}
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.75,
+            filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
+          }}
+        />
+
+        <Box position={"relative"} zIndex={2} padding={{ xs: 1, md: 0 }}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Gameplays
+          </Typography>
+
+          <Typography variant="h5" align="center" gutterBottom>
+            Get ready for epic gameplay, awesome moments, and plenty of
+            fun—let&apos;s dive in!
+          </Typography>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop={7.5}
+          >
+            <Alert severity="error">{error}</Alert>
+          </Box>
+        </Box>
       </Box>
     );
   }

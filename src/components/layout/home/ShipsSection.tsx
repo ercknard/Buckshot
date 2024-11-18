@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import { Alert, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { Container } from "@mui/material";
 import { Tab } from "@mui/material";
@@ -20,6 +20,7 @@ import "swiper/css/navigation";
 import { Scrollbar } from "swiper/modules";
 import supabase from "@/lib/supabase";
 import { keyframes } from "@emotion/react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -66,6 +67,7 @@ const ShipsSection: React.FC = () => {
   const [expandedMember, setExpandedMember] = useState<Ship | null>(null);
   const [shipData, setShipData] = useState<Ship[][]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
@@ -137,6 +139,7 @@ const ShipsSection: React.FC = () => {
         setExpandedMember(battleShips[2]);
       } catch (error) {
         console.error("Error fetching ship data:", error);
+        setError("Error fetching ship data.");
         setLoading(false);
       }
     };
@@ -162,9 +165,90 @@ const ShipsSection: React.FC = () => {
 
   if (loading) {
     return (
-      <Typography variant="h6" align="center">
-        Loading...
-      </Typography>
+      <Box
+        id={"ships"}
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+          minHeight: "75vh",
+        }}
+      >
+        <MainBorder containerId="ships-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Starships
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              The Starships lets you build and fly customizable ships, exploring
+              space and engaging in battles.
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <CircularProgress />
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box
+        id={"ships"}
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="ships-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Starships
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              The Starships lets you build and fly customizable ships, exploring
+              space and engaging in battles.
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <Alert severity="error">{error}</Alert>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
     );
   }
 

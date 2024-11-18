@@ -10,6 +10,8 @@ import supabase from "@/lib/supabase";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Alert } from "@mui/material";
 
 type CustomTheme = {
   activeSet: number;
@@ -31,15 +33,26 @@ const GameModeSection: React.FC = () => {
   const { activeSet, fancyMode } = useThemeContext() as CustomTheme;
   const [expandedMember, setExpandedMember] = useState<Modes | null>(null);
   const [modes, setModes] = useState<Modes[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchModes = async () => {
-      const { data, error } = await supabase.from("test_gamemodes").select("*");
-      if (error) {
-        console.error("Error fetching modes:", error);
-      } else {
-        setModes(data);
-        setExpandedMember(data[1]);
+      setLoading(true);
+      setError(null);
+
+      try {
+        const { data, error } = await supabase
+          .from("test_gamemodes")
+          .select("*");
+        if (error) {
+          setError("Error fetching gamemodes data.");
+        } else {
+          setModes(data);
+          setExpandedMember(data[1]);
+        }
+      } finally {
+        setLoading(false);
       }
     };
     fetchModes();
@@ -82,6 +95,144 @@ const GameModeSection: React.FC = () => {
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
   const imageBgBannerSrc =
     colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
+
+  if (loading) {
+    return (
+      <Box
+        id="servers"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+          paddingTop: { md: "5rem", xs: "3rem" },
+          paddingBottom: { md: "5rem", xs: "3rem" },
+        }}
+      >
+        <Box
+          component={"img"}
+          alt="Logo"
+          src={imageBgCapsule}
+          sx={(theme) => ({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.75,
+            filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
+            zIndex: 1,
+          })}
+        />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Game Servers
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Explore a variety of exciting game modes on our servers, offering
+              endless fun and diverse experiences for every type of gamer, from
+              competitive challenges to casual adventures.
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <CircularProgress />
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box
+        id="servers"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+          paddingTop: { md: "5rem", xs: "3rem" },
+          paddingBottom: { md: "5rem", xs: "3rem" },
+        }}
+      >
+        <Box
+          component={"img"}
+          alt="Logo"
+          src={imageBgCapsule}
+          sx={(theme) => ({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.75,
+            filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
+            zIndex: 1,
+          })}
+        />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Game Servers
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Explore a variety of exciting game modes on our servers, offering
+              endless fun and diverse experiences for every type of gamer, from
+              competitive challenges to casual adventures.
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <Alert severity="error">{error}</Alert>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
+  }
 
   return (
     <Box

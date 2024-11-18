@@ -18,6 +18,8 @@ import { Scrollbar } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
 import { keyframes } from "@emotion/react";
+import { Alert } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type CustomTheme = {
   activeSet: number;
@@ -173,11 +175,93 @@ const TeamSection: React.FC = () => {
   SwiperCore.use([Scrollbar]);
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Box
+        id="team"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="teams-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              CryptechTest Team
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Meet the creative minds and skilled players who brought our game
+              to life, each contributing their unique talents to create an
+              unforgettable experience.
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <CircularProgress />
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
   }
 
   if (error) {
-    return <Typography color="error">{error}</Typography>;
+    return (
+      <Box
+        id="team"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="teams-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              CryptechTest Team
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Meet the creative minds and skilled players who brought our game
+              to life, each contributing their unique talents to create an
+              unforgettable experience.
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <Alert severity="error">{error}</Alert>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
   }
 
   return (

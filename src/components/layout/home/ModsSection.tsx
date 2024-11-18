@@ -243,7 +243,7 @@ const ModsSection: React.FC = () => {
 
         setSlides(data); // Set the fetched slides data
       } catch (err) {
-        setError("Error loading slides");
+        setError("Error loading Featured mods");
       } finally {
         setLoading(false);
       }
@@ -254,16 +254,138 @@ const ModsSection: React.FC = () => {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <CircularProgress />
+      <Box
+        id="mods"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+
+          paddingTop: { md: "5rem", xs: "3rem" },
+          paddingBottom: { md: "5rem", xs: "3rem" },
+        }}
+      >
+        <Box
+          component={"img"}
+          alt="Logo"
+          src={imageBgCapsule}
+          sx={(theme) => ({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.75,
+            filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
+          })}
+        />
+
+        {/* Container for Mods List */}
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Featured Mods
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Check out our latest feature mods, designed to enhance
+              functionality and improve your experience.
+            </Typography>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop={7.5}
+          >
+            <CircularProgress />
+          </Box>
+        </Container>
       </Box>
     );
   }
 
   if (error) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Alert severity="error">{error}</Alert>
+      <Box
+        id="mods"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: (theme) =>
+            `rgba(${parseInt(
+              theme.palette.custom.primaryComponents.slice(1, 3),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(3, 5),
+              16
+            )}, ${parseInt(
+              theme.palette.custom.primaryComponents.slice(5, 7),
+              16
+            )}, .5)`,
+
+          paddingTop: { md: "5rem", xs: "3rem" },
+          paddingBottom: { md: "5rem", xs: "3rem" },
+        }}
+      >
+        <Box
+          component={"img"}
+          alt="Logo"
+          src={imageBgCapsule}
+          sx={(theme) => ({
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            opacity: 0.75,
+            filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.5))",
+          })}
+        />
+
+        {/* Container for Mods List */}
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Featured Mods
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Check out our latest feature mods, designed to enhance
+              functionality and improve your experience.
+            </Typography>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginTop={7.5}
+          >
+            <Alert severity="error">{error}</Alert>
+          </Box>
+        </Container>
       </Box>
     );
   }

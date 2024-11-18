@@ -55,16 +55,92 @@ const DonateSection: React.FC = () => {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <CircularProgress />
+      <Box
+        id="donate"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="donate-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Donate
+            </Typography>
+
+            <Typography variant="h5" align="center" gutterBottom>
+              If you enjoy our server, or the plugin we make, and want to help
+              contribute financially, we happily accept cryptocurrency
+              donations!
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <CircularProgress />
+            </Box>
+          </Box>
+        </Container>
       </Box>
     );
   }
 
   if (error) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Alert severity="error">{error}</Alert>
+      <Box
+        id="donate"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="donate-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Donate
+            </Typography>
+
+            <Typography variant="h5" align="center" gutterBottom>
+              If you enjoy our server, or the plugin we make, and want to help
+              contribute financially, we happily accept cryptocurrency
+              donations!
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <Alert severity="error">{error}</Alert>
+            </Box>
+          </Box>
+        </Container>
       </Box>
     );
   }

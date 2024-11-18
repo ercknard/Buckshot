@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";
 import DefaultDialog from "../DefaultDialog";
 import MainBorder from "../MainBorder";
+import { Alert } from "@mui/material";
 
 type CustomTheme = {
   activeSet: number;
@@ -43,11 +44,91 @@ const GitFeedsSection: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        id="git"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="github-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Git Events
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Stay updated with the latest Git events, including commits,
+              merges, and branch updates of CryptechTest
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <CircularProgress />
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <Box
+        id="git"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="github-particles" />
+
+        <Container
+          sx={{
+            justifyContent: { sm: "center", xs: "left" },
+            marginX: "auto",
+          }}
+        >
+          <Box position={"relative"} zIndex={2}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Git Events
+            </Typography>
+            <Typography variant="h5" align="center" gutterBottom>
+              Stay updated with the latest Git events, including commits,
+              merges, and branch updates of CryptechTest
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <Alert severity="error">{error}</Alert>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
   }
 
   const limitedEvents = events.slice(0, 4);
