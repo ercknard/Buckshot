@@ -223,7 +223,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
             zIndex: "5",
             overflow: "hidden",
             transform: leftVisible ? "translateX(-98%)" : "translateX(0)", // Slide in/out
-            transition: "transform 2s ease", // Apply smooth sliding animation
+            transition: "transform 1s ease", // Apply smooth sliding animation
             cursor: "pointer",
           })}
         >
@@ -300,7 +300,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
             zIndex: "5",
             overflow: "hidden",
             transform: rightVisible ? "translateX(98%)" : "translateX(0)", // Slide in/out
-            transition: "transform 2s ease", // Apply smooth sliding animation
+            transition: "transform 1s ease", // Apply smooth sliding animation
             cursor: "pointer",
           })}
         >
