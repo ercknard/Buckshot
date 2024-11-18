@@ -60,6 +60,8 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
   const [uiBoolean, setUiBoolean] = useState<UiBoolean | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [leftVisible, setLeftVisible] = useState<boolean>(true); // Track left section visibility
+  const [rightVisible, setRightVisible] = useState<boolean>(true); // Track right section visibility
   const theme = useTheme();
 
   useEffect(() => {
@@ -127,6 +129,30 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
     5: "/static/images/pink-banner.png",
   };
 
+  const colorSetFrameMap: { [key: string]: string } = {
+    1: "/static/images/blue-frame.png",
+    2: "/static/images/green-frame.png",
+    3: "/static/images/yellow-frame.png",
+    4: "/static/images/orange-frame.png",
+    5: "/static/images/pink-frame.png",
+  };
+
+  const colorSetBgMapLeft: { [key: string]: string } = {
+    1: "/static/images/blue-gate-l.webp",
+    2: "/static/images/green-gate-l.webp",
+    3: "/static/images/yellow-gate-l.webp",
+    4: "/static/images/orange-gate-l.webp",
+    5: "/static/images/pink-gate-l.webp",
+  };
+
+  const colorSetBgMapRight: { [key: string]: string } = {
+    1: "/static/images/blue-gate-r.webp",
+    2: "/static/images/green-gate-r.webp",
+    3: "/static/images/yellow-gate-r.webp",
+    4: "/static/images/orange-gate-r.webp",
+    5: "/static/images/pink-gate-r.webp",
+  };
+
   const imageBgSrc = colorSetBgMap[activeSet.toString()] || colorSetBgMap[1];
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
@@ -137,8 +163,139 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
   const imageBgBannerSrc =
     colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
 
+  const imageFrameSrc =
+    colorSetFrameMap[activeSet.toString()] || colorSetFrameMap[1];
+
+  const imageBgLeftSrc =
+    colorSetBgMapLeft[activeSet.toString()] || colorSetBgMapLeft[1];
+
+  const imageBgRightSrc =
+    colorSetBgMapRight[activeSet.toString()] || colorSetBgMapRight[1];
+
+  const handleLeftClick = () => setLeftVisible((prev) => !prev); // Toggle visibility of left section
+  const handleRightClick = () => setRightVisible((prev) => !prev); // Toggle visibility of right section
+
   return (
     <Box>
+      {/* Left Section */}
+      {fancyMode && (
+        <Box
+          onClick={handleLeftClick}
+          sx={(theme) => ({
+            position: "absolute",
+            display: { md: `${uiBoolean.image_banner}`, xs: "none" },
+            top: 0,
+            left: 0,
+            width: "50%",
+            height: "100%",
+            zIndex: "5",
+            overflow: "hidden",
+            transform: leftVisible ? "translateX(-98%)" : "translateX(0)", // Slide in/out
+            transition: "transform 1s ease", // Apply smooth sliding animation
+            cursor: "pointer",
+          })}
+        >
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageFrameSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              zIndex: "3",
+            })}
+          />
+
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageBgLeftSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              zIndex: "1",
+              objectFit: "cover",
+            })}
+          />
+
+          <Box
+            bgcolor={"#121212"}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              zIndex: "2",
+              opacity: ".5",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            })}
+          />
+        </Box>
+      )}
+
+      {/* Right Section */}
+      {fancyMode && (
+        <Box
+          onClick={handleRightClick}
+          sx={(theme) => ({
+            position: "absolute",
+            display: { md: `${uiBoolean.image_banner}`, xs: "none" },
+            top: 0,
+            right: 0,
+            width: "50%",
+            height: "100%",
+            zIndex: "5",
+            overflow: "hidden",
+            transform: rightVisible ? "translateX(98%)" : "translateX(0)", // Slide in/out
+            transition: "transform 1s ease", // Apply smooth sliding animation
+            cursor: "pointer",
+          })}
+        >
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageFrameSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              zIndex: "3",
+            })}
+          />
+
+          <Box
+            component="img"
+            alt="Logo"
+            src={imageBgRightSrc}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+              zIndex: "1",
+              objectFit: "cover",
+            })}
+          />
+
+          <Box
+            bgcolor={"#121212"}
+            sx={(theme) => ({
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              zIndex: "2",
+              opacity: ".5",
+              border: `.5rem solid ${theme.palette.custom.primaryBorders}`,
+            })}
+          />
+        </Box>
+      )}
+
+      {/* Particles and other content */}
       <Box
         sx={{
           position: "absolute",
@@ -182,10 +339,12 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
           left: 0,
           width: "100%",
           height: "100%",
+          zIndex: "5",
+          pointerEvents: "none",
         }}
       />
 
-      <Box
+      {/* <Box
         component="img"
         alt="Banner"
         src={imageBgBannerSrc}
@@ -199,7 +358,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
           opacity: 0.05,
           objectFit: "cover",
         }}
-      />
+      /> */}
 
       <Box
         component="img"
@@ -228,6 +387,8 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId }) => {
           width: "100%",
           height: "100%",
           opacity: 0.5,
+          zIndex: "5",
+          pointerEvents: "none",
         }}
       />
     </Box>
