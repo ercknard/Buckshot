@@ -27,6 +27,7 @@ interface Modes {
   port: string;
   intro: string;
   bgs: string;
+  isshow: string;
 }
 
 const GameModeSection: React.FC = () => {
@@ -478,7 +479,11 @@ const GameModeSection: React.FC = () => {
                 xs={6}
                 md={2.4}
                 key={member.name}
-                sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
+                sx={{
+                  marginBottom: "1.5rem",
+                  marginTop: ".5rem",
+                  display: `${member.isshow}`,
+                }}
               >
                 <Paper
                   elevation={3}

@@ -34,6 +34,7 @@ interface TeamMember {
   land: string;
   details: string;
   dcdetails: string;
+  isshow: string;
 }
 
 const jumpAnimation = keyframes`
@@ -468,7 +469,11 @@ const TeamSection: React.FC = () => {
                     xs={6}
                     md={2.4}
                     key={member.name}
-                    sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
+                    sx={{
+                      marginBottom: "1.5rem",
+                      marginTop: ".5rem",
+                      display: `${member.isshow}`,
+                    }}
                   >
                     <Paper
                       elevation={3}
@@ -556,7 +561,11 @@ const TeamSection: React.FC = () => {
                   .map((member) => (
                     <SwiperSlide
                       key={member.name}
-                      style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
+                      style={{
+                        paddingBottom: "1.5rem",
+                        paddingTop: ".5rem",
+                        display: `${member.isshow}`,
+                      }}
                     >
                       <Paper
                         elevation={3}

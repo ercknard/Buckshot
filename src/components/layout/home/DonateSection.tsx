@@ -22,6 +22,7 @@ interface Coin {
   name: string;
   image: string;
   address: string;
+  isshow: string;
 }
 
 const DonateSection: React.FC = () => {
@@ -347,7 +348,11 @@ const DonateSection: React.FC = () => {
                   xs={6}
                   md={2.4}
                   key={coin.name}
-                  sx={{ marginBottom: "1.5rem", marginTop: ".5rem" }}
+                  sx={{
+                    marginBottom: "1.5rem",
+                    marginTop: ".5rem",
+                    display: `${coin.isshow}`,
+                  }}
                 >
                   <Paper
                     elevation={3}
