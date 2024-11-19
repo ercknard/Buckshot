@@ -11,6 +11,16 @@ import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
 import MainBorder from "../MainBorder";
 import supabase from "@/lib/supabase";
+import { keyframes } from "@emotion/react";
+
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
 
 type CustomTheme = {
   activeSet: number;
@@ -390,6 +400,10 @@ const DonateSection: React.FC = () => {
                         borderRadius: "50%",
                         display: "block",
                         margin: "0 auto",
+                        animation:
+                          expandedcoin === coin
+                            ? `${jumpAnimation} 3s ease-in-out infinite`
+                            : `unset`,
                       }}
                     />
                     <Typography

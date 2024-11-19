@@ -522,6 +522,10 @@ const TeamSection: React.FC = () => {
                           width: "100%",
                           height: "auto",
                           borderRadius: "50%",
+                          animation:
+                            expandedMember === member
+                              ? `${jumpAnimation} 3s ease-in-out infinite`
+                              : `unset`,
                         }}
                       />
                       <Typography
@@ -612,6 +616,10 @@ const TeamSection: React.FC = () => {
                             width: "100%",
                             height: "auto",
                             borderRadius: "50%",
+                            animation:
+                              expandedMember === member
+                                ? `${jumpAnimation} 3s ease-in-out infinite`
+                                : `unset`,
                           }}
                         />
                         <Typography

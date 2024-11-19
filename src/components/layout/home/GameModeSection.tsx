@@ -12,6 +12,16 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Alert } from "@mui/material";
+import { keyframes } from "@emotion/react";
+
+const jumpAnimation = keyframes`
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+`;
 
 type CustomTheme = {
   activeSet: number;
@@ -528,6 +538,10 @@ const GameModeSection: React.FC = () => {
                     sx={{
                       width: "50%",
                       height: "auto",
+                      animation:
+                        expandedMember === member
+                          ? `${jumpAnimation} 3s ease-in-out infinite`
+                          : `unset`,
                     }}
                   />
                   <Typography
