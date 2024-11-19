@@ -45,6 +45,7 @@ type Ship = {
   front_view?: string;
   back_view?: string;
   side_view?: string;
+  isShow?: string;
 };
 
 const jumpAnimation = keyframes`
@@ -753,7 +754,11 @@ const ShipsSection: React.FC = () => {
               .map((member) => (
                 <SwiperSlide
                   key={member.id}
-                  style={{ paddingBottom: "1.5rem", paddingTop: ".5rem" }}
+                  style={{
+                    paddingBottom: "1.5rem",
+                    paddingTop: ".5rem",
+                    display: `${member.isShow}`,
+                  }}
                 >
                   <Paper
                     elevation={3}
