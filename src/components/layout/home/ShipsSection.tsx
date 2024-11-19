@@ -179,7 +179,7 @@ const ShipsSection: React.FC = () => {
         ]);
         setLoading(false);
 
-        setExpandedMember(battleShips[2]);
+        setExpandedMember(battleShips[0]);
       } catch (error) {
         console.error("Error fetching ship data:", error);
         setError("Error fetching ship data.");

@@ -128,13 +128,13 @@ const TeamSection: React.FC = () => {
     typeof activeSet === "number"
       ? activeSet
       : parseInt(activeSet as string, 10);
-
   useEffect(() => {
     const fetchTeamData = async () => {
       setLoading(true);
       setError(null);
 
       try {
+        // Fetch team members with the role "Leads"
         const { data: members, error: membersError } = await supabase
           .from("team_members")
           .select("*")
@@ -144,6 +144,7 @@ const TeamSection: React.FC = () => {
           throw membersError;
         }
 
+        // Fetch team moderators with roles "Moderator" or "Contributor"
         const { data: moderators, error: moderatorsError } = await supabase
           .from("team_moderators")
           .select("*")
@@ -156,12 +157,24 @@ const TeamSection: React.FC = () => {
         setTeamMembers(members);
         setTeamModerators(moderators);
 
-        if (members && members.length > 0) {
-          setExpandedMember(members[0]);
+        // Set the default expandedMember for members with id === 1, if exists
+        const defaultMember = members.find((member) => member.id === 1);
+        if (defaultMember) {
+          setExpandedMember(defaultMember);
+        } else if (members && members.length > 0) {
+          setExpandedMember(members[0]); // fallback to the first member if no member with id === 1
         }
 
-        if (moderators && moderators.length > 0 && activeTab === 1) {
-          setExpandedMember(moderators[0]);
+        // Set the default expandedMember for moderators with id === 1, if activeTab === 1
+        if (activeTab === 1) {
+          const defaultModerator = moderators.find(
+            (moderator) => moderator.id === 1
+          );
+          if (defaultModerator) {
+            setExpandedMember(defaultModerator);
+          } else if (moderators && moderators.length > 0) {
+            setExpandedMember(moderators[0]); // fallback to the first moderator if no moderator with id === 1
+          }
         }
       } catch (err) {
         setError("Error fetching team data.");
@@ -171,7 +184,7 @@ const TeamSection: React.FC = () => {
     };
 
     fetchTeamData();
-  }, []);
+  }, []); // Add activeTab as a dependency if it changes dynamically
 
   const getDefaultMember = (activeSet: number) => {
     switch (activeSet) {

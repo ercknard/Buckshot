@@ -56,16 +56,26 @@ const GameModeSection: React.FC = () => {
         const { data, error } = await supabase
           .from("test_gamemodes")
           .select("*");
+
         if (error) {
           setError("Error fetching gamemodes data.");
         } else {
           setModes(data);
-          setExpandedMember(data[1]);
+
+          // Set the default expandedMember to the entry with id 1
+          const defaultMode = data.find((mode) => mode.id === 1);
+          if (defaultMode) {
+            setExpandedMember(defaultMode);
+          } else {
+            // Optionally, handle case when no entry with id 1 is found
+            setExpandedMember(data[0]); // fallback to the first entry
+          }
         }
       } finally {
         setLoading(false);
       }
     };
+
     fetchModes();
   }, []);
 
