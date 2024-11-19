@@ -808,7 +808,7 @@ const ShipsSection: React.FC = () => {
                     <Typography
                       variant="body1"
                       fontSize={"1.10rem"}
-                      color="custom.primaryTextGrayed"
+                      color="custom.secondaryTextGrayed"
                     >
                       {member.title}
                     </Typography>

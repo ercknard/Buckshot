@@ -396,7 +396,7 @@ const DonateSection: React.FC = () => {
                       variant="body1"
                       fontSize={"1.10rem"}
                       sx={{ marginTop: 2 }}
-                      color="custom.primaryTextGrayed"
+                      color="custom.secondaryTextGrayed"
                     >
                       {coin.name}
                     </Typography>
