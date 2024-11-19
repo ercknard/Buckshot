@@ -486,6 +486,14 @@ const ShipsSection: React.FC = () => {
 
                   <Typography
                     variant="h5"
+                    textAlign="center"
+                    color="custom.primaryTextGrayed"
+                  >
+                    {expandedMember.no_specs}
+                  </Typography>
+
+                  <Typography
+                    variant="h5"
                     textAlign="left"
                     color="custom.primaryTextGrayed"
                   >
@@ -553,13 +561,6 @@ const ShipsSection: React.FC = () => {
                     color="custom.primaryTextGrayed"
                   >
                     {expandedMember.specs_10}
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    textAlign="center"
-                    color="custom.primaryTextGrayed"
-                  >
-                    {expandedMember.no_specs}
                   </Typography>
                 </Stack>
               )}
