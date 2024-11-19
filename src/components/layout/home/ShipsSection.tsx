@@ -45,7 +45,7 @@ type Ship = {
   front_view?: string;
   back_view?: string;
   side_view?: string;
-  isShow?: string;
+  isshow?: string;
 };
 
 const jumpAnimation = keyframes`
@@ -757,7 +757,7 @@ const ShipsSection: React.FC = () => {
                   style={{
                     paddingBottom: "1.5rem",
                     paddingTop: ".5rem",
-                    display: `${member.isShow}`,
+                    display: `${member.isshow}`,
                   }}
                 >
                   <Paper
