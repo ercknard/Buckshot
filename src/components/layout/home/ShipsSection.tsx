@@ -179,7 +179,10 @@ const ShipsSection: React.FC = () => {
         ]);
         setLoading(false);
 
-        setExpandedMember(battleShips[0]);
+        const defaultBattleShip = battleShips.find((ship) => ship.id === 1);
+
+        // Set expandedMember to the entry with id: 1 or the first ship in the array if not found
+        setExpandedMember(defaultBattleShip || battleShips[0]);
       } catch (error) {
         console.error("Error fetching ship data:", error);
         setError("Error fetching ship data.");
@@ -192,7 +195,13 @@ const ShipsSection: React.FC = () => {
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
-    setExpandedMember(shipData[newValue][0]);
+
+    // Set the default entry with id: 1 when switching tabs
+    const defaultMember = shipData[newValue].find((item) => item.id === 1);
+
+    // If no entry with id 1 is found, fall back to the first item in the array
+    setExpandedMember(defaultMember || shipData[newValue][0]);
+
     // Play the sound if it's loaded
     if (clickSound2 && soundsMode) {
       clickSound2.play();
