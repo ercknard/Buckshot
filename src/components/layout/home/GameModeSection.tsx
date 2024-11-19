@@ -422,7 +422,7 @@ const GameModeSection: React.FC = () => {
                 <Typography
                   fontSize={"1.5rem"}
                   sx={{ marginTop: 2, marginBottom: 2 }}
-                  color="custom.primaryTextGrayed"
+                  color="custom.secondaryTextGrayed"
                 >
                   {expandedMember.name}
                 </Typography>
@@ -447,7 +447,7 @@ const GameModeSection: React.FC = () => {
                   <Typography
                     variant="h5"
                     fontSize={{ md: "1.75rem", xs: "1.25rem" }}
-                    color="custom.primaryTextGrayed"
+                    color="custom.secondaryTextGrayed"
                   >
                     IP address: {expandedMember.ip}
                   </Typography>
@@ -464,7 +464,7 @@ const GameModeSection: React.FC = () => {
                   <Typography
                     variant="h5"
                     fontSize={{ md: "1.75rem", xs: "1.25rem" }}
-                    color="custom.primaryTextGrayed"
+                    color="custom.secondaryTextGrayed"
                   >
                     {expandedMember.name} port: {expandedMember.port}
                   </Typography>
