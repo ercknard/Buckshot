@@ -551,6 +551,7 @@ export default function HeroSection(): JSX.Element {
           pointerEvents: "none",
           zIndex: "4",
           marginTop: "2.5rem",
+          opacity: "0.5",
         })}
       />
 
