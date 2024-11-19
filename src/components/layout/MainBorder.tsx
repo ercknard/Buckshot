@@ -86,6 +86,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
 
     fetchUiBoolean();
   }, []);
+
   useEffect(() => {
     // Ensure sound plays only if both fancyMode and soundsMode are true
     if (typeof window !== "undefined" && fancyMode && soundsMode) {
