@@ -125,8 +125,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     // Apply the theme and color set from localStorage
     setActiveTheme(storedTheme); // No need to cast, already a PaletteMode
     setActiveSet(storedSet);
-    setFancyMode(storedFancyMode);
-    setSoundsMode(storedSoundsMode);
+    setFancyMode(storedFancyMode !== undefined ? storedFancyMode : true); // Default to true if undefined
+    setSoundsMode(storedSoundsMode !== undefined ? storedSoundsMode : true); // Default to true if undefined
 
     // Now, check the URL for parameters (if present, override localStorage values)
     const urlParams = new URLSearchParams(window.location.search);
@@ -145,8 +145,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ["blue", "green", "yellow", "orange", "pink"].includes(urlColor)
         ? ["blue", "green", "yellow", "orange", "pink"].indexOf(urlColor) + 1
         : storedSet;
-    const finalFancyMode = urlFancy === "on";
-    const finalSoundMode = urlSound === "on";
+    const finalFancyMode = urlFancy === "on" ? true : storedFancyMode;
+    const finalSoundMode = urlSound === "on" ? true : storedSoundsMode;
 
     // Update the state with the final values (from either URL or localStorage)
     setActiveTheme(finalTheme); // No need to cast, already a PaletteMode
