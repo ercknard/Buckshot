@@ -46,6 +46,7 @@ type Ship = {
   back_view?: string;
   side_view?: string;
   isshow?: string;
+  ifCruiser?: string;
 };
 
 const jumpAnimation = keyframes`
@@ -484,7 +485,7 @@ const ShipsSection: React.FC = () => {
                     sx={{ marginBottom: "2rem" }}
                   >
                     <Typography variant="h5" color="custom.secondaryText">
-                      {expandedMember.title} Model
+                      {expandedMember.title} {expandedMember.ifCruiser} Model
                     </Typography>
                   </Stack>
                 </>
@@ -514,7 +515,7 @@ const ShipsSection: React.FC = () => {
                     fontSize={"1.25rem"}
                     color="custom.primaryText"
                   >
-                    {expandedMember.title} Features
+                    {expandedMember.title} {expandedMember.ifCruiser} Features
                   </Typography>
 
                   <Divider />
@@ -642,7 +643,8 @@ const ShipsSection: React.FC = () => {
                         />
                         <Stack direction={"column"} spacing={1}>
                           <Typography variant="h5" color="custom.secondaryText">
-                            {expandedMember.title} Front View
+                            {expandedMember.title} {expandedMember.ifCruiser}{" "}
+                            Front View
                           </Typography>
                         </Stack>
                       </SwiperSlide>
@@ -670,7 +672,8 @@ const ShipsSection: React.FC = () => {
                               variant="h5"
                               color="custom.secondaryText"
                             >
-                              {expandedMember.title} Back View
+                              {expandedMember.title} {expandedMember.ifCruiser}{" "}
+                              Back View
                             </Typography>
                           </Stack>
                         </Box>
@@ -699,7 +702,8 @@ const ShipsSection: React.FC = () => {
                               variant="h5"
                               color="custom.secondaryText"
                             >
-                              {expandedMember.title} Side View
+                              {expandedMember.title} {expandedMember.ifCruiser}{" "}
+                              Side View
                             </Typography>
                           </Stack>
                         </Box>
