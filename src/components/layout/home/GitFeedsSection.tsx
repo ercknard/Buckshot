@@ -179,8 +179,8 @@ const GitFeedsSection: React.FC = () => {
     );
   }
 
-  const limitedEvents = events.slice(0, 4);
-  const remainingEvents = events.slice(4);
+  const limitedEvents = events.slice(0, 6);
+  const remainingEvents = events.slice(6);
 
   const colorSetBgBorderRight: { [key: string]: string } = {
     1: "/static/images/blue-border.png",
