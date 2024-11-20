@@ -383,7 +383,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
       <Box
         component="img"
         alt="Background"
-        src={imageBgSrc}
+        src="/static/images/bg-po.webp"
         sx={{
           position: "absolute",
           display: `${uiBoolean.image_background}`,
@@ -391,7 +391,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
           left: 0,
           width: "100%",
           height: "100%",
-          opacity: 0.05,
+          opacity: 0.15,
           objectFit: "cover",
         }}
       />

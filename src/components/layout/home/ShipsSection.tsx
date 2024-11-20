@@ -57,6 +57,15 @@ const jumpAnimation = keyframes`
   }
 `;
 
+const toOpacityAnimation = keyframes`
+  0%, 100% {
+   opacity: .5;
+  }
+  90% {
+    opacity: 0;
+  }
+`;
+
 const ShipsSection: React.FC = () => {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
@@ -128,11 +137,22 @@ const ShipsSection: React.FC = () => {
     5: "/static/images/pink-banner.png",
   };
 
+  const colorSetBgCrack: { [key: string]: string } = {
+    1: "/static/images/blue-crack.webp",
+    2: "/static/images/green-crack.webp",
+    3: "/static/images/yellow-crack.webp",
+    4: "/static/images/orange-crack.webp",
+    5: "/static/images/pink-crack.webp",
+  };
+
   const imageBgBorderSrc =
     colorSetBgBorderRight[activeSet.toString()] || colorSetBgBorderRight[1];
 
   const imageBgBannerSrc =
     colorSetBgBanner[activeSet.toString()] || colorSetBgBanner[1];
+
+  const imageBgCrackSrc =
+    colorSetBgCrack[activeSet.toString()] || colorSetBgCrack[1];
 
   useEffect(() => {
     const fetchShipData = async () => {
@@ -420,6 +440,21 @@ const ShipsSection: React.FC = () => {
             >
               {activeTabShips === 0 && (
                 <>
+                  <Box
+                    component="img"
+                    width={{
+                      xs: "100%",
+                      md: `${expandedMember.image_size}`,
+                    }}
+                    alt={expandedMember.title}
+                    src={imageBgCrackSrc}
+                    marginX={"auto"}
+                    sx={{
+                      position: "absolute",
+                      animation: `${toOpacityAnimation} 3s ease-in-out infinite`,
+                      top: "0",
+                    }}
+                  />
                   <Box
                     component="img"
                     alt="Logo"
