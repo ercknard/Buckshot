@@ -119,8 +119,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const storedTheme =
       (localStorage.getItem("theme") as PaletteMode) || "dark"; // Explicitly cast to PaletteMode
     const storedSet = Number(localStorage.getItem("colorSet")) || 1; // Default to set 1 if no value found
-    const storedFancyMode = localStorage.getItem("fancyMode") === "true";
-    const storedSoundsMode = localStorage.getItem("soundsMode") === "true";
+    const storedFancyMode = localStorage.getItem("fancyMode") === "true"; // Default to true if not found
+    const storedSoundsMode = localStorage.getItem("soundsMode") === "true"; // Default to true if not found
 
     // Apply the theme and color set from localStorage
     setActiveTheme(storedTheme); // No need to cast, already a PaletteMode
@@ -145,8 +145,10 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       ["blue", "green", "yellow", "orange", "pink"].includes(urlColor)
         ? ["blue", "green", "yellow", "orange", "pink"].indexOf(urlColor) + 1
         : storedSet;
-    const finalFancyMode = urlFancy === "on" ? true : storedFancyMode;
-    const finalSoundMode = urlSound === "on" ? true : storedSoundsMode;
+    const finalFancyMode =
+      urlFancy !== null ? urlFancy === "on" : storedFancyMode;
+    const finalSoundMode =
+      urlSound !== null ? urlSound === "on" : storedSoundsMode;
 
     // Update the state with the final values (from either URL or localStorage)
     setActiveTheme(finalTheme); // No need to cast, already a PaletteMode
@@ -235,7 +237,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const url = new URL(window.location.href);
     url.searchParams.set("fancy", newFancyMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
-    setDrawerOpen(false);
+    setDrawerOpen(false); // Close the settings drawer
   };
 
   const toggleSoundMode = () => {
@@ -243,11 +245,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setSoundsMode(newSoundMode);
     localStorage.setItem("soundMode", newSoundMode.toString());
 
-    // Optionally update the URL to reflect the fancy mode
+    // Optionally update the URL to reflect the sound mode
     const url = new URL(window.location.href);
     url.searchParams.set("sound", newSoundMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
-    setDrawerOpen(false);
+    setDrawerOpen(false); // Close the settings drawer
   };
 
   const customPalette: CustomTheme = {
