@@ -426,7 +426,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             </Stack>
             <Stack direction={"row"} marginTop={2.5} alignItems={"center"}>
               <Button variant="contained" onClick={clearLocalStorageAndRefresh}>
-                Reset theme
+                <Typography variant="h5">Reset theme</Typography>
               </Button>
             </Stack>
 
