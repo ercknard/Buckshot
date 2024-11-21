@@ -64,6 +64,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
   const [error, setError] = useState<string | null>(null);
   const [leftVisible, setLeftVisible] = useState<boolean>(true); // Track left section visibility
   const [rightVisible, setRightVisible] = useState<boolean>(true); // Track right section visibility
+  const [isSmallDevice, setIsSmallDevice] = useState(false);
   const theme = useTheme();
 
   useEffect(() => {
@@ -88,8 +89,30 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
   }, []);
 
   useEffect(() => {
-    // Ensure sound plays only if both fancyMode and soundsMode are true
-    if (typeof window !== "undefined" && fancyMode && soundsMode) {
+    const checkDeviceSize = () => {
+      setIsSmallDevice(window.innerWidth < 769); // 768px as a breakpoint for small devices
+    };
+
+    // Check on mount
+    checkDeviceSize();
+
+    // Add event listener for resizing
+    window.addEventListener("resize", checkDeviceSize);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("resize", checkDeviceSize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Ensure sound plays only if both fancyMode and soundsMode are true and it's not a small device
+    if (
+      typeof window !== "undefined" &&
+      fancyMode &&
+      soundsMode &&
+      !isSmallDevice
+    ) {
       const openSound = new Audio(
         "/static/sounds/sounds_scifi_nodes_door_normal.ogg"
       );
@@ -100,7 +123,7 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
       if (isVisible) {
         setLeftVisible(true);
         setRightVisible(true);
-        openSound.play(); // Play the sound only if fancyMode and soundsMode are true
+        openSound.play(); // Play the sound only if fancyMode, soundsMode are true, and it's not a small device
       } else {
         setLeftVisible(false);
         setRightVisible(false);
@@ -112,11 +135,11 @@ const MainBorder: React.FC<MainBorderProps> = ({ containerId, isVisible }) => {
         closeSound.pause();
       };
     } else {
-      // If fancyMode or soundsMode is false, no sound should play
+      // If fancyMode, soundsMode, or device is small, no sound should play
       setLeftVisible(isVisible);
       setRightVisible(isVisible);
     }
-  }, [isVisible, fancyMode, soundsMode]); // Triggered when `isVisible`, `fancyMode`, or `soundsMode` changes
+  }, [isVisible, fancyMode, soundsMode, isSmallDevice]); // Triggered when any of these change
 
   if (!fancyMode || loading || error || !uiBoolean) {
     return null; // Do not render anything if fancyMode is off or data is not loaded

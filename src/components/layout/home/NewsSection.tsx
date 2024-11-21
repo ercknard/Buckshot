@@ -254,6 +254,8 @@ const NewsSection = () => {
                   borderWidth: "10px",
                   borderStyle: "solid",
                   borderImage: `url('${imageBgBorderSrc}') 20 round`,
+                  maxHeight: "100vh",
+                  overflow: "scroll",
                 }}
               >
                 {currentFile && (
