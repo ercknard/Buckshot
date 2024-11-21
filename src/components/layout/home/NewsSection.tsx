@@ -178,7 +178,7 @@ const NewsSection = () => {
       fontSize: "1rem",
     },
     "& img": {
-      maxWidth: "100%",
+      maxWidth: "40%",
       height: "auto",
       borderRadius: "8px",
       marginTop: "2rem",
