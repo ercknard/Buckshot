@@ -427,8 +427,14 @@ const DonateSection: React.FC = () => {
         autoHideDuration={3000}
         onClose={handleCloseSnackbar}
       >
-        <Alert onClose={handleCloseSnackbar} severity="success">
-          {snackbarMessage}
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ display: "flex", alignItems: "center" }}
+        >
+          <Typography variant="h5" color="custom.primaryText">
+            {snackbarMessage}
+          </Typography>
         </Alert>
       </Snackbar>
     </Box>

@@ -115,7 +115,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [loaderKey, setLoaderKey] = useState(0);
   const [fancyMode, setFancyMode] = useState<boolean>(true);
   const [soundsMode, setSoundsMode] = useState<boolean>(true);
-  const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<
+    "success" | "info" | "warning" | "error"
+  >("success"); // Set default severity
 
   useEffect(() => {
     // Retrieve values from localStorage
@@ -235,6 +239,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     }, 1000); // 1 second delay before closing
   };
 
+  // Toggle fancy mode with Snackbar
   const toggleFancyMode = () => {
     const newFancyMode = !fancyMode;
     setFancyMode(newFancyMode);
@@ -244,9 +249,22 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const url = new URL(window.location.href);
     url.searchParams.set("fancy", newFancyMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
-    setDrawerOpen(false); // Close the settings drawer
+
+    // Show Snackbar
+    setSnackbarMessage(`Fancy Mode ${newFancyMode ? "Enabled" : "Disabled"}`);
+    setSnackbarSeverity(newFancyMode ? "success" : "warning"); // Use 'success' for ON, 'warning' for OFF
+
+    setSnackbarOpen(true);
+
+    setDrawerOpen(false); // Close the drawer after the Snackbar has time to show
+
+    // Delay the drawer closing slightly to allow Snackbar to be displayed
+    setTimeout(() => {
+      setSnackbarOpen(false); // Close the drawer after the Snackbar has time to show
+    }, 3000); // Wait 500ms before closing the drawer
   };
 
+  // Toggle sound mode with Snackbar
   const toggleSoundMode = () => {
     const newSoundMode = !soundsMode;
     setSoundsMode(newSoundMode);
@@ -256,7 +274,19 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const url = new URL(window.location.href);
     url.searchParams.set("sound", newSoundMode ? "on" : "off");
     window.history.pushState({}, "", url.toString());
-    setDrawerOpen(false); // Close the settings drawer
+
+    // Show Snackbar
+    setSnackbarMessage(`Sound Mode ${newSoundMode ? "Enabled" : "Disabled"}`);
+    setSnackbarSeverity(newSoundMode ? "success" : "warning"); // Use 'success' for ON, 'warning' for OFF
+
+    setSnackbarOpen(true);
+
+    setDrawerOpen(false); // Close the drawer after the Snackbar has time to show
+
+    // Delay the drawer closing slightly to allow Snackbar to be displayed
+    setTimeout(() => {
+      setSnackbarOpen(false); // Close the drawer after the Snackbar has time to show
+    }, 3000); // Wait 500ms before closing the drawer
   };
 
   const customPalette: CustomTheme = {
@@ -285,12 +315,19 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     window.history.pushState({}, "", url.toString()); // Update the URL without reloading
 
     // Show Snackbar
-    setOpen(true);
+    setSnackbarMessage(
+      `Local Storage cleared! Rolled back to default theme values...`
+    );
+    setSnackbarSeverity("success"); // Use 'success' for ON, 'warning' for OFF
+    // Open the Snackbar
+    setSnackbarOpen(true);
 
-    // After the Snackbar is shown, refresh the page
+    setDrawerOpen(false); // Close the drawer after the Snackbar has time to show
+
+    // Delay the drawer closing slightly to allow Snackbar to be displayed
     setTimeout(() => {
-      setOpen(false);
-    }, 3000); // Delay to allow Snackbar to show for 2 seconds
+      setSnackbarOpen(false); // Close the drawer after the Snackbar has time to show
+    }, 3000); // Wait 500ms before closing the drawer
   };
 
   // Function to close the Snackbar
@@ -301,7 +338,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setSnackbarOpen(false);
   };
 
   const iconColor = customPalette.palette.custom.primaryText;
@@ -429,17 +466,22 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 <Typography variant="h5">Reset theme</Typography>
               </Button>
             </Stack>
-
-            <Snackbar
-              open={open}
-              autoHideDuration={3000} // Show for 2 seconds
-            >
-              <Alert onClose={handleCloseSnackbar} severity="success">
-                Local Storage cleared! Rolled back to default theme values...
-              </Alert>
-            </Snackbar>
           </Box>
         </Drawer>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000} // Show for 2 seconds
+        >
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity={snackbarSeverity}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <Typography variant="h5" color="custom.primaryText">
+              {snackbarMessage}
+            </Typography>
+          </Alert>
+        </Snackbar>
         {children}
       </MuiThemeProvider>
     </ThemeContext.Provider>
