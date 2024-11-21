@@ -203,7 +203,7 @@ const NewsSection = () => {
         backgroundColor: "custom.primaryBackground",
         paddingTop: { md: "10rem", xs: "5rem" },
         paddingBottom: { md: "7.5rem", xs: "3rem" },
-        minHeight: "40vh",
+        minHeight: "50vh",
       }}
     >
       <MainBorder containerId="news-particles" isVisible={isNewsVisible} />
