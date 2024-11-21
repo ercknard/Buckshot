@@ -15,6 +15,7 @@ import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";
 import DefaultDialog from "../DefaultDialog";
 import MainBorder from "../MainBorder";
 import { Alert } from "@mui/material";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 type CustomTheme = {
   activeSet: number;
@@ -253,20 +254,37 @@ const GitFeedsSection: React.FC = () => {
                 }}
               >
                 <Stack
-                  direction={{ md: "row", xs: "column" }}
+                  direction="row"
                   spacing={1}
+                  justifyContent={"space-between"}
                   alignItems={"center"}
                   marginBottom={2}
                 >
-                  <Box
-                    component="img"
-                    width={{ xs: 55 }}
-                    alt="Logo"
-                    src={event.actor.avatar_url}
-                  />
-                  <Typography variant="h5" color="custom.primaryTextGrayed">
-                    {event.actor.display_login}
-                  </Typography>
+                  <Stack
+                    direction={{ md: "row", xs: "column" }}
+                    spacing={1}
+                    alignItems={"center"}
+                    marginBottom={2}
+                  >
+                    <Box
+                      component="img"
+                      width={{ xs: 55 }}
+                      alt="Logo"
+                      src={event.actor.avatar_url}
+                    />
+                    <Typography variant="h5" color="custom.primaryTextGrayed">
+                      {event.actor.display_login}
+                    </Typography>
+                  </Stack>
+                  <Link
+                    href={`https://github.com/${event.repo.name}/commit/${event.payload.commits[0].sha}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="h5"
+                    color="custom.mainColor"
+                  >
+                    <ArrowOutwardIcon />
+                  </Link>
                 </Stack>
 
                 <Stack
@@ -301,7 +319,7 @@ const GitFeedsSection: React.FC = () => {
                     Repository:
                   </Typography>
                   <Link
-                    href={event.repo.url}
+                    href={`https://github.com/${event.repo.name}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="h5"
@@ -402,20 +420,37 @@ const GitFeedsSection: React.FC = () => {
                   }}
                 >
                   <Stack
-                    direction={{ md: "row", xs: "column" }}
+                    direction="row"
                     spacing={1}
+                    justifyContent={"space-between"}
                     alignItems={"center"}
                     marginBottom={2}
                   >
-                    <Box
-                      component="img"
-                      width={{ xs: 55 }}
-                      alt="Logo"
-                      src={event.actor.avatar_url}
-                    />
-                    <Typography variant="h5" color="custom.primaryTextGrayed">
-                      {event.actor.display_login}
-                    </Typography>
+                    <Stack
+                      direction={{ md: "row", xs: "column" }}
+                      spacing={1}
+                      alignItems={"center"}
+                      marginBottom={2}
+                    >
+                      <Box
+                        component="img"
+                        width={{ xs: 55 }}
+                        alt="Logo"
+                        src={event.actor.avatar_url}
+                      />
+                      <Typography variant="h5" color="custom.primaryTextGrayed">
+                        {event.actor.display_login}
+                      </Typography>
+                    </Stack>
+                    <Link
+                      href={`https://github.com/${event.repo.name}/commit/${event.payload.commits[0].sha}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="h5"
+                      color="custom.mainColor"
+                    >
+                      <ArrowOutwardIcon />
+                    </Link>
                   </Stack>
 
                   <Stack
