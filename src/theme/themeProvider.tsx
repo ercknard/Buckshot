@@ -17,6 +17,8 @@ import {
   Divider,
   IconButton,
   Button,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 import { Theme as MuiTheme } from "@mui/material/styles";
 import { scTheme } from "@/theme/theme";
@@ -113,20 +115,17 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [loaderKey, setLoaderKey] = useState(0);
   const [fancyMode, setFancyMode] = useState<boolean>(true);
   const [soundsMode, setSoundsMode] = useState<boolean>(true);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // First, check if there's a stored theme and color set in localStorage
+    // Retrieve values from localStorage
     const storedTheme =
-      (localStorage.getItem("theme") as PaletteMode) || "dark"; // Explicitly cast to PaletteMode
-    const storedSet = Number(localStorage.getItem("colorSet")) || 1; // Default to set 1 if no value found
-    const storedFancyMode = localStorage.getItem("fancyMode") === "true"; // Default to true if not found
-    const storedSoundsMode = localStorage.getItem("soundsMode") === "true"; // Default to true if not found
-
-    // Apply the theme and color set from localStorage
-    setActiveTheme(storedTheme); // No need to cast, already a PaletteMode
-    setActiveSet(storedSet);
-    setFancyMode(storedFancyMode !== undefined ? storedFancyMode : true); // Default to true if undefined
-    setSoundsMode(storedSoundsMode !== undefined ? storedSoundsMode : true); // Default to true if undefined
+      (localStorage.getItem("theme") as PaletteMode) || "dark"; // Default to dark mode
+    const storedSet = Number(localStorage.getItem("colorSet")) || 1; // Default to color set 1
+    const storedFancyMode =
+      localStorage.getItem("fancyMode") === "true" ? true : true; // Default to true
+    const storedSoundsMode =
+      localStorage.getItem("soundsMode") === "true" ? true : true; // Default to true
 
     // Now, check the URL for parameters (if present, override localStorage values)
     const urlParams = new URLSearchParams(window.location.search);
@@ -135,28 +134,36 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const urlFancy = urlParams.get("fancy");
     const urlSound = urlParams.get("sound");
 
-    // If there are URL parameters for theme or color, override localStorage values
+    // Determine final values based on URL or localStorage
+
+    // Theme - Prioritize URL parameter if present, otherwise fall back to localStorage
     const finalTheme =
       urlTheme && (urlTheme === "light" || urlTheme === "dark")
         ? (urlTheme as PaletteMode)
         : storedTheme;
+
+    // Color Set - Use URL parameter if valid, otherwise fall back to localStorage
     const finalSet =
       urlColor &&
       ["blue", "green", "yellow", "orange", "pink"].includes(urlColor)
         ? ["blue", "green", "yellow", "orange", "pink"].indexOf(urlColor) + 1
         : storedSet;
+
+    // Fancy Mode - Use URL parameter if present and valid, otherwise fall back to localStorage
     const finalFancyMode =
       urlFancy !== null ? urlFancy === "on" : storedFancyMode;
+
+    // Sound Mode - Use URL parameter if present and valid, otherwise fall back to localStorage
     const finalSoundMode =
       urlSound !== null ? urlSound === "on" : storedSoundsMode;
 
-    // Update the state with the final values (from either URL or localStorage)
-    setActiveTheme(finalTheme); // No need to cast, already a PaletteMode
+    // Update state with final values (from either URL or localStorage)
+    setActiveTheme(finalTheme);
     setActiveSet(finalSet);
     setFancyMode(finalFancyMode);
     setSoundsMode(finalSoundMode);
 
-    // Store the final values in localStorage
+    // Store the final values in localStorage for future use
     localStorage.setItem("theme", finalTheme);
     localStorage.setItem("colorSet", finalSet.toString());
     localStorage.setItem("fancyMode", finalFancyMode.toString());
@@ -257,6 +264,36 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     activeSet, // Add the activeSet to the theme
     fancyMode,
     soundsMode,
+  };
+
+  const clearLocalStorageAndRefresh = () => {
+    // Clear localStorage
+    localStorage.clear(); // Or use `removeItem` for specific items
+
+    // Optionally reset state if needed
+    setFancyMode(true);
+    setSoundsMode(true);
+    setActiveTheme("dark");
+    setActiveSet(1);
+
+    // Show Snackbar
+    setOpen(true);
+
+    // After the Snackbar is shown, refresh the page
+    setTimeout(() => {
+      window.location.reload(); // Refresh the page
+    }, 3000); // Delay to allow Snackbar to show for 2 seconds
+  };
+
+  // Function to close the Snackbar
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
   };
 
   const iconColor = customPalette.palette.custom.primaryText;
@@ -379,6 +416,20 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 {soundsMode ? "ON" : "OFF"}
               </Button>
             </Stack>
+            <Stack direction={"row"} marginTop={2.5} alignItems={"center"}>
+              <Button variant="contained" onClick={clearLocalStorageAndRefresh}>
+                Clear Local Storage
+              </Button>
+            </Stack>
+
+            <Snackbar
+              open={open}
+              autoHideDuration={3000} // Show for 2 seconds
+            >
+              <Alert onClose={handleCloseSnackbar} severity="success">
+                Local Storage cleared! Refreshing the page...
+              </Alert>
+            </Snackbar>
           </Box>
         </Drawer>
         {children}
