@@ -178,11 +178,17 @@ const NewsSection = () => {
       fontSize: "1rem",
     },
     "& img": {
-      maxWidth: "40%",
+      maxWidth: "25%",
       height: "auto",
       borderRadius: "8px",
       marginTop: "2rem",
       marginBottom: "1rem",
+      justifyContent: "center",
+      marginLeft: "auto",
+      marginRight: "auto",
+      "@media (max-width: 768px)": {
+        maxWidth: "80%", // Change the maxWidth on small devices
+      },
     },
   }));
 

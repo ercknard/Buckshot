@@ -29,7 +29,7 @@ interface Media {
 
 const MediaSection: React.FC = () => {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
+    theme.breakpoints.down("md")
   );
   const { activeSet } = useThemeContext() as CustomTheme;
   const theme = useTheme();

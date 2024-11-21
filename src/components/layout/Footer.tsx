@@ -226,7 +226,7 @@ export default function Footer() {
           <Grid
             item
             lg={1.5}
-            sm={3}
+            sm={6}
             xs={6}
             display={"flex"}
             sx={{ justifyContent: { lg: "center", xs: "left" } }}
@@ -252,7 +252,7 @@ export default function Footer() {
           <Grid
             item
             lg={1.5}
-            sm={3}
+            sm={6}
             xs={6}
             display={"flex"}
             sx={{ justifyContent: { lg: "center", xs: "left" } }}

@@ -239,7 +239,7 @@ const GitFeedsSection: React.FC = () => {
 
         <Grid container spacing={3} marginTop={"2.5rem"}>
           {limitedEvents.map((event) => (
-            <Grid position={"relative"} item xs={12} md={6} key={event.id}>
+            <Grid position={"relative"} item xs={12} sm={6} key={event.id}>
               <Paper
                 elevation={3}
                 sx={{

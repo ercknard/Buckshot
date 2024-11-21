@@ -480,6 +480,7 @@ const TeamSection: React.FC = () => {
                   <Grid
                     item
                     xs={6}
+                    sm={4}
                     md={2.4}
                     key={member.name}
                     sx={{

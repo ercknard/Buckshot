@@ -356,6 +356,7 @@ const DonateSection: React.FC = () => {
                 <Grid
                   item
                   xs={6}
+                  sm={4}
                   md={2.4}
                   key={coin.name}
                   sx={{

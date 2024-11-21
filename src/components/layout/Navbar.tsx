@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar() {
   const theme = useTheme();
-  const isMobileView = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobileView = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -77,6 +77,7 @@ export default function Navbar() {
             zIndex: 10,
             px: 3,
             mb: { xs: 2.5, sm: 8 },
+            paddingBottom: { xs: 9, md: 0 },
             boxShadow: 1,
             bgcolor: "custom.a1",
             backgroundImage: "none",
