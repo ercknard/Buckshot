@@ -271,17 +271,25 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     localStorage.clear(); // Or use `removeItem` for specific items
 
     // Optionally reset state if needed
-    setFancyMode(true);
-    setSoundsMode(true);
-    setActiveTheme("dark");
-    setActiveSet(1);
+    setFancyMode(true); // Default to true (fancy mode ON)
+    setSoundsMode(true); // Default to true (sounds mode ON)
+    setActiveTheme("dark"); // Default theme (dark mode)
+    setActiveSet(1); // Default color set
+
+    // Update the URL to reflect the defaults (because localStorage is cleared)
+    const url = new URL(window.location.href);
+    url.searchParams.set("theme", "dark"); // Set to default theme
+    url.searchParams.set("color", "blue"); // Set to default color set
+    url.searchParams.set("fancy", "on"); // Set fancy mode to "on"
+    url.searchParams.set("sound", "on"); // Set sound mode to "on"
+    window.history.pushState({}, "", url.toString()); // Update the URL without reloading
 
     // Show Snackbar
     setOpen(true);
 
     // After the Snackbar is shown, refresh the page
     setTimeout(() => {
-      window.location.reload(); // Refresh the page
+      setOpen(false);
     }, 3000); // Delay to allow Snackbar to show for 2 seconds
   };
 
@@ -418,7 +426,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             </Stack>
             <Stack direction={"row"} marginTop={2.5} alignItems={"center"}>
               <Button variant="contained" onClick={clearLocalStorageAndRefresh}>
-                Clear Local Storage
+                Reset theme
               </Button>
             </Stack>
 
@@ -427,7 +435,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
               autoHideDuration={3000} // Show for 2 seconds
             >
               <Alert onClose={handleCloseSnackbar} severity="success">
-                Local Storage cleared! Refreshing the page...
+                Local Storage cleared! Rolled back to default theme values...
               </Alert>
             </Snackbar>
           </Box>
