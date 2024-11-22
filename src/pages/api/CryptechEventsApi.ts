@@ -49,7 +49,14 @@ export const fetchGitHubEvents = async (): Promise<Event[]> => {
     const response = await axios.get(
       "https://api.github.com/orgs/CryptechTest/events"
     );
-    return response.data; // Return the event data from the API
+    const events = response.data; // Get the event data from the API
+
+    // Filter out events from the repository 'CryptechTest/announcement'
+    const filteredEvents = events.filter(
+      (event: Event) => event.repo.name !== "CryptechTest/announcement"
+    );
+
+    return filteredEvents; // Return the filtered event data
   } catch (error) {
     console.error("Error fetching events:", error);
     return []; // Return an empty array in case of an error
