@@ -197,11 +197,6 @@ const ShipsSection: React.FC = () => {
           .select("*");
         if (scoutError) throw scoutError;
 
-        const { data: stationShips, error: stationError } = await supabase
-          .from("ships_station")
-          .select("*");
-        if (stationError) throw stationError;
-
         const { data: raiderShips, error: raiderError } = await supabase
           .from("ships_raider")
           .select("*");
@@ -212,13 +207,18 @@ const ShipsSection: React.FC = () => {
           .select("*");
         if (utilityError) throw utilityError;
 
+        const { data: stationShips, error: stationError } = await supabase
+          .from("ships_station")
+          .select("*");
+        if (stationError) throw stationError;
+
         setShipData([
           battleShips,
           cargoShips,
           scoutShips,
-          stationShips,
           raiderShips,
           utilityShips,
+          stationShips,
         ]);
         setLoading(false);
 
@@ -1053,9 +1053,9 @@ const ShipsSection: React.FC = () => {
           <Tab label="Battle Cruiser" />
           <Tab label="Cargo Cruiser" />
           <Tab label="Scout" />
-          <Tab label="Orbital Station" />
           <Tab label="Raider" />
           <Tab label="Utility Ships" />
+          <Tab label="Orbital Station" />
         </Tabs>
 
         <Box position={"relative"} zIndex={2}>
