@@ -57,6 +57,21 @@ type Ship = {
   recipe_7th?: string;
   recipe_8th?: string;
   recipe_9th?: string;
+  recipe_10th?: string;
+  recipe_11th?: string;
+  recipe_12th?: string;
+  recipe_13th?: string;
+  recipe_14th?: string;
+  recipe_15th?: string;
+  recipe_16th?: string;
+  recipe_17th?: string;
+  recipe_18th?: string;
+  recipe_19th?: string;
+  recipe_20th?: string;
+  recipe_21st?: string;
+  recipe_22nd?: string;
+  recipe_23rd?: string;
+  recipe_24th?: string;
   namerecipe_1st?: string;
   namerecipe_2nd?: string;
   namerecipe_3rd?: string;
@@ -66,6 +81,21 @@ type Ship = {
   namerecipe_7th?: string;
   namerecipe_8th?: string;
   namerecipe_9th?: string;
+  namerecipe_10th?: string;
+  namerecipe_11th?: string;
+  namerecipe_12th?: string;
+  namerecipe_13th?: string;
+  namerecipe_14th?: string;
+  namerecipe_15th?: string;
+  namerecipe_16th?: string;
+  namerecipe_17th?: string;
+  namerecipe_18th?: string;
+  namerecipe_19th?: string;
+  namerecipe_20th?: string;
+  namerecipe_21st?: string;
+  namerecipe_22nd?: string;
+  namerecipe_23rd?: string;
+  namerecipe_24th?: string;
   isCraftable?: string;
   isCraftableShow?: string;
   isRecipeShow?: string;
@@ -683,11 +713,11 @@ const ShipsSection: React.FC = () => {
                     container
                     spacing={2}
                     xs={12}
-                    md={5}
+                    md={8}
                     sx={{ display: `${expandedMember.isRecipeShow}` }}
                   >
                     {/* Row 1 */}
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_1st}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -709,7 +739,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_2nd}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -731,7 +761,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_3rd}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -754,7 +784,7 @@ const ShipsSection: React.FC = () => {
                     </Grid>
 
                     {/* Row 2 */}
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_4th}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -776,7 +806,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_5th}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -800,7 +830,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_6th}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -822,7 +852,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_7th}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -844,7 +874,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_8th}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -866,7 +896,7 @@ const ShipsSection: React.FC = () => {
                       </Tooltip>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_9th}`} arrow>
                         <FlippingBox>
                           <div className="flip-container">
@@ -882,6 +912,381 @@ const ShipsSection: React.FC = () => {
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
                               <Typography variant="h6">{`${expandedMember.namerecipe_9th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_10th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_10th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_10th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_11th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_11th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_11th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_12th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_12th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_12th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_13th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_13th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_13th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_14th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_14th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_14th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_15th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_15th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_15th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_16th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_16th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_16th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_17th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_17th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_17th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_18th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_18th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_18th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_19th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_19th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_19th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_20th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_20th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_20th}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_21st}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_21st})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_21st}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_22nd}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_22nd})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_22nd}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_23rd}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_23rd})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_23rd}`}</Typography>
+                            </div>
+                          </div>
+                        </FlippingBox>
+                      </Tooltip>
+                    </Grid>
+
+                    <Grid item xs={2}>
+                      <Tooltip
+                        title={`${expandedMember.namerecipe_24th}`}
+                        arrow
+                      >
+                        <FlippingBox>
+                          <div className="flip-container">
+                            {/* Front of the box (Image shown initially) */}
+                            <div
+                              className="flip-front"
+                              style={{
+                                backgroundImage: `url(${expandedMember.recipe_24th})`,
+                                height: "100%", // Ensure it takes the full height
+                                width: "100%", // Ensure it takes the full width
+                              }}
+                            />
+                            {/* Back of the box (Text shown after flip) */}
+                            <div className="flip-back">
+                              <Typography variant="h6">{`${expandedMember.namerecipe_24th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
