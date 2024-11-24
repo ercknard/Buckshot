@@ -315,6 +315,7 @@ const ShipsSection: React.FC = () => {
     aspectRatio: 1,
     perspective: "1000px", // Creates 3D space for flipping
     cursor: "pointer",
+    backgroundColor: theme.palette.custom.primaryComponents, // Slightly transparent background for text
     "& .flip-container": {
       position: "absolute",
       width: "100%",
@@ -332,6 +333,9 @@ const ShipsSection: React.FC = () => {
     "& .flip-front": {
       backgroundSize: "cover",
       backgroundPosition: "center",
+      borderWidth: "5px",
+      borderStyle: "solid",
+      borderImage: `url('${imageBgBorderSrc}') 20 round`, // Optional border image
     },
     "& .flip-back": {
       backgroundColor: theme.palette.custom.primaryComponents, // Slightly transparent background for text
@@ -342,7 +346,7 @@ const ShipsSection: React.FC = () => {
       fontSize: "18px",
       fontWeight: "bold",
       transform: "rotateY(180deg)", // Ensure the back text is flipped
-      borderWidth: "10px",
+      borderWidth: "5px",
       borderStyle: "solid",
       borderImage: `url('${imageBgBorderSrc}') 20 round`, // Optional border image
     },
