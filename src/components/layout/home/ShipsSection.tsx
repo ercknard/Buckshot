@@ -1386,7 +1386,7 @@ const ShipsSection: React.FC = () => {
                     variant="contained"
                     color="primary"
                   >
-                    Material Names
+                    {flipped ? "View Material Images" : "View Material Names"}
                   </Button>
                   {/* <Stack
                     direction={"column"}
