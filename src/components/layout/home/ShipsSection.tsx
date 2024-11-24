@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Grid, Tooltip, Typography } from "@mui/material";
+import { Alert, Button, Grid, Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { Container } from "@mui/material";
 import { Tab } from "@mui/material";
@@ -301,6 +301,14 @@ const ShipsSection: React.FC = () => {
     }
   };
 
+  const [flipped, setFlipped] = useState(false);
+
+  // Toggle the flipped state on button click
+  const handleFlipClick = () => {
+    setFlipped(!flipped);
+  };
+
+  // Styled Flipping Box
   const FlippingBox = styled(Box)(({ theme }) => ({
     position: "relative",
     width: "100%",
@@ -311,11 +319,9 @@ const ShipsSection: React.FC = () => {
       position: "absolute",
       width: "100%",
       height: "100%",
-      transition: "transform 0.6s",
+      transition: "transform 0.6s", // Add smooth transition for flipping
       transformStyle: "preserve-3d",
-      "&:hover": {
-        transform: "rotateY(180deg)", // Flip the box when hovered
-      },
+      transform: "rotateY(0deg)", // Initially not flipped
     },
     "& .flip-front, & .flip-back": {
       position: "absolute",
@@ -338,7 +344,14 @@ const ShipsSection: React.FC = () => {
       transform: "rotateY(180deg)", // Ensure the back text is flipped
       borderWidth: "10px",
       borderStyle: "solid",
-      borderImage: `url('${imageBgBorderSrc}') 20 round`,
+      borderImage: `url('${imageBgBorderSrc}') 20 round`, // Optional border image
+    },
+    "&:hover .flip-container": {
+      transform: "rotateY(180deg)", // Flip on hover
+    },
+    // Flip effect when clicked (based on flipped state)
+    "&.flipped .flip-container": {
+      transform: "rotateY(180deg)", // Flip on button click
     },
   }));
 
@@ -713,13 +726,14 @@ const ShipsSection: React.FC = () => {
                     container
                     spacing={2}
                     xs={12}
-                    md={8}
+                    md={7.5}
                     sx={{ display: `${expandedMember.isRecipeShow}` }}
+                    mb={3}
                   >
                     {/* Row 1 */}
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_1st}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -732,7 +746,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_1st}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_1st}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -741,7 +758,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_2nd}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -754,7 +771,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_2nd}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_2nd}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -763,7 +783,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_3rd}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -776,7 +796,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_3rd}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_3rd}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -786,7 +809,7 @@ const ShipsSection: React.FC = () => {
                     {/* Row 2 */}
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_4th}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -799,7 +822,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_4th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_4th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -808,7 +834,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_5th}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -821,7 +847,7 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">
+                              <Typography variant="h6" fontSize={"1rem"}>
                                 {`${expandedMember.namerecipe_5th}`}
                               </Typography>
                             </div>
@@ -832,7 +858,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_6th}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -845,7 +871,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_6th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_6th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -854,7 +883,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_7th}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -867,7 +896,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_7th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_7th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -876,7 +908,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_8th}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -889,7 +921,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_8th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_8th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -898,7 +933,7 @@ const ShipsSection: React.FC = () => {
 
                     <Grid item xs={2}>
                       <Tooltip title={`${expandedMember.namerecipe_9th}`} arrow>
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -911,7 +946,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_9th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_9th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -923,7 +961,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_10th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -936,7 +974,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_10th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_10th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -948,7 +989,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_11th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -961,7 +1002,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_11th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_11th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -973,7 +1017,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_12th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -986,7 +1030,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_12th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_12th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -998,7 +1045,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_13th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1011,7 +1058,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_13th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_13th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1023,7 +1073,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_14th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1036,7 +1086,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_14th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_14th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1048,7 +1101,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_15th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1061,7 +1114,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_15th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_15th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1073,7 +1129,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_16th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1086,7 +1142,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_16th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_16th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1098,7 +1157,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_17th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1111,7 +1170,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_17th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_17th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1123,7 +1185,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_18th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1136,7 +1198,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_18th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_18th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1148,7 +1213,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_19th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1161,7 +1226,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_19th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_19th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1173,7 +1241,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_20th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1186,7 +1254,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_20th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_20th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1198,7 +1269,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_21st}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1211,7 +1282,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_21st}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_21st}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1223,7 +1297,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_22nd}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1236,7 +1310,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_22nd}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_22nd}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1248,7 +1325,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_23rd}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1261,7 +1338,10 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_23rd}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_23rd}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
@@ -1273,7 +1353,7 @@ const ShipsSection: React.FC = () => {
                         title={`${expandedMember.namerecipe_24th}`}
                         arrow
                       >
-                        <FlippingBox>
+                        <FlippingBox className={flipped ? "flipped" : ""}>
                           <div className="flip-container">
                             {/* Front of the box (Image shown initially) */}
                             <div
@@ -1286,13 +1366,24 @@ const ShipsSection: React.FC = () => {
                             />
                             {/* Back of the box (Text shown after flip) */}
                             <div className="flip-back">
-                              <Typography variant="h6">{`${expandedMember.namerecipe_24th}`}</Typography>
+                              <Typography
+                                variant="h6"
+                                fontSize={"1rem"}
+                              >{`${expandedMember.namerecipe_24th}`}</Typography>
                             </div>
                           </div>
                         </FlippingBox>
                       </Tooltip>
                     </Grid>
                   </Grid>
+
+                  <Button
+                    onClick={handleFlipClick}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Material Names
+                  </Button>
                   {/* <Stack
                     direction={"column"}
                     spacing={1}
