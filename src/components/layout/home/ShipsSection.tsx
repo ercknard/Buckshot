@@ -1385,6 +1385,7 @@ const ShipsSection: React.FC = () => {
                     onClick={handleFlipClick}
                     variant="contained"
                     color="primary"
+                    sx={{ display: `${expandedMember.isRecipeShow}` }}
                   >
                     {flipped ? "View Material Images" : "View Material Names"}
                   </Button>
