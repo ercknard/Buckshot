@@ -99,7 +99,7 @@ type Ship = {
   isCraftable?: string;
   isCraftableShow?: string;
   isRecipeShow?: string;
-  toShowSpecs?: string;
+  toshowspecs?: string;
 };
 
 const jumpAnimation = keyframes`
@@ -642,7 +642,7 @@ const ShipsSection: React.FC = () => {
                   <Stack
                     spacing={1.5}
                     direction={"column"}
-                    sx={{ display: `${expandedMember.toShowSpecs}` }}
+                    sx={{ display: `${expandedMember.toshowspecs}` }}
                   >
                     <Typography
                       variant="h5"
