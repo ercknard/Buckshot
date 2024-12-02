@@ -120,6 +120,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [snackbarSeverity, setSnackbarSeverity] = useState<
     "success" | "info" | "warning" | "error"
   >("success"); // Set default severity
+  const [capitalizedColor, setCapitalizedColor] = useState<string>("");
 
   useEffect(() => {
     // Retrieve values from localStorage
@@ -192,6 +193,19 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const url = new URL(window.location.href);
     url.searchParams.set("theme", theme);
     window.history.pushState({}, "", url.toString());
+
+    // Show Snackbar
+    setSnackbarMessage(`${theme} mode is applied`);
+    setSnackbarSeverity("success"); // Use 'success' for ON, 'warning' for OFF
+    // Open the Snackbar
+    setSnackbarOpen(true);
+
+    setDrawerOpen(false); // Close the drawer after the Snackbar has time to show
+
+    // Delay the drawer closing slightly to allow Snackbar to be displayed
+    setTimeout(() => {
+      setSnackbarOpen(false); // Close the drawer after the Snackbar has time to show
+    }, 3000); // Wait 500ms before closing the drawer
   };
 
   const changeColorSet = (setId: number) => {
@@ -237,6 +251,26 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setTimeout(() => {
       setDrawerOpen(false); // Close drawer after an additional 1 second
     }, 1000); // 1 second delay before closing
+
+    // Capitalize the first letter of the color for the snackbar message
+    const capitalizedColor = color.charAt(0).toUpperCase() + color.slice(1);
+
+    setCapitalizedColor(capitalizedColor);
+
+    console.log("capitalizedColor:", capitalizedColor);
+
+    // Show Snackbar with capitalized color
+    setSnackbarMessage(`Theme color: ${capitalizedColor} is applied`);
+    setSnackbarSeverity("success"); // Use 'success' for ON, 'warning' for OFF
+    // Open the Snackbar
+    setSnackbarOpen(true);
+
+    setDrawerOpen(false); // Close the drawer after the Snackbar has time to show
+
+    // Delay the drawer closing slightly to allow Snackbar to be displayed
+    setTimeout(() => {
+      setSnackbarOpen(false); // Close the drawer after the Snackbar has time to show
+    }, 3000); // Wait 500ms before closing the drawer
   };
 
   // Toggle fancy mode with Snackbar
@@ -461,10 +495,23 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 {soundsMode ? "ON" : "OFF"}
               </Button>
             </Stack>
-            <Stack direction={"row"} marginTop={2.5} alignItems={"center"}>
+            <Stack direction={"column"} marginTop={2.5} spacing={1}>
               <Button variant="contained" onClick={clearLocalStorageAndRefresh}>
                 <Typography variant="h5">Reset theme</Typography>
               </Button>
+
+              <Typography variant="h5">
+                Current Theme mode is {activeTheme}
+              </Typography>
+              <Typography variant="h5">
+                Selected Theme color is {capitalizedColor}
+              </Typography>
+              <Typography variant="h5">
+                Fancy mode is {fancyMode ? "ACTIVATED" : "DEACTIVATED"}
+              </Typography>
+              <Typography variant="h5">
+                Sound mode is {soundsMode ? "ACTIVATED" : "DEACTIVATED"}
+              </Typography>
             </Stack>
           </Box>
         </Drawer>
