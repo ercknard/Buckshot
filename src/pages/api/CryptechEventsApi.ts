@@ -15,50 +15,56 @@ export interface Event {
   id: string;
   type: string;
   actor: {
-    id: number;
+    avatar_url: string;
     login: string;
     display_login: string;
-    avatar_url: string;
   };
   repo: {
-    id: number;
-    name: string;
     url: string;
+    name: string;
   };
   payload: {
-    repository_id: number;
-    push_id: number;
-    size: number;
-    distinct_size: number;
-    ref: string;
-    head: string;
-    before: string;
-    commits: Commit[];
+    repository_id?: number;
+    push_id?: number;
+    size?: number;
+    distinct_size?: number;
+    ref?: string;
+    head?: string;
+    before?: string;
+    commits?: Commit[];
+    ref_type?: string;
+    message?: string;
   };
   created_at: string;
-  org: {
-    id: number;
-    login: string;
-    avatar_url: string;
-  };
 }
 
-// Fetch GitHub events for the organization
+// Fetch GitHub events for the organization and exclude dependabot
 export const fetchGitHubEvents = async (): Promise<Event[]> => {
   try {
-    const response = await axios.get(
-      "https://api.github.com/orgs/CryptechTest/events"
+    const response = await axios.get<Event[]>(
+      "https://api.github.com/orgs/Cryptech-Services/events",
+      {
+        headers: {
+          Accept: "application/vnd.github.v3+json", // Use the correct GitHub API version
+        },
+      }
     );
-    const events = response.data; // Get the event data from the API
 
-    // Filter out events from the repository 'CryptechTest/announcement'
-    const filteredEvents = events.filter(
-      (event: Event) => event.repo.name !== "CryptechTest/announcement"
-    );
-
-    return filteredEvents; // Return the filtered event data
-  } catch (error) {
-    console.error("Error fetching events:", error);
-    return []; // Return an empty array in case of an error
+    if (response.status === 200) {
+      // Filter out events where the actor's login is "dependabot[bot]"
+      return response.data.filter(
+        (event) => event.actor.login !== "dependabot[bot]"
+      );
+    } else {
+      console.error("Unexpected response status:", response.status);
+      return [];
+    }
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    return [];
   }
 };
