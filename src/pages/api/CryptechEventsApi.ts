@@ -38,27 +38,35 @@ export interface Event {
   created_at: string;
 }
 
-// Fetch GitHub events for the organization and exclude dependabot
+// Fetch GitHub events for both organizations
 export const fetchGitHubEvents = async (): Promise<Event[]> => {
+  const orgs = ["Cryptech-Services", "CryptechTest"];
+  const allEvents: Event[] = [];
+
   try {
-    const response = await axios.get<Event[]>(
-      "https://api.github.com/orgs/Cryptech-Services/events",
-      {
-        headers: {
-          Accept: "application/vnd.github.v3+json", // Use the correct GitHub API version
-        },
-      }
+    const responses = await Promise.all(
+      orgs.map((org) =>
+        axios.get<Event[]>(`https://api.github.com/orgs/${org}/events`, {
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+          },
+        })
+      )
     );
 
-    if (response.status === 200) {
-      // Filter out events where the actor's login is "dependabot[bot]"
-      return response.data.filter(
-        (event) => event.actor.login !== "dependabot[bot]"
-      );
-    } else {
-      console.error("Unexpected response status:", response.status);
-      return [];
+    for (const response of responses) {
+      if (response.status === 200 && Array.isArray(response.data)) {
+        allEvents.push(...response.data);
+      } else {
+        console.warn("Unexpected response:", response.status);
+      }
     }
+
+    // Optionally, sort all events by newest first
+    return allEvents.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       console.error("Axios error:", error.message);
