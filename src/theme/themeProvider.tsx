@@ -449,7 +449,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 <ColorSetButton
                   key={setId}
                   setId={setId}
-                  s
                   currentSet={activeSet}
                   onClick={changeColorSet}
                 />
