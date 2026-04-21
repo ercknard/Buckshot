@@ -56,13 +56,15 @@ export default function Home(): JSX.Element {
         title="Welcome to Cryptechtest"
       >
         <Stack>
-          <video width="100%" controls autoPlay>
-            <source
-              src="https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
+          <iframe
+            width="100%"
+            height="600"
+            src="https://www.youtube.com/embed/4jbqVxeMWw8?autoplay=1&mute=1"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          />
         </Stack>
         <DialogActions>
           <Button onClick={handleDialogCloseTrailer} color="primary">

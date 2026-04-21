@@ -789,27 +789,36 @@ export default function HeroSection(): JSX.Element {
         </DialogActions>
       </DefaultDialog>
 
-      {/* <DefaultDialog
+      <DefaultDialog
         maxWidth="lg"
         open={dialogOpenTrailer}
         handleOnClose={handleDialogCloseTrailer}
         title="CryptechTest Trailer"
       >
         <Stack>
-          <video width="100%" controls autoPlay>
+          {/* <video width="100%" controls autoPlay>
             <source
-              src="https://firebasestorage.googleapis.com/v0/b/cryptech-3c327.appspot.com/o/CryptechTest_Teaser_final%20(1).mp4?alt=media&token=466d45d1-f730-4e0f-9b23-a24cc7dccc96"
+              src="https://youtu.be/4jbqVxeMWw8?si=K7371Kdsva-KY7BX"
               type="video/mp4"
             />
             Your browser does not support the video tag.
-          </video>
+          </video> */}
+          <iframe
+            width="100%"
+            height="600"
+            src="https://www.youtube.com/embed/4jbqVxeMWw8"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          />
         </Stack>
         <DialogActions>
           <Button onClick={handleDialogCloseTrailer} color="primary">
             Close
           </Button>
         </DialogActions>
-      </DefaultDialog> */}
+      </DefaultDialog>
     </Box>
   );
 }
