@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import { useThemeContext } from "@/theme/themeProvider";
 import { useTheme } from "@mui/material/styles";
-import { fetchGitHubEvents, Event } from "@/pages/api/CryptechEventsApi";
+import { fetchGitHubEvents, Event } from "@/lib/CryptechEventsApi";
 import DefaultDialog from "../DefaultDialog";
 import MainBorder from "../MainBorder";
 import { Alert } from "@mui/material";
@@ -42,7 +42,7 @@ const GitFeedsSection: React.FC = () => {
       },
       {
         threshold: 0.5, // Trigger when 50% of the section is in view
-      }
+      },
     );
 
     const gitSection = document.getElementById("git");
