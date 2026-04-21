@@ -179,7 +179,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     url.searchParams.set("theme", finalTheme);
     url.searchParams.set(
       "color",
-      ["blue", "green", "yellow", "orange", "pink"][finalSet - 1]
+      ["blue", "green", "yellow", "orange", "pink"][finalSet - 1],
     );
     url.searchParams.set("fancy", finalFancyMode ? "on" : "off");
     url.searchParams.set("sound", finalSoundMode ? "on" : "off");
@@ -350,7 +350,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
     // Show Snackbar
     setSnackbarMessage(
-      `Local Storage cleared! Rolled back to default theme values...`
+      `Local Storage cleared! Rolled back to default theme values...`,
     );
     setSnackbarSeverity("success"); // Use 'success' for ON, 'warning' for OFF
     // Open the Snackbar
@@ -367,7 +367,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   // Function to close the Snackbar
   const handleCloseSnackbar = (
     event?: React.SyntheticEvent,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === "clickaway") {
       return;
@@ -432,10 +432,18 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
                 marginBottom: 2.5,
               }}
             />
-            <ThemeToggleButton
+            {/* <ThemeToggleButton
               currentTheme={activeTheme}
               toggleTheme={toggleTheme}
-            />
+            /> */}
+
+            <Typography
+              variant="h5"
+              fontSize="1.5rem"
+              color="custom.primaryText"
+            >
+              Theme settings
+            </Typography>
             <Box display="flex" justifyContent="space-between" marginTop={2.5}>
               {[1, 2, 3, 4, 5].map((setId) => (
                 <ColorSetButton
