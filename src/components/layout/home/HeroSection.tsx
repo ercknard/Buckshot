@@ -94,7 +94,7 @@ const Cursor = styled("span")(({ theme }) => ({
 
 export default function HeroSection(): JSX.Element {
   const isSmallScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
+    theme.breakpoints.down("sm"),
   );
   const { activeSet, fancyMode } = useThemeContext() as CustomTheme; // Get the active color set ID from context
   const [displayedText, setDisplayedText] = useState("");
@@ -128,7 +128,7 @@ export default function HeroSection(): JSX.Element {
           }
         }
       },
-      isDeleting ? deletingSpeed : typingSpeed
+      isDeleting ? deletingSpeed : typingSpeed,
     );
 
     return () => clearInterval(typingInterval);
@@ -789,7 +789,7 @@ export default function HeroSection(): JSX.Element {
         </DialogActions>
       </DefaultDialog>
 
-      <DefaultDialog
+      {/* <DefaultDialog
         maxWidth="lg"
         open={dialogOpenTrailer}
         handleOnClose={handleDialogCloseTrailer}
@@ -809,7 +809,7 @@ export default function HeroSection(): JSX.Element {
             Close
           </Button>
         </DialogActions>
-      </DefaultDialog>
+      </DefaultDialog> */}
     </Box>
   );
 }
