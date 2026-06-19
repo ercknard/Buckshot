@@ -143,13 +143,13 @@ const GameModeSection: React.FC = () => {
           backgroundColor: (theme) =>
             `rgba(${parseInt(
               theme.palette.custom.primaryComponents.slice(1, 3),
-              16
+              16,
             )}, ${parseInt(
               theme.palette.custom.primaryComponents.slice(3, 5),
-              16
+              16,
             )}, ${parseInt(
               theme.palette.custom.primaryComponents.slice(5, 7),
-              16
+              16,
             )}, .5)`,
           paddingTop: { md: "5rem", xs: "3rem" },
           paddingBottom: { md: "5rem", xs: "3rem" },
@@ -222,13 +222,13 @@ const GameModeSection: React.FC = () => {
           backgroundColor: (theme) =>
             `rgba(${parseInt(
               theme.palette.custom.primaryComponents.slice(1, 3),
-              16
+              16,
             )}, ${parseInt(
               theme.palette.custom.primaryComponents.slice(3, 5),
-              16
+              16,
             )}, ${parseInt(
               theme.palette.custom.primaryComponents.slice(5, 7),
-              16
+              16,
             )}, .5)`,
           paddingTop: { md: "5rem", xs: "3rem" },
           paddingBottom: { md: "5rem", xs: "3rem" },
@@ -300,13 +300,13 @@ const GameModeSection: React.FC = () => {
         backgroundColor: (theme) =>
           `rgba(${parseInt(
             theme.palette.custom.primaryComponents.slice(1, 3),
-            16
+            16,
           )}, ${parseInt(
             theme.palette.custom.primaryComponents.slice(3, 5),
-            16
+            16,
           )}, ${parseInt(
             theme.palette.custom.primaryComponents.slice(5, 7),
-            16
+            16,
           )}, .5)`,
         paddingTop: { md: "5rem", xs: "3rem" },
         paddingBottom: { md: "5rem", xs: "3rem" },
@@ -469,6 +469,7 @@ const GameModeSection: React.FC = () => {
                     backgroundColor: "custom.secondaryComponents",
                     borderRadius: "4px",
                     marginTop: 1,
+                    marginBottom: 2,
                   }}
                 >
                   <Typography
@@ -480,6 +481,110 @@ const GameModeSection: React.FC = () => {
                   </Typography>
                 </Box>
               </Box>
+
+              <Grid
+                position={"relative"}
+                zIndex={2}
+                container
+                spacing={{ md: 4, xs: 2 }}
+                justifyContent="center"
+              >
+                <Grid
+                  item
+                  xs={6}
+                  sm={4}
+                  md={3}
+                  sx={{
+                    marginBottom: "1rem",
+                    marginTop: ".5rem",
+                  }}
+                >
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      padding: 2,
+                      textAlign: "center",
+                      justifyItems: "center",
+                      transition: "transform 0.2s, background-color 0.3s",
+                      cursor: "pointer",
+                      backgroundColor: "custom.secondaryBackground",
+                      borderWidth: "10px",
+                      borderStyle: "solid",
+                      borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                      "&:hover": {
+                        transform: "scale(1.05)",
+                        backgroundColor: "custom.secondaryBackground",
+                      },
+                    }}
+                  >
+                    <Box
+                      component={"img"}
+                      src={"/static/images/wheel.png"}
+                      alt={`modes`}
+                      sx={{
+                        width: "35%",
+                        height: "auto",
+                      }}
+                    />
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.10rem"}
+                      sx={{ marginTop: 2 }}
+                      color="custom.secondaryTextGrayed"
+                    >
+                      CryptechTest Game
+                    </Typography>
+                  </Paper>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={6}
+                  sm={4}
+                  md={3}
+                  sx={{
+                    marginBottom: "1rem",
+                    marginTop: ".5rem",
+                  }}
+                >
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      padding: 2,
+                      textAlign: "center",
+                      justifyItems: "center",
+                      transition: "transform 0.2s, background-color 0.3s",
+                      cursor: "pointer",
+                      backgroundColor: "custom.secondaryBackground",
+                      borderWidth: "10px",
+                      borderStyle: "solid",
+                      borderImage: `url('${imageBgBorderSrc}') 30 round`,
+                      "&:hover": {
+                        transform: "scale(1.05)",
+                        backgroundColor: "custom.secondaryBackground",
+                      },
+                    }}
+                  >
+                    <Box
+                      component={"img"}
+                      src={"/static/images/buckshot-icon.png"}
+                      alt={`modes`}
+                      sx={{
+                        width: "35%",
+                        height: "auto",
+                      }}
+                    />
+                    <Typography
+                      variant="body1"
+                      fontSize={"1.10rem"}
+                      sx={{ marginTop: 2 }}
+                      color="custom.secondaryTextGrayed"
+                    >
+                      Voxel Annihilation
+                    </Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
             </Box>
           </>
         )}

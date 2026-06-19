@@ -10,15 +10,12 @@ const Particlesview: React.FC<{ containerId: string }> = ({ containerId }) => {
   const [isInView, setIsInView] = useState(true); // Track whether the section is in view
 
   const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine);
     await loadSlim(engine);
   }, []);
 
   const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {
-      console.log("Particles Loaded:", container);
-    },
-    []
+    async (container: Container | undefined) => {},
+    [],
   );
 
   // Intersection Observer callback
