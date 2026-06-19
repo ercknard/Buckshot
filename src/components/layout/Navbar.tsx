@@ -50,7 +50,7 @@ export default function Navbar() {
         const section = document.getElementById(sections[i]);
         if (section) {
           const sectionOffsetTop = section.offsetTop;
-          // Add a 70px offset to check when the section is in view
+          // Add a 70px offset to check when the section is in views
           if (window.scrollY + 100 >= sectionOffsetTop) {
             currentSection = sections[i];
           }
@@ -324,7 +324,7 @@ export default function Navbar() {
                         {section.charAt(0).toUpperCase() + section.slice(1)}
                       </Typography>
                     </Button>
-                  )
+                  ),
                 )}
                 <Button
                   component="a"
