@@ -567,7 +567,7 @@ const GameModeSection: React.FC = () => {
                   >
                     <Box
                       component={"img"}
-                      src={"/static/images/buckshot-icon.png"}
+                      src={"/static/images/va_units_blueprint.png"}
                       alt={`modes`}
                       sx={{
                         width: "35%",
