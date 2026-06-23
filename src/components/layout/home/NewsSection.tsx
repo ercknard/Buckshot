@@ -30,7 +30,7 @@ const NewsSection = () => {
     // Only load the sound when the component is mounted on the client side
     if (typeof window !== "undefined") {
       const sound2 = new Audio(
-        "/static/sounds/sounds_scifi_nodes_palm_scanner.ogg"
+        "/static/sounds/sounds_scifi_nodes_palm_scanner.ogg",
       );
       setClickSound2(sound2);
     }
@@ -48,7 +48,7 @@ const NewsSection = () => {
       },
       {
         threshold: 0.5, // Trigger when 50% of the section is in view
-      }
+      },
     );
 
     const newsSection = document.getElementById("news");
@@ -78,7 +78,7 @@ const NewsSection = () => {
     const fetchReadme = async () => {
       try {
         const response = await fetch(
-          "https://api.github.com/repos/CryptechTest/announcement/contents/"
+          "https://api.github.com/repos/CryptechTest/announcement/contents/",
         );
         const data: GitHubFile[] = await response.json(); // Type the response as GitHubFile[]
 
@@ -96,7 +96,7 @@ const NewsSection = () => {
             const fileResponse = await fetch(file.download_url);
             const fileContent = await fileResponse.text();
             return { name: file.name, content: fileContent };
-          })
+          }),
         );
 
         // Set the fetched files and their content in state
@@ -178,7 +178,7 @@ const NewsSection = () => {
       fontSize: "1rem",
     },
     "& img": {
-      maxWidth: "25%",
+      maxWidth: "50%",
       height: "auto",
       borderRadius: "8px",
       marginTop: "2rem",
