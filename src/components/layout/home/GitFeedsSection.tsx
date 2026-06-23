@@ -72,6 +72,58 @@ const GitFeedsSection: React.FC = () => {
     loadEvents();
   }, []);
 
+  if (!loading && events.length === 0) {
+    return (
+      <Box
+        id="git"
+        position={"relative"}
+        width={1}
+        left={0}
+        sx={{
+          padding: { md: "4", xs: "1" },
+          backgroundColor: "custom.secondaryBackground",
+          paddingTop: { md: "7.5rem", xs: "3rem" },
+          paddingBottom: { md: "7.5rem", xs: "3rem" },
+        }}
+      >
+        <MainBorder containerId="github-particles" isVisible={isFeedsVisible} />
+
+        <Container>
+          <Box position={"relative"} zIndex={2}>
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              color="custom.secondaryTextGrayed"
+            >
+              Git Events
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              gutterBottom
+              color="custom.primaryTextGrayed"
+            >
+              Stay updated with the latest Git events, including commits,
+              merges, and branch updates of CryptechTest
+            </Typography>
+
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop={7.5}
+            >
+              <Alert severity="warning">
+                No Git events available at the moment.
+              </Alert>
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    );
+  }
+
   if (loading) {
     return (
       <Box
